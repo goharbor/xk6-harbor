@@ -1,0 +1,87 @@
+name: Releases
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    outputs:
+      release-id: ${{ steps.create_release.outputs.id }}
+      release-tag: ${{ steps.short-sha.outputs.sha }}
+    steps:
+    - uses: benjlevesque/short-sha@v1.2
+      id: short-sha
+
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.short-sha.outputs.sha }}
+        release_name: ${{ steps.short-sha.outputs.sha }}
+        body: |
+          Release ${{ steps.short-sha.outputs.sha }}
+        draft: false
+        prerelease: true
+
+  build-upload-assets:
+    needs: [create-release]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        goos: [linux, windows, darwin]
+        goarch: [amd64]
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Run go generate
+      run: make go-generate
+
+    - name: Release ${{ matrix.goos }}-${{ matrix.goarch }}
+      uses: wangyoucao577/go-release-action@v1.14
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        goos: ${{ matrix.goos }}
+        goarch: ${{ matrix.goarch }}
+        goversion: https://dl.google.com/go/go1.15.6.linux-amd64.tar.gz
+        pre_command: export CGO_ENABLED=0
+        build_flags: -a -tags netgo
+        ldflags: -extldflags -static -X "github.com/loadimpact/k6/lib/consts.VersionDetails=${{ needs.create-release.outputs.release-tag }}"
+        project_path: ./cmd/k6
+        binary_name: k6
+        release_tag: ${{ needs.create-release.outputs.release-tag }}
+
+    - name: Rollback Release
+      if: failure()
+      uses: author/action-rollback@stable
+      with:
+        release_id: ${{ needs.create-release.outputs.release-id }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  publish-release:
+    needs: [create-release, build-upload-assets]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: meeDamian/github-release@v2.0.2
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        tag: ${{ needs.create-release.outputs.release-tag }}
+        prerelease: false
+        allow_override: true
+
+  delete-older-releases:
+    needs: [publish-release]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: dev-drprasad/delete-older-releases@v0.2.0
+      with:
+        keep_latest: 1
+        delete_tags: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
