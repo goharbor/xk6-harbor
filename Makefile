@@ -6,8 +6,6 @@ SHELL := /bin/bash
 
 GIT_HASH := $(shell git rev-parse --short=8 HEAD)
 
-TMPDIR := $(shell mktemp -d /tmp/xk6-harbor.XXXX)
-
 BUILDPATH=$(CURDIR)
 
 BIN ?= $(CURDIR)/bin
@@ -17,23 +15,6 @@ $(BIN):
 
 DOCKERCMD=$(shell which docker)
 
-GO_MODIFY_TAGS_VERSION := 1.13.0
-GO_MODIFY_TAGS := $(BIN)/gomodifytags-$(GO_MODIFY_TAGS_VERSION)
-
-.PHONY: gomodifytags
-gomodifytags:
-	@$(GO_MODIFY_TAGS) > /dev/null 2>&1 \
-	|| rm -f $(BIN)/gomodifytags-*
-	@$(MAKE) $(GO_MODIFY_TAGS)
-
-$(GO_MODIFY_TAGS):
-	$(MAKE) $(BIN)
-	cd "$(TMPDIR)" && \
-	go mod init gomodifytags && \
-	go get 'github.com/fatih/gomodifytags@v$(GO_MODIFY_TAGS_VERSION)' && \
-	go build -mod=readonly -o $(GO_MODIFY_TAGS) github.com/fatih/gomodifytags && \
-	cd -
-
 SWAGGER_IMAGENAME := quay.io/goswagger/swagger
 SWAGGER_VERSION := 0.27.0
 SWAGGER=$(DOCKERCMD) run --rm -u $(shell id -u):$(shell id -g) -v $(BUILDPATH):$(BUILDPATH) -w $(BUILDPATH) ${SWAGGER_IMAGENAME}:v${SWAGGER_VERSION}
@@ -42,12 +23,16 @@ generate-client:
 	- rm -rf pkg/harbor/{models,client}
 	$(SWAGGER) generate client -f pkg/harbor/swagger.yaml --target pkg/harbor --template=stratoscale --additional-initialism=CVE --additional-initialism=GC
 
-modify-tags: gomodifytags
+GOMODIFYTAGS_IMAGENAME := quay.io/heww/gomodifytags
+GOMODIFYTAGS_VERSION := 1.13.0
+GOMODIFYTAGS=$(DOCKERCMD) run --rm -u $(shell id -u):$(shell id -g) -v $(BUILDPATH):$(BUILDPATH) -w $(BUILDPATH) ${GOMODIFYTAGS_IMAGENAME}:v${GOMODIFYTAGS_VERSION}
+
+modify-tags:
 	@for f in $(shell ls pkg/harbor/models/*.go); \
-		do $(GO_MODIFY_TAGS) -file $${f} -all -add-tags js -transform camelcase --skip-unexported -w ; \
+		do $(GOMODIFYTAGS) -file $${f} -all -add-tags js -transform camelcase --skip-unexported -w ; \
 	done
 	@for f in $(shell ls pkg/harbor/client/*/*_parameters.go); \
-		do $(GO_MODIFY_TAGS) -file $${f} -all -add-tags js -transform camelcase --skip-unexported -w ; \
+		do $(GOMODIFYTAGS) -file $${f} -all -add-tags js -transform camelcase --skip-unexported -w ; \
 	done
 
 go-generate: generate-client modify-tags
