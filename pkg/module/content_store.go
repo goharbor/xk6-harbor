@@ -39,7 +39,12 @@ type ContentStore struct {
 	RootPath string
 }
 
-func (s *ContentStore) Generate(size uint64) (*ocispec.Descriptor, error) {
+func (s *ContentStore) Generate(humanSize goja.Value) (*ocispec.Descriptor, error) {
+	size, err := humanize.ParseBytes(humanSize.String())
+	if err != nil {
+		return nil, err
+	}
+
 	data, err := util.GenerateRandomBytes(int(size))
 	if err != nil {
 		return nil, err
@@ -87,7 +92,7 @@ func (s *ContentStore) GenerateMany(humanSize goja.Value, count int) ([]*ocispec
 		defer wg.Done()
 
 		ix := i.(int)
-		descriptor, err := s.Generate(size)
+		descriptor, err := s.Generate(humanSize)
 		if err != nil {
 			errs[ix] = err
 		} else {

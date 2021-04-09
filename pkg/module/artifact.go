@@ -7,7 +7,6 @@ import (
 	"sync"
 
 	"github.com/dop251/goja"
-	"github.com/dustin/go-humanize"
 	operation "github.com/heww/xk6-harbor/pkg/harbor/client/artifact"
 	"github.com/heww/xk6-harbor/pkg/harbor/models"
 	"github.com/heww/xk6-harbor/pkg/util"
@@ -113,13 +112,10 @@ func (h *Harbor) PrepareArtifactTags(ctx context.Context, option PrepareArtifact
 		Throwf(ctx, "artifact tags count must greater than 0")
 	}
 
-	size, err := humanize.ParseBytes(option.ArtifactSize.String())
-	Check(ctx, err)
-
 	store := newContentStore(ctx, util.GenerateRandomString(8))
 	defer store.Free(ctx)
 
-	descriptor, err := store.Generate(size)
+	descriptor, err := store.Generate(option.ArtifactSize)
 	Check(ctx, err)
 
 	digest := h.Push(ctx, PushOption{
