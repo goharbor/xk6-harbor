@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/dop251/goja"
-	operation "github.com/heww/xk6-harbor/pkg/harbor/client/products"
+	operation "github.com/heww/xk6-harbor/pkg/harbor/client/registry"
 	"github.com/heww/xk6-harbor/pkg/harbor/models"
 	"github.com/loadimpact/k6/js/common"
 )
@@ -12,9 +12,9 @@ import (
 func (h *Harbor) CreateRegistry(ctx context.Context, r models.Registry) int64 {
 	h.mustInitialized(ctx)
 
-	params := operation.NewPostRegistriesParams().WithRegistry(&r)
+	params := operation.NewCreateRegistryParams().WithRegistry(&r)
 
-	res, err := h.api.Products.PostRegistries(ctx, params)
+	res, err := h.api.Registry.CreateRegistry(ctx, params)
 	Checkf(ctx, err, "failed to create registry %s", params.Registry.Name)
 
 	return IDFromLocation(ctx, res.Location)
@@ -23,9 +23,9 @@ func (h *Harbor) CreateRegistry(ctx context.Context, r models.Registry) int64 {
 func (h *Harbor) DeleteRegistry(ctx context.Context, id int64) {
 	h.mustInitialized(ctx)
 
-	params := operation.NewDeleteRegistriesIDParams().WithID(id)
+	params := operation.NewDeleteRegistryParams().WithID(id)
 
-	_, err := h.api.Products.DeleteRegistriesID(ctx, params)
+	_, err := h.api.Registry.DeleteRegistry(ctx, params)
 	Checkf(ctx, err, "failed to delete registry %d", id)
 }
 
@@ -36,7 +36,7 @@ type ListRegistriesResult struct {
 func (h *Harbor) ListRegistries(ctx context.Context, args ...goja.Value) ListRegistriesResult {
 	h.mustInitialized(ctx)
 
-	params := operation.NewGetRegistriesParams()
+	params := operation.NewListRegistriesParams()
 	if len(args) > 0 {
 		rt := common.GetRuntime(ctx)
 		if err := rt.ExportTo(args[0], params); err != nil {
@@ -44,7 +44,7 @@ func (h *Harbor) ListRegistries(ctx context.Context, args ...goja.Value) ListReg
 		}
 	}
 
-	res, err := h.api.Products.GetRegistries(ctx, params)
+	res, err := h.api.Registry.ListRegistries(ctx, params)
 	Checkf(ctx, err, "failed to list registries")
 
 	return ListRegistriesResult{

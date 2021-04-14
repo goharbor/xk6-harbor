@@ -4,7 +4,6 @@ import (
 	"context"
 
 	"github.com/dop251/goja"
-	"github.com/heww/xk6-harbor/pkg/harbor/client/products"
 	operation "github.com/heww/xk6-harbor/pkg/harbor/client/replication"
 	"github.com/heww/xk6-harbor/pkg/harbor/models"
 	"github.com/loadimpact/k6/js/common"
@@ -13,10 +12,10 @@ import (
 func (h *Harbor) CreateReplicationPolicy(ctx context.Context, policy models.ReplicationPolicy) int64 {
 	h.mustInitialized(ctx)
 
-	params := products.NewPostReplicationPoliciesParams()
+	params := operation.NewCreateReplicationPolicyParams()
 	params.WithPolicy(&policy)
 
-	res, err := h.api.Products.PostReplicationPolicies(ctx, params)
+	res, err := h.api.Replication.CreateReplicationPolicy(ctx, params)
 	Checkf(ctx, err, "failed to create replication policy %s", params.Policy.Name)
 
 	return IDFromLocation(ctx, res.Location)
@@ -25,9 +24,9 @@ func (h *Harbor) CreateReplicationPolicy(ctx context.Context, policy models.Repl
 func (h *Harbor) DeleteReplicationPolicy(ctx context.Context, id int64) {
 	h.mustInitialized(ctx)
 
-	params := products.NewDeleteReplicationPoliciesIDParams().WithID(id)
+	params := operation.NewDeleteReplicationPolicyParams().WithID(id)
 
-	_, err := h.api.Products.DeleteReplicationPoliciesID(ctx, params)
+	_, err := h.api.Replication.DeleteReplicationPolicy(ctx, params)
 	Checkf(ctx, err, "failed to delete the replication policy %d", id)
 }
 
@@ -39,7 +38,7 @@ type ListReplicationPoliciesResult struct {
 func (h *Harbor) ListReplicationPolicies(ctx context.Context, args ...goja.Value) ListReplicationPoliciesResult {
 	h.mustInitialized(ctx)
 
-	params := products.NewGetReplicationPoliciesParams()
+	params := operation.NewListReplicationPoliciesParams()
 	if len(args) > 0 {
 		rt := common.GetRuntime(ctx)
 		if err := rt.ExportTo(args[0], params); err != nil {
@@ -47,7 +46,7 @@ func (h *Harbor) ListReplicationPolicies(ctx context.Context, args ...goja.Value
 		}
 	}
 
-	res, err := h.api.Products.GetReplicationPolicies(ctx, params)
+	res, err := h.api.Replication.ListReplicationPolicies(ctx, params)
 	Checkf(ctx, err, "failed to list replication policies	")
 
 	return ListReplicationPoliciesResult{

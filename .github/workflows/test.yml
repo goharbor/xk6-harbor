@@ -44,5 +44,8 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-go-
 
+    - name: Generated diff test
+      run: make generated-diff-test
+
     - name: Test
       run: make test

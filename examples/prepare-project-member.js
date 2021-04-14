@@ -49,12 +49,12 @@ export function setup() {
     let page = 1
     const pageSize = 100
 
-    const projectIDs = []
-    while (projectIDs.length < projectsCount) {
+    const projectNames = []
+    while (projectNames.length < projectsCount) {
         const { projects } = harbor.listProjects({ page, pageSize })
 
         for (const project of projects) {
-            projectIDs.push(project.projectID)
+            projectNames.push(project.name)
         }
 
         if (projects.length == 0 || projects.length < pageSize) {
@@ -65,11 +65,11 @@ export function setup() {
     }
 
     return {
-        projectIDs: projectIDs.slice(0, projectsCount)
+        projectNames: projectNames.slice(0, projectsCount)
     }
 }
 
-export default function ({ projectIDs }) {
+export default function ({ projectNames }) {
     const i = counter.up()
 
     let userID = null
@@ -82,9 +82,9 @@ export default function ({ projectIDs }) {
         return
     }
 
-    const projectID = projectIDs[(i - 1) % projectIDs.length]
+    const projectName = projectNames[(i - 1) % projectNames.length]
     try {
-        harbor.createProjectMember(projectID, userID)
+        harbor.createProjectMember(projectName, userID)
     } catch (e) {
         console.log(e)
         errorRate.add(true)

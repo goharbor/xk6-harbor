@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	operation "github.com/heww/xk6-harbor/pkg/harbor/client/products"
+	operation "github.com/heww/xk6-harbor/pkg/harbor/client/user"
 	"github.com/heww/xk6-harbor/pkg/harbor/models"
 )
 
@@ -16,15 +16,15 @@ func (h *Harbor) CreateUser(ctx context.Context, username string, passwords ...s
 		password = passwords[0]
 	}
 
-	params := operation.NewPostUsersParams()
-	params.WithUser(&models.User{
+	params := operation.NewCreateUserParams()
+	params.WithUserReq(&models.UserCreationReq{
 		Username: username,
 		Email:    fmt.Sprintf("%s@goharbor.io", username),
 		Password: password,
 		Realname: username,
 	})
 
-	res, err := h.api.Products.PostUsers(ctx, params)
+	res, err := h.api.User.CreateUser(ctx, params)
 	Checkf(ctx, err, "failed to create user %s", username)
 
 	return IDFromLocation(ctx, res.Location)

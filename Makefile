@@ -21,7 +21,7 @@ SWAGGER=$(DOCKERCMD) run --rm -u $(shell id -u):$(shell id -g) -v $(BUILDPATH):$
 
 generate-client:
 	- rm -rf pkg/harbor/{models,client}
-	$(SWAGGER) generate client -f pkg/harbor/swagger.yaml --target pkg/harbor --template=stratoscale --additional-initialism=CVE --additional-initialism=GC
+	$(SWAGGER) generate client -f pkg/harbor/swagger.yaml --target pkg/harbor --template=stratoscale --additional-initialism=CVE --additional-initialism=GC --additional-initialism=OIDC
 
 GOMODIFYTAGS_IMAGENAME := quay.io/heww/gomodifytags
 GOMODIFYTAGS_VERSION := 1.13.0
@@ -41,19 +41,25 @@ go-generate: generate-client modify-tags
 k6:
 	CGO_ENABLED=0 go build -a -installsuffix cgo -ldflags '-w' -i -o k6 ./cmd/k6/main.go
 
-build: go-generate k6
+build: k6
 
 docker-build: build
 	@echo "Beginning build $(GIT_HASH)"
 	docker build --build-arg GOLANG=$(GOLANG) -f docker/Dockerfile -t $(IMG):$(GIT_HASH) .
 	docker tag $(IMG):$(GIT_HASH) $(IMG):latest
 
-test: go-generate
+.PHONY: test
+test:
 	go test ./...
+
+# Run go fmt against code
+.PHONY: fmt
+fmt:
+	go fmt ./...
 
 # Run go vet against code
 .PHONY: vet
-vet: go-generate
+vet:
 	go vet ./...
 
 # find or download golangci-lint
@@ -80,5 +86,21 @@ go-lint: golangci-lint vet go-generate
 	$(GOLANGCI_LINT) run --verbose --max-same-issues 0 --sort-results -D wrapcheck -D exhaustivestruct -D errorlint -D goerr113 -D gomnd -D nestif -D funlen -D gosec
 
 clean:
-	- rm -rf pkg/harbor/{models,client}
 	- rm -rf $(BIN)
+
+.PHONY: generate
+generate: go-generate
+
+.PHONY: go-dependencies-test
+go-dependencies-test: fmt
+	go mod tidy
+	$(MAKE) diff
+
+.PHONY: generated-diff-test
+generated-diff-test: fmt generate
+	$(MAKE) diff
+
+.PHONY: diff
+diff:
+	git status
+	git diff --diff-filter=d --exit-code HEAD
