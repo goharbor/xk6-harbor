@@ -17,6 +17,31 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
+func (h *Harbor) GetManifest(ctx context.Context, ref string) map[string]interface{} {
+	h.mustInitialized(ctx)
+
+	resolver := h.makeResolver(ctx)
+
+	ref = h.getRef(ref)
+	_, desc, err := resolver.Resolve(ctx, ref)
+	Checkf(ctx, err, "failed to head the manifest")
+
+	fetcher, err := resolver.Fetcher(ctx, ref)
+	Checkf(ctx, err, "failed to create fetcher")
+
+	rc, err := fetcher.Fetch(ctx, desc)
+	Checkf(ctx, err, "failed to get the manifest")
+
+	defer rc.Close()
+
+	dec := json.NewDecoder(rc)
+
+	m := map[string]interface{}{}
+	Checkf(ctx, dec.Decode(&m), "bad manifest")
+
+	return m
+}
+
 func (h *Harbor) Pull(ctx context.Context, ref string, args ...goja.Value) {
 	h.mustInitialized(ctx)
 
