@@ -139,3 +139,29 @@ func (h *Harbor) ListProjects(ctx context.Context, args ...goja.Value) ListProje
 		Total:    res.XTotalCount,
 	}
 }
+
+type ListAuditLogsOfProjectResult struct {
+	Logs  []*models.AuditLog `js:"logs"`
+	Total int64              `js:"total"`
+}
+
+func (h *Harbor) ListAuditLogsOfProject(ctx context.Context, projectName string, args ...goja.Value) ListAuditLogsOfProjectResult {
+	h.mustInitialized(ctx)
+
+	params := operation.NewGetLogsParams().WithProjectName(projectName)
+
+	if len(args) > 0 {
+		rt := common.GetRuntime(ctx)
+		if err := rt.ExportTo(args[0], params); err != nil {
+			common.Throw(common.GetRuntime(ctx), err)
+		}
+	}
+
+	res, err := h.api.Project.GetLogs(ctx, params)
+	Checkf(ctx, err, "failed to list audit logs of project %s", projectName)
+
+	return ListAuditLogsOfProjectResult{
+		Logs:  res.Payload,
+		Total: res.XTotalCount,
+	}
+}
