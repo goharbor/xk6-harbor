@@ -4,8 +4,10 @@ import (
 	"context"
 	"net/url"
 
+	"github.com/dop251/goja"
 	operation "github.com/heww/xk6-harbor/pkg/harbor/client/repository"
 	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/loadimpact/k6/js/common"
 )
 
 func (h *Harbor) DeleteRepository(ctx context.Context, projectName, repositoryName string) {
@@ -23,18 +25,17 @@ type ListRepositoriesResult struct {
 	Total        int64                `js:"total"`
 }
 
-func (h *Harbor) ListRepositories(ctx context.Context, projectName string, query ...Query) ListRepositoriesResult {
+func (h *Harbor) ListRepositories(ctx context.Context, projectName string, args ...goja.Value) ListRepositoriesResult {
 	h.mustInitialized(ctx)
 
 	params := operation.NewListRepositoriesParams()
 	params.WithProjectName(projectName)
 
-	if len(query) > 0 {
-		q := query[0]
-
-		params.Page = q.Page
-		params.PageSize = q.PageSize
-		params.Q = q.Q
+	if len(args) > 0 {
+		rt := common.GetRuntime(ctx)
+		if err := rt.ExportTo(args[0], params); err != nil {
+			common.Throw(common.GetRuntime(ctx), err)
+		}
 	}
 
 	res, err := h.api.Repository.ListRepositories(ctx, params)
