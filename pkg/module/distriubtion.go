@@ -117,10 +117,19 @@ func (h *Harbor) makeResolver(ctx context.Context, args ...goja.Value) remotes.R
 		return "", "", nil
 	})
 
+	plainHTTP := func(host string) (bool, error) {
+		if host == h.option.Host {
+			return h.option.Scheme == "http", nil
+		}
+
+		return false, nil // default is https
+	}
+
 	return docker.NewResolver(docker.ResolverOptions{
 		Hosts: docker.ConfigureDefaultRegistries(
 			docker.WithAuthorizer(authorizer),
 			docker.WithClient(client),
+			docker.WithPlainHTTP(plainHTTP),
 		),
 	})
 }

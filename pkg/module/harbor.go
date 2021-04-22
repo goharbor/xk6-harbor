@@ -98,6 +98,8 @@ func (h *Harbor) Initialize(ctx context.Context, args ...goja.Value) {
 			config.Transport = util.NewDefaultTransport()
 		}
 
+		opt.Scheme = strings.ToLower(opt.Scheme)
+
 		h.api = client.New(config)
 		h.option = opt
 		h.initialized = true
