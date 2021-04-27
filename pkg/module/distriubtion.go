@@ -3,7 +3,9 @@ package module
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"net/http"
+	"strconv"
 	"strings"
 
 	"github.com/containerd/containerd/remotes"
@@ -12,10 +14,53 @@ import (
 	"github.com/dop251/goja"
 	"github.com/google/uuid"
 	"github.com/heww/xk6-harbor/pkg/util"
+	"github.com/loadimpact/k6/js/common"
 	"github.com/opencontainers/go-digest"
 	ocispec "github.com/opencontainers/image-spec/specs-go/v1"
 	log "github.com/sirupsen/logrus"
 )
+
+type GetCatalogQuery struct {
+	N    int    `js:"n"`
+	Last string `js:"last"`
+}
+
+func (h *Harbor) GetCatalog(ctx context.Context, args ...goja.Value) map[string]interface{} {
+	h.mustInitialized(ctx)
+
+	var param GetCatalogQuery
+	if len(args) > 0 {
+		rt := common.GetRuntime(ctx)
+		if err := rt.ExportTo(args[0], &param); err != nil {
+			common.Throw(common.GetRuntime(ctx), err)
+		}
+	}
+
+	req, _ := http.NewRequest(http.MethodGet, fmt.Sprintf("%s://%s/v2/_catalog", h.option.Scheme, h.option.Host), nil)
+	req.SetBasicAuth(h.option.Username, h.option.Password)
+
+	q := req.URL.Query()
+	if param.N != 0 {
+		q.Add("n", strconv.Itoa(param.N))
+	}
+
+	if param.Last != "" {
+		q.Add("last", param.Last)
+	}
+
+	req.URL.RawQuery = q.Encode()
+
+	resp, err := h.httpClient.Do(req)
+	Checkf(ctx, err, "failed to get catalog")
+	defer resp.Body.Close()
+
+	dec := json.NewDecoder(resp.Body)
+
+	m := map[string]interface{}{}
+	Checkf(ctx, dec.Decode(&m), "bad catalog")
+
+	return m
+}
 
 func (h *Harbor) GetManifest(ctx context.Context, ref string) map[string]interface{} {
 	h.mustInitialized(ctx)

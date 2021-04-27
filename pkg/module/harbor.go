@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"net/http"
 	"net/url"
 	"os"
 	"path/filepath"
@@ -46,6 +47,7 @@ type Option struct {
 }
 
 type Harbor struct {
+	httpClient  *http.Client
 	api         *client.HarborAPI
 	option      *Option
 	initialized bool
@@ -80,7 +82,9 @@ func (h *Harbor) Initialize(ctx context.Context, args ...goja.Value) {
 			return
 		}
 
-		rawURL := fmt.Sprintf("%s://%s/%s", opt.Scheme, strings.TrimSuffix(opt.Host, "/"), client.DefaultBasePath)
+		opt.Host = strings.TrimSuffix(opt.Host, "/")
+
+		rawURL := fmt.Sprintf("%s://%s/%s", opt.Scheme, opt.Host, client.DefaultBasePath)
 		u, err := url.Parse(rawURL)
 		if err != nil {
 			common.Throw(common.GetRuntime(ctx), err)
@@ -102,6 +106,7 @@ func (h *Harbor) Initialize(ctx context.Context, args ...goja.Value) {
 
 		h.api = client.New(config)
 		h.option = opt
+		h.httpClient = &http.Client{Transport: config.Transport}
 		h.initialized = true
 	})
 }
