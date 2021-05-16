@@ -23,6 +23,11 @@ type API interface {
 	   Create Retention Policy, you can reference metadatas API for the policy model. You can check project metadatas to find whether a retention policy is already binded. This method should only be called when no retention policy binded to project yet.*/
 	CreateRetention(ctx context.Context, params *CreateRetentionParams) (*CreateRetentionCreated, error)
 	/*
+	   DeleteRetention deletes retention policy
+
+	   Delete Retention Policy, you can reference metadatas API for the policy model. You can check project metadatas to find whether a retention policy is already binded. This method should only be called when retention policy has already binded to project.*/
+	DeleteRetention(ctx context.Context, params *DeleteRetentionParams) (*DeleteRetentionOK, error)
+	/*
 	   GetRentenitionMetadata gets retention metadatas
 
 	   Get Retention Metadatas.*/
@@ -106,6 +111,33 @@ func (a *Client) CreateRetention(ctx context.Context, params *CreateRetentionPar
 		return nil, err
 	}
 	return result.(*CreateRetentionCreated), nil
+
+}
+
+/*
+DeleteRetention deletes retention policy
+
+Delete Retention Policy, you can reference metadatas API for the policy model. You can check project metadatas to find whether a retention policy is already binded. This method should only be called when retention policy has already binded to project.
+*/
+func (a *Client) DeleteRetention(ctx context.Context, params *DeleteRetentionParams) (*DeleteRetentionOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "deleteRetention",
+		Method:             "DELETE",
+		PathPattern:        "/retentions/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &DeleteRetentionReader{formats: a.formats},
+		AuthInfo:           a.authInfo,
+		Context:            ctx,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*DeleteRetentionOK), nil
 
 }
 

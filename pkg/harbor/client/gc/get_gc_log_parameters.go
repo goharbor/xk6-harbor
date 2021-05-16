@@ -60,6 +60,12 @@ func NewGetGCLogParamsWithHTTPClient(client *http.Client) *GetGCLogParams {
 */
 type GetGCLogParams struct {
 
+	/* XRequestID.
+
+	   An unique ID for the request
+	*/
+	XRequestID *string `js:"xRequestID"`
+
 	/* GCID.
 
 	   The ID of the gc log
@@ -121,6 +127,17 @@ func (o *GetGCLogParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithXRequestID adds the xRequestID to the get GC log params
+func (o *GetGCLogParams) WithXRequestID(xRequestID *string) *GetGCLogParams {
+	o.SetXRequestID(xRequestID)
+	return o
+}
+
+// SetXRequestID adds the xRequestId to the get GC log params
+func (o *GetGCLogParams) SetXRequestID(xRequestID *string) {
+	o.XRequestID = xRequestID
+}
+
 // WithGCID adds the gCID to the get GC log params
 func (o *GetGCLogParams) WithGCID(gCID int64) *GetGCLogParams {
 	o.SetGCID(gCID)
@@ -139,6 +156,14 @@ func (o *GetGCLogParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Regi
 		return err
 	}
 	var res []error
+
+	if o.XRequestID != nil {
+
+		// header param X-Request-Id
+		if err := r.SetHeaderParam("X-Request-Id", *o.XRequestID); err != nil {
+			return err
+		}
+	}
 
 	// path param gc_id
 	if err := r.SetPathParam("gc_id", swag.FormatInt64(o.GCID)); err != nil {

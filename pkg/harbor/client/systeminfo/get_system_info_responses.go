@@ -15,22 +15,22 @@ import (
 	"github.com/heww/xk6-harbor/pkg/harbor/models"
 )
 
-// GetSysteminfoReader is a Reader for the GetSysteminfo structure.
-type GetSysteminfoReader struct {
+// GetSystemInfoReader is a Reader for the GetSystemInfo structure.
+type GetSystemInfoReader struct {
 	formats strfmt.Registry
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *GetSysteminfoReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *GetSystemInfoReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 	case 200:
-		result := NewGetSysteminfoOK()
+		result := NewGetSystemInfoOK()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
 		return result, nil
 	case 500:
-		result := NewGetSysteminfoInternalServerError()
+		result := NewGetSystemInfoInternalServerError()
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -40,27 +40,27 @@ func (o *GetSysteminfoReader) ReadResponse(response runtime.ClientResponse, cons
 	}
 }
 
-// NewGetSysteminfoOK creates a GetSysteminfoOK with default headers values
-func NewGetSysteminfoOK() *GetSysteminfoOK {
-	return &GetSysteminfoOK{}
+// NewGetSystemInfoOK creates a GetSystemInfoOK with default headers values
+func NewGetSystemInfoOK() *GetSystemInfoOK {
+	return &GetSystemInfoOK{}
 }
 
-/* GetSysteminfoOK describes a response with status code 200, with default header values.
+/* GetSystemInfoOK describes a response with status code 200, with default header values.
 
 Get general info successfully.
 */
-type GetSysteminfoOK struct {
+type GetSystemInfoOK struct {
 	Payload *models.GeneralInfo
 }
 
-func (o *GetSysteminfoOK) Error() string {
-	return fmt.Sprintf("[GET /systeminfo][%d] getSysteminfoOK  %+v", 200, o.Payload)
+func (o *GetSystemInfoOK) Error() string {
+	return fmt.Sprintf("[GET /systeminfo][%d] getSystemInfoOK  %+v", 200, o.Payload)
 }
-func (o *GetSysteminfoOK) GetPayload() *models.GeneralInfo {
+func (o *GetSystemInfoOK) GetPayload() *models.GeneralInfo {
 	return o.Payload
 }
 
-func (o *GetSysteminfoOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *GetSystemInfoOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.GeneralInfo)
 
@@ -72,16 +72,16 @@ func (o *GetSysteminfoOK) readResponse(response runtime.ClientResponse, consumer
 	return nil
 }
 
-// NewGetSysteminfoInternalServerError creates a GetSysteminfoInternalServerError with default headers values
-func NewGetSysteminfoInternalServerError() *GetSysteminfoInternalServerError {
-	return &GetSysteminfoInternalServerError{}
+// NewGetSystemInfoInternalServerError creates a GetSystemInfoInternalServerError with default headers values
+func NewGetSystemInfoInternalServerError() *GetSystemInfoInternalServerError {
+	return &GetSystemInfoInternalServerError{}
 }
 
-/* GetSysteminfoInternalServerError describes a response with status code 500, with default header values.
+/* GetSystemInfoInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
-type GetSysteminfoInternalServerError struct {
+type GetSystemInfoInternalServerError struct {
 
 	/* The ID of the corresponding request for the response
 	 */
@@ -90,14 +90,14 @@ type GetSysteminfoInternalServerError struct {
 	Payload *models.Errors
 }
 
-func (o *GetSysteminfoInternalServerError) Error() string {
-	return fmt.Sprintf("[GET /systeminfo][%d] getSysteminfoInternalServerError  %+v", 500, o.Payload)
+func (o *GetSystemInfoInternalServerError) Error() string {
+	return fmt.Sprintf("[GET /systeminfo][%d] getSystemInfoInternalServerError  %+v", 500, o.Payload)
 }
-func (o *GetSysteminfoInternalServerError) GetPayload() *models.Errors {
+func (o *GetSystemInfoInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }
 
-func (o *GetSysteminfoInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+func (o *GetSystemInfoInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// hydrates response header X-Request-Id
 	hdrXRequestID := response.GetHeader("X-Request-Id")

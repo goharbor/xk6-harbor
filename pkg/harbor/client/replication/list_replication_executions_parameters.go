@@ -60,6 +60,12 @@ func NewListReplicationExecutionsParamsWithHTTPClient(client *http.Client) *List
 */
 type ListReplicationExecutionsParams struct {
 
+	/* XRequestID.
+
+	   An unique ID for the request
+	*/
+	XRequestID *string `js:"xRequestID"`
+
 	/* Page.
 
 	   The page number
@@ -169,6 +175,17 @@ func (o *ListReplicationExecutionsParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithXRequestID adds the xRequestID to the list replication executions params
+func (o *ListReplicationExecutionsParams) WithXRequestID(xRequestID *string) *ListReplicationExecutionsParams {
+	o.SetXRequestID(xRequestID)
+	return o
+}
+
+// SetXRequestID adds the xRequestId to the list replication executions params
+func (o *ListReplicationExecutionsParams) SetXRequestID(xRequestID *string) {
+	o.XRequestID = xRequestID
+}
+
 // WithPage adds the page to the list replication executions params
 func (o *ListReplicationExecutionsParams) WithPage(page *int64) *ListReplicationExecutionsParams {
 	o.SetPage(page)
@@ -242,6 +259,14 @@ func (o *ListReplicationExecutionsParams) WriteToRequest(r runtime.ClientRequest
 		return err
 	}
 	var res []error
+
+	if o.XRequestID != nil {
+
+		// header param X-Request-Id
+		if err := r.SetHeaderParam("X-Request-Id", *o.XRequestID); err != nil {
+			return err
+		}
+	}
 
 	if o.Page != nil {
 

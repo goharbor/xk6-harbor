@@ -60,6 +60,12 @@ func NewListReplicationPoliciesParamsWithHTTPClient(client *http.Client) *ListRe
 */
 type ListReplicationPoliciesParams struct {
 
+	/* XRequestID.
+
+	   An unique ID for the request
+	*/
+	XRequestID *string `js:"xRequestID"`
+
 	/* Name.
 
 	   Deprecated, use "query" instead. The policy name.
@@ -163,6 +169,17 @@ func (o *ListReplicationPoliciesParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithXRequestID adds the xRequestID to the list replication policies params
+func (o *ListReplicationPoliciesParams) WithXRequestID(xRequestID *string) *ListReplicationPoliciesParams {
+	o.SetXRequestID(xRequestID)
+	return o
+}
+
+// SetXRequestID adds the xRequestId to the list replication policies params
+func (o *ListReplicationPoliciesParams) SetXRequestID(xRequestID *string) {
+	o.XRequestID = xRequestID
+}
+
 // WithName adds the name to the list replication policies params
 func (o *ListReplicationPoliciesParams) WithName(name *string) *ListReplicationPoliciesParams {
 	o.SetName(name)
@@ -225,6 +242,14 @@ func (o *ListReplicationPoliciesParams) WriteToRequest(r runtime.ClientRequest, 
 		return err
 	}
 	var res []error
+
+	if o.XRequestID != nil {
+
+		// header param X-Request-Id
+		if err := r.SetHeaderParam("X-Request-Id", *o.XRequestID); err != nil {
+			return err
+		}
+	}
 
 	if o.Name != nil {
 

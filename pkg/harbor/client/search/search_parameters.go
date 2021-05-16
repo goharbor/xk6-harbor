@@ -59,6 +59,12 @@ func NewSearchParamsWithHTTPClient(client *http.Client) *SearchParams {
 */
 type SearchParams struct {
 
+	/* XRequestID.
+
+	   An unique ID for the request
+	*/
+	XRequestID *string `js:"xRequestID"`
+
 	/* Q.
 
 	   Search parameter for project and repository name.
@@ -118,6 +124,17 @@ func (o *SearchParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithXRequestID adds the xRequestID to the search params
+func (o *SearchParams) WithXRequestID(xRequestID *string) *SearchParams {
+	o.SetXRequestID(xRequestID)
+	return o
+}
+
+// SetXRequestID adds the xRequestId to the search params
+func (o *SearchParams) SetXRequestID(xRequestID *string) {
+	o.XRequestID = xRequestID
+}
+
 // WithQ adds the q to the search params
 func (o *SearchParams) WithQ(q string) *SearchParams {
 	o.SetQ(q)
@@ -136,6 +153,14 @@ func (o *SearchParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Regist
 		return err
 	}
 	var res []error
+
+	if o.XRequestID != nil {
+
+		// header param X-Request-Id
+		if err := r.SetHeaderParam("X-Request-Id", *o.XRequestID); err != nil {
+			return err
+		}
+	}
 
 	// query param q
 	qrQ := o.Q

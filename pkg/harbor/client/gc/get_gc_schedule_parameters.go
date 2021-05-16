@@ -58,6 +58,13 @@ func NewGetGCScheduleParamsWithHTTPClient(client *http.Client) *GetGCSchedulePar
    Typically these are written to a http.Request.
 */
 type GetGCScheduleParams struct {
+
+	/* XRequestID.
+
+	   An unique ID for the request
+	*/
+	XRequestID *string `js:"xRequestID"`
+
 	timeout    time.Duration
 	Context    context.Context `js:"context"`
 	HTTPClient *http.Client    `js:"httpClient"`
@@ -111,6 +118,17 @@ func (o *GetGCScheduleParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithXRequestID adds the xRequestID to the get GC schedule params
+func (o *GetGCScheduleParams) WithXRequestID(xRequestID *string) *GetGCScheduleParams {
+	o.SetXRequestID(xRequestID)
+	return o
+}
+
+// SetXRequestID adds the xRequestId to the get GC schedule params
+func (o *GetGCScheduleParams) SetXRequestID(xRequestID *string) {
+	o.XRequestID = xRequestID
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *GetGCScheduleParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -118,6 +136,14 @@ func (o *GetGCScheduleParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		return err
 	}
 	var res []error
+
+	if o.XRequestID != nil {
+
+		// header param X-Request-Id
+		if err := r.SetHeaderParam("X-Request-Id", *o.XRequestID); err != nil {
+			return err
+		}
+	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)

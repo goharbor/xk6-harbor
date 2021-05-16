@@ -30,11 +30,11 @@ type API interface {
 	*/
 	GetInternalconfig(ctx context.Context, params *GetInternalconfigParams) (*GetInternalconfigOK, error)
 	/*
-	   PutConfigurations modifies system configurations
+	   UpdateConfigurations modifies system configurations
 
 	   This endpoint is for modifying system configurations that only provides for admin user.
 	*/
-	PutConfigurations(ctx context.Context, params *PutConfigurationsParams) (*PutConfigurationsOK, error)
+	UpdateConfigurations(ctx context.Context, params *UpdateConfigurationsParams) (*UpdateConfigurationsOK, error)
 }
 
 // New creates a new configure API client.
@@ -64,7 +64,7 @@ This endpoint is for retrieving system configurations that only provides for adm
 func (a *Client) GetConfigurations(ctx context.Context, params *GetConfigurationsParams) (*GetConfigurationsOK, error) {
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetConfigurations",
+		ID:                 "getConfigurations",
 		Method:             "GET",
 		PathPattern:        "/configurations",
 		ProducesMediaTypes: []string{"application/json"},
@@ -92,7 +92,7 @@ This endpoint is for retrieving system configurations that only provides for int
 func (a *Client) GetInternalconfig(ctx context.Context, params *GetInternalconfigParams) (*GetInternalconfigOK, error) {
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetInternalconfig",
+		ID:                 "getInternalconfig",
 		Method:             "GET",
 		PathPattern:        "/internalconfig",
 		ProducesMediaTypes: []string{"application/json"},
@@ -112,22 +112,22 @@ func (a *Client) GetInternalconfig(ctx context.Context, params *GetInternalconfi
 }
 
 /*
-PutConfigurations modifies system configurations
+UpdateConfigurations modifies system configurations
 
 This endpoint is for modifying system configurations that only provides for admin user.
 
 */
-func (a *Client) PutConfigurations(ctx context.Context, params *PutConfigurationsParams) (*PutConfigurationsOK, error) {
+func (a *Client) UpdateConfigurations(ctx context.Context, params *UpdateConfigurationsParams) (*UpdateConfigurationsOK, error) {
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "PutConfigurations",
+		ID:                 "updateConfigurations",
 		Method:             "PUT",
 		PathPattern:        "/configurations",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"http", "https"},
 		Params:             params,
-		Reader:             &PutConfigurationsReader{formats: a.formats},
+		Reader:             &UpdateConfigurationsReader{formats: a.formats},
 		AuthInfo:           a.authInfo,
 		Context:            ctx,
 		Client:             params.HTTPClient,
@@ -135,6 +135,6 @@ func (a *Client) PutConfigurations(ctx context.Context, params *PutConfiguration
 	if err != nil {
 		return nil, err
 	}
-	return result.(*PutConfigurationsOK), nil
+	return result.(*UpdateConfigurationsOK), nil
 
 }

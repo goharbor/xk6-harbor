@@ -33,6 +33,10 @@ type ReplicationPolicy struct {
 	// The destination namespace.
 	DestNamespace string `json:"dest_namespace,omitempty" js:"destNamespace"`
 
+	// Specify how many path components will be replaced by the provided destination namespace.
+	// The default value is -1 in which case the legacy mode will be applied.
+	DestNamespaceReplaceCount *int8 `json:"dest_namespace_replace_count,omitempty" js:"destNamespaceReplaceCount"`
+
 	// The destination registry.
 	DestRegistry *Registry `json:"dest_registry,omitempty" js:"destRegistry"`
 

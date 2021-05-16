@@ -60,6 +60,12 @@ func NewGetGCHistoryParamsWithHTTPClient(client *http.Client) *GetGCHistoryParam
 */
 type GetGCHistoryParams struct {
 
+	/* XRequestID.
+
+	   An unique ID for the request
+	*/
+	XRequestID *string `js:"xRequestID"`
+
 	/* Page.
 
 	   The page number
@@ -157,6 +163,17 @@ func (o *GetGCHistoryParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithXRequestID adds the xRequestID to the get GC history params
+func (o *GetGCHistoryParams) WithXRequestID(xRequestID *string) *GetGCHistoryParams {
+	o.SetXRequestID(xRequestID)
+	return o
+}
+
+// SetXRequestID adds the xRequestId to the get GC history params
+func (o *GetGCHistoryParams) SetXRequestID(xRequestID *string) {
+	o.XRequestID = xRequestID
+}
+
 // WithPage adds the page to the get GC history params
 func (o *GetGCHistoryParams) WithPage(page *int64) *GetGCHistoryParams {
 	o.SetPage(page)
@@ -208,6 +225,14 @@ func (o *GetGCHistoryParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.
 		return err
 	}
 	var res []error
+
+	if o.XRequestID != nil {
+
+		// header param X-Request-Id
+		if err := r.SetHeaderParam("X-Request-Id", *o.XRequestID); err != nil {
+			return err
+		}
+	}
 
 	if o.Page != nil {
 

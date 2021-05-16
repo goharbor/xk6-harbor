@@ -19,12 +19,29 @@ security:
   - basic: []
   - {}
 paths:
+  /health:
+    get:
+      summary: Check the status of Harbor components
+      description: Check the status of Harbor components
+      tags:
+        - health
+      operationId: getHealth
+      parameters:
+        - $ref: '#/parameters/requestId'
+      responses:
+        '200':
+          description: The health status of Harbor components
+          schema:
+            $ref: '#/definitions/OverallHealthStatus'
+        '500':
+          $ref: '#/responses/500'
   /search:
     get:
       summary: 'Search for projects, repositories and helm charts'
       description: |-
         The Search endpoint returns information about the projects, repositories and helm charts offered at public status or related to the current logged in user. The response includes the project, repository list and charts in a proper display order.
       parameters:
+        - $ref: '#/parameters/requestId'
         - name: q
           in: query
           description: Search parameter for project and repository name.
@@ -38,6 +55,24 @@ paths:
           description: An array of search results
           schema:
             $ref: '#/definitions/Search'
+        '500':
+          $ref: '#/responses/500'
+  /statistics:
+    get:
+      summary: Get the statistic information about the projects and repositories
+      description: Get the statistic information about the projects and repositories
+      tags:
+        - statistic
+      operationId: getStatistic
+      parameters:
+        - $ref: '#/parameters/requestId'
+      responses:
+        '200':
+          description: The statistic information
+          schema:
+            $ref: '#/definitions/Statistic'
+        '401':
+          $ref: '#/responses/401'
         '500':
           $ref: '#/responses/500'
   /ldap/ping:
@@ -166,6 +201,7 @@ paths:
   /internalconfig:
     get:
       summary: Get internal configurations.
+      operationId: getInternalconfig
       description: |
         This endpoint is for retrieving system configurations that only provides for internal api call.
       tags:
@@ -186,6 +222,7 @@ paths:
   /configurations:
     get:
       summary: Get system configurations.
+      operationId: getConfigurations
       description: |
         This endpoint is for retrieving system configurations that only provides for admin user.
       tags:
@@ -205,6 +242,7 @@ paths:
           description: Unexpected internal errors.
     put:
       summary: Modify system configurations.
+      operationId: updateConfigurations
       description: |
         This endpoint is for modifying system configurations that only provides for admin user.
       tags:
@@ -609,6 +647,164 @@ paths:
           $ref: '#/responses/401'
         '403':
           $ref: '#/responses/403'
+        '500':
+          $ref: '#/responses/500'
+  '/projects/{project_name_or_id}/metadatas/':
+    get:
+      summary: Get the metadata of the specific project
+      description: Get the metadata of the specific project
+      operationId: listProjectMetadatas
+      parameters:
+        - $ref: '#/parameters/requestId'
+        - $ref: '#/parameters/isResourceName'
+        - $ref: '#/parameters/projectNameOrId'
+      tags:
+        - projectMetadata
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+        '400':
+          $ref: '#/responses/400'
+        '401':
+          $ref: '#/responses/401'
+        '403':
+          $ref: '#/responses/403'
+        '404':
+          $ref: '#/responses/404'
+        '500':
+          $ref: '#/responses/500'
+    post:
+      summary: Add metadata for the specific project
+      operationId: addProjectMetadatas
+      description: Add metadata for the specific project
+      tags:
+        - projectMetadata
+      parameters:
+        - $ref: '#/parameters/requestId'
+        - $ref: '#/parameters/isResourceName'
+        - $ref: '#/parameters/projectNameOrId'
+        - name: metadata
+          in: body
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+      responses:
+        '200':
+          $ref: '#/responses/200'
+        '400':
+          $ref: '#/responses/400'
+        '401':
+          $ref: '#/responses/401'
+        '403':
+          $ref: '#/responses/403'
+        '404':
+          $ref: '#/responses/404'
+        '409':
+          $ref: '#/responses/409'
+        '500':
+          $ref: '#/responses/500'
+  '/projects/{project_name_or_id}/metadatas/{meta_name}':
+    get:
+      summary: Get the specific metadata of the specific project
+      description: Get the specific metadata of the specific project
+      operationId: getProjectMetadata
+      parameters:
+        - $ref: '#/parameters/requestId'
+        - $ref: '#/parameters/isResourceName'
+        - $ref: '#/parameters/projectNameOrId'
+        - name: meta_name
+          in: path
+          description: The name of metadata.
+          required: true
+          type: string
+      tags:
+        - projectMetadata
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+        '400':
+          $ref: '#/responses/400'
+        '401':
+          $ref: '#/responses/401'
+        '403':
+          $ref: '#/responses/403'
+        '404':
+          $ref: '#/responses/404'
+        '500':
+          $ref: '#/responses/500'
+    put:
+      summary: Update the specific metadata for the specific project
+      description: Update the specific metadata for the specific project
+      operationId: updateProjectMetadata
+      tags:
+        - projectMetadata
+      parameters:
+        - $ref: '#/parameters/requestId'
+        - $ref: '#/parameters/isResourceName'
+        - $ref: '#/parameters/projectNameOrId'
+        - name: meta_name
+          in: path
+          description: The name of metadata.
+          required: true
+          type: string
+        - name: metadata
+          in: body
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+      responses:
+        '200':
+          $ref: '#/responses/200'
+        '400':
+          $ref: '#/responses/400'
+        '401':
+          $ref: '#/responses/401'
+        '403':
+          $ref: '#/responses/403'
+        '404':
+          $ref: '#/responses/404'
+        '409':
+          $ref: '#/responses/409'
+        '500':
+          $ref: '#/responses/500'
+    delete:
+      summary: Delete the specific metadata for the specific project
+      description: Delete the specific metadata for the specific project
+      operationId: deleteProjectMetadata
+      tags:
+        - projectMetadata
+      parameters:
+        - $ref: '#/parameters/requestId'
+        - $ref: '#/parameters/isResourceName'
+        - $ref: '#/parameters/projectNameOrId'
+        - name: meta_name
+          in: path
+          description: The name of metadata.
+          required: true
+          type: string
+      responses:
+        '200':
+          $ref: '#/responses/200'
+        '400':
+          $ref: '#/responses/400'
+        '401':
+          $ref: '#/responses/401'
+        '403':
+          $ref: '#/responses/403'
+        '404':
+          $ref: '#/responses/404'
+        '409':
+          $ref: '#/responses/409'
         '500':
           $ref: '#/responses/500'
   /repositories:
@@ -2935,6 +3131,7 @@ paths:
         - replication
       operationId: listReplicationPolicies
       parameters:
+        - $ref: '#/parameters/requestId'
         - $ref: '#/parameters/query'
         - $ref: '#/parameters/sort'
         - $ref: '#/parameters/page'
@@ -3081,6 +3278,7 @@ paths:
         - replication
       operationId: listReplicationExecutions
       parameters:
+        - $ref: '#/parameters/requestId'
         - $ref: '#/parameters/sort'
         - $ref: '#/parameters/page'
         - $ref: '#/parameters/pageSize'
@@ -3202,6 +3400,7 @@ paths:
         - replication
       operationId: listReplicationTasks
       parameters:
+        - $ref: '#/parameters/requestId'
         - $ref: '#/parameters/sort'
         - $ref: '#/parameters/page'
         - $ref: '#/parameters/pageSize'
@@ -3540,6 +3739,8 @@ paths:
       tags:
         - scanAll
       operationId: getLatestScanAllMetrics
+      parameters:
+        - $ref: '#/parameters/requestId'
       responses:
         '200':
           description: OK
@@ -3561,6 +3762,8 @@ paths:
         - scanAll
       operationId: getLatestScheduledScanAllMetrics
       deprecated: true
+      parameters:
+        - $ref: '#/parameters/requestId'
       responses:
         '200':
           description: OK
@@ -3577,10 +3780,13 @@ paths:
   /systeminfo:
     get:
       summary: Get general system info
+      operationId: getSystemInfo
       description: |
         This API is for retrieving general system info, this can be called by anonymous request.  Some attributes will be omitted in the response when this API is called by anonymous request.
       tags:
         - systeminfo
+      parameters:
+        - $ref: '#/parameters/requestId'
       responses:
         '200':
           description: Get general info successfully.
@@ -3591,10 +3797,13 @@ paths:
   /systeminfo/volumes:
     get:
       summary: Get system volume info (total/free size).
+      operationId: getVolumes
       description: |
         This endpoint is for retrieving system volume info that only provides for admin user.  Note that the response only reflects the storage status of local disk.
       tags:
         - systeminfo
+      parameters:
+        - $ref: '#/parameters/requestId'
       responses:
         '200':
           description: Get system volumes successfully.
@@ -3611,12 +3820,15 @@ paths:
   /systeminfo/getcert:
     get:
       summary: Get default root certificate.
+      operationId: getCert
       description: |
         This endpoint is for downloading a default root certificate.
       tags:
         - systeminfo
       produces:
         - application/octet-stream
+      parameters:
+        - $ref: '#/parameters/requestId'
       responses:
         '200':
           description: Get default root certificate successfully.
@@ -3669,6 +3881,7 @@ paths:
         - gc
       operationId: getGCHistory
       parameters:
+        - $ref: '#/parameters/requestId'
         - $ref: '#/parameters/query'
         - $ref: '#/parameters/sort'
         - $ref: '#/parameters/page'
@@ -3699,6 +3912,7 @@ paths:
       description: This endpoint let user get gc status filtered by specific ID.
       operationId: getGC
       parameters:
+        - $ref: '#/parameters/requestId'
         - $ref: '#/parameters/gcId'
       tags:
         - gc
@@ -3721,6 +3935,7 @@ paths:
       description: This endpoint let user get gc job logs filtered by specific ID.
       operationId: getGCLog
       parameters:
+        - $ref: '#/parameters/requestId'
         - $ref: '#/parameters/gcId'
       tags:
         - gc
@@ -3748,6 +3963,8 @@ paths:
       operationId: getGCSchedule
       tags:
         - gc
+      parameters:
+        - $ref: '#/parameters/requestId'
       responses:
         '200':
           description: Get gc's schedule.
@@ -3818,6 +4035,8 @@ paths:
       operationId: getSystemCVEAllowlist
       tags:
         - SystemCVEAllowlist
+      parameters:
+        - $ref: '#/parameters/requestId'
       responses:
         '200':
           description: Successfully retrieved the CVE allowlist.
@@ -3856,6 +4075,8 @@ paths:
       tags:
         - scanAll
       operationId: getScanAllSchedule
+      parameters:
+        - $ref: '#/parameters/requestId'
       responses:
         '200':
           description: Get a schedule for the scan all job, which scans all of images in Harbor.
@@ -3925,12 +4146,15 @@ paths:
           $ref: '#/responses/500'
   /ping:
     get:
+      operationId: getPing
       summary: Ping Harbor to check if it's alive.
       description: This API simply replies a pong to indicate the process to handle API is up, disregarding the health status of dependent components.
       tags:
         - ping
       produces:
         - text/plain
+      parameters:
+        - $ref: '#/parameters/requestId'
       responses:
         '200':
           description: The API server is alive
@@ -3943,6 +4167,8 @@ paths:
       operationId: getRentenitionMetadata
       tags:
         - Retention
+      parameters:
+        - $ref: '#/parameters/requestId'
       responses:
         '200':
           description: Get Retention Metadatas successfully.
@@ -3960,6 +4186,7 @@ paths:
       tags:
         - Retention
       parameters:
+        - $ref: '#/parameters/requestId'
         - name: policy
           in: body
           description: Create Retention Policy successfully.
@@ -3986,6 +4213,7 @@ paths:
       tags:
         - Retention
       parameters:
+        - $ref: '#/parameters/requestId'
         - name: id
           in: path
           type: integer
@@ -4013,6 +4241,7 @@ paths:
       tags:
         - Retention
       parameters:
+        - $ref: '#/parameters/requestId'
         - name: id
           in: path
           type: integer
@@ -4033,6 +4262,32 @@ paths:
           $ref: '#/responses/403'
         '500':
           $ref: '#/responses/500'
+    delete:
+      summary: Delete Retention Policy
+      operationId: deleteRetention
+      description: >-
+        Delete Retention Policy, you can reference metadatas API for the policy model.
+        You can check project metadatas to find whether a retention policy is already binded.
+        This method should only be called when retention policy has already binded to project.
+      tags:
+        - Retention
+      parameters:
+        - $ref: '#/parameters/requestId'
+        - name: id
+          in: path
+          type: integer
+          format: int64
+          required: true
+          description: Retention ID.
+      responses:
+        '200':
+          description: Update Retention Policy successfully.
+        '401':
+          $ref: '#/responses/401'
+        '403':
+          $ref: '#/responses/403'
+        '500':
+          $ref: '#/responses/500'
 
   /retentions/{id}/executions:
     post:
@@ -4044,6 +4299,7 @@ paths:
       produces:
         - text/plain
       parameters:
+        - $ref: '#/parameters/requestId'
         - name: id
           in: path
           type: integer
@@ -4076,6 +4332,7 @@ paths:
       tags:
         - Retention
       parameters:
+        - $ref: '#/parameters/requestId'
         - name: id
           in: path
           type: integer
@@ -4124,6 +4381,7 @@ paths:
       tags:
         - Retention
       parameters:
+        - $ref: '#/parameters/requestId'
         - name: id
           in: path
           type: integer
@@ -4163,6 +4421,7 @@ paths:
       tags:
         - Retention
       parameters:
+        - $ref: '#/parameters/requestId'
         - name: id
           in: path
           type: integer
@@ -4219,6 +4478,7 @@ paths:
       produces:
         - text/plain
       parameters:
+        - $ref: '#/parameters/requestId'
         - name: id
           in: path
           type: integer
@@ -4801,6 +5061,161 @@ paths:
           description: The auth mode of the system is not "oidc_auth", or the user is not onboarded via OIDC AuthN.
         '500':
           $ref: '#/responses/500'
+
+  /labels:
+    get:
+      summary: List labels according to the query strings.
+      description: |
+        This endpoint let user list labels by name, scope and project_id
+      tags:
+        - label
+      operationId: ListLabels
+      parameters:
+        - $ref: '#/parameters/requestId'
+        - $ref: '#/parameters/query'
+        - $ref: '#/parameters/sort'
+        - $ref: '#/parameters/page'
+        - $ref: '#/parameters/pageSize'
+        - name: name
+          in: query
+          type: string
+          required: false
+          description: The label name.
+        - name: scope
+          in: query
+          type: string
+          required: false
+          description: The label scope. Valid values are g and p. g for global labels and p for project labels.
+        - name: project_id
+          in: query
+          type: integer
+          format: int64
+          required: false
+          description: Relevant project ID, required when scope is p.
+      responses:
+        '200':
+          description: Get successfully.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Label'
+          headers:
+            X-Total-Count:
+              description: The total count of available items
+              type: integer
+            Link:
+              description: Link to previous page and next page
+              type: string
+        '400':
+          $ref: '#/responses/400'
+        '401':
+          $ref: '#/responses/401'
+        '500':
+          $ref: '#/responses/500'
+    post:
+      summary: Post creates a label
+      description: |
+        This endpoint let user creates a label.
+      tags:
+        - label
+      operationId: CreateLabel
+      parameters:
+        - name: label
+          in: body
+          description: The json object of label.
+          required: true
+          schema:
+            $ref: '#/definitions/Label'
+      responses:
+        '201':
+          description: Create successfully.
+          headers:
+            Location:
+              type: string
+              description: The URL of the created resource
+        '400':
+          $ref: '#/responses/400'
+        '401':
+          $ref: '#/responses/401'
+        '409':
+          $ref: '#/responses/409'
+        '415':
+          $ref: '#/responses/415'
+        '500':
+          $ref: '#/responses/500'
+  '/labels/{label_id}':
+    get:
+      summary: Get the label specified by ID.
+      description: |
+        This endpoint let user get the label by specific ID.
+      tags:
+        - label
+      operationId: GetLabelByID
+      parameters:
+        - $ref: '#/parameters/requestId'
+        - $ref: '#/parameters/labelId'
+      responses:
+        '200':
+          description: Get successfully.
+          schema:
+            $ref: '#/definitions/Label'
+        '401':
+          $ref: '#/responses/401'
+        '404':
+          $ref: '#/responses/404'
+        '500':
+          $ref: '#/responses/500'
+    put:
+      summary: Update the label properties.
+      description: |
+        This endpoint let user update label properties.
+      tags:
+        - label
+      operationId: UpdateLabel
+      parameters:
+        - $ref: '#/parameters/requestId'
+        - $ref: '#/parameters/labelId'
+        - name: label
+          in: body
+          description: The updated label json object.
+          required: true
+          schema:
+            $ref: '#/definitions/Label'
+      responses:
+        '200':
+          $ref: '#/responses/200'
+        '400':
+          $ref: '#/responses/400'
+        '401':
+          $ref: '#/responses/401'
+        '404':
+          $ref: '#/responses/404'
+        '409':
+          $ref: '#/responses/409'
+        '500':
+          $ref: '#/responses/500'
+    delete:
+      summary: Delete the label specified by ID.
+      description: |
+        Delete the label specified by ID.
+      tags:
+        - label
+      operationId: DeleteLabel
+      parameters:
+        - $ref: '#/parameters/requestId'
+        - $ref: '#/parameters/labelId'
+      responses:
+        '200':
+          $ref: '#/responses/200'
+        '400':
+          $ref: '#/responses/400'
+        '401':
+          $ref: '#/responses/401'
+        '404':
+          $ref: '#/responses/404'
+        '500':
+          $ref: '#/responses/500'
+
 parameters:
   query:
     name: q
@@ -4933,6 +5348,13 @@ parameters:
     required: true
     type: integer
     format: int64
+  labelId:
+    name: label_id
+    in: path
+    description: Label ID
+    required: true
+    type: integer
+    format: int64
   webhookPolicyId:
     name: webhook_policy_id
     in: path
@@ -5020,6 +5442,14 @@ responses:
       $ref: '#/definitions/Errors'
   '412':
     description: Precondition failed
+    headers:
+      X-Request-Id:
+        description: The ID of the corresponding request for the response
+        type: string
+    schema:
+      $ref: '#/definitions/Errors'
+  '415':
+    description: Unsupported MediaType
     headers:
       X-Request-Id:
         description: The ID of the corresponding request for the response
@@ -5954,6 +6384,13 @@ definitions:
       dest_namespace:
         type: string
         description: The destination namespace.
+      dest_namespace_replace_count:
+        type: integer
+        format: int8
+        description: |-
+          Specify how many path components will be replaced by the provided destination namespace.
+          The default value is -1 in which case the legacy mode will be applied.
+        x-isnullable: true # make this field optional to keep backward compatibility
       trigger:
         $ref: '#/definitions/ReplicationTrigger'
       filters:
@@ -7719,5 +8156,65 @@ definitions:
       secret:
         type: string
         description: The new secret
-
-
+  OverallHealthStatus:
+    type: object
+    description: The system health status
+    properties:
+      status:
+        type: string
+        description: The overall health status. It is "healthy" only when all the components' status are "healthy"
+      components:
+        type: array
+        items:
+          $ref: '#/definitions/ComponentHealthStatus'
+  ComponentHealthStatus:
+    type: object
+    description: The health status of component
+    properties:
+      name:
+        type: string
+        description: The component name
+      status:
+        type: string
+        description: The health status of component
+      error:
+        type: string
+        description: (optional) The error message when the status is "unhealthy"
+  Statistic:
+    type: object
+    properties:
+      private_project_count:
+        type: integer
+        format: int64
+        description: The count of the private projects
+        x-omitempty: false
+      private_repo_count:
+        type: integer
+        format: int64
+        description: The count of the private repositories
+        x-omitempty: false
+      public_project_count:
+        type: integer
+        format: int64
+        description: The count of the public projects
+        x-omitempty: false
+      public_repo_count:
+        type: integer
+        format: int64
+        description: The count of the public repositories
+        x-omitempty: false
+      total_project_count:
+        type: integer
+        format: int64
+        description: The count of the total projects, only be seen by the system admin
+        x-omitempty: false
+      total_repo_count:
+        type: integer
+        format: int64
+        description: The count of the total repositories, only be seen by the system admin
+        x-omitempty: false
+      total_storage_consumption:
+        type: integer
+        format: int64
+        description: The total storage consumption of blobs, only be seen by the system admin
+        x-omitempty: false

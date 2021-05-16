@@ -17,14 +17,17 @@ import (
 	"github.com/heww/xk6-harbor/pkg/harbor/client/auditlog"
 	"github.com/heww/xk6-harbor/pkg/harbor/client/configure"
 	"github.com/heww/xk6-harbor/pkg/harbor/client/gc"
+	"github.com/heww/xk6-harbor/pkg/harbor/client/health"
 	"github.com/heww/xk6-harbor/pkg/harbor/client/icon"
 	"github.com/heww/xk6-harbor/pkg/harbor/client/immutable"
+	"github.com/heww/xk6-harbor/pkg/harbor/client/label"
 	"github.com/heww/xk6-harbor/pkg/harbor/client/ldap"
 	"github.com/heww/xk6-harbor/pkg/harbor/client/member"
 	"github.com/heww/xk6-harbor/pkg/harbor/client/oidc"
 	"github.com/heww/xk6-harbor/pkg/harbor/client/ping"
 	"github.com/heww/xk6-harbor/pkg/harbor/client/preheat"
 	"github.com/heww/xk6-harbor/pkg/harbor/client/project"
+	"github.com/heww/xk6-harbor/pkg/harbor/client/project_metadata"
 	"github.com/heww/xk6-harbor/pkg/harbor/client/quota"
 	"github.com/heww/xk6-harbor/pkg/harbor/client/registry"
 	"github.com/heww/xk6-harbor/pkg/harbor/client/replication"
@@ -36,6 +39,7 @@ import (
 	"github.com/heww/xk6-harbor/pkg/harbor/client/scan_all"
 	"github.com/heww/xk6-harbor/pkg/harbor/client/scanner"
 	"github.com/heww/xk6-harbor/pkg/harbor/client/search"
+	"github.com/heww/xk6-harbor/pkg/harbor/client/statistic"
 	"github.com/heww/xk6-harbor/pkg/harbor/client/system_cve_allowlist"
 	"github.com/heww/xk6-harbor/pkg/harbor/client/systeminfo"
 	"github.com/heww/xk6-harbor/pkg/harbor/client/user"
@@ -90,14 +94,17 @@ func New(c Config) *HarborAPI {
 	cli.Auditlog = auditlog.New(transport, strfmt.Default, c.AuthInfo)
 	cli.Configure = configure.New(transport, strfmt.Default, c.AuthInfo)
 	cli.GC = gc.New(transport, strfmt.Default, c.AuthInfo)
+	cli.Health = health.New(transport, strfmt.Default, c.AuthInfo)
 	cli.Icon = icon.New(transport, strfmt.Default, c.AuthInfo)
 	cli.Immutable = immutable.New(transport, strfmt.Default, c.AuthInfo)
+	cli.Label = label.New(transport, strfmt.Default, c.AuthInfo)
 	cli.Ldap = ldap.New(transport, strfmt.Default, c.AuthInfo)
 	cli.Member = member.New(transport, strfmt.Default, c.AuthInfo)
 	cli.OIDC = oidc.New(transport, strfmt.Default, c.AuthInfo)
 	cli.Ping = ping.New(transport, strfmt.Default, c.AuthInfo)
 	cli.Preheat = preheat.New(transport, strfmt.Default, c.AuthInfo)
 	cli.Project = project.New(transport, strfmt.Default, c.AuthInfo)
+	cli.ProjectMetadata = project_metadata.New(transport, strfmt.Default, c.AuthInfo)
 	cli.Quota = quota.New(transport, strfmt.Default, c.AuthInfo)
 	cli.Registry = registry.New(transport, strfmt.Default, c.AuthInfo)
 	cli.Replication = replication.New(transport, strfmt.Default, c.AuthInfo)
@@ -109,6 +116,7 @@ func New(c Config) *HarborAPI {
 	cli.ScanAll = scan_all.New(transport, strfmt.Default, c.AuthInfo)
 	cli.Scanner = scanner.New(transport, strfmt.Default, c.AuthInfo)
 	cli.Search = search.New(transport, strfmt.Default, c.AuthInfo)
+	cli.Statistic = statistic.New(transport, strfmt.Default, c.AuthInfo)
 	cli.SystemCVEAllowlist = system_cve_allowlist.New(transport, strfmt.Default, c.AuthInfo)
 	cli.Systeminfo = systeminfo.New(transport, strfmt.Default, c.AuthInfo)
 	cli.User = user.New(transport, strfmt.Default, c.AuthInfo)
@@ -124,14 +132,17 @@ type HarborAPI struct {
 	Auditlog           *auditlog.Client
 	Configure          *configure.Client
 	GC                 *gc.Client
+	Health             *health.Client
 	Icon               *icon.Client
 	Immutable          *immutable.Client
+	Label              *label.Client
 	Ldap               *ldap.Client
 	Member             *member.Client
 	OIDC               *oidc.Client
 	Ping               *ping.Client
 	Preheat            *preheat.Client
 	Project            *project.Client
+	ProjectMetadata    *project_metadata.Client
 	Quota              *quota.Client
 	Registry           *registry.Client
 	Replication        *replication.Client
@@ -143,6 +154,7 @@ type HarborAPI struct {
 	ScanAll            *scan_all.Client
 	Scanner            *scanner.Client
 	Search             *search.Client
+	Statistic          *statistic.Client
 	SystemCVEAllowlist *system_cve_allowlist.Client
 	Systeminfo         *systeminfo.Client
 	User               *user.Client

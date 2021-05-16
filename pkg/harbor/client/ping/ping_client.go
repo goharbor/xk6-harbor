@@ -50,7 +50,7 @@ This API simply replies a pong to indicate the process to handle API is up, disr
 func (a *Client) GetPing(ctx context.Context, params *GetPingParams) (*GetPingOK, error) {
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetPing",
+		ID:                 "getPing",
 		Method:             "GET",
 		PathPattern:        "/ping",
 		ProducesMediaTypes: []string{"text/plain"},
