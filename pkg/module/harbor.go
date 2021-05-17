@@ -54,6 +54,18 @@ type Harbor struct {
 	once        sync.Once
 }
 
+func (h *Harbor) XHarbor(ctx context.Context, args ...goja.Value) interface{} {
+	rt := common.GetRuntime(ctx)
+
+	n := new(Harbor)
+
+	if len(args) > 0 {
+		n.Initialize(ctx, args...)
+	}
+
+	return common.Bind(rt, n, &ctx)
+}
+
 func (h *Harbor) Initialize(ctx context.Context, args ...goja.Value) {
 	if h.initialized {
 		common.Throw(common.GetRuntime(ctx), errors.New("harbor module initialized"))
@@ -82,6 +94,12 @@ func (h *Harbor) Initialize(ctx context.Context, args ...goja.Value) {
 			return
 		}
 
+		opt.Scheme = strings.ToLower(opt.Scheme)
+		if opt.Scheme != "https" && opt.Scheme != "http" {
+			common.GetRuntime(ctx).Interrupt(fmt.Sprintf("invalid harbor scheme %s", opt.Scheme))
+			return
+		}
+
 		opt.Host = strings.TrimSuffix(opt.Host, "/")
 
 		rawURL := fmt.Sprintf("%s://%s/%s", opt.Scheme, opt.Host, client.DefaultBasePath)
@@ -101,8 +119,6 @@ func (h *Harbor) Initialize(ctx context.Context, args ...goja.Value) {
 		} else {
 			config.Transport = util.NewDefaultTransport()
 		}
-
-		opt.Scheme = strings.ToLower(opt.Scheme)
 
 		h.api = client.New(config)
 		h.option = opt
