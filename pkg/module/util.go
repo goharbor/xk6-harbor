@@ -15,6 +15,19 @@ import (
 	"github.com/opencontainers/go-digest"
 )
 
+func isDigest(reference string) bool {
+	i := strings.Index(reference, ":")
+	return i > 0 && i+1 != len(reference)
+}
+
+func getDistrubtionRef(projectName, repositoryName, reference string) string {
+	if isDigest(reference) {
+		return fmt.Sprintf("%s/%s@%s", projectName, repositoryName, reference)
+	}
+
+	return fmt.Sprintf("%s/%s:%s", projectName, repositoryName, reference)
+}
+
 func getEnv(key string, defaults ...string) string {
 	if value, ok := os.LookupEnv(key); ok {
 		return value

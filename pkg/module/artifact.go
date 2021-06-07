@@ -161,20 +161,32 @@ func (h *Harbor) PrepareArtifactTags(ctx context.Context, option PrepareArtifact
 	return digest
 }
 
-func (h *Harbor) CreateArtifactTag(ctx context.Context, projectName, repositoryName, digestOrTag, newTag string) string {
+func (h *Harbor) CreateArtifactTag(ctx context.Context, projectName, repositoryName, reference, newTag string) string {
 	h.mustInitialized(ctx)
 
 	params := operation.NewCreateTagParams()
 
 	params.WithProjectName(projectName)
 	params.WithRepositoryName(url.PathEscape(repositoryName))
-	params.WithReference(digestOrTag)
+	params.WithReference(reference)
 	params.WithTag(&models.Tag{Name: newTag})
 
 	res, err := h.api.Artifact.CreateTag(ctx, params)
-	Checkf(ctx, err, "failed to create new tag %s to %s/%s", newTag, projectName, repositoryName)
+	Checkf(ctx, err, "failed to create new tag %s to %s", newTag, getDistrubtionRef(projectName, repositoryName, reference))
 
 	return res.Location
+}
+
+func (h *Harbor) DeleteArtifact(ctx context.Context, projectName, repositoryName, reference string) {
+	h.mustInitialized(ctx)
+
+	params := operation.NewDeleteArtifactParams()
+	params.WithProjectName(projectName)
+	params.WithRepositoryName(url.PathEscape(repositoryName))
+	params.WithReference(reference)
+
+	_, err := h.api.Artifact.DeleteArtifact(ctx, params)
+	Checkf(ctx, err, "failed to delete artifact %s", getDistrubtionRef(projectName, repositoryName, reference))
 }
 
 func (h *Harbor) ListArtifactTags(ctx context.Context, projectName, repositoryName, digestOrTag string, args ...goja.Value) []*models.Tag {
