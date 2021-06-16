@@ -6,7 +6,7 @@ import (
 	"github.com/dop251/goja"
 	operation "github.com/heww/xk6-harbor/pkg/harbor/client/member"
 	"github.com/heww/xk6-harbor/pkg/harbor/models"
-	"github.com/loadimpact/k6/js/common"
+	"go.k6.io/k6/js/common"
 )
 
 func (h *Harbor) CreateProjectMember(ctx context.Context, projectName string, userID int64, roleIDs ...int64) string {

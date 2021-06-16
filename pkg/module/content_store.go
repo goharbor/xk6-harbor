@@ -12,9 +12,9 @@ import (
 	"github.com/dop251/goja"
 	"github.com/dustin/go-humanize"
 	"github.com/heww/xk6-harbor/pkg/util"
-	"github.com/loadimpact/k6/js/common"
 	ocispec "github.com/opencontainers/image-spec/specs-go/v1"
 	ants "github.com/panjf2000/ants/v2"
+	"go.k6.io/k6/js/common"
 )
 
 func (h *Harbor) XContentStore(ctx context.Context, name string) interface{} {

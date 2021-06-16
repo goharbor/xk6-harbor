@@ -11,8 +11,8 @@ import (
 	"strings"
 
 	"github.com/heww/xk6-harbor/pkg/harbor/models"
-	"github.com/loadimpact/k6/js/common"
 	"github.com/opencontainers/go-digest"
+	"go.k6.io/k6/js/common"
 )
 
 func isDigest(reference string) bool {

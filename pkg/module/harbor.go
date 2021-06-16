@@ -15,8 +15,8 @@ import (
 	rtclient "github.com/go-openapi/runtime/client"
 	"github.com/heww/xk6-harbor/pkg/harbor/client"
 	"github.com/heww/xk6-harbor/pkg/util"
-	"github.com/loadimpact/k6/js/common"
-	"github.com/loadimpact/k6/js/modules"
+	"go.k6.io/k6/js/common"
+	"go.k6.io/k6/js/modules"
 )
 
 var DefaultRootPath = filepath.Join(os.TempDir(), "harbor")
