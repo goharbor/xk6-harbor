@@ -14,10 +14,10 @@ import (
 	"github.com/dop251/goja"
 	"github.com/google/uuid"
 	"github.com/heww/xk6-harbor/pkg/util"
-	"github.com/loadimpact/k6/js/common"
 	"github.com/opencontainers/go-digest"
 	ocispec "github.com/opencontainers/image-spec/specs-go/v1"
 	log "github.com/sirupsen/logrus"
+	"go.k6.io/k6/js/common"
 )
 
 type GetCatalogQuery struct {

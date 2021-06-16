@@ -7,7 +7,7 @@ import (
 	"github.com/dop251/goja"
 	operation "github.com/heww/xk6-harbor/pkg/harbor/client/user"
 	"github.com/heww/xk6-harbor/pkg/harbor/models"
-	"github.com/loadimpact/k6/js/common"
+	"go.k6.io/k6/js/common"
 )
 
 func (h *Harbor) CreateUser(ctx context.Context, username string, passwords ...string) int64 {

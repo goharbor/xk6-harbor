@@ -9,8 +9,8 @@ import (
 	"github.com/heww/xk6-harbor/pkg/harbor/client/repository"
 	"github.com/heww/xk6-harbor/pkg/harbor/models"
 	"github.com/heww/xk6-harbor/pkg/util"
-	"github.com/loadimpact/k6/js/common"
 	log "github.com/sirupsen/logrus"
+	"go.k6.io/k6/js/common"
 )
 
 func (h *Harbor) CreateProject(ctx context.Context, body goja.Value) string {
