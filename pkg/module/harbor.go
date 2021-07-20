@@ -127,6 +127,13 @@ func (h *Harbor) Initialize(ctx context.Context, args ...goja.Value) {
 	})
 }
 
+func (h *Harbor) Free(ctx context.Context) {
+	err := os.RemoveAll(DefaultRootPath)
+	if err != nil {
+		panic(common.GetRuntime(ctx).NewGoError(err))
+	}
+}
+
 func (h *Harbor) mustInitialized(ctx context.Context) {
 	if !h.initialized {
 		common.Throw(common.GetRuntime(ctx), errors.New("harbor module not initialized"))
