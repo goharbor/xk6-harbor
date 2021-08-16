@@ -51,7 +51,7 @@ jobs:
         goversion: https://dl.google.com/go/go1.15.6.linux-amd64.tar.gz
         pre_command: export CGO_ENABLED=0
         build_flags: -a -tags netgo
-        ldflags: -extldflags -static -X "github.com/loadimpact/k6/lib/consts.VersionDetails=${{ needs.create-release.outputs.release-tag }}"
+        ldflags: -extldflags -static -X "go.k6.io/k6/lib/consts.VersionDetails=${{ needs.create-release.outputs.release-tag }}"
         project_path: ./cmd/k6
         binary_name: k6
         release_tag: ${{ needs.create-release.outputs.release-tag }}
