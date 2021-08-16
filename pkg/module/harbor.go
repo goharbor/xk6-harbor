@@ -73,10 +73,10 @@ func (h *Harbor) Initialize(ctx context.Context, args ...goja.Value) {
 
 	h.once.Do(func() {
 		opt := &Option{
-			Scheme:   getEnv("HARBOR_SCHEME", "https"),
-			Host:     getEnv("HARBOR_HOST", ""),
-			Username: getEnv("HARBOR_USERNAME", "admin"),
-			Password: getEnv("HARBOR_PASSWORD", "Harbor12345"),
+			Scheme:   util.GetEnv("HARBOR_SCHEME", "https"),
+			Host:     util.GetEnv("HARBOR_HOST", ""),
+			Username: util.GetEnv("HARBOR_USERNAME", "admin"),
+			Password: util.GetEnv("HARBOR_PASSWORD", "Harbor12345"),
 			Insecure: false,
 		}
 

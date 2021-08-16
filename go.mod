@@ -36,6 +36,7 @@ require (
 	github.com/rcrowley/go-metrics v0.0.0-20181016184325-3113b8401b8a // indirect
 	github.com/sirupsen/logrus v1.8.1
 	github.com/spf13/afero v1.2.2 // indirect
+	github.com/spf13/cast v1.4.0
 	go.k6.io/k6 v0.32.0
 	go.opencensus.io v0.22.3 // indirect
 	rsc.io/letsencrypt v0.0.3 // indirect

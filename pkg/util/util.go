@@ -2,7 +2,9 @@ package util
 
 import (
 	crand "crypto/rand"
+	"fmt"
 	"math/rand"
+	"os"
 )
 
 func GenerateRandomBytes(n int) ([]byte, error) {
@@ -22,4 +24,16 @@ func GenerateRandomString(n int) string {
 		b[i] = letterBytes[rand.Intn(len(letterBytes))]
 	}
 	return string(b)
+}
+
+func GetEnv(key string, defaults ...string) string {
+	if value, ok := os.LookupEnv(key); ok {
+		return value
+	}
+
+	if len(defaults) > 0 {
+		return defaults[0]
+	}
+
+	panic(fmt.Errorf("%s envirument is required", key))
 }

@@ -28,18 +28,6 @@ func getDistrubtionRef(projectName, repositoryName, reference string) string {
 	return fmt.Sprintf("%s/%s:%s", projectName, repositoryName, reference)
 }
 
-func getEnv(key string, defaults ...string) string {
-	if value, ok := os.LookupEnv(key); ok {
-		return value
-	}
-
-	if len(defaults) > 0 {
-		return defaults[0]
-	}
-
-	panic(fmt.Errorf("%s envirument is required", key))
-}
-
 func writeBlob(rootPath string, data []byte) (digest.Digest, error) {
 	dgt := digest.FromBytes(data)
 
