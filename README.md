@@ -8,17 +8,16 @@ To build a `k6` binary with this extension, first ensure you have the prerequisi
 
 - [Go toolchain](https://go101.org/article/go-toolchain.html)
 - Git
-- Docker
 
 Then:
 
-1. Clone this repostiroy and generate client from swagger
+1. Clone this repostiroy
   ```shell
   git clone https://github.com/heww/xk6-harbor
   cd xk6-harbor
   ```
 
-2. Build the binary:
+2. Build the binary
   ```shell
   make build
   ```
