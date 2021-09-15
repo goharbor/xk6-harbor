@@ -7,13 +7,26 @@ import (
 	"io/ioutil"
 	"os"
 	"path"
+	"path/filepath"
 	"strconv"
 	"strings"
 
+	"github.com/containerd/containerd/content"
+	"github.com/containerd/containerd/content/local"
+	"github.com/dop251/goja"
 	"github.com/heww/xk6-harbor/pkg/harbor/models"
 	"github.com/opencontainers/go-digest"
 	"go.k6.io/k6/js/common"
 )
+
+func newLocalStore(ctx context.Context, name string) (string, content.Store) {
+	rootPath := filepath.Join(DefaultRootPath, name)
+
+	store, err := local.NewStore(rootPath)
+	Check(ctx, err)
+
+	return rootPath, store
+}
 
 func isDigest(reference string) bool {
 	i := strings.Index(reference, ":")
@@ -84,6 +97,15 @@ func Checkf(ctx context.Context, err error, format string, a ...interface{}) {
 
 func Throwf(ctx context.Context, format string, a ...interface{}) {
 	common.Throw(common.GetRuntime(ctx), fmt.Errorf(format, a...))
+}
+
+func ExportTo(ctx context.Context, target interface{}, args ...goja.Value) {
+	if len(args) > 0 {
+		rt := common.GetRuntime(ctx)
+		if err := rt.ExportTo(args[0], target); err != nil {
+			common.Throw(common.GetRuntime(ctx), err)
+		}
+	}
 }
 
 func IDFromLocation(ctx context.Context, loc string) int64 {

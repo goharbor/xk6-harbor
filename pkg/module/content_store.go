@@ -4,11 +4,9 @@ import (
 	"context"
 	"errors"
 	"os"
-	"path/filepath"
 	"sync"
 
 	"github.com/containerd/containerd/content"
-	"github.com/containerd/containerd/content/local"
 	"github.com/dop251/goja"
 	"github.com/dustin/go-humanize"
 	"github.com/heww/xk6-harbor/pkg/util"
@@ -26,10 +24,7 @@ func (h *Harbor) XContentStore(ctx context.Context, name string) interface{} {
 }
 
 func newContentStore(ctx context.Context, name string) *ContentStore {
-	rootPath := filepath.Join(DefaultRootPath, name)
-
-	store, err := local.NewStore(rootPath)
-	Check(ctx, err)
+	rootPath, store := newLocalStore(ctx, name)
 
 	return &ContentStore{Store: store, RootPath: rootPath}
 }

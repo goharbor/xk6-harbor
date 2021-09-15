@@ -2,6 +2,7 @@
 
 import harbor from 'k6/x/harbor'
 import { ContentStore } from 'k6/x/harbor'
+import { Rate } from 'k6/metrics'
 
 const missing = Object()
 
@@ -18,10 +19,11 @@ const teardownResources = getEnv('TEARDOWN_RESOURCES', 'true') === 'true'
 
 const artifactSize = getEnv('ARTIFACT_SIZE', '10 MiB')
 
-const conentStore = new ContentStore('artifact-pull')
+const store = new ContentStore('artifact-pull')
+
+export let successRate = new Rate('success')
 
 export let options = {
-    noUsageReport: true,
     vus: 500,
     iterations: 1000,
     thresholds: {
@@ -43,17 +45,12 @@ export function setup() {
     })
 
     const projectName = `project-${Date.now()}`
-    try {
-        harbor.createProject({ projectName })
-    } catch (e) {
-        console.log(e)
-        errorRate.add(true)
-    }
+    harbor.createProject({ projectName })
 
     harbor.push({
+        store,
         ref: `${projectName}/benchmark:latest`,
-        store: conentStore,
-        blobs: [conentStore.generate(artifactSize)],
+        blobs: [store.generate(artifactSize)],
     })
 
     return {
@@ -62,11 +59,17 @@ export function setup() {
 }
 
 export default function ({ projectName }) {
-    harbor.pull(`${projectName}/benchmark:latest`)
+    try {
+        harbor.pull(`${projectName}/benchmark:latest`, { discard: false })
+        successRate.add(true)
+    } catch (e) {
+        successRate.add(false)
+        console.log(e)
+    }
 }
 
 export function teardown({ projectName }) {
-    conentStore.free()
+    store.free()
 
     if (teardownResources) {
         try {

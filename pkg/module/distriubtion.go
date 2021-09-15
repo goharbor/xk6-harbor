@@ -8,6 +8,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/containerd/containerd/content"
 	"github.com/containerd/containerd/remotes"
 	"github.com/containerd/containerd/remotes/docker"
 	"github.com/deislabs/oras/pkg/oras"
@@ -87,19 +88,30 @@ func (h *Harbor) GetManifest(ctx context.Context, ref string) map[string]interfa
 	return m
 }
 
+type PullOption struct {
+	Discard bool
+}
+
 func (h *Harbor) Pull(ctx context.Context, ref string, args ...goja.Value) {
 	h.mustInitialized(ctx)
 
-	resolver := h.makeResolver(ctx, args...)
-	store := newContentStore(ctx, util.GenerateRandomString(8))
+	params := PullOption{}
+	ExportTo(ctx, &params, args...)
+
+	var ingester content.Ingester
+	if params.Discard {
+		ingester = util.NewDiscardStore()
+	} else {
+		_, store := newLocalStore(ctx, util.GenerateRandomString(8))
+		ingester = store
+	}
 
 	pullOpts := []oras.PullOpt{
 		oras.WithPullEmptyNameAllowed(),
-		oras.WithContentProvideIngester(store.Store),
 	}
 
 	ref = h.getRef(ref)
-	_, _, err := oras.Pull(ctx, resolver, ref, store.Store, pullOpts...)
+	_, _, err := oras.Pull(ctx, h.makeResolver(ctx, args...), ref, ingester, pullOpts...)
 	Checkf(ctx, err, "failed to pull %s", ref)
 }
 

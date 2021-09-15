@@ -32,6 +32,7 @@ require (
 	github.com/opencontainers/image-spec v1.0.1
 	github.com/panjf2000/ants/v2 v2.4.3
 	github.com/pierrec/lz4 v2.0.5+incompatible // indirect
+	github.com/pkg/errors v0.9.1
 	github.com/prometheus/client_golang v1.7.1 // indirect
 	github.com/rcrowley/go-metrics v0.0.0-20181016184325-3113b8401b8a // indirect
 	github.com/sirupsen/logrus v1.8.1
