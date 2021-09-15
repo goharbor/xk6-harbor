@@ -8,9 +8,9 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/containerd/containerd/content"
 	"github.com/containerd/containerd/remotes"
 	"github.com/containerd/containerd/remotes/docker"
+	orascontent "github.com/deislabs/oras/pkg/content"
 	"github.com/deislabs/oras/pkg/oras"
 	"github.com/dop251/goja"
 	"github.com/google/uuid"
@@ -98,20 +98,21 @@ func (h *Harbor) Pull(ctx context.Context, ref string, args ...goja.Value) {
 	params := PullOption{}
 	ExportTo(ctx, &params, args...)
 
-	var ingester content.Ingester
+	var store orascontent.ProvideIngester
 	if params.Discard {
-		ingester = util.NewDiscardStore()
+		store = newDiscardStore()
 	} else {
-		_, store := newLocalStore(ctx, util.GenerateRandomString(8))
-		ingester = store
+		_, l := newLocalStore(ctx, util.GenerateRandomString(8))
+		store = l
 	}
 
 	pullOpts := []oras.PullOpt{
 		oras.WithPullEmptyNameAllowed(),
+		oras.WithContentProvideIngester(store),
 	}
 
 	ref = h.getRef(ref)
-	_, _, err := oras.Pull(ctx, h.makeResolver(ctx, args...), ref, ingester, pullOpts...)
+	_, _, err := oras.Pull(ctx, h.makeResolver(ctx, args...), ref, store, pullOpts...)
 	Checkf(ctx, err, "failed to pull %s", ref)
 }
 

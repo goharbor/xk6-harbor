@@ -39,7 +39,7 @@ go-generate: generate-client modify-tags
 
 .PHONY: k6
 k6:
-	CGO_ENABLED=0 go build -a -installsuffix cgo -ldflags '-w' -i -o k6 ./cmd/k6/main.go
+	CGO_ENABLED=0 go build -a -installsuffix cgo -ldflags '-w' -o k6 ./cmd/k6/main.go
 
 build: k6
 
