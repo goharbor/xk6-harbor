@@ -35,5 +35,5 @@ func GetEnv(key string, defaults ...string) string {
 		return defaults[0]
 	}
 
-	panic(fmt.Errorf("%s envirument is required", key))
+	panic(fmt.Errorf("%s environment is required", key))
 }

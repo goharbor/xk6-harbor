@@ -177,6 +177,20 @@ func (h *Harbor) CreateArtifactTag(ctx context.Context, projectName, repositoryN
 	return res.Location
 }
 
+func (h *Harbor) GetArtifact(ctx context.Context, projectName, repositoryName, reference string) *models.Artifact {
+	h.mustInitialized(ctx)
+
+	params := operation.NewGetArtifactParams()
+	params.WithProjectName(projectName)
+	params.WithRepositoryName(url.PathEscape(repositoryName))
+	params.WithReference(reference)
+
+	res, err := h.api.Artifact.GetArtifact(ctx, params)
+	Checkf(ctx, err, "failed to get artifact %s", getDistrubtionRef(projectName, repositoryName, reference))
+
+	return res.Payload
+}
+
 func (h *Harbor) DeleteArtifact(ctx context.Context, projectName, repositoryName, reference string) {
 	h.mustInitialized(ctx)
 

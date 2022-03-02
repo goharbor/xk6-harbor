@@ -30,6 +30,18 @@ func (h *Harbor) CreateProject(ctx context.Context, body goja.Value) string {
 	return NameFromLocation(ctx, res.Location)
 }
 
+func (h *Harbor) GetProject(ctx context.Context, projectName string) *models.Project {
+	h.mustInitialized(ctx)
+
+	params := operation.NewGetProjectParams()
+	params.WithProjectNameOrID(projectName)
+
+	res, err := h.api.Project.GetProject(ctx, params)
+	Checkf(ctx, err, "failed to get project %s", projectName)
+
+	return res.Payload
+}
+
 func (h *Harbor) DeleteProject(ctx context.Context, projectName string, args ...goja.Value) {
 	h.mustInitialized(ctx)
 
