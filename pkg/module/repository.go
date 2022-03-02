@@ -20,6 +20,19 @@ func (h *Harbor) DeleteRepository(ctx context.Context, projectName, repositoryNa
 	Checkf(ctx, err, "failed to delete repository %s/%s", projectName, repositoryName)
 }
 
+func (h *Harbor) GetRepository(ctx context.Context, projectName, repositoryName string) *models.Repository {
+	h.mustInitialized(ctx)
+
+	params := operation.NewGetRepositoryParams()
+	params.WithProjectName(projectName)
+	params.WithRepositoryName(repositoryName)
+
+	res, err := h.api.Repository.GetRepository(ctx, params)
+	Checkf(ctx, err, "failed to get repository %s/%s", projectName, repositoryName)
+
+	return res.Payload
+}
+
 type ListRepositoriesResult struct {
 	Repositories []*models.Repository `js:"repositories"`
 	Total        int64                `js:"total"`
