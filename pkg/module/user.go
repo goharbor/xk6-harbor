@@ -32,6 +32,16 @@ func (h *Harbor) CreateUser(ctx context.Context, username string, passwords ...s
 	return IDFromLocation(ctx, res.Location)
 }
 
+func (h *Harbor) DeleteUser(ctx context.Context, userid int64) {
+	h.mustInitialized(ctx)
+
+	params := operation.NewDeleteUserParams()
+	params.WithUserID(userid)
+
+	_, err := h.api.User.DeleteUser(ctx, params)
+	Checkf(ctx, err, "failed to delete user %v", userid)
+}
+
 type ListUsersResult struct {
 	Users []*models.UserResp `js:"users"`
 	Total int64              `js:"total"`
