@@ -53,10 +53,12 @@ func NewListRetentionExecutionsParamsWithHTTPClient(client *http.Client) *ListRe
 	}
 }
 
-/* ListRetentionExecutionsParams contains all the parameters to send to the API endpoint
-   for the list retention executions operation.
+/*
+ListRetentionExecutionsParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the list retention executions operation.
+
+	Typically these are written to a http.Request.
 */
 type ListRetentionExecutionsParams struct {
 

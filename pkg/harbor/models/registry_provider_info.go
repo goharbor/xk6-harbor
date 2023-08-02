@@ -52,6 +52,8 @@ func (m *RegistryProviderInfo) validateCredentialPattern(formats strfmt.Registry
 		if err := m.CredentialPattern.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("credential_pattern")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("credential_pattern")
 			}
 			return err
 		}
@@ -69,6 +71,8 @@ func (m *RegistryProviderInfo) validateEndpointPattern(formats strfmt.Registry) 
 		if err := m.EndpointPattern.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("endpoint_pattern")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("endpoint_pattern")
 			}
 			return err
 		}
@@ -98,9 +102,16 @@ func (m *RegistryProviderInfo) ContextValidate(ctx context.Context, formats strf
 func (m *RegistryProviderInfo) contextValidateCredentialPattern(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.CredentialPattern != nil {
+
+		if swag.IsZero(m.CredentialPattern) { // not required
+			return nil
+		}
+
 		if err := m.CredentialPattern.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("credential_pattern")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("credential_pattern")
 			}
 			return err
 		}
@@ -112,9 +123,16 @@ func (m *RegistryProviderInfo) contextValidateCredentialPattern(ctx context.Cont
 func (m *RegistryProviderInfo) contextValidateEndpointPattern(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.EndpointPattern != nil {
+
+		if swag.IsZero(m.EndpointPattern) { // not required
+			return nil
+		}
+
 		if err := m.EndpointPattern.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("endpoint_pattern")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("endpoint_pattern")
 			}
 			return err
 		}

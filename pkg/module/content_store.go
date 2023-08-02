@@ -1,7 +1,6 @@
 package module
 
 import (
-	"context"
 	"errors"
 	"os"
 	"sync"
@@ -9,27 +8,19 @@ import (
 	"github.com/containerd/containerd/content"
 	"github.com/dop251/goja"
 	"github.com/dustin/go-humanize"
-	"github.com/heww/xk6-harbor/pkg/util"
+	"github.com/goharbor/xk6-harbor/pkg/util"
 	ocispec "github.com/opencontainers/image-spec/specs-go/v1"
 	ants "github.com/panjf2000/ants/v2"
-	"go.k6.io/k6/js/common"
 )
 
-func (h *Harbor) XContentStore(ctx context.Context, name string) interface{} {
-	rt := common.GetRuntime(ctx)
+func newContentStore(rt *goja.Runtime, name string) *ContentStore {
+	rootPath, store := newLocalStore(rt, name)
 
-	store := newContentStore(ctx, name)
-
-	return common.Bind(rt, store, &ctx)
-}
-
-func newContentStore(ctx context.Context, name string) *ContentStore {
-	rootPath, store := newLocalStore(ctx, name)
-
-	return &ContentStore{Store: store, RootPath: rootPath}
+	return &ContentStore{Runtime: rt, Store: store, RootPath: rootPath}
 }
 
 type ContentStore struct {
+	Runtime  *goja.Runtime
 	Store    content.Store
 	RootPath string
 }
@@ -112,9 +103,9 @@ func (s *ContentStore) GenerateMany(humanSize goja.Value, count int) ([]*ocispec
 	return descriptors, nil
 }
 
-func (s *ContentStore) Free(ctx context.Context) {
+func (s *ContentStore) Free() {
 	err := os.RemoveAll(s.RootPath)
 	if err != nil {
-		panic(common.GetRuntime(ctx).NewGoError(err))
+		panic(s.Runtime.NewGoError(err))
 	}
 }

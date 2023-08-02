@@ -7,13 +7,14 @@ package artifact
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/go-openapi/runtime"
 
 	strfmt "github.com/go-openapi/strfmt"
 )
 
-//go:generate mockery -name API -inpkg
+//go:generate mockery --name API --keeptree --with-expecter --case underscore
 
 // API is the interface of the artifact client
 type API interface {
@@ -115,8 +116,25 @@ func (a *Client) CopyArtifact(ctx context.Context, params *CopyArtifactParams) (
 	if err != nil {
 		return nil, err
 	}
-	return result.(*CopyArtifactCreated), nil
-
+	switch value := result.(type) {
+	case *CopyArtifactCreated:
+		return value, nil
+	case *CopyArtifactBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CopyArtifactUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CopyArtifactForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CopyArtifactNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CopyArtifactMethodNotAllowed:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CopyArtifactInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for CopyArtifact: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -142,8 +160,25 @@ func (a *Client) AddLabel(ctx context.Context, params *AddLabelParams) (*AddLabe
 	if err != nil {
 		return nil, err
 	}
-	return result.(*AddLabelOK), nil
-
+	switch value := result.(type) {
+	case *AddLabelOK:
+		return value, nil
+	case *AddLabelBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *AddLabelUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *AddLabelForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *AddLabelNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *AddLabelConflict:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *AddLabelInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for addLabel: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -169,8 +204,27 @@ func (a *Client) CreateTag(ctx context.Context, params *CreateTagParams) (*Creat
 	if err != nil {
 		return nil, err
 	}
-	return result.(*CreateTagCreated), nil
-
+	switch value := result.(type) {
+	case *CreateTagCreated:
+		return value, nil
+	case *CreateTagBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateTagUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateTagForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateTagNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateTagMethodNotAllowed:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateTagConflict:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateTagInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for createTag: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -196,8 +250,21 @@ func (a *Client) DeleteArtifact(ctx context.Context, params *DeleteArtifactParam
 	if err != nil {
 		return nil, err
 	}
-	return result.(*DeleteArtifactOK), nil
-
+	switch value := result.(type) {
+	case *DeleteArtifactOK:
+		return value, nil
+	case *DeleteArtifactUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteArtifactForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteArtifactNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteArtifactInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for deleteArtifact: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -223,8 +290,21 @@ func (a *Client) DeleteTag(ctx context.Context, params *DeleteTagParams) (*Delet
 	if err != nil {
 		return nil, err
 	}
-	return result.(*DeleteTagOK), nil
-
+	switch value := result.(type) {
+	case *DeleteTagOK:
+		return value, nil
+	case *DeleteTagUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteTagForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteTagNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteTagInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for deleteTag: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -250,8 +330,23 @@ func (a *Client) GetAddition(ctx context.Context, params *GetAdditionParams) (*G
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetAdditionOK), nil
-
+	switch value := result.(type) {
+	case *GetAdditionOK:
+		return value, nil
+	case *GetAdditionBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetAdditionUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetAdditionForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetAdditionNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetAdditionInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getAddition: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -277,8 +372,23 @@ func (a *Client) GetArtifact(ctx context.Context, params *GetArtifactParams) (*G
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetArtifactOK), nil
-
+	switch value := result.(type) {
+	case *GetArtifactOK:
+		return value, nil
+	case *GetArtifactBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetArtifactUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetArtifactForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetArtifactNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetArtifactInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getArtifact: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -304,8 +414,23 @@ func (a *Client) GetVulnerabilitiesAddition(ctx context.Context, params *GetVuln
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetVulnerabilitiesAdditionOK), nil
-
+	switch value := result.(type) {
+	case *GetVulnerabilitiesAdditionOK:
+		return value, nil
+	case *GetVulnerabilitiesAdditionBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetVulnerabilitiesAdditionUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetVulnerabilitiesAdditionForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetVulnerabilitiesAdditionNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetVulnerabilitiesAdditionInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getVulnerabilitiesAddition: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -331,8 +456,23 @@ func (a *Client) ListArtifacts(ctx context.Context, params *ListArtifactsParams)
 	if err != nil {
 		return nil, err
 	}
-	return result.(*ListArtifactsOK), nil
-
+	switch value := result.(type) {
+	case *ListArtifactsOK:
+		return value, nil
+	case *ListArtifactsBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListArtifactsUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListArtifactsForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListArtifactsNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListArtifactsInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for listArtifacts: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -358,8 +498,23 @@ func (a *Client) ListTags(ctx context.Context, params *ListTagsParams) (*ListTag
 	if err != nil {
 		return nil, err
 	}
-	return result.(*ListTagsOK), nil
-
+	switch value := result.(type) {
+	case *ListTagsOK:
+		return value, nil
+	case *ListTagsBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListTagsUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListTagsForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListTagsNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListTagsInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for listTags: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -385,6 +540,21 @@ func (a *Client) RemoveLabel(ctx context.Context, params *RemoveLabelParams) (*R
 	if err != nil {
 		return nil, err
 	}
-	return result.(*RemoveLabelOK), nil
-
+	switch value := result.(type) {
+	case *RemoveLabelOK:
+		return value, nil
+	case *RemoveLabelUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *RemoveLabelForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *RemoveLabelNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *RemoveLabelConflict:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *RemoveLabelInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for removeLabel: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }

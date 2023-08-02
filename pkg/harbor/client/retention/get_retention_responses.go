@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // GetRetentionReader is a Reader for the GetRetention structure.
@@ -48,7 +48,7 @@ func (o *GetRetentionReader) ReadResponse(response runtime.ClientResponse, consu
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /retentions/{id}] getRetention", response, response.Code())
 	}
 }
 
@@ -57,7 +57,8 @@ func NewGetRetentionOK() *GetRetentionOK {
 	return &GetRetentionOK{}
 }
 
-/* GetRetentionOK describes a response with status code 200, with default header values.
+/*
+GetRetentionOK describes a response with status code 200, with default header values.
 
 Get Retention Policy successfully.
 */
@@ -65,9 +66,44 @@ type GetRetentionOK struct {
 	Payload *models.RetentionPolicy
 }
 
+// IsSuccess returns true when this get retention o k response has a 2xx status code
+func (o *GetRetentionOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get retention o k response has a 3xx status code
+func (o *GetRetentionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get retention o k response has a 4xx status code
+func (o *GetRetentionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get retention o k response has a 5xx status code
+func (o *GetRetentionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get retention o k response a status code equal to that given
+func (o *GetRetentionOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get retention o k response
+func (o *GetRetentionOK) Code() int {
+	return 200
+}
+
 func (o *GetRetentionOK) Error() string {
 	return fmt.Sprintf("[GET /retentions/{id}][%d] getRetentionOK  %+v", 200, o.Payload)
 }
+
+func (o *GetRetentionOK) String() string {
+	return fmt.Sprintf("[GET /retentions/{id}][%d] getRetentionOK  %+v", 200, o.Payload)
+}
+
 func (o *GetRetentionOK) GetPayload() *models.RetentionPolicy {
 	return o.Payload
 }
@@ -89,7 +125,8 @@ func NewGetRetentionUnauthorized() *GetRetentionUnauthorized {
 	return &GetRetentionUnauthorized{}
 }
 
-/* GetRetentionUnauthorized describes a response with status code 401, with default header values.
+/*
+GetRetentionUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -102,9 +139,44 @@ type GetRetentionUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get retention unauthorized response has a 2xx status code
+func (o *GetRetentionUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get retention unauthorized response has a 3xx status code
+func (o *GetRetentionUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get retention unauthorized response has a 4xx status code
+func (o *GetRetentionUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get retention unauthorized response has a 5xx status code
+func (o *GetRetentionUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get retention unauthorized response a status code equal to that given
+func (o *GetRetentionUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the get retention unauthorized response
+func (o *GetRetentionUnauthorized) Code() int {
+	return 401
+}
+
 func (o *GetRetentionUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /retentions/{id}][%d] getRetentionUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *GetRetentionUnauthorized) String() string {
+	return fmt.Sprintf("[GET /retentions/{id}][%d] getRetentionUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *GetRetentionUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -133,7 +205,8 @@ func NewGetRetentionForbidden() *GetRetentionForbidden {
 	return &GetRetentionForbidden{}
 }
 
-/* GetRetentionForbidden describes a response with status code 403, with default header values.
+/*
+GetRetentionForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -146,9 +219,44 @@ type GetRetentionForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get retention forbidden response has a 2xx status code
+func (o *GetRetentionForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get retention forbidden response has a 3xx status code
+func (o *GetRetentionForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get retention forbidden response has a 4xx status code
+func (o *GetRetentionForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get retention forbidden response has a 5xx status code
+func (o *GetRetentionForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get retention forbidden response a status code equal to that given
+func (o *GetRetentionForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the get retention forbidden response
+func (o *GetRetentionForbidden) Code() int {
+	return 403
+}
+
 func (o *GetRetentionForbidden) Error() string {
 	return fmt.Sprintf("[GET /retentions/{id}][%d] getRetentionForbidden  %+v", 403, o.Payload)
 }
+
+func (o *GetRetentionForbidden) String() string {
+	return fmt.Sprintf("[GET /retentions/{id}][%d] getRetentionForbidden  %+v", 403, o.Payload)
+}
+
 func (o *GetRetentionForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -177,7 +285,8 @@ func NewGetRetentionInternalServerError() *GetRetentionInternalServerError {
 	return &GetRetentionInternalServerError{}
 }
 
-/* GetRetentionInternalServerError describes a response with status code 500, with default header values.
+/*
+GetRetentionInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -190,9 +299,44 @@ type GetRetentionInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get retention internal server error response has a 2xx status code
+func (o *GetRetentionInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get retention internal server error response has a 3xx status code
+func (o *GetRetentionInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get retention internal server error response has a 4xx status code
+func (o *GetRetentionInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get retention internal server error response has a 5xx status code
+func (o *GetRetentionInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get retention internal server error response a status code equal to that given
+func (o *GetRetentionInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the get retention internal server error response
+func (o *GetRetentionInternalServerError) Code() int {
+	return 500
+}
+
 func (o *GetRetentionInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /retentions/{id}][%d] getRetentionInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *GetRetentionInternalServerError) String() string {
+	return fmt.Sprintf("[GET /retentions/{id}][%d] getRetentionInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *GetRetentionInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

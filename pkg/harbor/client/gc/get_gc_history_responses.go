@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // GetGCHistoryReader is a Reader for the GetGCHistory structure.
@@ -50,7 +50,7 @@ func (o *GetGCHistoryReader) ReadResponse(response runtime.ClientResponse, consu
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /system/gc] getGCHistory", response, response.Code())
 	}
 }
 
@@ -59,7 +59,8 @@ func NewGetGCHistoryOK() *GetGCHistoryOK {
 	return &GetGCHistoryOK{}
 }
 
-/* GetGCHistoryOK describes a response with status code 200, with default header values.
+/*
+GetGCHistoryOK describes a response with status code 200, with default header values.
 
 Get gc results successfully.
 */
@@ -76,9 +77,44 @@ type GetGCHistoryOK struct {
 	Payload []*models.GCHistory
 }
 
+// IsSuccess returns true when this get Gc history o k response has a 2xx status code
+func (o *GetGCHistoryOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get Gc history o k response has a 3xx status code
+func (o *GetGCHistoryOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get Gc history o k response has a 4xx status code
+func (o *GetGCHistoryOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get Gc history o k response has a 5xx status code
+func (o *GetGCHistoryOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get Gc history o k response a status code equal to that given
+func (o *GetGCHistoryOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get Gc history o k response
+func (o *GetGCHistoryOK) Code() int {
+	return 200
+}
+
 func (o *GetGCHistoryOK) Error() string {
 	return fmt.Sprintf("[GET /system/gc][%d] getGcHistoryOK  %+v", 200, o.Payload)
 }
+
+func (o *GetGCHistoryOK) String() string {
+	return fmt.Sprintf("[GET /system/gc][%d] getGcHistoryOK  %+v", 200, o.Payload)
+}
+
 func (o *GetGCHistoryOK) GetPayload() []*models.GCHistory {
 	return o.Payload
 }
@@ -116,7 +152,8 @@ func NewGetGCHistoryUnauthorized() *GetGCHistoryUnauthorized {
 	return &GetGCHistoryUnauthorized{}
 }
 
-/* GetGCHistoryUnauthorized describes a response with status code 401, with default header values.
+/*
+GetGCHistoryUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -129,9 +166,44 @@ type GetGCHistoryUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get Gc history unauthorized response has a 2xx status code
+func (o *GetGCHistoryUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get Gc history unauthorized response has a 3xx status code
+func (o *GetGCHistoryUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get Gc history unauthorized response has a 4xx status code
+func (o *GetGCHistoryUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get Gc history unauthorized response has a 5xx status code
+func (o *GetGCHistoryUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get Gc history unauthorized response a status code equal to that given
+func (o *GetGCHistoryUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the get Gc history unauthorized response
+func (o *GetGCHistoryUnauthorized) Code() int {
+	return 401
+}
+
 func (o *GetGCHistoryUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /system/gc][%d] getGcHistoryUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *GetGCHistoryUnauthorized) String() string {
+	return fmt.Sprintf("[GET /system/gc][%d] getGcHistoryUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *GetGCHistoryUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -160,7 +232,8 @@ func NewGetGCHistoryForbidden() *GetGCHistoryForbidden {
 	return &GetGCHistoryForbidden{}
 }
 
-/* GetGCHistoryForbidden describes a response with status code 403, with default header values.
+/*
+GetGCHistoryForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -173,9 +246,44 @@ type GetGCHistoryForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get Gc history forbidden response has a 2xx status code
+func (o *GetGCHistoryForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get Gc history forbidden response has a 3xx status code
+func (o *GetGCHistoryForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get Gc history forbidden response has a 4xx status code
+func (o *GetGCHistoryForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get Gc history forbidden response has a 5xx status code
+func (o *GetGCHistoryForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get Gc history forbidden response a status code equal to that given
+func (o *GetGCHistoryForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the get Gc history forbidden response
+func (o *GetGCHistoryForbidden) Code() int {
+	return 403
+}
+
 func (o *GetGCHistoryForbidden) Error() string {
 	return fmt.Sprintf("[GET /system/gc][%d] getGcHistoryForbidden  %+v", 403, o.Payload)
 }
+
+func (o *GetGCHistoryForbidden) String() string {
+	return fmt.Sprintf("[GET /system/gc][%d] getGcHistoryForbidden  %+v", 403, o.Payload)
+}
+
 func (o *GetGCHistoryForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -204,7 +312,8 @@ func NewGetGCHistoryInternalServerError() *GetGCHistoryInternalServerError {
 	return &GetGCHistoryInternalServerError{}
 }
 
-/* GetGCHistoryInternalServerError describes a response with status code 500, with default header values.
+/*
+GetGCHistoryInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -217,9 +326,44 @@ type GetGCHistoryInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get Gc history internal server error response has a 2xx status code
+func (o *GetGCHistoryInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get Gc history internal server error response has a 3xx status code
+func (o *GetGCHistoryInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get Gc history internal server error response has a 4xx status code
+func (o *GetGCHistoryInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get Gc history internal server error response has a 5xx status code
+func (o *GetGCHistoryInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get Gc history internal server error response a status code equal to that given
+func (o *GetGCHistoryInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the get Gc history internal server error response
+func (o *GetGCHistoryInternalServerError) Code() int {
+	return 500
+}
+
 func (o *GetGCHistoryInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /system/gc][%d] getGcHistoryInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *GetGCHistoryInternalServerError) String() string {
+	return fmt.Sprintf("[GET /system/gc][%d] getGcHistoryInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *GetGCHistoryInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

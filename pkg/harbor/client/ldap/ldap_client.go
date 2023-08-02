@@ -7,13 +7,14 @@ package ldap
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/go-openapi/runtime"
 
 	strfmt "github.com/go-openapi/strfmt"
 )
 
-//go:generate mockery -name API -inpkg
+//go:generate mockery --name API --keeptree --with-expecter --case underscore
 
 // API is the interface of the ldap client
 type API interface {
@@ -65,7 +66,6 @@ type Client struct {
 ImportLdapUser imports selected available ldap users
 
 This endpoint adds the selected available ldap users to harbor based on related configuration parameters from the system. System will try to guess the user email address and realname, add to harbor user information. If have errors when import user, will return the list of importing failed uid and the failed reason.
-
 */
 func (a *Client) ImportLdapUser(ctx context.Context, params *ImportLdapUserParams) (*ImportLdapUserOK, error) {
 
@@ -85,15 +85,29 @@ func (a *Client) ImportLdapUser(ctx context.Context, params *ImportLdapUserParam
 	if err != nil {
 		return nil, err
 	}
-	return result.(*ImportLdapUserOK), nil
-
+	switch value := result.(type) {
+	case *ImportLdapUserOK:
+		return value, nil
+	case *ImportLdapUserBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ImportLdapUserUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ImportLdapUserForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ImportLdapUserNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ImportLdapUserInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for importLdapUser: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
 PingLdap pings available ldap service
 
 This endpoint ping the available ldap service for test related configuration parameters.
-
 */
 func (a *Client) PingLdap(ctx context.Context, params *PingLdapParams) (*PingLdapOK, error) {
 
@@ -113,15 +127,27 @@ func (a *Client) PingLdap(ctx context.Context, params *PingLdapParams) (*PingLda
 	if err != nil {
 		return nil, err
 	}
-	return result.(*PingLdapOK), nil
-
+	switch value := result.(type) {
+	case *PingLdapOK:
+		return value, nil
+	case *PingLdapBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *PingLdapUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *PingLdapForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *PingLdapInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for pingLdap: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
 SearchLdapGroup searches available ldap groups
 
 This endpoint searches the available ldap groups based on related configuration parameters. support to search by groupname or groupdn.
-
 */
 func (a *Client) SearchLdapGroup(ctx context.Context, params *SearchLdapGroupParams) (*SearchLdapGroupOK, error) {
 
@@ -141,15 +167,27 @@ func (a *Client) SearchLdapGroup(ctx context.Context, params *SearchLdapGroupPar
 	if err != nil {
 		return nil, err
 	}
-	return result.(*SearchLdapGroupOK), nil
-
+	switch value := result.(type) {
+	case *SearchLdapGroupOK:
+		return value, nil
+	case *SearchLdapGroupBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *SearchLdapGroupUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *SearchLdapGroupForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *SearchLdapGroupInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for searchLdapGroup: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
 SearchLdapUser searches available ldap users
 
 This endpoint searches the available ldap users based on related configuration parameters. Support searched by input ladp configuration, load configuration from the system and specific filter.
-
 */
 func (a *Client) SearchLdapUser(ctx context.Context, params *SearchLdapUserParams) (*SearchLdapUserOK, error) {
 
@@ -169,6 +207,19 @@ func (a *Client) SearchLdapUser(ctx context.Context, params *SearchLdapUserParam
 	if err != nil {
 		return nil, err
 	}
-	return result.(*SearchLdapUserOK), nil
-
+	switch value := result.(type) {
+	case *SearchLdapUserOK:
+		return value, nil
+	case *SearchLdapUserBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *SearchLdapUserUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *SearchLdapUserForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *SearchLdapUserInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for searchLdapUser: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }

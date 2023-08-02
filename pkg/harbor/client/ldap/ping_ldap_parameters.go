@@ -15,7 +15,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // NewPingLdapParams creates a new PingLdapParams object,
@@ -54,10 +54,12 @@ func NewPingLdapParamsWithHTTPClient(client *http.Client) *PingLdapParams {
 	}
 }
 
-/* PingLdapParams contains all the parameters to send to the API endpoint
-   for the ping ldap operation.
+/*
+PingLdapParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the ping ldap operation.
+
+	Typically these are written to a http.Request.
 */
 type PingLdapParams struct {
 

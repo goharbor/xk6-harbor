@@ -53,10 +53,12 @@ func NewListRetentionTasksParamsWithHTTPClient(client *http.Client) *ListRetenti
 	}
 }
 
-/* ListRetentionTasksParams contains all the parameters to send to the API endpoint
-   for the list retention tasks operation.
+/*
+ListRetentionTasksParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the list retention tasks operation.
+
+	Typically these are written to a http.Request.
 */
 type ListRetentionTasksParams struct {
 

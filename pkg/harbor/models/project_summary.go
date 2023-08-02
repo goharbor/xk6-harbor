@@ -73,6 +73,8 @@ func (m *ProjectSummary) validateQuota(formats strfmt.Registry) error {
 		if err := m.Quota.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("quota")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("quota")
 			}
 			return err
 		}
@@ -90,6 +92,8 @@ func (m *ProjectSummary) validateRegistry(formats strfmt.Registry) error {
 		if err := m.Registry.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("registry")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("registry")
 			}
 			return err
 		}
@@ -119,9 +123,16 @@ func (m *ProjectSummary) ContextValidate(ctx context.Context, formats strfmt.Reg
 func (m *ProjectSummary) contextValidateQuota(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Quota != nil {
+
+		if swag.IsZero(m.Quota) { // not required
+			return nil
+		}
+
 		if err := m.Quota.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("quota")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("quota")
 			}
 			return err
 		}
@@ -133,9 +144,16 @@ func (m *ProjectSummary) contextValidateQuota(ctx context.Context, formats strfm
 func (m *ProjectSummary) contextValidateRegistry(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Registry != nil {
+
+		if swag.IsZero(m.Registry) { // not required
+			return nil
+		}
+
 		if err := m.Registry.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("registry")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("registry")
 			}
 			return err
 		}

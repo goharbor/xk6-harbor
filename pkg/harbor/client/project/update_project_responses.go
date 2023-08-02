@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // UpdateProjectReader is a Reader for the UpdateProject structure.
@@ -60,7 +60,7 @@ func (o *UpdateProjectReader) ReadResponse(response runtime.ClientResponse, cons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /projects/{project_name_or_id}] updateProject", response, response.Code())
 	}
 }
 
@@ -69,7 +69,8 @@ func NewUpdateProjectOK() *UpdateProjectOK {
 	return &UpdateProjectOK{}
 }
 
-/* UpdateProjectOK describes a response with status code 200, with default header values.
+/*
+UpdateProjectOK describes a response with status code 200, with default header values.
 
 Success
 */
@@ -80,7 +81,41 @@ type UpdateProjectOK struct {
 	XRequestID string
 }
 
+// IsSuccess returns true when this update project o k response has a 2xx status code
+func (o *UpdateProjectOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this update project o k response has a 3xx status code
+func (o *UpdateProjectOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update project o k response has a 4xx status code
+func (o *UpdateProjectOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this update project o k response has a 5xx status code
+func (o *UpdateProjectOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update project o k response a status code equal to that given
+func (o *UpdateProjectOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the update project o k response
+func (o *UpdateProjectOK) Code() int {
+	return 200
+}
+
 func (o *UpdateProjectOK) Error() string {
+	return fmt.Sprintf("[PUT /projects/{project_name_or_id}][%d] updateProjectOK ", 200)
+}
+
+func (o *UpdateProjectOK) String() string {
 	return fmt.Sprintf("[PUT /projects/{project_name_or_id}][%d] updateProjectOK ", 200)
 }
 
@@ -101,7 +136,8 @@ func NewUpdateProjectBadRequest() *UpdateProjectBadRequest {
 	return &UpdateProjectBadRequest{}
 }
 
-/* UpdateProjectBadRequest describes a response with status code 400, with default header values.
+/*
+UpdateProjectBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
@@ -114,9 +150,44 @@ type UpdateProjectBadRequest struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this update project bad request response has a 2xx status code
+func (o *UpdateProjectBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update project bad request response has a 3xx status code
+func (o *UpdateProjectBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update project bad request response has a 4xx status code
+func (o *UpdateProjectBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update project bad request response has a 5xx status code
+func (o *UpdateProjectBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update project bad request response a status code equal to that given
+func (o *UpdateProjectBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the update project bad request response
+func (o *UpdateProjectBadRequest) Code() int {
+	return 400
+}
+
 func (o *UpdateProjectBadRequest) Error() string {
 	return fmt.Sprintf("[PUT /projects/{project_name_or_id}][%d] updateProjectBadRequest  %+v", 400, o.Payload)
 }
+
+func (o *UpdateProjectBadRequest) String() string {
+	return fmt.Sprintf("[PUT /projects/{project_name_or_id}][%d] updateProjectBadRequest  %+v", 400, o.Payload)
+}
+
 func (o *UpdateProjectBadRequest) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -145,7 +216,8 @@ func NewUpdateProjectUnauthorized() *UpdateProjectUnauthorized {
 	return &UpdateProjectUnauthorized{}
 }
 
-/* UpdateProjectUnauthorized describes a response with status code 401, with default header values.
+/*
+UpdateProjectUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -158,9 +230,44 @@ type UpdateProjectUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this update project unauthorized response has a 2xx status code
+func (o *UpdateProjectUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update project unauthorized response has a 3xx status code
+func (o *UpdateProjectUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update project unauthorized response has a 4xx status code
+func (o *UpdateProjectUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update project unauthorized response has a 5xx status code
+func (o *UpdateProjectUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update project unauthorized response a status code equal to that given
+func (o *UpdateProjectUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the update project unauthorized response
+func (o *UpdateProjectUnauthorized) Code() int {
+	return 401
+}
+
 func (o *UpdateProjectUnauthorized) Error() string {
 	return fmt.Sprintf("[PUT /projects/{project_name_or_id}][%d] updateProjectUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *UpdateProjectUnauthorized) String() string {
+	return fmt.Sprintf("[PUT /projects/{project_name_or_id}][%d] updateProjectUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *UpdateProjectUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -189,7 +296,8 @@ func NewUpdateProjectForbidden() *UpdateProjectForbidden {
 	return &UpdateProjectForbidden{}
 }
 
-/* UpdateProjectForbidden describes a response with status code 403, with default header values.
+/*
+UpdateProjectForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -202,9 +310,44 @@ type UpdateProjectForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this update project forbidden response has a 2xx status code
+func (o *UpdateProjectForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update project forbidden response has a 3xx status code
+func (o *UpdateProjectForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update project forbidden response has a 4xx status code
+func (o *UpdateProjectForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update project forbidden response has a 5xx status code
+func (o *UpdateProjectForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update project forbidden response a status code equal to that given
+func (o *UpdateProjectForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the update project forbidden response
+func (o *UpdateProjectForbidden) Code() int {
+	return 403
+}
+
 func (o *UpdateProjectForbidden) Error() string {
 	return fmt.Sprintf("[PUT /projects/{project_name_or_id}][%d] updateProjectForbidden  %+v", 403, o.Payload)
 }
+
+func (o *UpdateProjectForbidden) String() string {
+	return fmt.Sprintf("[PUT /projects/{project_name_or_id}][%d] updateProjectForbidden  %+v", 403, o.Payload)
+}
+
 func (o *UpdateProjectForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -233,7 +376,8 @@ func NewUpdateProjectNotFound() *UpdateProjectNotFound {
 	return &UpdateProjectNotFound{}
 }
 
-/* UpdateProjectNotFound describes a response with status code 404, with default header values.
+/*
+UpdateProjectNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
@@ -246,9 +390,44 @@ type UpdateProjectNotFound struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this update project not found response has a 2xx status code
+func (o *UpdateProjectNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update project not found response has a 3xx status code
+func (o *UpdateProjectNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update project not found response has a 4xx status code
+func (o *UpdateProjectNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update project not found response has a 5xx status code
+func (o *UpdateProjectNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update project not found response a status code equal to that given
+func (o *UpdateProjectNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the update project not found response
+func (o *UpdateProjectNotFound) Code() int {
+	return 404
+}
+
 func (o *UpdateProjectNotFound) Error() string {
 	return fmt.Sprintf("[PUT /projects/{project_name_or_id}][%d] updateProjectNotFound  %+v", 404, o.Payload)
 }
+
+func (o *UpdateProjectNotFound) String() string {
+	return fmt.Sprintf("[PUT /projects/{project_name_or_id}][%d] updateProjectNotFound  %+v", 404, o.Payload)
+}
+
 func (o *UpdateProjectNotFound) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -277,7 +456,8 @@ func NewUpdateProjectInternalServerError() *UpdateProjectInternalServerError {
 	return &UpdateProjectInternalServerError{}
 }
 
-/* UpdateProjectInternalServerError describes a response with status code 500, with default header values.
+/*
+UpdateProjectInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -290,9 +470,44 @@ type UpdateProjectInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this update project internal server error response has a 2xx status code
+func (o *UpdateProjectInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update project internal server error response has a 3xx status code
+func (o *UpdateProjectInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update project internal server error response has a 4xx status code
+func (o *UpdateProjectInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this update project internal server error response has a 5xx status code
+func (o *UpdateProjectInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this update project internal server error response a status code equal to that given
+func (o *UpdateProjectInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the update project internal server error response
+func (o *UpdateProjectInternalServerError) Code() int {
+	return 500
+}
+
 func (o *UpdateProjectInternalServerError) Error() string {
 	return fmt.Sprintf("[PUT /projects/{project_name_or_id}][%d] updateProjectInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *UpdateProjectInternalServerError) String() string {
+	return fmt.Sprintf("[PUT /projects/{project_name_or_id}][%d] updateProjectInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *UpdateProjectInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

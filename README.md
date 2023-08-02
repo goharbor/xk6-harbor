@@ -13,7 +13,7 @@ Then:
 
 1. Clone this repostiroy
   ```shell
-  git clone https://github.com/heww/xk6-harbor
+  git clone https://github.com/goharbor/xk6-harbor
   cd xk6-harbor
   ```
 
@@ -26,5 +26,5 @@ Then:
 You can also download the latest pre-build binary file.
 
 ```shell
-curl -sL $(curl -s https://api.github.com/repos/heww/xk6-harbor/releases/latest | grep 'http.*linux-amd64.tar.gz"' | awk '{print $2}' | sed 's|[\"\,]*||g') | tar -zx
+curl -sL $(curl -s https://api.github.com/repos/goharbor/xk6-harbor/releases/latest | grep 'http.*linux-amd64.tar.gz"' | awk '{print $2}' | sed 's|[\"\,]*||g') | tar -zx
 ```

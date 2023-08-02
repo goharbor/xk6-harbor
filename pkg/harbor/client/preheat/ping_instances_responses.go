@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // PingInstancesReader is a Reader for the PingInstances structure.
@@ -54,7 +54,7 @@ func (o *PingInstancesReader) ReadResponse(response runtime.ClientResponse, cons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /p2p/preheat/instances/ping] PingInstances", response, response.Code())
 	}
 }
 
@@ -63,7 +63,8 @@ func NewPingInstancesOK() *PingInstancesOK {
 	return &PingInstancesOK{}
 }
 
-/* PingInstancesOK describes a response with status code 200, with default header values.
+/*
+PingInstancesOK describes a response with status code 200, with default header values.
 
 Success
 */
@@ -74,7 +75,41 @@ type PingInstancesOK struct {
 	XRequestID string
 }
 
+// IsSuccess returns true when this ping instances o k response has a 2xx status code
+func (o *PingInstancesOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this ping instances o k response has a 3xx status code
+func (o *PingInstancesOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this ping instances o k response has a 4xx status code
+func (o *PingInstancesOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this ping instances o k response has a 5xx status code
+func (o *PingInstancesOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this ping instances o k response a status code equal to that given
+func (o *PingInstancesOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the ping instances o k response
+func (o *PingInstancesOK) Code() int {
+	return 200
+}
+
 func (o *PingInstancesOK) Error() string {
+	return fmt.Sprintf("[POST /p2p/preheat/instances/ping][%d] pingInstancesOK ", 200)
+}
+
+func (o *PingInstancesOK) String() string {
 	return fmt.Sprintf("[POST /p2p/preheat/instances/ping][%d] pingInstancesOK ", 200)
 }
 
@@ -95,7 +130,8 @@ func NewPingInstancesBadRequest() *PingInstancesBadRequest {
 	return &PingInstancesBadRequest{}
 }
 
-/* PingInstancesBadRequest describes a response with status code 400, with default header values.
+/*
+PingInstancesBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
@@ -108,9 +144,44 @@ type PingInstancesBadRequest struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this ping instances bad request response has a 2xx status code
+func (o *PingInstancesBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this ping instances bad request response has a 3xx status code
+func (o *PingInstancesBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this ping instances bad request response has a 4xx status code
+func (o *PingInstancesBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this ping instances bad request response has a 5xx status code
+func (o *PingInstancesBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this ping instances bad request response a status code equal to that given
+func (o *PingInstancesBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the ping instances bad request response
+func (o *PingInstancesBadRequest) Code() int {
+	return 400
+}
+
 func (o *PingInstancesBadRequest) Error() string {
 	return fmt.Sprintf("[POST /p2p/preheat/instances/ping][%d] pingInstancesBadRequest  %+v", 400, o.Payload)
 }
+
+func (o *PingInstancesBadRequest) String() string {
+	return fmt.Sprintf("[POST /p2p/preheat/instances/ping][%d] pingInstancesBadRequest  %+v", 400, o.Payload)
+}
+
 func (o *PingInstancesBadRequest) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -139,7 +210,8 @@ func NewPingInstancesUnauthorized() *PingInstancesUnauthorized {
 	return &PingInstancesUnauthorized{}
 }
 
-/* PingInstancesUnauthorized describes a response with status code 401, with default header values.
+/*
+PingInstancesUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -152,9 +224,44 @@ type PingInstancesUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this ping instances unauthorized response has a 2xx status code
+func (o *PingInstancesUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this ping instances unauthorized response has a 3xx status code
+func (o *PingInstancesUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this ping instances unauthorized response has a 4xx status code
+func (o *PingInstancesUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this ping instances unauthorized response has a 5xx status code
+func (o *PingInstancesUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this ping instances unauthorized response a status code equal to that given
+func (o *PingInstancesUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the ping instances unauthorized response
+func (o *PingInstancesUnauthorized) Code() int {
+	return 401
+}
+
 func (o *PingInstancesUnauthorized) Error() string {
 	return fmt.Sprintf("[POST /p2p/preheat/instances/ping][%d] pingInstancesUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *PingInstancesUnauthorized) String() string {
+	return fmt.Sprintf("[POST /p2p/preheat/instances/ping][%d] pingInstancesUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *PingInstancesUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -183,14 +290,49 @@ func NewPingInstancesNotFound() *PingInstancesNotFound {
 	return &PingInstancesNotFound{}
 }
 
-/* PingInstancesNotFound describes a response with status code 404, with default header values.
+/*
+PingInstancesNotFound describes a response with status code 404, with default header values.
 
 Instance not found (when instance is provided by ID).
 */
 type PingInstancesNotFound struct {
 }
 
+// IsSuccess returns true when this ping instances not found response has a 2xx status code
+func (o *PingInstancesNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this ping instances not found response has a 3xx status code
+func (o *PingInstancesNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this ping instances not found response has a 4xx status code
+func (o *PingInstancesNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this ping instances not found response has a 5xx status code
+func (o *PingInstancesNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this ping instances not found response a status code equal to that given
+func (o *PingInstancesNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the ping instances not found response
+func (o *PingInstancesNotFound) Code() int {
+	return 404
+}
+
 func (o *PingInstancesNotFound) Error() string {
+	return fmt.Sprintf("[POST /p2p/preheat/instances/ping][%d] pingInstancesNotFound ", 404)
+}
+
+func (o *PingInstancesNotFound) String() string {
 	return fmt.Sprintf("[POST /p2p/preheat/instances/ping][%d] pingInstancesNotFound ", 404)
 }
 
@@ -204,7 +346,8 @@ func NewPingInstancesInternalServerError() *PingInstancesInternalServerError {
 	return &PingInstancesInternalServerError{}
 }
 
-/* PingInstancesInternalServerError describes a response with status code 500, with default header values.
+/*
+PingInstancesInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -217,9 +360,44 @@ type PingInstancesInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this ping instances internal server error response has a 2xx status code
+func (o *PingInstancesInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this ping instances internal server error response has a 3xx status code
+func (o *PingInstancesInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this ping instances internal server error response has a 4xx status code
+func (o *PingInstancesInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this ping instances internal server error response has a 5xx status code
+func (o *PingInstancesInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this ping instances internal server error response a status code equal to that given
+func (o *PingInstancesInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the ping instances internal server error response
+func (o *PingInstancesInternalServerError) Code() int {
+	return 500
+}
+
 func (o *PingInstancesInternalServerError) Error() string {
 	return fmt.Sprintf("[POST /p2p/preheat/instances/ping][%d] pingInstancesInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *PingInstancesInternalServerError) String() string {
+	return fmt.Sprintf("[POST /p2p/preheat/instances/ping][%d] pingInstancesInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *PingInstancesInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

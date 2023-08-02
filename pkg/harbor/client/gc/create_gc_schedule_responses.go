@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // CreateGCScheduleReader is a Reader for the CreateGCSchedule structure.
@@ -60,7 +60,7 @@ func (o *CreateGCScheduleReader) ReadResponse(response runtime.ClientResponse, c
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /system/gc/schedule] createGCSchedule", response, response.Code())
 	}
 }
 
@@ -69,7 +69,8 @@ func NewCreateGCScheduleCreated() *CreateGCScheduleCreated {
 	return &CreateGCScheduleCreated{}
 }
 
-/* CreateGCScheduleCreated describes a response with status code 201, with default header values.
+/*
+CreateGCScheduleCreated describes a response with status code 201, with default header values.
 
 Created
 */
@@ -84,7 +85,41 @@ type CreateGCScheduleCreated struct {
 	XRequestID string
 }
 
+// IsSuccess returns true when this create Gc schedule created response has a 2xx status code
+func (o *CreateGCScheduleCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create Gc schedule created response has a 3xx status code
+func (o *CreateGCScheduleCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create Gc schedule created response has a 4xx status code
+func (o *CreateGCScheduleCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create Gc schedule created response has a 5xx status code
+func (o *CreateGCScheduleCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create Gc schedule created response a status code equal to that given
+func (o *CreateGCScheduleCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create Gc schedule created response
+func (o *CreateGCScheduleCreated) Code() int {
+	return 201
+}
+
 func (o *CreateGCScheduleCreated) Error() string {
+	return fmt.Sprintf("[POST /system/gc/schedule][%d] createGcScheduleCreated ", 201)
+}
+
+func (o *CreateGCScheduleCreated) String() string {
 	return fmt.Sprintf("[POST /system/gc/schedule][%d] createGcScheduleCreated ", 201)
 }
 
@@ -112,7 +147,8 @@ func NewCreateGCScheduleBadRequest() *CreateGCScheduleBadRequest {
 	return &CreateGCScheduleBadRequest{}
 }
 
-/* CreateGCScheduleBadRequest describes a response with status code 400, with default header values.
+/*
+CreateGCScheduleBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
@@ -125,9 +161,44 @@ type CreateGCScheduleBadRequest struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create Gc schedule bad request response has a 2xx status code
+func (o *CreateGCScheduleBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create Gc schedule bad request response has a 3xx status code
+func (o *CreateGCScheduleBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create Gc schedule bad request response has a 4xx status code
+func (o *CreateGCScheduleBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create Gc schedule bad request response has a 5xx status code
+func (o *CreateGCScheduleBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create Gc schedule bad request response a status code equal to that given
+func (o *CreateGCScheduleBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create Gc schedule bad request response
+func (o *CreateGCScheduleBadRequest) Code() int {
+	return 400
+}
+
 func (o *CreateGCScheduleBadRequest) Error() string {
 	return fmt.Sprintf("[POST /system/gc/schedule][%d] createGcScheduleBadRequest  %+v", 400, o.Payload)
 }
+
+func (o *CreateGCScheduleBadRequest) String() string {
+	return fmt.Sprintf("[POST /system/gc/schedule][%d] createGcScheduleBadRequest  %+v", 400, o.Payload)
+}
+
 func (o *CreateGCScheduleBadRequest) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -156,7 +227,8 @@ func NewCreateGCScheduleUnauthorized() *CreateGCScheduleUnauthorized {
 	return &CreateGCScheduleUnauthorized{}
 }
 
-/* CreateGCScheduleUnauthorized describes a response with status code 401, with default header values.
+/*
+CreateGCScheduleUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -169,9 +241,44 @@ type CreateGCScheduleUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create Gc schedule unauthorized response has a 2xx status code
+func (o *CreateGCScheduleUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create Gc schedule unauthorized response has a 3xx status code
+func (o *CreateGCScheduleUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create Gc schedule unauthorized response has a 4xx status code
+func (o *CreateGCScheduleUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create Gc schedule unauthorized response has a 5xx status code
+func (o *CreateGCScheduleUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create Gc schedule unauthorized response a status code equal to that given
+func (o *CreateGCScheduleUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the create Gc schedule unauthorized response
+func (o *CreateGCScheduleUnauthorized) Code() int {
+	return 401
+}
+
 func (o *CreateGCScheduleUnauthorized) Error() string {
 	return fmt.Sprintf("[POST /system/gc/schedule][%d] createGcScheduleUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *CreateGCScheduleUnauthorized) String() string {
+	return fmt.Sprintf("[POST /system/gc/schedule][%d] createGcScheduleUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *CreateGCScheduleUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -200,7 +307,8 @@ func NewCreateGCScheduleForbidden() *CreateGCScheduleForbidden {
 	return &CreateGCScheduleForbidden{}
 }
 
-/* CreateGCScheduleForbidden describes a response with status code 403, with default header values.
+/*
+CreateGCScheduleForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -213,9 +321,44 @@ type CreateGCScheduleForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create Gc schedule forbidden response has a 2xx status code
+func (o *CreateGCScheduleForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create Gc schedule forbidden response has a 3xx status code
+func (o *CreateGCScheduleForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create Gc schedule forbidden response has a 4xx status code
+func (o *CreateGCScheduleForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create Gc schedule forbidden response has a 5xx status code
+func (o *CreateGCScheduleForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create Gc schedule forbidden response a status code equal to that given
+func (o *CreateGCScheduleForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the create Gc schedule forbidden response
+func (o *CreateGCScheduleForbidden) Code() int {
+	return 403
+}
+
 func (o *CreateGCScheduleForbidden) Error() string {
 	return fmt.Sprintf("[POST /system/gc/schedule][%d] createGcScheduleForbidden  %+v", 403, o.Payload)
 }
+
+func (o *CreateGCScheduleForbidden) String() string {
+	return fmt.Sprintf("[POST /system/gc/schedule][%d] createGcScheduleForbidden  %+v", 403, o.Payload)
+}
+
 func (o *CreateGCScheduleForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -244,7 +387,8 @@ func NewCreateGCScheduleConflict() *CreateGCScheduleConflict {
 	return &CreateGCScheduleConflict{}
 }
 
-/* CreateGCScheduleConflict describes a response with status code 409, with default header values.
+/*
+CreateGCScheduleConflict describes a response with status code 409, with default header values.
 
 Conflict
 */
@@ -257,9 +401,44 @@ type CreateGCScheduleConflict struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create Gc schedule conflict response has a 2xx status code
+func (o *CreateGCScheduleConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create Gc schedule conflict response has a 3xx status code
+func (o *CreateGCScheduleConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create Gc schedule conflict response has a 4xx status code
+func (o *CreateGCScheduleConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create Gc schedule conflict response has a 5xx status code
+func (o *CreateGCScheduleConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create Gc schedule conflict response a status code equal to that given
+func (o *CreateGCScheduleConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the create Gc schedule conflict response
+func (o *CreateGCScheduleConflict) Code() int {
+	return 409
+}
+
 func (o *CreateGCScheduleConflict) Error() string {
 	return fmt.Sprintf("[POST /system/gc/schedule][%d] createGcScheduleConflict  %+v", 409, o.Payload)
 }
+
+func (o *CreateGCScheduleConflict) String() string {
+	return fmt.Sprintf("[POST /system/gc/schedule][%d] createGcScheduleConflict  %+v", 409, o.Payload)
+}
+
 func (o *CreateGCScheduleConflict) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -288,7 +467,8 @@ func NewCreateGCScheduleInternalServerError() *CreateGCScheduleInternalServerErr
 	return &CreateGCScheduleInternalServerError{}
 }
 
-/* CreateGCScheduleInternalServerError describes a response with status code 500, with default header values.
+/*
+CreateGCScheduleInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -301,9 +481,44 @@ type CreateGCScheduleInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create Gc schedule internal server error response has a 2xx status code
+func (o *CreateGCScheduleInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create Gc schedule internal server error response has a 3xx status code
+func (o *CreateGCScheduleInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create Gc schedule internal server error response has a 4xx status code
+func (o *CreateGCScheduleInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create Gc schedule internal server error response has a 5xx status code
+func (o *CreateGCScheduleInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this create Gc schedule internal server error response a status code equal to that given
+func (o *CreateGCScheduleInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the create Gc schedule internal server error response
+func (o *CreateGCScheduleInternalServerError) Code() int {
+	return 500
+}
+
 func (o *CreateGCScheduleInternalServerError) Error() string {
 	return fmt.Sprintf("[POST /system/gc/schedule][%d] createGcScheduleInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *CreateGCScheduleInternalServerError) String() string {
+	return fmt.Sprintf("[POST /system/gc/schedule][%d] createGcScheduleInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *CreateGCScheduleInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

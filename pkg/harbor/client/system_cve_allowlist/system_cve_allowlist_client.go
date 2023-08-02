@@ -7,13 +7,14 @@ package system_cve_allowlist
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/go-openapi/runtime"
 
 	strfmt "github.com/go-openapi/strfmt"
 )
 
-//go:generate mockery -name API -inpkg
+//go:generate mockery --name API --keeptree --with-expecter --case underscore
 
 // API is the interface of the system cve allowlist client
 type API interface {
@@ -70,8 +71,17 @@ func (a *Client) GetSystemCVEAllowlist(ctx context.Context, params *GetSystemCVE
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetSystemCVEAllowlistOK), nil
-
+	switch value := result.(type) {
+	case *GetSystemCVEAllowlistOK:
+		return value, nil
+	case *GetSystemCVEAllowlistUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetSystemCVEAllowlistInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getSystemCVEAllowlist: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -97,6 +107,17 @@ func (a *Client) PutSystemCVEAllowlist(ctx context.Context, params *PutSystemCVE
 	if err != nil {
 		return nil, err
 	}
-	return result.(*PutSystemCVEAllowlistOK), nil
-
+	switch value := result.(type) {
+	case *PutSystemCVEAllowlistOK:
+		return value, nil
+	case *PutSystemCVEAllowlistUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *PutSystemCVEAllowlistForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *PutSystemCVEAllowlistInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for putSystemCVEAllowlist: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }

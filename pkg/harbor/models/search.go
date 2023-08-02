@@ -65,6 +65,8 @@ func (m *Search) validateChart(formats strfmt.Registry) error {
 			if err := m.Chart[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("chart" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("chart" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -89,6 +91,8 @@ func (m *Search) validateProject(formats strfmt.Registry) error {
 			if err := m.Project[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("project" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("project" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -113,6 +117,8 @@ func (m *Search) validateRepository(formats strfmt.Registry) error {
 			if err := m.Repository[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("repository" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("repository" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -150,9 +156,16 @@ func (m *Search) contextValidateChart(ctx context.Context, formats strfmt.Regist
 	for i := 0; i < len(m.Chart); i++ {
 
 		if m.Chart[i] != nil {
+
+			if swag.IsZero(m.Chart[i]) { // not required
+				return nil
+			}
+
 			if err := m.Chart[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("chart" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("chart" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -168,9 +181,16 @@ func (m *Search) contextValidateProject(ctx context.Context, formats strfmt.Regi
 	for i := 0; i < len(m.Project); i++ {
 
 		if m.Project[i] != nil {
+
+			if swag.IsZero(m.Project[i]) { // not required
+				return nil
+			}
+
 			if err := m.Project[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("project" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("project" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -186,9 +206,16 @@ func (m *Search) contextValidateRepository(ctx context.Context, formats strfmt.R
 	for i := 0; i < len(m.Repository); i++ {
 
 		if m.Repository[i] != nil {
+
+			if swag.IsZero(m.Repository[i]) { // not required
+				return nil
+			}
+
 			if err := m.Repository[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("repository" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("repository" + "." + strconv.Itoa(i))
 				}
 				return err
 			}

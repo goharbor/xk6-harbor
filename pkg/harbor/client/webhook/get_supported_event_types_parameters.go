@@ -53,10 +53,12 @@ func NewGetSupportedEventTypesParamsWithHTTPClient(client *http.Client) *GetSupp
 	}
 }
 
-/* GetSupportedEventTypesParams contains all the parameters to send to the API endpoint
-   for the get supported event types operation.
+/*
+GetSupportedEventTypesParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get supported event types operation.
+
+	Typically these are written to a http.Request.
 */
 type GetSupportedEventTypesParams struct {
 

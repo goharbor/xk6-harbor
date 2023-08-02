@@ -52,10 +52,12 @@ func NewDeleteScannerParamsWithHTTPClient(client *http.Client) *DeleteScannerPar
 	}
 }
 
-/* DeleteScannerParams contains all the parameters to send to the API endpoint
-   for the delete scanner operation.
+/*
+DeleteScannerParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the delete scanner operation.
+
+	Typically these are written to a http.Request.
 */
 type DeleteScannerParams struct {
 

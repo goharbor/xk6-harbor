@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // ListReplicationPoliciesReader is a Reader for the ListReplicationPolicies structure.
@@ -50,7 +50,7 @@ func (o *ListReplicationPoliciesReader) ReadResponse(response runtime.ClientResp
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /replication/policies] listReplicationPolicies", response, response.Code())
 	}
 }
 
@@ -59,7 +59,8 @@ func NewListReplicationPoliciesOK() *ListReplicationPoliciesOK {
 	return &ListReplicationPoliciesOK{}
 }
 
-/* ListReplicationPoliciesOK describes a response with status code 200, with default header values.
+/*
+ListReplicationPoliciesOK describes a response with status code 200, with default header values.
 
 Success
 */
@@ -76,9 +77,44 @@ type ListReplicationPoliciesOK struct {
 	Payload []*models.ReplicationPolicy
 }
 
+// IsSuccess returns true when this list replication policies o k response has a 2xx status code
+func (o *ListReplicationPoliciesOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list replication policies o k response has a 3xx status code
+func (o *ListReplicationPoliciesOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list replication policies o k response has a 4xx status code
+func (o *ListReplicationPoliciesOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list replication policies o k response has a 5xx status code
+func (o *ListReplicationPoliciesOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list replication policies o k response a status code equal to that given
+func (o *ListReplicationPoliciesOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list replication policies o k response
+func (o *ListReplicationPoliciesOK) Code() int {
+	return 200
+}
+
 func (o *ListReplicationPoliciesOK) Error() string {
 	return fmt.Sprintf("[GET /replication/policies][%d] listReplicationPoliciesOK  %+v", 200, o.Payload)
 }
+
+func (o *ListReplicationPoliciesOK) String() string {
+	return fmt.Sprintf("[GET /replication/policies][%d] listReplicationPoliciesOK  %+v", 200, o.Payload)
+}
+
 func (o *ListReplicationPoliciesOK) GetPayload() []*models.ReplicationPolicy {
 	return o.Payload
 }
@@ -116,7 +152,8 @@ func NewListReplicationPoliciesUnauthorized() *ListReplicationPoliciesUnauthoriz
 	return &ListReplicationPoliciesUnauthorized{}
 }
 
-/* ListReplicationPoliciesUnauthorized describes a response with status code 401, with default header values.
+/*
+ListReplicationPoliciesUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -129,9 +166,44 @@ type ListReplicationPoliciesUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list replication policies unauthorized response has a 2xx status code
+func (o *ListReplicationPoliciesUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list replication policies unauthorized response has a 3xx status code
+func (o *ListReplicationPoliciesUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list replication policies unauthorized response has a 4xx status code
+func (o *ListReplicationPoliciesUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list replication policies unauthorized response has a 5xx status code
+func (o *ListReplicationPoliciesUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list replication policies unauthorized response a status code equal to that given
+func (o *ListReplicationPoliciesUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the list replication policies unauthorized response
+func (o *ListReplicationPoliciesUnauthorized) Code() int {
+	return 401
+}
+
 func (o *ListReplicationPoliciesUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /replication/policies][%d] listReplicationPoliciesUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *ListReplicationPoliciesUnauthorized) String() string {
+	return fmt.Sprintf("[GET /replication/policies][%d] listReplicationPoliciesUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *ListReplicationPoliciesUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -160,7 +232,8 @@ func NewListReplicationPoliciesForbidden() *ListReplicationPoliciesForbidden {
 	return &ListReplicationPoliciesForbidden{}
 }
 
-/* ListReplicationPoliciesForbidden describes a response with status code 403, with default header values.
+/*
+ListReplicationPoliciesForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -173,9 +246,44 @@ type ListReplicationPoliciesForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list replication policies forbidden response has a 2xx status code
+func (o *ListReplicationPoliciesForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list replication policies forbidden response has a 3xx status code
+func (o *ListReplicationPoliciesForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list replication policies forbidden response has a 4xx status code
+func (o *ListReplicationPoliciesForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list replication policies forbidden response has a 5xx status code
+func (o *ListReplicationPoliciesForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list replication policies forbidden response a status code equal to that given
+func (o *ListReplicationPoliciesForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the list replication policies forbidden response
+func (o *ListReplicationPoliciesForbidden) Code() int {
+	return 403
+}
+
 func (o *ListReplicationPoliciesForbidden) Error() string {
 	return fmt.Sprintf("[GET /replication/policies][%d] listReplicationPoliciesForbidden  %+v", 403, o.Payload)
 }
+
+func (o *ListReplicationPoliciesForbidden) String() string {
+	return fmt.Sprintf("[GET /replication/policies][%d] listReplicationPoliciesForbidden  %+v", 403, o.Payload)
+}
+
 func (o *ListReplicationPoliciesForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -204,7 +312,8 @@ func NewListReplicationPoliciesInternalServerError() *ListReplicationPoliciesInt
 	return &ListReplicationPoliciesInternalServerError{}
 }
 
-/* ListReplicationPoliciesInternalServerError describes a response with status code 500, with default header values.
+/*
+ListReplicationPoliciesInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -217,9 +326,44 @@ type ListReplicationPoliciesInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list replication policies internal server error response has a 2xx status code
+func (o *ListReplicationPoliciesInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list replication policies internal server error response has a 3xx status code
+func (o *ListReplicationPoliciesInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list replication policies internal server error response has a 4xx status code
+func (o *ListReplicationPoliciesInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list replication policies internal server error response has a 5xx status code
+func (o *ListReplicationPoliciesInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this list replication policies internal server error response a status code equal to that given
+func (o *ListReplicationPoliciesInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the list replication policies internal server error response
+func (o *ListReplicationPoliciesInternalServerError) Code() int {
+	return 500
+}
+
 func (o *ListReplicationPoliciesInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /replication/policies][%d] listReplicationPoliciesInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *ListReplicationPoliciesInternalServerError) String() string {
+	return fmt.Sprintf("[GET /replication/policies][%d] listReplicationPoliciesInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *ListReplicationPoliciesInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

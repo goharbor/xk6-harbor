@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // GetReportLogReader is a Reader for the GetReportLog structure.
@@ -54,7 +54,7 @@ func (o *GetReportLogReader) ReadResponse(response runtime.ClientResponse, consu
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/scan/{report_id}/log] getReportLog", response, response.Code())
 	}
 }
 
@@ -63,7 +63,8 @@ func NewGetReportLogOK() *GetReportLogOK {
 	return &GetReportLogOK{}
 }
 
-/* GetReportLogOK describes a response with status code 200, with default header values.
+/*
+GetReportLogOK describes a response with status code 200, with default header values.
 
 Successfully get scan log file
 */
@@ -71,9 +72,44 @@ type GetReportLogOK struct {
 	Payload string
 }
 
+// IsSuccess returns true when this get report log o k response has a 2xx status code
+func (o *GetReportLogOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get report log o k response has a 3xx status code
+func (o *GetReportLogOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get report log o k response has a 4xx status code
+func (o *GetReportLogOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get report log o k response has a 5xx status code
+func (o *GetReportLogOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get report log o k response a status code equal to that given
+func (o *GetReportLogOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get report log o k response
+func (o *GetReportLogOK) Code() int {
+	return 200
+}
+
 func (o *GetReportLogOK) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/scan/{report_id}/log][%d] getReportLogOK  %+v", 200, o.Payload)
 }
+
+func (o *GetReportLogOK) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/scan/{report_id}/log][%d] getReportLogOK  %+v", 200, o.Payload)
+}
+
 func (o *GetReportLogOK) GetPayload() string {
 	return o.Payload
 }
@@ -93,7 +129,8 @@ func NewGetReportLogUnauthorized() *GetReportLogUnauthorized {
 	return &GetReportLogUnauthorized{}
 }
 
-/* GetReportLogUnauthorized describes a response with status code 401, with default header values.
+/*
+GetReportLogUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -106,9 +143,44 @@ type GetReportLogUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get report log unauthorized response has a 2xx status code
+func (o *GetReportLogUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get report log unauthorized response has a 3xx status code
+func (o *GetReportLogUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get report log unauthorized response has a 4xx status code
+func (o *GetReportLogUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get report log unauthorized response has a 5xx status code
+func (o *GetReportLogUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get report log unauthorized response a status code equal to that given
+func (o *GetReportLogUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the get report log unauthorized response
+func (o *GetReportLogUnauthorized) Code() int {
+	return 401
+}
+
 func (o *GetReportLogUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/scan/{report_id}/log][%d] getReportLogUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *GetReportLogUnauthorized) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/scan/{report_id}/log][%d] getReportLogUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *GetReportLogUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -137,7 +209,8 @@ func NewGetReportLogForbidden() *GetReportLogForbidden {
 	return &GetReportLogForbidden{}
 }
 
-/* GetReportLogForbidden describes a response with status code 403, with default header values.
+/*
+GetReportLogForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -150,9 +223,44 @@ type GetReportLogForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get report log forbidden response has a 2xx status code
+func (o *GetReportLogForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get report log forbidden response has a 3xx status code
+func (o *GetReportLogForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get report log forbidden response has a 4xx status code
+func (o *GetReportLogForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get report log forbidden response has a 5xx status code
+func (o *GetReportLogForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get report log forbidden response a status code equal to that given
+func (o *GetReportLogForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the get report log forbidden response
+func (o *GetReportLogForbidden) Code() int {
+	return 403
+}
+
 func (o *GetReportLogForbidden) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/scan/{report_id}/log][%d] getReportLogForbidden  %+v", 403, o.Payload)
 }
+
+func (o *GetReportLogForbidden) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/scan/{report_id}/log][%d] getReportLogForbidden  %+v", 403, o.Payload)
+}
+
 func (o *GetReportLogForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -181,7 +289,8 @@ func NewGetReportLogNotFound() *GetReportLogNotFound {
 	return &GetReportLogNotFound{}
 }
 
-/* GetReportLogNotFound describes a response with status code 404, with default header values.
+/*
+GetReportLogNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
@@ -194,9 +303,44 @@ type GetReportLogNotFound struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get report log not found response has a 2xx status code
+func (o *GetReportLogNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get report log not found response has a 3xx status code
+func (o *GetReportLogNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get report log not found response has a 4xx status code
+func (o *GetReportLogNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get report log not found response has a 5xx status code
+func (o *GetReportLogNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get report log not found response a status code equal to that given
+func (o *GetReportLogNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get report log not found response
+func (o *GetReportLogNotFound) Code() int {
+	return 404
+}
+
 func (o *GetReportLogNotFound) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/scan/{report_id}/log][%d] getReportLogNotFound  %+v", 404, o.Payload)
 }
+
+func (o *GetReportLogNotFound) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/scan/{report_id}/log][%d] getReportLogNotFound  %+v", 404, o.Payload)
+}
+
 func (o *GetReportLogNotFound) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -225,7 +369,8 @@ func NewGetReportLogInternalServerError() *GetReportLogInternalServerError {
 	return &GetReportLogInternalServerError{}
 }
 
-/* GetReportLogInternalServerError describes a response with status code 500, with default header values.
+/*
+GetReportLogInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -238,9 +383,44 @@ type GetReportLogInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get report log internal server error response has a 2xx status code
+func (o *GetReportLogInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get report log internal server error response has a 3xx status code
+func (o *GetReportLogInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get report log internal server error response has a 4xx status code
+func (o *GetReportLogInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get report log internal server error response has a 5xx status code
+func (o *GetReportLogInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get report log internal server error response a status code equal to that given
+func (o *GetReportLogInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the get report log internal server error response
+func (o *GetReportLogInternalServerError) Code() int {
+	return 500
+}
+
 func (o *GetReportLogInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/scan/{report_id}/log][%d] getReportLogInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *GetReportLogInternalServerError) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/scan/{report_id}/log][%d] getReportLogInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *GetReportLogInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // SearchReader is a Reader for the Search structure.
@@ -36,7 +36,7 @@ func (o *SearchReader) ReadResponse(response runtime.ClientResponse, consumer ru
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /search] search", response, response.Code())
 	}
 }
 
@@ -45,7 +45,8 @@ func NewSearchOK() *SearchOK {
 	return &SearchOK{}
 }
 
-/* SearchOK describes a response with status code 200, with default header values.
+/*
+SearchOK describes a response with status code 200, with default header values.
 
 An array of search results
 */
@@ -53,9 +54,44 @@ type SearchOK struct {
 	Payload *models.Search
 }
 
+// IsSuccess returns true when this search o k response has a 2xx status code
+func (o *SearchOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this search o k response has a 3xx status code
+func (o *SearchOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this search o k response has a 4xx status code
+func (o *SearchOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this search o k response has a 5xx status code
+func (o *SearchOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this search o k response a status code equal to that given
+func (o *SearchOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the search o k response
+func (o *SearchOK) Code() int {
+	return 200
+}
+
 func (o *SearchOK) Error() string {
 	return fmt.Sprintf("[GET /search][%d] searchOK  %+v", 200, o.Payload)
 }
+
+func (o *SearchOK) String() string {
+	return fmt.Sprintf("[GET /search][%d] searchOK  %+v", 200, o.Payload)
+}
+
 func (o *SearchOK) GetPayload() *models.Search {
 	return o.Payload
 }
@@ -77,7 +113,8 @@ func NewSearchInternalServerError() *SearchInternalServerError {
 	return &SearchInternalServerError{}
 }
 
-/* SearchInternalServerError describes a response with status code 500, with default header values.
+/*
+SearchInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -90,9 +127,44 @@ type SearchInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this search internal server error response has a 2xx status code
+func (o *SearchInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this search internal server error response has a 3xx status code
+func (o *SearchInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this search internal server error response has a 4xx status code
+func (o *SearchInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this search internal server error response has a 5xx status code
+func (o *SearchInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this search internal server error response a status code equal to that given
+func (o *SearchInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the search internal server error response
+func (o *SearchInternalServerError) Code() int {
+	return 500
+}
+
 func (o *SearchInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /search][%d] searchInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *SearchInternalServerError) String() string {
+	return fmt.Sprintf("[GET /search][%d] searchInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *SearchInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

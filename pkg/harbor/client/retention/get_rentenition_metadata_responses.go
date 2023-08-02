@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // GetRentenitionMetadataReader is a Reader for the GetRentenitionMetadata structure.
@@ -30,7 +30,7 @@ func (o *GetRentenitionMetadataReader) ReadResponse(response runtime.ClientRespo
 		}
 		return result, nil
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /retentions/metadatas] getRentenitionMetadata", response, response.Code())
 	}
 }
 
@@ -39,7 +39,8 @@ func NewGetRentenitionMetadataOK() *GetRentenitionMetadataOK {
 	return &GetRentenitionMetadataOK{}
 }
 
-/* GetRentenitionMetadataOK describes a response with status code 200, with default header values.
+/*
+GetRentenitionMetadataOK describes a response with status code 200, with default header values.
 
 Get Retention Metadatas successfully.
 */
@@ -47,9 +48,44 @@ type GetRentenitionMetadataOK struct {
 	Payload *models.RetentionMetadata
 }
 
+// IsSuccess returns true when this get rentenition metadata o k response has a 2xx status code
+func (o *GetRentenitionMetadataOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get rentenition metadata o k response has a 3xx status code
+func (o *GetRentenitionMetadataOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get rentenition metadata o k response has a 4xx status code
+func (o *GetRentenitionMetadataOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get rentenition metadata o k response has a 5xx status code
+func (o *GetRentenitionMetadataOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get rentenition metadata o k response a status code equal to that given
+func (o *GetRentenitionMetadataOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get rentenition metadata o k response
+func (o *GetRentenitionMetadataOK) Code() int {
+	return 200
+}
+
 func (o *GetRentenitionMetadataOK) Error() string {
 	return fmt.Sprintf("[GET /retentions/metadatas][%d] getRentenitionMetadataOK  %+v", 200, o.Payload)
 }
+
+func (o *GetRentenitionMetadataOK) String() string {
+	return fmt.Sprintf("[GET /retentions/metadatas][%d] getRentenitionMetadataOK  %+v", 200, o.Payload)
+}
+
 func (o *GetRentenitionMetadataOK) GetPayload() *models.RetentionMetadata {
 	return o.Payload
 }

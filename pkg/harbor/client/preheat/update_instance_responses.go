@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // UpdateInstanceReader is a Reader for the UpdateInstance structure.
@@ -60,7 +60,7 @@ func (o *UpdateInstanceReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /p2p/preheat/instances/{preheat_instance_name}] UpdateInstance", response, response.Code())
 	}
 }
 
@@ -69,7 +69,8 @@ func NewUpdateInstanceOK() *UpdateInstanceOK {
 	return &UpdateInstanceOK{}
 }
 
-/* UpdateInstanceOK describes a response with status code 200, with default header values.
+/*
+UpdateInstanceOK describes a response with status code 200, with default header values.
 
 Success
 */
@@ -80,7 +81,41 @@ type UpdateInstanceOK struct {
 	XRequestID string
 }
 
+// IsSuccess returns true when this update instance o k response has a 2xx status code
+func (o *UpdateInstanceOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this update instance o k response has a 3xx status code
+func (o *UpdateInstanceOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update instance o k response has a 4xx status code
+func (o *UpdateInstanceOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this update instance o k response has a 5xx status code
+func (o *UpdateInstanceOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update instance o k response a status code equal to that given
+func (o *UpdateInstanceOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the update instance o k response
+func (o *UpdateInstanceOK) Code() int {
+	return 200
+}
+
 func (o *UpdateInstanceOK) Error() string {
+	return fmt.Sprintf("[PUT /p2p/preheat/instances/{preheat_instance_name}][%d] updateInstanceOK ", 200)
+}
+
+func (o *UpdateInstanceOK) String() string {
 	return fmt.Sprintf("[PUT /p2p/preheat/instances/{preheat_instance_name}][%d] updateInstanceOK ", 200)
 }
 
@@ -101,7 +136,8 @@ func NewUpdateInstanceBadRequest() *UpdateInstanceBadRequest {
 	return &UpdateInstanceBadRequest{}
 }
 
-/* UpdateInstanceBadRequest describes a response with status code 400, with default header values.
+/*
+UpdateInstanceBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
@@ -114,9 +150,44 @@ type UpdateInstanceBadRequest struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this update instance bad request response has a 2xx status code
+func (o *UpdateInstanceBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update instance bad request response has a 3xx status code
+func (o *UpdateInstanceBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update instance bad request response has a 4xx status code
+func (o *UpdateInstanceBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update instance bad request response has a 5xx status code
+func (o *UpdateInstanceBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update instance bad request response a status code equal to that given
+func (o *UpdateInstanceBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the update instance bad request response
+func (o *UpdateInstanceBadRequest) Code() int {
+	return 400
+}
+
 func (o *UpdateInstanceBadRequest) Error() string {
 	return fmt.Sprintf("[PUT /p2p/preheat/instances/{preheat_instance_name}][%d] updateInstanceBadRequest  %+v", 400, o.Payload)
 }
+
+func (o *UpdateInstanceBadRequest) String() string {
+	return fmt.Sprintf("[PUT /p2p/preheat/instances/{preheat_instance_name}][%d] updateInstanceBadRequest  %+v", 400, o.Payload)
+}
+
 func (o *UpdateInstanceBadRequest) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -145,7 +216,8 @@ func NewUpdateInstanceUnauthorized() *UpdateInstanceUnauthorized {
 	return &UpdateInstanceUnauthorized{}
 }
 
-/* UpdateInstanceUnauthorized describes a response with status code 401, with default header values.
+/*
+UpdateInstanceUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -158,9 +230,44 @@ type UpdateInstanceUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this update instance unauthorized response has a 2xx status code
+func (o *UpdateInstanceUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update instance unauthorized response has a 3xx status code
+func (o *UpdateInstanceUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update instance unauthorized response has a 4xx status code
+func (o *UpdateInstanceUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update instance unauthorized response has a 5xx status code
+func (o *UpdateInstanceUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update instance unauthorized response a status code equal to that given
+func (o *UpdateInstanceUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the update instance unauthorized response
+func (o *UpdateInstanceUnauthorized) Code() int {
+	return 401
+}
+
 func (o *UpdateInstanceUnauthorized) Error() string {
 	return fmt.Sprintf("[PUT /p2p/preheat/instances/{preheat_instance_name}][%d] updateInstanceUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *UpdateInstanceUnauthorized) String() string {
+	return fmt.Sprintf("[PUT /p2p/preheat/instances/{preheat_instance_name}][%d] updateInstanceUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *UpdateInstanceUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -189,7 +296,8 @@ func NewUpdateInstanceForbidden() *UpdateInstanceForbidden {
 	return &UpdateInstanceForbidden{}
 }
 
-/* UpdateInstanceForbidden describes a response with status code 403, with default header values.
+/*
+UpdateInstanceForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -202,9 +310,44 @@ type UpdateInstanceForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this update instance forbidden response has a 2xx status code
+func (o *UpdateInstanceForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update instance forbidden response has a 3xx status code
+func (o *UpdateInstanceForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update instance forbidden response has a 4xx status code
+func (o *UpdateInstanceForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update instance forbidden response has a 5xx status code
+func (o *UpdateInstanceForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update instance forbidden response a status code equal to that given
+func (o *UpdateInstanceForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the update instance forbidden response
+func (o *UpdateInstanceForbidden) Code() int {
+	return 403
+}
+
 func (o *UpdateInstanceForbidden) Error() string {
 	return fmt.Sprintf("[PUT /p2p/preheat/instances/{preheat_instance_name}][%d] updateInstanceForbidden  %+v", 403, o.Payload)
 }
+
+func (o *UpdateInstanceForbidden) String() string {
+	return fmt.Sprintf("[PUT /p2p/preheat/instances/{preheat_instance_name}][%d] updateInstanceForbidden  %+v", 403, o.Payload)
+}
+
 func (o *UpdateInstanceForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -233,7 +376,8 @@ func NewUpdateInstanceNotFound() *UpdateInstanceNotFound {
 	return &UpdateInstanceNotFound{}
 }
 
-/* UpdateInstanceNotFound describes a response with status code 404, with default header values.
+/*
+UpdateInstanceNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
@@ -246,9 +390,44 @@ type UpdateInstanceNotFound struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this update instance not found response has a 2xx status code
+func (o *UpdateInstanceNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update instance not found response has a 3xx status code
+func (o *UpdateInstanceNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update instance not found response has a 4xx status code
+func (o *UpdateInstanceNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update instance not found response has a 5xx status code
+func (o *UpdateInstanceNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update instance not found response a status code equal to that given
+func (o *UpdateInstanceNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the update instance not found response
+func (o *UpdateInstanceNotFound) Code() int {
+	return 404
+}
+
 func (o *UpdateInstanceNotFound) Error() string {
 	return fmt.Sprintf("[PUT /p2p/preheat/instances/{preheat_instance_name}][%d] updateInstanceNotFound  %+v", 404, o.Payload)
 }
+
+func (o *UpdateInstanceNotFound) String() string {
+	return fmt.Sprintf("[PUT /p2p/preheat/instances/{preheat_instance_name}][%d] updateInstanceNotFound  %+v", 404, o.Payload)
+}
+
 func (o *UpdateInstanceNotFound) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -277,7 +456,8 @@ func NewUpdateInstanceInternalServerError() *UpdateInstanceInternalServerError {
 	return &UpdateInstanceInternalServerError{}
 }
 
-/* UpdateInstanceInternalServerError describes a response with status code 500, with default header values.
+/*
+UpdateInstanceInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -290,9 +470,44 @@ type UpdateInstanceInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this update instance internal server error response has a 2xx status code
+func (o *UpdateInstanceInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update instance internal server error response has a 3xx status code
+func (o *UpdateInstanceInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update instance internal server error response has a 4xx status code
+func (o *UpdateInstanceInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this update instance internal server error response has a 5xx status code
+func (o *UpdateInstanceInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this update instance internal server error response a status code equal to that given
+func (o *UpdateInstanceInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the update instance internal server error response
+func (o *UpdateInstanceInternalServerError) Code() int {
+	return 500
+}
+
 func (o *UpdateInstanceInternalServerError) Error() string {
 	return fmt.Sprintf("[PUT /p2p/preheat/instances/{preheat_instance_name}][%d] updateInstanceInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *UpdateInstanceInternalServerError) String() string {
+	return fmt.Sprintf("[PUT /p2p/preheat/instances/{preheat_instance_name}][%d] updateInstanceInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *UpdateInstanceInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

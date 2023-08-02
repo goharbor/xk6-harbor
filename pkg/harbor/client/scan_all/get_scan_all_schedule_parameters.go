@@ -52,10 +52,12 @@ func NewGetScanAllScheduleParamsWithHTTPClient(client *http.Client) *GetScanAllS
 	}
 }
 
-/* GetScanAllScheduleParams contains all the parameters to send to the API endpoint
-   for the get scan all schedule operation.
+/*
+GetScanAllScheduleParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get scan all schedule operation.
+
+	Typically these are written to a http.Request.
 */
 type GetScanAllScheduleParams struct {
 

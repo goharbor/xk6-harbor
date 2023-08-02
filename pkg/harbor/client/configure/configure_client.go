@@ -7,13 +7,14 @@ package configure
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/go-openapi/runtime"
 
 	strfmt "github.com/go-openapi/strfmt"
 )
 
-//go:generate mockery -name API -inpkg
+//go:generate mockery --name API --keeptree --with-expecter --case underscore
 
 // API is the interface of the configure client
 type API interface {
@@ -59,7 +60,6 @@ type Client struct {
 GetConfigurations gets system configurations
 
 This endpoint is for retrieving system configurations that only provides for admin user.
-
 */
 func (a *Client) GetConfigurations(ctx context.Context, params *GetConfigurationsParams) (*GetConfigurationsOK, error) {
 
@@ -79,15 +79,25 @@ func (a *Client) GetConfigurations(ctx context.Context, params *GetConfiguration
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetConfigurationsOK), nil
-
+	switch value := result.(type) {
+	case *GetConfigurationsOK:
+		return value, nil
+	case *GetConfigurationsUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetConfigurationsForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetConfigurationsInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getConfigurations: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
 GetInternalconfig gets internal configurations
 
 This endpoint is for retrieving system configurations that only provides for internal api call.
-
 */
 func (a *Client) GetInternalconfig(ctx context.Context, params *GetInternalconfigParams) (*GetInternalconfigOK, error) {
 
@@ -107,15 +117,25 @@ func (a *Client) GetInternalconfig(ctx context.Context, params *GetInternalconfi
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetInternalconfigOK), nil
-
+	switch value := result.(type) {
+	case *GetInternalconfigOK:
+		return value, nil
+	case *GetInternalconfigUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetInternalconfigForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetInternalconfigInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getInternalconfig: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
 UpdateConfigurations modifies system configurations
 
 This endpoint is for modifying system configurations that only provides for admin user.
-
 */
 func (a *Client) UpdateConfigurations(ctx context.Context, params *UpdateConfigurationsParams) (*UpdateConfigurationsOK, error) {
 
@@ -135,6 +155,17 @@ func (a *Client) UpdateConfigurations(ctx context.Context, params *UpdateConfigu
 	if err != nil {
 		return nil, err
 	}
-	return result.(*UpdateConfigurationsOK), nil
-
+	switch value := result.(type) {
+	case *UpdateConfigurationsOK:
+		return value, nil
+	case *UpdateConfigurationsUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateConfigurationsForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateConfigurationsInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for updateConfigurations: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }

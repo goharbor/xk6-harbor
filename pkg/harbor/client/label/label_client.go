@@ -7,13 +7,14 @@ package label
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/go-openapi/runtime"
 
 	strfmt "github.com/go-openapi/strfmt"
 )
 
-//go:generate mockery -name API -inpkg
+//go:generate mockery --name API --keeptree --with-expecter --case underscore
 
 // API is the interface of the label client
 type API interface {
@@ -71,7 +72,6 @@ type Client struct {
 CreateLabel posts creates a label
 
 This endpoint let user creates a label.
-
 */
 func (a *Client) CreateLabel(ctx context.Context, params *CreateLabelParams) (*CreateLabelCreated, error) {
 
@@ -91,15 +91,29 @@ func (a *Client) CreateLabel(ctx context.Context, params *CreateLabelParams) (*C
 	if err != nil {
 		return nil, err
 	}
-	return result.(*CreateLabelCreated), nil
-
+	switch value := result.(type) {
+	case *CreateLabelCreated:
+		return value, nil
+	case *CreateLabelBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateLabelUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateLabelConflict:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateLabelUnsupportedMediaType:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateLabelInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for CreateLabel: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
 DeleteLabel deletes the label specified by ID
 
 Delete the label specified by ID.
-
 */
 func (a *Client) DeleteLabel(ctx context.Context, params *DeleteLabelParams) (*DeleteLabelOK, error) {
 
@@ -119,15 +133,27 @@ func (a *Client) DeleteLabel(ctx context.Context, params *DeleteLabelParams) (*D
 	if err != nil {
 		return nil, err
 	}
-	return result.(*DeleteLabelOK), nil
-
+	switch value := result.(type) {
+	case *DeleteLabelOK:
+		return value, nil
+	case *DeleteLabelBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteLabelUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteLabelNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteLabelInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for DeleteLabel: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
 GetLabelByID gets the label specified by ID
 
 This endpoint let user get the label by specific ID.
-
 */
 func (a *Client) GetLabelByID(ctx context.Context, params *GetLabelByIDParams) (*GetLabelByIDOK, error) {
 
@@ -147,15 +173,25 @@ func (a *Client) GetLabelByID(ctx context.Context, params *GetLabelByIDParams) (
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetLabelByIDOK), nil
-
+	switch value := result.(type) {
+	case *GetLabelByIDOK:
+		return value, nil
+	case *GetLabelByIDUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetLabelByIDNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetLabelByIDInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetLabelByID: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
 ListLabels lists labels according to the query strings
 
 This endpoint let user list labels by name, scope and project_id
-
 */
 func (a *Client) ListLabels(ctx context.Context, params *ListLabelsParams) (*ListLabelsOK, error) {
 
@@ -175,15 +211,25 @@ func (a *Client) ListLabels(ctx context.Context, params *ListLabelsParams) (*Lis
 	if err != nil {
 		return nil, err
 	}
-	return result.(*ListLabelsOK), nil
-
+	switch value := result.(type) {
+	case *ListLabelsOK:
+		return value, nil
+	case *ListLabelsBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListLabelsUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListLabelsInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ListLabels: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
 UpdateLabel updates the label properties
 
 This endpoint let user update label properties.
-
 */
 func (a *Client) UpdateLabel(ctx context.Context, params *UpdateLabelParams) (*UpdateLabelOK, error) {
 
@@ -203,6 +249,21 @@ func (a *Client) UpdateLabel(ctx context.Context, params *UpdateLabelParams) (*U
 	if err != nil {
 		return nil, err
 	}
-	return result.(*UpdateLabelOK), nil
-
+	switch value := result.(type) {
+	case *UpdateLabelOK:
+		return value, nil
+	case *UpdateLabelBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateLabelUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateLabelNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateLabelConflict:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateLabelInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for UpdateLabel: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }

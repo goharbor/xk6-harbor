@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // NewUpdateImmuRuleParams creates a new UpdateImmuRuleParams object,
@@ -55,10 +55,12 @@ func NewUpdateImmuRuleParamsWithHTTPClient(client *http.Client) *UpdateImmuRuleP
 	}
 }
 
-/* UpdateImmuRuleParams contains all the parameters to send to the API endpoint
-   for the update immu rule operation.
+/*
+UpdateImmuRuleParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the update immu rule operation.
+
+	Typically these are written to a http.Request.
 */
 type UpdateImmuRuleParams struct {
 

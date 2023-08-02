@@ -7,13 +7,14 @@ package user
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/go-openapi/runtime"
 
 	strfmt "github.com/go-openapi/strfmt"
 )
 
-//go:generate mockery -name API -inpkg
+//go:generate mockery --name API --keeptree --with-expecter --case underscore
 
 // API is the interface of the user client
 type API interface {
@@ -106,15 +107,29 @@ func (a *Client) CreateUser(ctx context.Context, params *CreateUserParams) (*Cre
 	if err != nil {
 		return nil, err
 	}
-	return result.(*CreateUserCreated), nil
-
+	switch value := result.(type) {
+	case *CreateUserCreated:
+		return value, nil
+	case *CreateUserBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateUserUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateUserForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateUserConflict:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateUserInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for createUser: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
 DeleteUser marks a registered user as be removed
 
 This endpoint let administrator of Harbor mark a registered user as removed.It actually won't be deleted from DB.
-
 */
 func (a *Client) DeleteUser(ctx context.Context, params *DeleteUserParams) (*DeleteUserOK, error) {
 
@@ -134,8 +149,21 @@ func (a *Client) DeleteUser(ctx context.Context, params *DeleteUserParams) (*Del
 	if err != nil {
 		return nil, err
 	}
-	return result.(*DeleteUserOK), nil
-
+	switch value := result.(type) {
+	case *DeleteUserOK:
+		return value, nil
+	case *DeleteUserUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteUserForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteUserNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteUserInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for deleteUser: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -159,8 +187,17 @@ func (a *Client) GetCurrentUserInfo(ctx context.Context, params *GetCurrentUserI
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetCurrentUserInfoOK), nil
-
+	switch value := result.(type) {
+	case *GetCurrentUserInfoOK:
+		return value, nil
+	case *GetCurrentUserInfoUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetCurrentUserInfoInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getCurrentUserInfo: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -184,8 +221,17 @@ func (a *Client) GetCurrentUserPermissions(ctx context.Context, params *GetCurre
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetCurrentUserPermissionsOK), nil
-
+	switch value := result.(type) {
+	case *GetCurrentUserPermissionsOK:
+		return value, nil
+	case *GetCurrentUserPermissionsUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetCurrentUserPermissionsInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getCurrentUserPermissions: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -209,8 +255,21 @@ func (a *Client) GetUser(ctx context.Context, params *GetUserParams) (*GetUserOK
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetUserOK), nil
-
+	switch value := result.(type) {
+	case *GetUserOK:
+		return value, nil
+	case *GetUserUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetUserForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetUserNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetUserInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getUser: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -234,15 +293,25 @@ func (a *Client) ListUsers(ctx context.Context, params *ListUsersParams) (*ListU
 	if err != nil {
 		return nil, err
 	}
-	return result.(*ListUsersOK), nil
-
+	switch value := result.(type) {
+	case *ListUsersOK:
+		return value, nil
+	case *ListUsersUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListUsersForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListUsersInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for listUsers: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
 SearchUsers searches users by username
 
 This endpoint is to search the users by username.  It's open for all authenticated requests.
-
 */
 func (a *Client) SearchUsers(ctx context.Context, params *SearchUsersParams) (*SearchUsersOK, error) {
 
@@ -262,8 +331,17 @@ func (a *Client) SearchUsers(ctx context.Context, params *SearchUsersParams) (*S
 	if err != nil {
 		return nil, err
 	}
-	return result.(*SearchUsersOK), nil
-
+	switch value := result.(type) {
+	case *SearchUsersOK:
+		return value, nil
+	case *SearchUsersUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *SearchUsersInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for searchUsers: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -289,8 +367,25 @@ func (a *Client) SetCliSecret(ctx context.Context, params *SetCliSecretParams) (
 	if err != nil {
 		return nil, err
 	}
-	return result.(*SetCliSecretOK), nil
-
+	switch value := result.(type) {
+	case *SetCliSecretOK:
+		return value, nil
+	case *SetCliSecretBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *SetCliSecretUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *SetCliSecretForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *SetCliSecretNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *SetCliSecretPreconditionFailed:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *SetCliSecretInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for setCliSecret: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -314,15 +409,27 @@ func (a *Client) SetUserSysAdmin(ctx context.Context, params *SetUserSysAdminPar
 	if err != nil {
 		return nil, err
 	}
-	return result.(*SetUserSysAdminOK), nil
-
+	switch value := result.(type) {
+	case *SetUserSysAdminOK:
+		return value, nil
+	case *SetUserSysAdminUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *SetUserSysAdminForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *SetUserSysAdminNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *SetUserSysAdminInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for setUserSysAdmin: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
 UpdateUserPassword changes the password on a user that already exists
 
 This endpoint is for user to update password. Users with the admin role can change any user's password. Regular users can change only their own password.
-
 */
 func (a *Client) UpdateUserPassword(ctx context.Context, params *UpdateUserPasswordParams) (*UpdateUserPasswordOK, error) {
 
@@ -342,8 +449,21 @@ func (a *Client) UpdateUserPassword(ctx context.Context, params *UpdateUserPassw
 	if err != nil {
 		return nil, err
 	}
-	return result.(*UpdateUserPasswordOK), nil
-
+	switch value := result.(type) {
+	case *UpdateUserPasswordOK:
+		return value, nil
+	case *UpdateUserPasswordBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateUserPasswordUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateUserPasswordForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateUserPasswordInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for updateUserPassword: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -367,6 +487,19 @@ func (a *Client) UpdateUserProfile(ctx context.Context, params *UpdateUserProfil
 	if err != nil {
 		return nil, err
 	}
-	return result.(*UpdateUserProfileOK), nil
-
+	switch value := result.(type) {
+	case *UpdateUserProfileOK:
+		return value, nil
+	case *UpdateUserProfileUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateUserProfileForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateUserProfileNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateUserProfileInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for updateUserProfile: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }

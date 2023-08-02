@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // NewCreateProjectMemberParams creates a new CreateProjectMemberParams object,
@@ -55,10 +55,12 @@ func NewCreateProjectMemberParamsWithHTTPClient(client *http.Client) *CreateProj
 	}
 }
 
-/* CreateProjectMemberParams contains all the parameters to send to the API endpoint
-   for the create project member operation.
+/*
+CreateProjectMemberParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the create project member operation.
+
+	Typically these are written to a http.Request.
 */
 type CreateProjectMemberParams struct {
 

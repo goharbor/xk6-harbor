@@ -52,10 +52,12 @@ func NewHeadProjectParamsWithHTTPClient(client *http.Client) *HeadProjectParams 
 	}
 }
 
-/* HeadProjectParams contains all the parameters to send to the API endpoint
-   for the head project operation.
+/*
+HeadProjectParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the head project operation.
+
+	Typically these are written to a http.Request.
 */
 type HeadProjectParams struct {
 

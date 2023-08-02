@@ -1,19 +1,17 @@
 package module
 
 import (
-	"context"
 	"fmt"
 	"net/url"
 	"sync"
 
 	"github.com/dop251/goja"
-	operation "github.com/heww/xk6-harbor/pkg/harbor/client/artifact"
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
-	"github.com/heww/xk6-harbor/pkg/util"
+	operation "github.com/goharbor/xk6-harbor/pkg/harbor/client/artifact"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/util"
 	ocispec "github.com/opencontainers/image-spec/specs-go/v1"
 	ants "github.com/panjf2000/ants/v2"
 	log "github.com/sirupsen/logrus"
-	"go.k6.io/k6/js/common"
 )
 
 const DefaultPoolSise = 300
@@ -25,18 +23,18 @@ type PrepareArtifactsOption struct {
 	ArtifactsCount int        `js:"artifactsCount"`
 }
 
-func (h *Harbor) PrepareArtifacts(ctx context.Context, option PrepareArtifactsOption) {
-	h.mustInitialized(ctx)
+func (h *Harbor) PrepareArtifacts(option PrepareArtifactsOption) {
+	h.mustInitialized()
 
 	if option.ArtifactsCount <= 0 {
-		Throwf(ctx, "artifacts count must greater than 0")
+		Throwf(h.vu.Runtime(), "artifacts count must greater than 0")
 	}
 
-	store := newContentStore(ctx, util.GenerateRandomString(8))
-	defer store.Free(ctx)
+	store := newContentStore(h.vu.Runtime(), util.GenerateRandomString(8))
+	defer store.Free()
 
 	descriptors, err := store.GenerateMany(option.ArtifactSize, option.ArtifactsCount)
-	Check(ctx, err)
+	Check(h.vu.Runtime(), err)
 
 	var wg sync.WaitGroup
 
@@ -56,7 +54,7 @@ func (h *Harbor) PrepareArtifacts(ctx context.Context, option PrepareArtifactsOp
 
 		ix := i.(int)
 
-		h.Push(ctx, PushOption{
+		h.Push(PushOption{
 			Ref:   fmt.Sprintf("%s/%s:tag-%d", option.ProjectName, option.RepositoryName, ix),
 			Store: store,
 			Blobs: []ocispec.Descriptor{*descriptors[ix]},
@@ -77,20 +75,20 @@ type ListArtifactsResult struct {
 	Total     int64              `js:"total"`
 }
 
-func (h *Harbor) ListArtifacts(ctx context.Context, projectName, repositoryName string, args ...goja.Value) ListArtifactsResult {
-	h.mustInitialized(ctx)
+func (h *Harbor) ListArtifacts(projectName, repositoryName string, args ...goja.Value) ListArtifactsResult {
+	h.mustInitialized()
 
 	params := operation.NewListArtifactsParams()
 
 	if len(args) > 0 {
-		err := common.GetRuntime(ctx).ExportTo(args[0], params)
-		Check(ctx, err)
+		err := h.vu.Runtime().ExportTo(args[0], params)
+		Check(h.vu.Runtime(), err)
 	}
 
 	params.WithProjectName(projectName).WithRepositoryName(url.PathEscape(repositoryName))
 
-	res, err := h.api.Artifact.ListArtifacts(ctx, params)
-	Checkf(ctx, err, "failed to list artifacts %s/%s", projectName, repositoryName)
+	res, err := h.api.Artifact.ListArtifacts(h.vu.Context(), params)
+	Checkf(h.vu.Runtime(), err, "failed to list artifacts %s/%s", projectName, repositoryName)
 
 	return ListArtifactsResult{
 		Artifacts: res.Payload,
@@ -105,20 +103,20 @@ type PrepareArtifactTagsOption struct {
 	TagsCount      int        `js:"tagsCount"`
 }
 
-func (h *Harbor) PrepareArtifactTags(ctx context.Context, option PrepareArtifactTagsOption) string {
-	h.mustInitialized(ctx)
+func (h *Harbor) PrepareArtifactTags(option PrepareArtifactTagsOption) string {
+	h.mustInitialized()
 
 	if option.TagsCount <= 0 {
-		Throwf(ctx, "artifact tags count must greater than 0")
+		Throwf(h.vu.Runtime(), "artifact tags count must greater than 0")
 	}
 
-	store := newContentStore(ctx, util.GenerateRandomString(8))
-	defer store.Free(ctx)
+	store := newContentStore(h.vu.Runtime(), util.GenerateRandomString(8))
+	defer store.Free()
 
 	descriptor, err := store.Generate(option.ArtifactSize)
-	Check(ctx, err)
+	Check(h.vu.Runtime(), err)
 
-	digest := h.Push(ctx, PushOption{
+	digest := h.Push(PushOption{
 		Ref:   fmt.Sprintf("%s/%s:latest", option.ProjectName, option.RepositoryName),
 		Store: store,
 		Blobs: []ocispec.Descriptor{*descriptor},
@@ -140,7 +138,7 @@ func (h *Harbor) PrepareArtifactTags(ctx context.Context, option PrepareArtifact
 	p, _ := ants.NewPoolWithFunc(poolSize, func(i interface{}) {
 		ix := i.(int)
 
-		h.CreateArtifactTag(ctx,
+		h.CreateArtifactTag(
 			option.ProjectName,
 			option.RepositoryName,
 			digest,
@@ -161,8 +159,8 @@ func (h *Harbor) PrepareArtifactTags(ctx context.Context, option PrepareArtifact
 	return digest
 }
 
-func (h *Harbor) CreateArtifactTag(ctx context.Context, projectName, repositoryName, reference, newTag string) string {
-	h.mustInitialized(ctx)
+func (h *Harbor) CreateArtifactTag(projectName, repositoryName, reference, newTag string) string {
+	h.mustInitialized()
 
 	params := operation.NewCreateTagParams()
 
@@ -171,54 +169,54 @@ func (h *Harbor) CreateArtifactTag(ctx context.Context, projectName, repositoryN
 	params.WithReference(reference)
 	params.WithTag(&models.Tag{Name: newTag})
 
-	res, err := h.api.Artifact.CreateTag(ctx, params)
-	Checkf(ctx, err, "failed to create new tag %s to %s", newTag, getDistrubtionRef(projectName, repositoryName, reference))
+	res, err := h.api.Artifact.CreateTag(h.vu.Context(), params)
+	Checkf(h.vu.Runtime(), err, "failed to create new tag %s to %s", newTag, getDistrubtionRef(projectName, repositoryName, reference))
 
 	return res.Location
 }
 
-func (h *Harbor) GetArtifact(ctx context.Context, projectName, repositoryName, reference string) *models.Artifact {
-	h.mustInitialized(ctx)
+func (h *Harbor) GetArtifact(projectName, repositoryName, reference string) *models.Artifact {
+	h.mustInitialized()
 
 	params := operation.NewGetArtifactParams()
 	params.WithProjectName(projectName)
 	params.WithRepositoryName(url.PathEscape(repositoryName))
 	params.WithReference(reference)
 
-	res, err := h.api.Artifact.GetArtifact(ctx, params)
-	Checkf(ctx, err, "failed to get artifact %s", getDistrubtionRef(projectName, repositoryName, reference))
+	res, err := h.api.Artifact.GetArtifact(h.vu.Context(), params)
+	Checkf(h.vu.Runtime(), err, "failed to get artifact %s", getDistrubtionRef(projectName, repositoryName, reference))
 
 	return res.Payload
 }
 
-func (h *Harbor) DeleteArtifact(ctx context.Context, projectName, repositoryName, reference string) {
-	h.mustInitialized(ctx)
+func (h *Harbor) DeleteArtifact(projectName, repositoryName, reference string) {
+	h.mustInitialized()
 
 	params := operation.NewDeleteArtifactParams()
 	params.WithProjectName(projectName)
 	params.WithRepositoryName(url.PathEscape(repositoryName))
 	params.WithReference(reference)
 
-	_, err := h.api.Artifact.DeleteArtifact(ctx, params)
-	Checkf(ctx, err, "failed to delete artifact %s", getDistrubtionRef(projectName, repositoryName, reference))
+	_, err := h.api.Artifact.DeleteArtifact(h.vu.Context(), params)
+	Checkf(h.vu.Runtime(), err, "failed to delete artifact %s", getDistrubtionRef(projectName, repositoryName, reference))
 }
 
-func (h *Harbor) ListArtifactTags(ctx context.Context, projectName, repositoryName, digestOrTag string, args ...goja.Value) []*models.Tag {
-	h.mustInitialized(ctx)
+func (h *Harbor) ListArtifactTags(projectName, repositoryName, digestOrTag string, args ...goja.Value) []*models.Tag {
+	h.mustInitialized()
 
 	params := operation.NewListTagsParams()
 
 	if len(args) > 0 {
-		err := common.GetRuntime(ctx).ExportTo(args[0], params)
-		Check(ctx, err)
+		err := h.vu.Runtime().ExportTo(args[0], params)
+		Check(h.vu.Runtime(), err)
 	}
 
 	params.WithProjectName(projectName)
 	params.WithRepositoryName(url.PathEscape(repositoryName))
 	params.WithReference(digestOrTag)
 
-	res, err := h.api.Artifact.ListTags(ctx, params)
-	Checkf(ctx, err, "failed to list artifact tags %s/%s", projectName, repositoryName)
+	res, err := h.api.Artifact.ListTags(h.vu.Context(), params)
+	Checkf(h.vu.Runtime(), err, "failed to list artifact tags %s/%s", projectName, repositoryName)
 
 	return res.Payload
 }

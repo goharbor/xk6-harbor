@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // GetRegistryReader is a Reader for the GetRegistry structure.
@@ -54,7 +54,7 @@ func (o *GetRegistryReader) ReadResponse(response runtime.ClientResponse, consum
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /registries/{id}] getRegistry", response, response.Code())
 	}
 }
 
@@ -63,7 +63,8 @@ func NewGetRegistryOK() *GetRegistryOK {
 	return &GetRegistryOK{}
 }
 
-/* GetRegistryOK describes a response with status code 200, with default header values.
+/*
+GetRegistryOK describes a response with status code 200, with default header values.
 
 Success
 */
@@ -71,9 +72,44 @@ type GetRegistryOK struct {
 	Payload *models.Registry
 }
 
+// IsSuccess returns true when this get registry o k response has a 2xx status code
+func (o *GetRegistryOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get registry o k response has a 3xx status code
+func (o *GetRegistryOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get registry o k response has a 4xx status code
+func (o *GetRegistryOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get registry o k response has a 5xx status code
+func (o *GetRegistryOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get registry o k response a status code equal to that given
+func (o *GetRegistryOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get registry o k response
+func (o *GetRegistryOK) Code() int {
+	return 200
+}
+
 func (o *GetRegistryOK) Error() string {
 	return fmt.Sprintf("[GET /registries/{id}][%d] getRegistryOK  %+v", 200, o.Payload)
 }
+
+func (o *GetRegistryOK) String() string {
+	return fmt.Sprintf("[GET /registries/{id}][%d] getRegistryOK  %+v", 200, o.Payload)
+}
+
 func (o *GetRegistryOK) GetPayload() *models.Registry {
 	return o.Payload
 }
@@ -95,7 +131,8 @@ func NewGetRegistryUnauthorized() *GetRegistryUnauthorized {
 	return &GetRegistryUnauthorized{}
 }
 
-/* GetRegistryUnauthorized describes a response with status code 401, with default header values.
+/*
+GetRegistryUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -108,9 +145,44 @@ type GetRegistryUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get registry unauthorized response has a 2xx status code
+func (o *GetRegistryUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get registry unauthorized response has a 3xx status code
+func (o *GetRegistryUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get registry unauthorized response has a 4xx status code
+func (o *GetRegistryUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get registry unauthorized response has a 5xx status code
+func (o *GetRegistryUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get registry unauthorized response a status code equal to that given
+func (o *GetRegistryUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the get registry unauthorized response
+func (o *GetRegistryUnauthorized) Code() int {
+	return 401
+}
+
 func (o *GetRegistryUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /registries/{id}][%d] getRegistryUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *GetRegistryUnauthorized) String() string {
+	return fmt.Sprintf("[GET /registries/{id}][%d] getRegistryUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *GetRegistryUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -139,7 +211,8 @@ func NewGetRegistryForbidden() *GetRegistryForbidden {
 	return &GetRegistryForbidden{}
 }
 
-/* GetRegistryForbidden describes a response with status code 403, with default header values.
+/*
+GetRegistryForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -152,9 +225,44 @@ type GetRegistryForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get registry forbidden response has a 2xx status code
+func (o *GetRegistryForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get registry forbidden response has a 3xx status code
+func (o *GetRegistryForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get registry forbidden response has a 4xx status code
+func (o *GetRegistryForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get registry forbidden response has a 5xx status code
+func (o *GetRegistryForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get registry forbidden response a status code equal to that given
+func (o *GetRegistryForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the get registry forbidden response
+func (o *GetRegistryForbidden) Code() int {
+	return 403
+}
+
 func (o *GetRegistryForbidden) Error() string {
 	return fmt.Sprintf("[GET /registries/{id}][%d] getRegistryForbidden  %+v", 403, o.Payload)
 }
+
+func (o *GetRegistryForbidden) String() string {
+	return fmt.Sprintf("[GET /registries/{id}][%d] getRegistryForbidden  %+v", 403, o.Payload)
+}
+
 func (o *GetRegistryForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -183,7 +291,8 @@ func NewGetRegistryNotFound() *GetRegistryNotFound {
 	return &GetRegistryNotFound{}
 }
 
-/* GetRegistryNotFound describes a response with status code 404, with default header values.
+/*
+GetRegistryNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
@@ -196,9 +305,44 @@ type GetRegistryNotFound struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get registry not found response has a 2xx status code
+func (o *GetRegistryNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get registry not found response has a 3xx status code
+func (o *GetRegistryNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get registry not found response has a 4xx status code
+func (o *GetRegistryNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get registry not found response has a 5xx status code
+func (o *GetRegistryNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get registry not found response a status code equal to that given
+func (o *GetRegistryNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get registry not found response
+func (o *GetRegistryNotFound) Code() int {
+	return 404
+}
+
 func (o *GetRegistryNotFound) Error() string {
 	return fmt.Sprintf("[GET /registries/{id}][%d] getRegistryNotFound  %+v", 404, o.Payload)
 }
+
+func (o *GetRegistryNotFound) String() string {
+	return fmt.Sprintf("[GET /registries/{id}][%d] getRegistryNotFound  %+v", 404, o.Payload)
+}
+
 func (o *GetRegistryNotFound) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -227,7 +371,8 @@ func NewGetRegistryInternalServerError() *GetRegistryInternalServerError {
 	return &GetRegistryInternalServerError{}
 }
 
-/* GetRegistryInternalServerError describes a response with status code 500, with default header values.
+/*
+GetRegistryInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -240,9 +385,44 @@ type GetRegistryInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get registry internal server error response has a 2xx status code
+func (o *GetRegistryInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get registry internal server error response has a 3xx status code
+func (o *GetRegistryInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get registry internal server error response has a 4xx status code
+func (o *GetRegistryInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get registry internal server error response has a 5xx status code
+func (o *GetRegistryInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get registry internal server error response a status code equal to that given
+func (o *GetRegistryInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the get registry internal server error response
+func (o *GetRegistryInternalServerError) Code() int {
+	return 500
+}
+
 func (o *GetRegistryInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /registries/{id}][%d] getRegistryInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *GetRegistryInternalServerError) String() string {
+	return fmt.Sprintf("[GET /registries/{id}][%d] getRegistryInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *GetRegistryInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

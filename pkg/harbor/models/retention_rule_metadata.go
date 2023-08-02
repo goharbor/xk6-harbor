@@ -60,6 +60,8 @@ func (m *RetentionRuleMetadata) validateParams(formats strfmt.Registry) error {
 			if err := m.Params[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("params" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("params" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -89,9 +91,16 @@ func (m *RetentionRuleMetadata) contextValidateParams(ctx context.Context, forma
 	for i := 0; i < len(m.Params); i++ {
 
 		if m.Params[i] != nil {
+
+			if swag.IsZero(m.Params[i]) { // not required
+				return nil
+			}
+
 			if err := m.Params[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("params" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("params" + "." + strconv.Itoa(i))
 				}
 				return err
 			}

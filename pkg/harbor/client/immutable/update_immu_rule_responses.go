@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // UpdateImmuRuleReader is a Reader for the UpdateImmuRule structure.
@@ -54,7 +54,7 @@ func (o *UpdateImmuRuleReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /projects/{project_name_or_id}/immutabletagrules/{immutable_rule_id}] UpdateImmuRule", response, response.Code())
 	}
 }
 
@@ -63,7 +63,8 @@ func NewUpdateImmuRuleOK() *UpdateImmuRuleOK {
 	return &UpdateImmuRuleOK{}
 }
 
-/* UpdateImmuRuleOK describes a response with status code 200, with default header values.
+/*
+UpdateImmuRuleOK describes a response with status code 200, with default header values.
 
 Success
 */
@@ -74,7 +75,41 @@ type UpdateImmuRuleOK struct {
 	XRequestID string
 }
 
+// IsSuccess returns true when this update immu rule o k response has a 2xx status code
+func (o *UpdateImmuRuleOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this update immu rule o k response has a 3xx status code
+func (o *UpdateImmuRuleOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update immu rule o k response has a 4xx status code
+func (o *UpdateImmuRuleOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this update immu rule o k response has a 5xx status code
+func (o *UpdateImmuRuleOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update immu rule o k response a status code equal to that given
+func (o *UpdateImmuRuleOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the update immu rule o k response
+func (o *UpdateImmuRuleOK) Code() int {
+	return 200
+}
+
 func (o *UpdateImmuRuleOK) Error() string {
+	return fmt.Sprintf("[PUT /projects/{project_name_or_id}/immutabletagrules/{immutable_rule_id}][%d] updateImmuRuleOK ", 200)
+}
+
+func (o *UpdateImmuRuleOK) String() string {
 	return fmt.Sprintf("[PUT /projects/{project_name_or_id}/immutabletagrules/{immutable_rule_id}][%d] updateImmuRuleOK ", 200)
 }
 
@@ -95,7 +130,8 @@ func NewUpdateImmuRuleBadRequest() *UpdateImmuRuleBadRequest {
 	return &UpdateImmuRuleBadRequest{}
 }
 
-/* UpdateImmuRuleBadRequest describes a response with status code 400, with default header values.
+/*
+UpdateImmuRuleBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
@@ -108,9 +144,44 @@ type UpdateImmuRuleBadRequest struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this update immu rule bad request response has a 2xx status code
+func (o *UpdateImmuRuleBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update immu rule bad request response has a 3xx status code
+func (o *UpdateImmuRuleBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update immu rule bad request response has a 4xx status code
+func (o *UpdateImmuRuleBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update immu rule bad request response has a 5xx status code
+func (o *UpdateImmuRuleBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update immu rule bad request response a status code equal to that given
+func (o *UpdateImmuRuleBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the update immu rule bad request response
+func (o *UpdateImmuRuleBadRequest) Code() int {
+	return 400
+}
+
 func (o *UpdateImmuRuleBadRequest) Error() string {
 	return fmt.Sprintf("[PUT /projects/{project_name_or_id}/immutabletagrules/{immutable_rule_id}][%d] updateImmuRuleBadRequest  %+v", 400, o.Payload)
 }
+
+func (o *UpdateImmuRuleBadRequest) String() string {
+	return fmt.Sprintf("[PUT /projects/{project_name_or_id}/immutabletagrules/{immutable_rule_id}][%d] updateImmuRuleBadRequest  %+v", 400, o.Payload)
+}
+
 func (o *UpdateImmuRuleBadRequest) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -139,7 +210,8 @@ func NewUpdateImmuRuleUnauthorized() *UpdateImmuRuleUnauthorized {
 	return &UpdateImmuRuleUnauthorized{}
 }
 
-/* UpdateImmuRuleUnauthorized describes a response with status code 401, with default header values.
+/*
+UpdateImmuRuleUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -152,9 +224,44 @@ type UpdateImmuRuleUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this update immu rule unauthorized response has a 2xx status code
+func (o *UpdateImmuRuleUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update immu rule unauthorized response has a 3xx status code
+func (o *UpdateImmuRuleUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update immu rule unauthorized response has a 4xx status code
+func (o *UpdateImmuRuleUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update immu rule unauthorized response has a 5xx status code
+func (o *UpdateImmuRuleUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update immu rule unauthorized response a status code equal to that given
+func (o *UpdateImmuRuleUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the update immu rule unauthorized response
+func (o *UpdateImmuRuleUnauthorized) Code() int {
+	return 401
+}
+
 func (o *UpdateImmuRuleUnauthorized) Error() string {
 	return fmt.Sprintf("[PUT /projects/{project_name_or_id}/immutabletagrules/{immutable_rule_id}][%d] updateImmuRuleUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *UpdateImmuRuleUnauthorized) String() string {
+	return fmt.Sprintf("[PUT /projects/{project_name_or_id}/immutabletagrules/{immutable_rule_id}][%d] updateImmuRuleUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *UpdateImmuRuleUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -183,7 +290,8 @@ func NewUpdateImmuRuleForbidden() *UpdateImmuRuleForbidden {
 	return &UpdateImmuRuleForbidden{}
 }
 
-/* UpdateImmuRuleForbidden describes a response with status code 403, with default header values.
+/*
+UpdateImmuRuleForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -196,9 +304,44 @@ type UpdateImmuRuleForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this update immu rule forbidden response has a 2xx status code
+func (o *UpdateImmuRuleForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update immu rule forbidden response has a 3xx status code
+func (o *UpdateImmuRuleForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update immu rule forbidden response has a 4xx status code
+func (o *UpdateImmuRuleForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update immu rule forbidden response has a 5xx status code
+func (o *UpdateImmuRuleForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update immu rule forbidden response a status code equal to that given
+func (o *UpdateImmuRuleForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the update immu rule forbidden response
+func (o *UpdateImmuRuleForbidden) Code() int {
+	return 403
+}
+
 func (o *UpdateImmuRuleForbidden) Error() string {
 	return fmt.Sprintf("[PUT /projects/{project_name_or_id}/immutabletagrules/{immutable_rule_id}][%d] updateImmuRuleForbidden  %+v", 403, o.Payload)
 }
+
+func (o *UpdateImmuRuleForbidden) String() string {
+	return fmt.Sprintf("[PUT /projects/{project_name_or_id}/immutabletagrules/{immutable_rule_id}][%d] updateImmuRuleForbidden  %+v", 403, o.Payload)
+}
+
 func (o *UpdateImmuRuleForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -227,7 +370,8 @@ func NewUpdateImmuRuleInternalServerError() *UpdateImmuRuleInternalServerError {
 	return &UpdateImmuRuleInternalServerError{}
 }
 
-/* UpdateImmuRuleInternalServerError describes a response with status code 500, with default header values.
+/*
+UpdateImmuRuleInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -240,9 +384,44 @@ type UpdateImmuRuleInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this update immu rule internal server error response has a 2xx status code
+func (o *UpdateImmuRuleInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update immu rule internal server error response has a 3xx status code
+func (o *UpdateImmuRuleInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update immu rule internal server error response has a 4xx status code
+func (o *UpdateImmuRuleInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this update immu rule internal server error response has a 5xx status code
+func (o *UpdateImmuRuleInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this update immu rule internal server error response a status code equal to that given
+func (o *UpdateImmuRuleInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the update immu rule internal server error response
+func (o *UpdateImmuRuleInternalServerError) Code() int {
+	return 500
+}
+
 func (o *UpdateImmuRuleInternalServerError) Error() string {
 	return fmt.Sprintf("[PUT /projects/{project_name_or_id}/immutabletagrules/{immutable_rule_id}][%d] updateImmuRuleInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *UpdateImmuRuleInternalServerError) String() string {
+	return fmt.Sprintf("[PUT /projects/{project_name_or_id}/immutabletagrules/{immutable_rule_id}][%d] updateImmuRuleInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *UpdateImmuRuleInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

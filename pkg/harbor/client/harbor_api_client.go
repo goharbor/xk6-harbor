@@ -13,39 +13,39 @@ import (
 	rtclient "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/client/artifact"
-	"github.com/heww/xk6-harbor/pkg/harbor/client/auditlog"
-	"github.com/heww/xk6-harbor/pkg/harbor/client/configure"
-	"github.com/heww/xk6-harbor/pkg/harbor/client/gc"
-	"github.com/heww/xk6-harbor/pkg/harbor/client/health"
-	"github.com/heww/xk6-harbor/pkg/harbor/client/icon"
-	"github.com/heww/xk6-harbor/pkg/harbor/client/immutable"
-	"github.com/heww/xk6-harbor/pkg/harbor/client/label"
-	"github.com/heww/xk6-harbor/pkg/harbor/client/ldap"
-	"github.com/heww/xk6-harbor/pkg/harbor/client/member"
-	"github.com/heww/xk6-harbor/pkg/harbor/client/oidc"
-	"github.com/heww/xk6-harbor/pkg/harbor/client/ping"
-	"github.com/heww/xk6-harbor/pkg/harbor/client/preheat"
-	"github.com/heww/xk6-harbor/pkg/harbor/client/project"
-	"github.com/heww/xk6-harbor/pkg/harbor/client/project_metadata"
-	"github.com/heww/xk6-harbor/pkg/harbor/client/quota"
-	"github.com/heww/xk6-harbor/pkg/harbor/client/registry"
-	"github.com/heww/xk6-harbor/pkg/harbor/client/replication"
-	"github.com/heww/xk6-harbor/pkg/harbor/client/repository"
-	"github.com/heww/xk6-harbor/pkg/harbor/client/retention"
-	"github.com/heww/xk6-harbor/pkg/harbor/client/robot"
-	"github.com/heww/xk6-harbor/pkg/harbor/client/robotv1"
-	"github.com/heww/xk6-harbor/pkg/harbor/client/scan"
-	"github.com/heww/xk6-harbor/pkg/harbor/client/scan_all"
-	"github.com/heww/xk6-harbor/pkg/harbor/client/scanner"
-	"github.com/heww/xk6-harbor/pkg/harbor/client/search"
-	"github.com/heww/xk6-harbor/pkg/harbor/client/statistic"
-	"github.com/heww/xk6-harbor/pkg/harbor/client/system_cve_allowlist"
-	"github.com/heww/xk6-harbor/pkg/harbor/client/systeminfo"
-	"github.com/heww/xk6-harbor/pkg/harbor/client/user"
-	"github.com/heww/xk6-harbor/pkg/harbor/client/usergroup"
-	"github.com/heww/xk6-harbor/pkg/harbor/client/webhook"
-	"github.com/heww/xk6-harbor/pkg/harbor/client/webhookjob"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/client/artifact"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/client/auditlog"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/client/configure"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/client/gc"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/client/health"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/client/icon"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/client/immutable"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/client/label"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/client/ldap"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/client/member"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/client/oidc"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/client/ping"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/client/preheat"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/client/project"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/client/project_metadata"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/client/quota"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/client/registry"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/client/replication"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/client/repository"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/client/retention"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/client/robot"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/client/robotv1"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/client/scan"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/client/scan_all"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/client/scanner"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/client/search"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/client/statistic"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/client/system_cve_allowlist"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/client/systeminfo"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/client/user"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/client/usergroup"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/client/webhook"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/client/webhookjob"
 )
 
 const (
@@ -128,38 +128,38 @@ func New(c Config) *HarborAPI {
 
 // HarborAPI is a client for harbor API
 type HarborAPI struct {
-	Artifact           *artifact.Client
-	Auditlog           *auditlog.Client
-	Configure          *configure.Client
-	GC                 *gc.Client
-	Health             *health.Client
-	Icon               *icon.Client
-	Immutable          *immutable.Client
-	Label              *label.Client
-	Ldap               *ldap.Client
-	Member             *member.Client
-	OIDC               *oidc.Client
-	Ping               *ping.Client
-	Preheat            *preheat.Client
-	Project            *project.Client
-	ProjectMetadata    *project_metadata.Client
-	Quota              *quota.Client
-	Registry           *registry.Client
-	Replication        *replication.Client
-	Repository         *repository.Client
-	Retention          *retention.Client
-	Robot              *robot.Client
-	Robotv1            *robotv1.Client
-	Scan               *scan.Client
-	ScanAll            *scan_all.Client
-	Scanner            *scanner.Client
-	Search             *search.Client
-	Statistic          *statistic.Client
-	SystemCVEAllowlist *system_cve_allowlist.Client
-	Systeminfo         *systeminfo.Client
-	User               *user.Client
-	Usergroup          *usergroup.Client
-	Webhook            *webhook.Client
-	Webhookjob         *webhookjob.Client
+	Artifact           artifact.API
+	Auditlog           auditlog.API
+	Configure          configure.API
+	GC                 gc.API
+	Health             health.API
+	Icon               icon.API
+	Immutable          immutable.API
+	Label              label.API
+	Ldap               ldap.API
+	Member             member.API
+	OIDC               oidc.API
+	Ping               ping.API
+	Preheat            preheat.API
+	Project            project.API
+	ProjectMetadata    project_metadata.API
+	Quota              quota.API
+	Registry           registry.API
+	Replication        replication.API
+	Repository         repository.API
+	Retention          retention.API
+	Robot              robot.API
+	Robotv1            robotv1.API
+	Scan               scan.API
+	ScanAll            scan_all.API
+	Scanner            scanner.API
+	Search             search.API
+	Statistic          statistic.API
+	SystemCVEAllowlist system_cve_allowlist.API
+	Systeminfo         systeminfo.API
+	User               user.API
+	Usergroup          usergroup.API
+	Webhook            webhook.API
+	Webhookjob         webhookjob.API
 	Transport          runtime.ClientTransport
 }

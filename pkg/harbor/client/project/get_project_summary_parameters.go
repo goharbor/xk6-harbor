@@ -53,10 +53,12 @@ func NewGetProjectSummaryParamsWithHTTPClient(client *http.Client) *GetProjectSu
 	}
 }
 
-/* GetProjectSummaryParams contains all the parameters to send to the API endpoint
-   for the get project summary operation.
+/*
+GetProjectSummaryParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get project summary operation.
+
+	Typically these are written to a http.Request.
 */
 type GetProjectSummaryParams struct {
 

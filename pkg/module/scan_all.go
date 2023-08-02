@@ -1,14 +1,12 @@
 package module
 
 import (
-	"context"
-
-	operation "github.com/heww/xk6-harbor/pkg/harbor/client/scan_all"
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	operation "github.com/goharbor/xk6-harbor/pkg/harbor/client/scan_all"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
-func (h *Harbor) StartScanAll(ctx context.Context) {
-	h.mustInitialized(ctx)
+func (h *Harbor) StartScanAll() {
+	h.mustInitialized()
 
 	params := operation.NewCreateScanAllScheduleParams().
 		WithSchedule(&models.Schedule{
@@ -17,17 +15,17 @@ func (h *Harbor) StartScanAll(ctx context.Context) {
 			},
 		})
 
-	_, err := h.api.ScanAll.CreateScanAllSchedule(ctx, params)
-	Checkf(ctx, err, "failed to start scan all")
+	_, err := h.api.ScanAll.CreateScanAllSchedule(h.vu.Context(), params)
+	Checkf(h.vu.Runtime(), err, "failed to start scan all")
 }
 
-func (h *Harbor) GetScanAllMetrics(ctx context.Context) *models.Stats {
-	h.mustInitialized(ctx)
+func (h *Harbor) GetScanAllMetrics() *models.Stats {
+	h.mustInitialized()
 
 	parmas := operation.NewGetLatestScanAllMetricsParams()
 
-	res, err := h.api.ScanAll.GetLatestScanAllMetrics(ctx, parmas)
-	Checkf(ctx, err, "failed to get metrics of scan all")
+	res, err := h.api.ScanAll.GetLatestScanAllMetrics(h.vu.Context(), parmas)
+	Checkf(h.vu.Runtime(), err, "failed to get metrics of scan all")
 
 	return res.Payload
 }

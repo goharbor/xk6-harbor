@@ -53,10 +53,12 @@ func NewOperateRetentionExecutionParamsWithHTTPClient(client *http.Client) *Oper
 	}
 }
 
-/* OperateRetentionExecutionParams contains all the parameters to send to the API endpoint
-   for the operate retention execution operation.
+/*
+OperateRetentionExecutionParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the operate retention execution operation.
+
+	Typically these are written to a http.Request.
 */
 type OperateRetentionExecutionParams struct {
 

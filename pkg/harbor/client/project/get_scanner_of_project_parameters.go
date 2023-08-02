@@ -53,10 +53,12 @@ func NewGetScannerOfProjectParamsWithHTTPClient(client *http.Client) *GetScanner
 	}
 }
 
-/* GetScannerOfProjectParams contains all the parameters to send to the API endpoint
-   for the get scanner of project operation.
+/*
+GetScannerOfProjectParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get scanner of project operation.
+
+	Typically these are written to a http.Request.
 */
 type GetScannerOfProjectParams struct {
 

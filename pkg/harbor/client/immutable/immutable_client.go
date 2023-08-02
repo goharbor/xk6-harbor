@@ -7,13 +7,14 @@ package immutable
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/go-openapi/runtime"
 
 	strfmt "github.com/go-openapi/strfmt"
 )
 
-//go:generate mockery -name API -inpkg
+//go:generate mockery --name API --keeptree --with-expecter --case underscore
 
 // API is the interface of the immutable client
 type API interface {
@@ -59,7 +60,6 @@ type Client struct {
 CreateImmuRule adds an immutable tag rule to current project
 
 This endpoint add an immutable tag rule to the project
-
 */
 func (a *Client) CreateImmuRule(ctx context.Context, params *CreateImmuRuleParams) (*CreateImmuRuleCreated, error) {
 
@@ -79,8 +79,23 @@ func (a *Client) CreateImmuRule(ctx context.Context, params *CreateImmuRuleParam
 	if err != nil {
 		return nil, err
 	}
-	return result.(*CreateImmuRuleCreated), nil
-
+	switch value := result.(type) {
+	case *CreateImmuRuleCreated:
+		return value, nil
+	case *CreateImmuRuleBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateImmuRuleUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateImmuRuleForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateImmuRuleNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateImmuRuleInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for CreateImmuRule: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -104,15 +119,27 @@ func (a *Client) DeleteImmuRule(ctx context.Context, params *DeleteImmuRuleParam
 	if err != nil {
 		return nil, err
 	}
-	return result.(*DeleteImmuRuleOK), nil
-
+	switch value := result.(type) {
+	case *DeleteImmuRuleOK:
+		return value, nil
+	case *DeleteImmuRuleBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteImmuRuleUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteImmuRuleForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteImmuRuleInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for DeleteImmuRule: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
 ListImmuRules lists all immutable tag rules of current project
 
 This endpoint returns the immutable tag rules of a project
-
 */
 func (a *Client) ListImmuRules(ctx context.Context, params *ListImmuRulesParams) (*ListImmuRulesOK, error) {
 
@@ -132,8 +159,21 @@ func (a *Client) ListImmuRules(ctx context.Context, params *ListImmuRulesParams)
 	if err != nil {
 		return nil, err
 	}
-	return result.(*ListImmuRulesOK), nil
-
+	switch value := result.(type) {
+	case *ListImmuRulesOK:
+		return value, nil
+	case *ListImmuRulesBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListImmuRulesUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListImmuRulesForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListImmuRulesInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ListImmuRules: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -157,6 +197,19 @@ func (a *Client) UpdateImmuRule(ctx context.Context, params *UpdateImmuRuleParam
 	if err != nil {
 		return nil, err
 	}
-	return result.(*UpdateImmuRuleOK), nil
-
+	switch value := result.(type) {
+	case *UpdateImmuRuleOK:
+		return value, nil
+	case *UpdateImmuRuleBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateImmuRuleUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateImmuRuleForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateImmuRuleInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for UpdateImmuRule: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }

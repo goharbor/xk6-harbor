@@ -53,10 +53,12 @@ func NewListReplicationPoliciesParamsWithHTTPClient(client *http.Client) *ListRe
 	}
 }
 
-/* ListReplicationPoliciesParams contains all the parameters to send to the API endpoint
-   for the list replication policies operation.
+/*
+ListReplicationPoliciesParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the list replication policies operation.
+
+	Typically these are written to a http.Request.
 */
 type ListReplicationPoliciesParams struct {
 

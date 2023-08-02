@@ -52,10 +52,12 @@ func NewGetPingParamsWithHTTPClient(client *http.Client) *GetPingParams {
 	}
 }
 
-/* GetPingParams contains all the parameters to send to the API endpoint
-   for the get ping operation.
+/*
+GetPingParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get ping operation.
+
+	Typically these are written to a http.Request.
 */
 type GetPingParams struct {
 

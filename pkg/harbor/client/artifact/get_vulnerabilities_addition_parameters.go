@@ -52,10 +52,12 @@ func NewGetVulnerabilitiesAdditionParamsWithHTTPClient(client *http.Client) *Get
 	}
 }
 
-/* GetVulnerabilitiesAdditionParams contains all the parameters to send to the API endpoint
-   for the get vulnerabilities addition operation.
+/*
+GetVulnerabilitiesAdditionParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get vulnerabilities addition operation.
+
+	Typically these are written to a http.Request.
 */
 type GetVulnerabilitiesAdditionParams struct {
 

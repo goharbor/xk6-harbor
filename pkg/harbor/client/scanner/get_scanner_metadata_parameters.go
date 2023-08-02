@@ -52,10 +52,12 @@ func NewGetScannerMetadataParamsWithHTTPClient(client *http.Client) *GetScannerM
 	}
 }
 
-/* GetScannerMetadataParams contains all the parameters to send to the API endpoint
-   for the get scanner metadata operation.
+/*
+GetScannerMetadataParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get scanner metadata operation.
+
+	Typically these are written to a http.Request.
 */
 type GetScannerMetadataParams struct {
 

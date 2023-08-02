@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // ListWebhookJobsReader is a Reader for the ListWebhookJobs structure.
@@ -56,7 +56,7 @@ func (o *ListWebhookJobsReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /projects/{project_name_or_id}/webhook/jobs] ListWebhookJobs", response, response.Code())
 	}
 }
 
@@ -65,7 +65,8 @@ func NewListWebhookJobsOK() *ListWebhookJobsOK {
 	return &ListWebhookJobsOK{}
 }
 
-/* ListWebhookJobsOK describes a response with status code 200, with default header values.
+/*
+ListWebhookJobsOK describes a response with status code 200, with default header values.
 
 List project webhook jobs successfully.
 */
@@ -82,9 +83,44 @@ type ListWebhookJobsOK struct {
 	Payload []*models.WebhookJob
 }
 
+// IsSuccess returns true when this list webhook jobs o k response has a 2xx status code
+func (o *ListWebhookJobsOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list webhook jobs o k response has a 3xx status code
+func (o *ListWebhookJobsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list webhook jobs o k response has a 4xx status code
+func (o *ListWebhookJobsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list webhook jobs o k response has a 5xx status code
+func (o *ListWebhookJobsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list webhook jobs o k response a status code equal to that given
+func (o *ListWebhookJobsOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list webhook jobs o k response
+func (o *ListWebhookJobsOK) Code() int {
+	return 200
+}
+
 func (o *ListWebhookJobsOK) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name_or_id}/webhook/jobs][%d] listWebhookJobsOK  %+v", 200, o.Payload)
 }
+
+func (o *ListWebhookJobsOK) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name_or_id}/webhook/jobs][%d] listWebhookJobsOK  %+v", 200, o.Payload)
+}
+
 func (o *ListWebhookJobsOK) GetPayload() []*models.WebhookJob {
 	return o.Payload
 }
@@ -122,7 +158,8 @@ func NewListWebhookJobsBadRequest() *ListWebhookJobsBadRequest {
 	return &ListWebhookJobsBadRequest{}
 }
 
-/* ListWebhookJobsBadRequest describes a response with status code 400, with default header values.
+/*
+ListWebhookJobsBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
@@ -135,9 +172,44 @@ type ListWebhookJobsBadRequest struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list webhook jobs bad request response has a 2xx status code
+func (o *ListWebhookJobsBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list webhook jobs bad request response has a 3xx status code
+func (o *ListWebhookJobsBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list webhook jobs bad request response has a 4xx status code
+func (o *ListWebhookJobsBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list webhook jobs bad request response has a 5xx status code
+func (o *ListWebhookJobsBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list webhook jobs bad request response a status code equal to that given
+func (o *ListWebhookJobsBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the list webhook jobs bad request response
+func (o *ListWebhookJobsBadRequest) Code() int {
+	return 400
+}
+
 func (o *ListWebhookJobsBadRequest) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name_or_id}/webhook/jobs][%d] listWebhookJobsBadRequest  %+v", 400, o.Payload)
 }
+
+func (o *ListWebhookJobsBadRequest) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name_or_id}/webhook/jobs][%d] listWebhookJobsBadRequest  %+v", 400, o.Payload)
+}
+
 func (o *ListWebhookJobsBadRequest) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -166,7 +238,8 @@ func NewListWebhookJobsUnauthorized() *ListWebhookJobsUnauthorized {
 	return &ListWebhookJobsUnauthorized{}
 }
 
-/* ListWebhookJobsUnauthorized describes a response with status code 401, with default header values.
+/*
+ListWebhookJobsUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -179,9 +252,44 @@ type ListWebhookJobsUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list webhook jobs unauthorized response has a 2xx status code
+func (o *ListWebhookJobsUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list webhook jobs unauthorized response has a 3xx status code
+func (o *ListWebhookJobsUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list webhook jobs unauthorized response has a 4xx status code
+func (o *ListWebhookJobsUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list webhook jobs unauthorized response has a 5xx status code
+func (o *ListWebhookJobsUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list webhook jobs unauthorized response a status code equal to that given
+func (o *ListWebhookJobsUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the list webhook jobs unauthorized response
+func (o *ListWebhookJobsUnauthorized) Code() int {
+	return 401
+}
+
 func (o *ListWebhookJobsUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name_or_id}/webhook/jobs][%d] listWebhookJobsUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *ListWebhookJobsUnauthorized) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name_or_id}/webhook/jobs][%d] listWebhookJobsUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *ListWebhookJobsUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -210,7 +318,8 @@ func NewListWebhookJobsForbidden() *ListWebhookJobsForbidden {
 	return &ListWebhookJobsForbidden{}
 }
 
-/* ListWebhookJobsForbidden describes a response with status code 403, with default header values.
+/*
+ListWebhookJobsForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -223,9 +332,44 @@ type ListWebhookJobsForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list webhook jobs forbidden response has a 2xx status code
+func (o *ListWebhookJobsForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list webhook jobs forbidden response has a 3xx status code
+func (o *ListWebhookJobsForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list webhook jobs forbidden response has a 4xx status code
+func (o *ListWebhookJobsForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list webhook jobs forbidden response has a 5xx status code
+func (o *ListWebhookJobsForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list webhook jobs forbidden response a status code equal to that given
+func (o *ListWebhookJobsForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the list webhook jobs forbidden response
+func (o *ListWebhookJobsForbidden) Code() int {
+	return 403
+}
+
 func (o *ListWebhookJobsForbidden) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name_or_id}/webhook/jobs][%d] listWebhookJobsForbidden  %+v", 403, o.Payload)
 }
+
+func (o *ListWebhookJobsForbidden) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name_or_id}/webhook/jobs][%d] listWebhookJobsForbidden  %+v", 403, o.Payload)
+}
+
 func (o *ListWebhookJobsForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -254,7 +398,8 @@ func NewListWebhookJobsInternalServerError() *ListWebhookJobsInternalServerError
 	return &ListWebhookJobsInternalServerError{}
 }
 
-/* ListWebhookJobsInternalServerError describes a response with status code 500, with default header values.
+/*
+ListWebhookJobsInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -267,9 +412,44 @@ type ListWebhookJobsInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list webhook jobs internal server error response has a 2xx status code
+func (o *ListWebhookJobsInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list webhook jobs internal server error response has a 3xx status code
+func (o *ListWebhookJobsInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list webhook jobs internal server error response has a 4xx status code
+func (o *ListWebhookJobsInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list webhook jobs internal server error response has a 5xx status code
+func (o *ListWebhookJobsInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this list webhook jobs internal server error response a status code equal to that given
+func (o *ListWebhookJobsInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the list webhook jobs internal server error response
+func (o *ListWebhookJobsInternalServerError) Code() int {
+	return 500
+}
+
 func (o *ListWebhookJobsInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name_or_id}/webhook/jobs][%d] listWebhookJobsInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *ListWebhookJobsInternalServerError) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name_or_id}/webhook/jobs][%d] listWebhookJobsInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *ListWebhookJobsInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

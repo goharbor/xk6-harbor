@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // DeleteTagReader is a Reader for the DeleteTag structure.
@@ -54,7 +54,7 @@ func (o *DeleteTagReader) ReadResponse(response runtime.ClientResponse, consumer
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/tags/{tag_name}] deleteTag", response, response.Code())
 	}
 }
 
@@ -63,7 +63,8 @@ func NewDeleteTagOK() *DeleteTagOK {
 	return &DeleteTagOK{}
 }
 
-/* DeleteTagOK describes a response with status code 200, with default header values.
+/*
+DeleteTagOK describes a response with status code 200, with default header values.
 
 Success
 */
@@ -74,7 +75,41 @@ type DeleteTagOK struct {
 	XRequestID string
 }
 
+// IsSuccess returns true when this delete tag o k response has a 2xx status code
+func (o *DeleteTagOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this delete tag o k response has a 3xx status code
+func (o *DeleteTagOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete tag o k response has a 4xx status code
+func (o *DeleteTagOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete tag o k response has a 5xx status code
+func (o *DeleteTagOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete tag o k response a status code equal to that given
+func (o *DeleteTagOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the delete tag o k response
+func (o *DeleteTagOK) Code() int {
+	return 200
+}
+
 func (o *DeleteTagOK) Error() string {
+	return fmt.Sprintf("[DELETE /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/tags/{tag_name}][%d] deleteTagOK ", 200)
+}
+
+func (o *DeleteTagOK) String() string {
 	return fmt.Sprintf("[DELETE /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/tags/{tag_name}][%d] deleteTagOK ", 200)
 }
 
@@ -95,7 +130,8 @@ func NewDeleteTagUnauthorized() *DeleteTagUnauthorized {
 	return &DeleteTagUnauthorized{}
 }
 
-/* DeleteTagUnauthorized describes a response with status code 401, with default header values.
+/*
+DeleteTagUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -108,9 +144,44 @@ type DeleteTagUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this delete tag unauthorized response has a 2xx status code
+func (o *DeleteTagUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete tag unauthorized response has a 3xx status code
+func (o *DeleteTagUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete tag unauthorized response has a 4xx status code
+func (o *DeleteTagUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete tag unauthorized response has a 5xx status code
+func (o *DeleteTagUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete tag unauthorized response a status code equal to that given
+func (o *DeleteTagUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the delete tag unauthorized response
+func (o *DeleteTagUnauthorized) Code() int {
+	return 401
+}
+
 func (o *DeleteTagUnauthorized) Error() string {
 	return fmt.Sprintf("[DELETE /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/tags/{tag_name}][%d] deleteTagUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *DeleteTagUnauthorized) String() string {
+	return fmt.Sprintf("[DELETE /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/tags/{tag_name}][%d] deleteTagUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *DeleteTagUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -139,7 +210,8 @@ func NewDeleteTagForbidden() *DeleteTagForbidden {
 	return &DeleteTagForbidden{}
 }
 
-/* DeleteTagForbidden describes a response with status code 403, with default header values.
+/*
+DeleteTagForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -152,9 +224,44 @@ type DeleteTagForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this delete tag forbidden response has a 2xx status code
+func (o *DeleteTagForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete tag forbidden response has a 3xx status code
+func (o *DeleteTagForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete tag forbidden response has a 4xx status code
+func (o *DeleteTagForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete tag forbidden response has a 5xx status code
+func (o *DeleteTagForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete tag forbidden response a status code equal to that given
+func (o *DeleteTagForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the delete tag forbidden response
+func (o *DeleteTagForbidden) Code() int {
+	return 403
+}
+
 func (o *DeleteTagForbidden) Error() string {
 	return fmt.Sprintf("[DELETE /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/tags/{tag_name}][%d] deleteTagForbidden  %+v", 403, o.Payload)
 }
+
+func (o *DeleteTagForbidden) String() string {
+	return fmt.Sprintf("[DELETE /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/tags/{tag_name}][%d] deleteTagForbidden  %+v", 403, o.Payload)
+}
+
 func (o *DeleteTagForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -183,7 +290,8 @@ func NewDeleteTagNotFound() *DeleteTagNotFound {
 	return &DeleteTagNotFound{}
 }
 
-/* DeleteTagNotFound describes a response with status code 404, with default header values.
+/*
+DeleteTagNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
@@ -196,9 +304,44 @@ type DeleteTagNotFound struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this delete tag not found response has a 2xx status code
+func (o *DeleteTagNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete tag not found response has a 3xx status code
+func (o *DeleteTagNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete tag not found response has a 4xx status code
+func (o *DeleteTagNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete tag not found response has a 5xx status code
+func (o *DeleteTagNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete tag not found response a status code equal to that given
+func (o *DeleteTagNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the delete tag not found response
+func (o *DeleteTagNotFound) Code() int {
+	return 404
+}
+
 func (o *DeleteTagNotFound) Error() string {
 	return fmt.Sprintf("[DELETE /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/tags/{tag_name}][%d] deleteTagNotFound  %+v", 404, o.Payload)
 }
+
+func (o *DeleteTagNotFound) String() string {
+	return fmt.Sprintf("[DELETE /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/tags/{tag_name}][%d] deleteTagNotFound  %+v", 404, o.Payload)
+}
+
 func (o *DeleteTagNotFound) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -227,7 +370,8 @@ func NewDeleteTagInternalServerError() *DeleteTagInternalServerError {
 	return &DeleteTagInternalServerError{}
 }
 
-/* DeleteTagInternalServerError describes a response with status code 500, with default header values.
+/*
+DeleteTagInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -240,9 +384,44 @@ type DeleteTagInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this delete tag internal server error response has a 2xx status code
+func (o *DeleteTagInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete tag internal server error response has a 3xx status code
+func (o *DeleteTagInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete tag internal server error response has a 4xx status code
+func (o *DeleteTagInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete tag internal server error response has a 5xx status code
+func (o *DeleteTagInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this delete tag internal server error response a status code equal to that given
+func (o *DeleteTagInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the delete tag internal server error response
+func (o *DeleteTagInternalServerError) Code() int {
+	return 500
+}
+
 func (o *DeleteTagInternalServerError) Error() string {
 	return fmt.Sprintf("[DELETE /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/tags/{tag_name}][%d] deleteTagInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *DeleteTagInternalServerError) String() string {
+	return fmt.Sprintf("[DELETE /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/tags/{tag_name}][%d] deleteTagInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *DeleteTagInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

@@ -53,10 +53,12 @@ func NewDeleteRobotV1ParamsWithHTTPClient(client *http.Client) *DeleteRobotV1Par
 	}
 }
 
-/* DeleteRobotV1Params contains all the parameters to send to the API endpoint
-   for the delete robot v1 operation.
+/*
+DeleteRobotV1Params contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the delete robot v1 operation.
+
+	Typically these are written to a http.Request.
 */
 type DeleteRobotV1Params struct {
 

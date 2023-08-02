@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // ListRegistryProviderInfosReader is a Reader for the ListRegistryProviderInfos structure.
@@ -48,7 +48,7 @@ func (o *ListRegistryProviderInfosReader) ReadResponse(response runtime.ClientRe
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /replication/adapterinfos] listRegistryProviderInfos", response, response.Code())
 	}
 }
 
@@ -57,7 +57,8 @@ func NewListRegistryProviderInfosOK() *ListRegistryProviderInfosOK {
 	return &ListRegistryProviderInfosOK{}
 }
 
-/* ListRegistryProviderInfosOK describes a response with status code 200, with default header values.
+/*
+ListRegistryProviderInfosOK describes a response with status code 200, with default header values.
 
 Success.
 */
@@ -65,9 +66,44 @@ type ListRegistryProviderInfosOK struct {
 	Payload map[string]models.RegistryProviderInfo
 }
 
+// IsSuccess returns true when this list registry provider infos o k response has a 2xx status code
+func (o *ListRegistryProviderInfosOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list registry provider infos o k response has a 3xx status code
+func (o *ListRegistryProviderInfosOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list registry provider infos o k response has a 4xx status code
+func (o *ListRegistryProviderInfosOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list registry provider infos o k response has a 5xx status code
+func (o *ListRegistryProviderInfosOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list registry provider infos o k response a status code equal to that given
+func (o *ListRegistryProviderInfosOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list registry provider infos o k response
+func (o *ListRegistryProviderInfosOK) Code() int {
+	return 200
+}
+
 func (o *ListRegistryProviderInfosOK) Error() string {
 	return fmt.Sprintf("[GET /replication/adapterinfos][%d] listRegistryProviderInfosOK  %+v", 200, o.Payload)
 }
+
+func (o *ListRegistryProviderInfosOK) String() string {
+	return fmt.Sprintf("[GET /replication/adapterinfos][%d] listRegistryProviderInfosOK  %+v", 200, o.Payload)
+}
+
 func (o *ListRegistryProviderInfosOK) GetPayload() map[string]models.RegistryProviderInfo {
 	return o.Payload
 }
@@ -87,7 +123,8 @@ func NewListRegistryProviderInfosUnauthorized() *ListRegistryProviderInfosUnauth
 	return &ListRegistryProviderInfosUnauthorized{}
 }
 
-/* ListRegistryProviderInfosUnauthorized describes a response with status code 401, with default header values.
+/*
+ListRegistryProviderInfosUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -100,9 +137,44 @@ type ListRegistryProviderInfosUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list registry provider infos unauthorized response has a 2xx status code
+func (o *ListRegistryProviderInfosUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list registry provider infos unauthorized response has a 3xx status code
+func (o *ListRegistryProviderInfosUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list registry provider infos unauthorized response has a 4xx status code
+func (o *ListRegistryProviderInfosUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list registry provider infos unauthorized response has a 5xx status code
+func (o *ListRegistryProviderInfosUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list registry provider infos unauthorized response a status code equal to that given
+func (o *ListRegistryProviderInfosUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the list registry provider infos unauthorized response
+func (o *ListRegistryProviderInfosUnauthorized) Code() int {
+	return 401
+}
+
 func (o *ListRegistryProviderInfosUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /replication/adapterinfos][%d] listRegistryProviderInfosUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *ListRegistryProviderInfosUnauthorized) String() string {
+	return fmt.Sprintf("[GET /replication/adapterinfos][%d] listRegistryProviderInfosUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *ListRegistryProviderInfosUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -131,7 +203,8 @@ func NewListRegistryProviderInfosForbidden() *ListRegistryProviderInfosForbidden
 	return &ListRegistryProviderInfosForbidden{}
 }
 
-/* ListRegistryProviderInfosForbidden describes a response with status code 403, with default header values.
+/*
+ListRegistryProviderInfosForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -144,9 +217,44 @@ type ListRegistryProviderInfosForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list registry provider infos forbidden response has a 2xx status code
+func (o *ListRegistryProviderInfosForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list registry provider infos forbidden response has a 3xx status code
+func (o *ListRegistryProviderInfosForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list registry provider infos forbidden response has a 4xx status code
+func (o *ListRegistryProviderInfosForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list registry provider infos forbidden response has a 5xx status code
+func (o *ListRegistryProviderInfosForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list registry provider infos forbidden response a status code equal to that given
+func (o *ListRegistryProviderInfosForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the list registry provider infos forbidden response
+func (o *ListRegistryProviderInfosForbidden) Code() int {
+	return 403
+}
+
 func (o *ListRegistryProviderInfosForbidden) Error() string {
 	return fmt.Sprintf("[GET /replication/adapterinfos][%d] listRegistryProviderInfosForbidden  %+v", 403, o.Payload)
 }
+
+func (o *ListRegistryProviderInfosForbidden) String() string {
+	return fmt.Sprintf("[GET /replication/adapterinfos][%d] listRegistryProviderInfosForbidden  %+v", 403, o.Payload)
+}
+
 func (o *ListRegistryProviderInfosForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -175,7 +283,8 @@ func NewListRegistryProviderInfosInternalServerError() *ListRegistryProviderInfo
 	return &ListRegistryProviderInfosInternalServerError{}
 }
 
-/* ListRegistryProviderInfosInternalServerError describes a response with status code 500, with default header values.
+/*
+ListRegistryProviderInfosInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -188,9 +297,44 @@ type ListRegistryProviderInfosInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list registry provider infos internal server error response has a 2xx status code
+func (o *ListRegistryProviderInfosInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list registry provider infos internal server error response has a 3xx status code
+func (o *ListRegistryProviderInfosInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list registry provider infos internal server error response has a 4xx status code
+func (o *ListRegistryProviderInfosInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list registry provider infos internal server error response has a 5xx status code
+func (o *ListRegistryProviderInfosInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this list registry provider infos internal server error response a status code equal to that given
+func (o *ListRegistryProviderInfosInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the list registry provider infos internal server error response
+func (o *ListRegistryProviderInfosInternalServerError) Code() int {
+	return 500
+}
+
 func (o *ListRegistryProviderInfosInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /replication/adapterinfos][%d] listRegistryProviderInfosInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *ListRegistryProviderInfosInternalServerError) String() string {
+	return fmt.Sprintf("[GET /replication/adapterinfos][%d] listRegistryProviderInfosInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *ListRegistryProviderInfosInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

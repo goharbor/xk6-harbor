@@ -53,10 +53,12 @@ func NewListLabelsParamsWithHTTPClient(client *http.Client) *ListLabelsParams {
 	}
 }
 
-/* ListLabelsParams contains all the parameters to send to the API endpoint
-   for the list labels operation.
+/*
+ListLabelsParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the list labels operation.
+
+	Typically these are written to a http.Request.
 */
 type ListLabelsParams struct {
 

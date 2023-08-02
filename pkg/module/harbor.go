@@ -1,7 +1,6 @@
 package module
 
 import (
-	"context"
 	"errors"
 	"fmt"
 	"net/http"
@@ -13,8 +12,8 @@ import (
 
 	"github.com/dop251/goja"
 	rtclient "github.com/go-openapi/runtime/client"
-	"github.com/heww/xk6-harbor/pkg/harbor/client"
-	"github.com/heww/xk6-harbor/pkg/util"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/client"
+	"github.com/goharbor/xk6-harbor/pkg/util"
 	"go.k6.io/k6/js/common"
 	"go.k6.io/k6/js/modules"
 )
@@ -22,7 +21,7 @@ import (
 var DefaultRootPath = filepath.Join(os.TempDir(), "harbor")
 
 func init() {
-	modules.Register("k6/x/harbor", new(Harbor))
+	modules.Register("k6/x/harbor", New())
 
 	rootPath := os.Getenv("HARBOR_ROOT")
 	if rootPath != "" {
@@ -38,37 +37,75 @@ var (
 	varTrue = true
 )
 
-type Option struct {
-	Scheme   string // http or https
-	Host     string
-	Username string
-	Password string
-	Insecure bool // Allow insecure server connections when using SSL
-}
-
-type Harbor struct {
-	httpClient  *http.Client
-	api         *client.HarborAPI
-	option      *Option
-	initialized bool
-	once        sync.Once
-}
-
-func (h *Harbor) XHarbor(ctx context.Context, args ...goja.Value) interface{} {
-	rt := common.GetRuntime(ctx)
-
-	n := new(Harbor)
-
-	if len(args) > 0 {
-		n.Initialize(ctx, args...)
+type (
+	Option struct {
+		Scheme   string // http or https
+		Host     string
+		Username string
+		Password string
+		Insecure bool // Allow insecure server connections when using SSL
+	}
+	Harbor struct {
+		vu          modules.VU
+		httpClient  *http.Client
+		api         *client.HarborAPI
+		option      *Option
+		initialized bool
+		once        sync.Once
 	}
 
-	return common.Bind(rt, n, &ctx)
+	RootModule struct{}
+	Module     struct {
+		*Harbor
+	}
+)
+
+var (
+	_ modules.Instance = &Module{}
+	_ modules.Module   = &RootModule{}
+)
+
+// New creates a new instance of the root module.
+func New() *RootModule {
+	return &RootModule{}
 }
 
-func (h *Harbor) Initialize(ctx context.Context, args ...goja.Value) {
+func (*RootModule) NewModuleInstance(vu modules.VU) modules.Instance {
+	return &Module{
+		Harbor: &Harbor{vu: vu},
+	}
+}
+
+func (m *Module) Exports() modules.Exports {
+	return modules.Exports{
+		Named: map[string]interface{}{
+			"Harbor":       m.newHarbor,
+			"ContentStore": m.newContentStore,
+		},
+	}
+}
+
+func (m *Module) newHarbor(c goja.ConstructorCall) *goja.Object {
+	rt := m.vu.Runtime()
+
+	if len(c.Arguments) > 0 {
+		m.Initialize(c)
+	}
+
+	return rt.ToValue(m.Harbor).ToObject(rt)
+}
+
+func (m *Module) newContentStore(c goja.ConstructorCall) *goja.Object {
+	rt := m.vu.Runtime()
+
+	store := newContentStore(m.vu.Runtime(), c.Arguments[0].String())
+
+	return rt.ToValue(store).ToObject(rt)
+}
+
+func (h *Harbor) Initialize(c goja.ConstructorCall) {
 	if h.initialized {
-		common.Throw(common.GetRuntime(ctx), errors.New("harbor module initialized"))
+		common.Throw(h.vu.Runtime(), errors.New("harbor module initialized"))
 	}
 
 	h.once.Do(func() {
@@ -80,32 +117,32 @@ func (h *Harbor) Initialize(ctx context.Context, args ...goja.Value) {
 			Insecure: false,
 		}
 
-		if len(args) > 0 {
-			if args[0] != nil && !goja.IsUndefined(args[0]) && !goja.IsNull(args[0]) {
-				rt := common.GetRuntime(ctx)
+		if len(c.Arguments) > 0 {
+			if c.Arguments[0] != nil && !goja.IsUndefined(c.Arguments[0]) && !goja.IsNull(c.Arguments[0]) {
+				rt := h.vu.Runtime()
 
-				err := rt.ExportTo(args[0], opt)
-				Checkf(ctx, err, "failed to parse the option")
+				err := rt.ExportTo(c.Arguments[0], opt)
+				Checkf(h.vu.Runtime(), err, "failed to parse the option")
 			}
 		}
 
 		if opt.Host == "" {
-			common.GetRuntime(ctx).Interrupt("harbor host is required in initialization")
+			h.vu.Runtime().Interrupt("harbor host is required in initialization")
 			return
 		}
 
 		opt.Scheme = strings.ToLower(opt.Scheme)
 		if opt.Scheme != "https" && opt.Scheme != "http" {
-			common.GetRuntime(ctx).Interrupt(fmt.Sprintf("invalid harbor scheme %s", opt.Scheme))
+			h.vu.Runtime().Interrupt(fmt.Sprintf("invalid harbor scheme %s", opt.Scheme))
 			return
 		}
 
 		opt.Host = strings.TrimSuffix(opt.Host, "/")
 
-		rawURL := fmt.Sprintf("%s://%s/%s", opt.Scheme, opt.Host, client.DefaultBasePath)
+		rawURL := fmt.Sprintf("%s://%s%s", opt.Scheme, opt.Host, client.DefaultBasePath)
 		u, err := url.Parse(rawURL)
 		if err != nil {
-			common.Throw(common.GetRuntime(ctx), err)
+			common.Throw(h.vu.Runtime(), err)
 		}
 
 		config := client.Config{URL: u}
@@ -127,15 +164,15 @@ func (h *Harbor) Initialize(ctx context.Context, args ...goja.Value) {
 	})
 }
 
-func (h *Harbor) Free(ctx context.Context) {
+func (h *Harbor) Free() {
 	err := os.RemoveAll(DefaultRootPath)
 	if err != nil {
-		panic(common.GetRuntime(ctx).NewGoError(err))
+		panic(h.vu.Runtime().NewGoError(err))
 	}
 }
 
-func (h *Harbor) mustInitialized(ctx context.Context) {
+func (h *Harbor) mustInitialized() {
 	if !h.initialized {
-		common.Throw(common.GetRuntime(ctx), errors.New("harbor module not initialized"))
+		common.Throw(h.vu.Runtime(), errors.New("harbor module not initialized"))
 	}
 }

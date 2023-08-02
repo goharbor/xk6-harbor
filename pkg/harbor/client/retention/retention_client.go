@@ -7,13 +7,14 @@ package retention
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/go-openapi/runtime"
 
 	strfmt "github.com/go-openapi/strfmt"
 )
 
-//go:generate mockery -name API -inpkg
+//go:generate mockery --name API --keeptree --with-expecter --case underscore
 
 // API is the interface of the retention client
 type API interface {
@@ -110,8 +111,21 @@ func (a *Client) CreateRetention(ctx context.Context, params *CreateRetentionPar
 	if err != nil {
 		return nil, err
 	}
-	return result.(*CreateRetentionCreated), nil
-
+	switch value := result.(type) {
+	case *CreateRetentionCreated:
+		return value, nil
+	case *CreateRetentionBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateRetentionUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateRetentionForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateRetentionInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for createRetention: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -137,8 +151,19 @@ func (a *Client) DeleteRetention(ctx context.Context, params *DeleteRetentionPar
 	if err != nil {
 		return nil, err
 	}
-	return result.(*DeleteRetentionOK), nil
-
+	switch value := result.(type) {
+	case *DeleteRetentionOK:
+		return value, nil
+	case *DeleteRetentionUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteRetentionForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteRetentionInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for deleteRetention: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -164,8 +189,13 @@ func (a *Client) GetRentenitionMetadata(ctx context.Context, params *GetRentenit
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetRentenitionMetadataOK), nil
-
+	switch value := result.(type) {
+	case *GetRentenitionMetadataOK:
+		return value, nil
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getRentenitionMetadata: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -191,8 +221,19 @@ func (a *Client) GetRetention(ctx context.Context, params *GetRetentionParams) (
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetRetentionOK), nil
-
+	switch value := result.(type) {
+	case *GetRetentionOK:
+		return value, nil
+	case *GetRetentionUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetRetentionForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetRetentionInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getRetention: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -218,8 +259,19 @@ func (a *Client) GetRetentionTaskLog(ctx context.Context, params *GetRetentionTa
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetRetentionTaskLogOK), nil
-
+	switch value := result.(type) {
+	case *GetRetentionTaskLogOK:
+		return value, nil
+	case *GetRetentionTaskLogUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetRetentionTaskLogForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetRetentionTaskLogInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getRetentionTaskLog: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -245,8 +297,19 @@ func (a *Client) ListRetentionExecutions(ctx context.Context, params *ListRetent
 	if err != nil {
 		return nil, err
 	}
-	return result.(*ListRetentionExecutionsOK), nil
-
+	switch value := result.(type) {
+	case *ListRetentionExecutionsOK:
+		return value, nil
+	case *ListRetentionExecutionsUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListRetentionExecutionsForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListRetentionExecutionsInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for listRetentionExecutions: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -272,8 +335,19 @@ func (a *Client) ListRetentionTasks(ctx context.Context, params *ListRetentionTa
 	if err != nil {
 		return nil, err
 	}
-	return result.(*ListRetentionTasksOK), nil
-
+	switch value := result.(type) {
+	case *ListRetentionTasksOK:
+		return value, nil
+	case *ListRetentionTasksUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListRetentionTasksForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListRetentionTasksInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for listRetentionTasks: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -299,8 +373,19 @@ func (a *Client) OperateRetentionExecution(ctx context.Context, params *OperateR
 	if err != nil {
 		return nil, err
 	}
-	return result.(*OperateRetentionExecutionOK), nil
-
+	switch value := result.(type) {
+	case *OperateRetentionExecutionOK:
+		return value, nil
+	case *OperateRetentionExecutionUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *OperateRetentionExecutionForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *OperateRetentionExecutionInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for operateRetentionExecution: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -331,9 +416,16 @@ func (a *Client) TriggerRetentionExecution(ctx context.Context, params *TriggerR
 		return value, nil, nil
 	case *TriggerRetentionExecutionCreated:
 		return nil, value, nil
+	case *TriggerRetentionExecutionUnauthorized:
+		return nil, nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *TriggerRetentionExecutionForbidden:
+		return nil, nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *TriggerRetentionExecutionInternalServerError:
+		return nil, nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
 	}
-	return nil, nil, nil
-
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for triggerRetentionExecution: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -359,6 +451,17 @@ func (a *Client) UpdateRetention(ctx context.Context, params *UpdateRetentionPar
 	if err != nil {
 		return nil, err
 	}
-	return result.(*UpdateRetentionOK), nil
-
+	switch value := result.(type) {
+	case *UpdateRetentionOK:
+		return value, nil
+	case *UpdateRetentionUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateRetentionForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateRetentionInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for updateRetention: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }

@@ -95,6 +95,8 @@ func (m *Registry) validateCredential(formats strfmt.Registry) error {
 		if err := m.Credential.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("credential")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("credential")
 			}
 			return err
 		}
@@ -132,9 +134,16 @@ func (m *Registry) ContextValidate(ctx context.Context, formats strfmt.Registry)
 func (m *Registry) contextValidateCredential(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Credential != nil {
+
+		if swag.IsZero(m.Credential) { // not required
+			return nil
+		}
+
 		if err := m.Credential.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("credential")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("credential")
 			}
 			return err
 		}

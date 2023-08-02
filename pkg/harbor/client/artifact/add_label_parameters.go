@@ -15,7 +15,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // NewAddLabelParams creates a new AddLabelParams object,
@@ -54,10 +54,12 @@ func NewAddLabelParamsWithHTTPClient(client *http.Client) *AddLabelParams {
 	}
 }
 
-/* AddLabelParams contains all the parameters to send to the API endpoint
-   for the add label operation.
+/*
+AddLabelParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the add label operation.
+
+	Typically these are written to a http.Request.
 */
 type AddLabelParams struct {
 

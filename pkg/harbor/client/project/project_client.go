@@ -7,13 +7,14 @@ package project
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/go-openapi/runtime"
 
 	strfmt "github.com/go-openapi/strfmt"
 )
 
-//go:generate mockery -name API -inpkg
+//go:generate mockery --name API --keeptree --with-expecter --case underscore
 
 // API is the interface of the project client
 type API interface {
@@ -120,8 +121,21 @@ func (a *Client) CreateProject(ctx context.Context, params *CreateProjectParams)
 	if err != nil {
 		return nil, err
 	}
-	return result.(*CreateProjectCreated), nil
-
+	switch value := result.(type) {
+	case *CreateProjectCreated:
+		return value, nil
+	case *CreateProjectBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateProjectUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateProjectConflict:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateProjectInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for createProject: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -147,8 +161,23 @@ func (a *Client) DeleteProject(ctx context.Context, params *DeleteProjectParams)
 	if err != nil {
 		return nil, err
 	}
-	return result.(*DeleteProjectOK), nil
-
+	switch value := result.(type) {
+	case *DeleteProjectOK:
+		return value, nil
+	case *DeleteProjectBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteProjectForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteProjectNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteProjectPreconditionFailed:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteProjectInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for deleteProject: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -174,8 +203,19 @@ func (a *Client) GetLogs(ctx context.Context, params *GetLogsParams) (*GetLogsOK
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetLogsOK), nil
-
+	switch value := result.(type) {
+	case *GetLogsOK:
+		return value, nil
+	case *GetLogsBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetLogsUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetLogsInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getLogs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -201,8 +241,17 @@ func (a *Client) GetProject(ctx context.Context, params *GetProjectParams) (*Get
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetProjectOK), nil
-
+	switch value := result.(type) {
+	case *GetProjectOK:
+		return value, nil
+	case *GetProjectUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetProjectInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getProject: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -228,8 +277,21 @@ func (a *Client) GetProjectDeletable(ctx context.Context, params *GetProjectDele
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetProjectDeletableOK), nil
-
+	switch value := result.(type) {
+	case *GetProjectDeletableOK:
+		return value, nil
+	case *GetProjectDeletableUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetProjectDeletableForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetProjectDeletableNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetProjectDeletableInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getProjectDeletable: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -255,8 +317,23 @@ func (a *Client) GetProjectSummary(ctx context.Context, params *GetProjectSummar
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetProjectSummaryOK), nil
-
+	switch value := result.(type) {
+	case *GetProjectSummaryOK:
+		return value, nil
+	case *GetProjectSummaryBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetProjectSummaryUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetProjectSummaryForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetProjectSummaryNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetProjectSummaryInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getProjectSummary: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -282,8 +359,23 @@ func (a *Client) GetScannerOfProject(ctx context.Context, params *GetScannerOfPr
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetScannerOfProjectOK), nil
-
+	switch value := result.(type) {
+	case *GetScannerOfProjectOK:
+		return value, nil
+	case *GetScannerOfProjectBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetScannerOfProjectUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetScannerOfProjectForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetScannerOfProjectNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetScannerOfProjectInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getScannerOfProject: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -309,8 +401,17 @@ func (a *Client) HeadProject(ctx context.Context, params *HeadProjectParams) (*H
 	if err != nil {
 		return nil, err
 	}
-	return result.(*HeadProjectOK), nil
-
+	switch value := result.(type) {
+	case *HeadProjectOK:
+		return value, nil
+	case *HeadProjectNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *HeadProjectInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for headProject: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -336,8 +437,17 @@ func (a *Client) ListProjects(ctx context.Context, params *ListProjectsParams) (
 	if err != nil {
 		return nil, err
 	}
-	return result.(*ListProjectsOK), nil
-
+	switch value := result.(type) {
+	case *ListProjectsOK:
+		return value, nil
+	case *ListProjectsUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListProjectsInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for listProjects: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -363,8 +473,21 @@ func (a *Client) ListScannerCandidatesOfProject(ctx context.Context, params *Lis
 	if err != nil {
 		return nil, err
 	}
-	return result.(*ListScannerCandidatesOfProjectOK), nil
-
+	switch value := result.(type) {
+	case *ListScannerCandidatesOfProjectOK:
+		return value, nil
+	case *ListScannerCandidatesOfProjectBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListScannerCandidatesOfProjectUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListScannerCandidatesOfProjectForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListScannerCandidatesOfProjectInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for listScannerCandidatesOfProject: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -390,8 +513,23 @@ func (a *Client) SetScannerOfProject(ctx context.Context, params *SetScannerOfPr
 	if err != nil {
 		return nil, err
 	}
-	return result.(*SetScannerOfProjectOK), nil
-
+	switch value := result.(type) {
+	case *SetScannerOfProjectOK:
+		return value, nil
+	case *SetScannerOfProjectBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *SetScannerOfProjectUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *SetScannerOfProjectForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *SetScannerOfProjectNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *SetScannerOfProjectInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for setScannerOfProject: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -417,6 +555,21 @@ func (a *Client) UpdateProject(ctx context.Context, params *UpdateProjectParams)
 	if err != nil {
 		return nil, err
 	}
-	return result.(*UpdateProjectOK), nil
-
+	switch value := result.(type) {
+	case *UpdateProjectOK:
+		return value, nil
+	case *UpdateProjectBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateProjectUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateProjectForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateProjectNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateProjectInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for updateProject: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }

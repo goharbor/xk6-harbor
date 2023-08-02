@@ -62,6 +62,8 @@ func (m *ScannerAdapterMetadata) validateCapabilities(formats strfmt.Registry) e
 			if err := m.Capabilities[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("capabilities" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("capabilities" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -81,6 +83,8 @@ func (m *ScannerAdapterMetadata) validateScanner(formats strfmt.Registry) error 
 		if err := m.Scanner.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("scanner")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("scanner")
 			}
 			return err
 		}
@@ -112,9 +116,16 @@ func (m *ScannerAdapterMetadata) contextValidateCapabilities(ctx context.Context
 	for i := 0; i < len(m.Capabilities); i++ {
 
 		if m.Capabilities[i] != nil {
+
+			if swag.IsZero(m.Capabilities[i]) { // not required
+				return nil
+			}
+
 			if err := m.Capabilities[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("capabilities" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("capabilities" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -128,9 +139,16 @@ func (m *ScannerAdapterMetadata) contextValidateCapabilities(ctx context.Context
 func (m *ScannerAdapterMetadata) contextValidateScanner(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Scanner != nil {
+
+		if swag.IsZero(m.Scanner) { // not required
+			return nil
+		}
+
 		if err := m.Scanner.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("scanner")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("scanner")
 			}
 			return err
 		}

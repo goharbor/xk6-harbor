@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // ListUserGroupsReader is a Reader for the ListUserGroups structure.
@@ -48,7 +48,7 @@ func (o *ListUserGroupsReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /usergroups] listUserGroups", response, response.Code())
 	}
 }
 
@@ -57,7 +57,8 @@ func NewListUserGroupsOK() *ListUserGroupsOK {
 	return &ListUserGroupsOK{}
 }
 
-/* ListUserGroupsOK describes a response with status code 200, with default header values.
+/*
+ListUserGroupsOK describes a response with status code 200, with default header values.
 
 Get user group successfully.
 */
@@ -65,9 +66,44 @@ type ListUserGroupsOK struct {
 	Payload []*models.UserGroup
 }
 
+// IsSuccess returns true when this list user groups o k response has a 2xx status code
+func (o *ListUserGroupsOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list user groups o k response has a 3xx status code
+func (o *ListUserGroupsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list user groups o k response has a 4xx status code
+func (o *ListUserGroupsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list user groups o k response has a 5xx status code
+func (o *ListUserGroupsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list user groups o k response a status code equal to that given
+func (o *ListUserGroupsOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list user groups o k response
+func (o *ListUserGroupsOK) Code() int {
+	return 200
+}
+
 func (o *ListUserGroupsOK) Error() string {
 	return fmt.Sprintf("[GET /usergroups][%d] listUserGroupsOK  %+v", 200, o.Payload)
 }
+
+func (o *ListUserGroupsOK) String() string {
+	return fmt.Sprintf("[GET /usergroups][%d] listUserGroupsOK  %+v", 200, o.Payload)
+}
+
 func (o *ListUserGroupsOK) GetPayload() []*models.UserGroup {
 	return o.Payload
 }
@@ -87,7 +123,8 @@ func NewListUserGroupsUnauthorized() *ListUserGroupsUnauthorized {
 	return &ListUserGroupsUnauthorized{}
 }
 
-/* ListUserGroupsUnauthorized describes a response with status code 401, with default header values.
+/*
+ListUserGroupsUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -100,9 +137,44 @@ type ListUserGroupsUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list user groups unauthorized response has a 2xx status code
+func (o *ListUserGroupsUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list user groups unauthorized response has a 3xx status code
+func (o *ListUserGroupsUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list user groups unauthorized response has a 4xx status code
+func (o *ListUserGroupsUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list user groups unauthorized response has a 5xx status code
+func (o *ListUserGroupsUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list user groups unauthorized response a status code equal to that given
+func (o *ListUserGroupsUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the list user groups unauthorized response
+func (o *ListUserGroupsUnauthorized) Code() int {
+	return 401
+}
+
 func (o *ListUserGroupsUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /usergroups][%d] listUserGroupsUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *ListUserGroupsUnauthorized) String() string {
+	return fmt.Sprintf("[GET /usergroups][%d] listUserGroupsUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *ListUserGroupsUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -131,7 +203,8 @@ func NewListUserGroupsForbidden() *ListUserGroupsForbidden {
 	return &ListUserGroupsForbidden{}
 }
 
-/* ListUserGroupsForbidden describes a response with status code 403, with default header values.
+/*
+ListUserGroupsForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -144,9 +217,44 @@ type ListUserGroupsForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list user groups forbidden response has a 2xx status code
+func (o *ListUserGroupsForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list user groups forbidden response has a 3xx status code
+func (o *ListUserGroupsForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list user groups forbidden response has a 4xx status code
+func (o *ListUserGroupsForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list user groups forbidden response has a 5xx status code
+func (o *ListUserGroupsForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list user groups forbidden response a status code equal to that given
+func (o *ListUserGroupsForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the list user groups forbidden response
+func (o *ListUserGroupsForbidden) Code() int {
+	return 403
+}
+
 func (o *ListUserGroupsForbidden) Error() string {
 	return fmt.Sprintf("[GET /usergroups][%d] listUserGroupsForbidden  %+v", 403, o.Payload)
 }
+
+func (o *ListUserGroupsForbidden) String() string {
+	return fmt.Sprintf("[GET /usergroups][%d] listUserGroupsForbidden  %+v", 403, o.Payload)
+}
+
 func (o *ListUserGroupsForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -175,7 +283,8 @@ func NewListUserGroupsInternalServerError() *ListUserGroupsInternalServerError {
 	return &ListUserGroupsInternalServerError{}
 }
 
-/* ListUserGroupsInternalServerError describes a response with status code 500, with default header values.
+/*
+ListUserGroupsInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -188,9 +297,44 @@ type ListUserGroupsInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list user groups internal server error response has a 2xx status code
+func (o *ListUserGroupsInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list user groups internal server error response has a 3xx status code
+func (o *ListUserGroupsInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list user groups internal server error response has a 4xx status code
+func (o *ListUserGroupsInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list user groups internal server error response has a 5xx status code
+func (o *ListUserGroupsInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this list user groups internal server error response a status code equal to that given
+func (o *ListUserGroupsInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the list user groups internal server error response
+func (o *ListUserGroupsInternalServerError) Code() int {
+	return 500
+}
+
 func (o *ListUserGroupsInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /usergroups][%d] listUserGroupsInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *ListUserGroupsInternalServerError) String() string {
+	return fmt.Sprintf("[GET /usergroups][%d] listUserGroupsInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *ListUserGroupsInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

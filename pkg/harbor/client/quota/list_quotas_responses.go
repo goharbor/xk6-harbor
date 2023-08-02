@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // ListQuotasReader is a Reader for the ListQuotas structure.
@@ -50,7 +50,7 @@ func (o *ListQuotasReader) ReadResponse(response runtime.ClientResponse, consume
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /quotas] listQuotas", response, response.Code())
 	}
 }
 
@@ -59,7 +59,8 @@ func NewListQuotasOK() *ListQuotasOK {
 	return &ListQuotasOK{}
 }
 
-/* ListQuotasOK describes a response with status code 200, with default header values.
+/*
+ListQuotasOK describes a response with status code 200, with default header values.
 
 Successfully retrieved the quotas.
 */
@@ -76,9 +77,44 @@ type ListQuotasOK struct {
 	Payload []*models.Quota
 }
 
+// IsSuccess returns true when this list quotas o k response has a 2xx status code
+func (o *ListQuotasOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list quotas o k response has a 3xx status code
+func (o *ListQuotasOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list quotas o k response has a 4xx status code
+func (o *ListQuotasOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list quotas o k response has a 5xx status code
+func (o *ListQuotasOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list quotas o k response a status code equal to that given
+func (o *ListQuotasOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list quotas o k response
+func (o *ListQuotasOK) Code() int {
+	return 200
+}
+
 func (o *ListQuotasOK) Error() string {
 	return fmt.Sprintf("[GET /quotas][%d] listQuotasOK  %+v", 200, o.Payload)
 }
+
+func (o *ListQuotasOK) String() string {
+	return fmt.Sprintf("[GET /quotas][%d] listQuotasOK  %+v", 200, o.Payload)
+}
+
 func (o *ListQuotasOK) GetPayload() []*models.Quota {
 	return o.Payload
 }
@@ -116,7 +152,8 @@ func NewListQuotasUnauthorized() *ListQuotasUnauthorized {
 	return &ListQuotasUnauthorized{}
 }
 
-/* ListQuotasUnauthorized describes a response with status code 401, with default header values.
+/*
+ListQuotasUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -129,9 +166,44 @@ type ListQuotasUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list quotas unauthorized response has a 2xx status code
+func (o *ListQuotasUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list quotas unauthorized response has a 3xx status code
+func (o *ListQuotasUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list quotas unauthorized response has a 4xx status code
+func (o *ListQuotasUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list quotas unauthorized response has a 5xx status code
+func (o *ListQuotasUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list quotas unauthorized response a status code equal to that given
+func (o *ListQuotasUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the list quotas unauthorized response
+func (o *ListQuotasUnauthorized) Code() int {
+	return 401
+}
+
 func (o *ListQuotasUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /quotas][%d] listQuotasUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *ListQuotasUnauthorized) String() string {
+	return fmt.Sprintf("[GET /quotas][%d] listQuotasUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *ListQuotasUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -160,7 +232,8 @@ func NewListQuotasForbidden() *ListQuotasForbidden {
 	return &ListQuotasForbidden{}
 }
 
-/* ListQuotasForbidden describes a response with status code 403, with default header values.
+/*
+ListQuotasForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -173,9 +246,44 @@ type ListQuotasForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list quotas forbidden response has a 2xx status code
+func (o *ListQuotasForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list quotas forbidden response has a 3xx status code
+func (o *ListQuotasForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list quotas forbidden response has a 4xx status code
+func (o *ListQuotasForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list quotas forbidden response has a 5xx status code
+func (o *ListQuotasForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list quotas forbidden response a status code equal to that given
+func (o *ListQuotasForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the list quotas forbidden response
+func (o *ListQuotasForbidden) Code() int {
+	return 403
+}
+
 func (o *ListQuotasForbidden) Error() string {
 	return fmt.Sprintf("[GET /quotas][%d] listQuotasForbidden  %+v", 403, o.Payload)
 }
+
+func (o *ListQuotasForbidden) String() string {
+	return fmt.Sprintf("[GET /quotas][%d] listQuotasForbidden  %+v", 403, o.Payload)
+}
+
 func (o *ListQuotasForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -204,7 +312,8 @@ func NewListQuotasInternalServerError() *ListQuotasInternalServerError {
 	return &ListQuotasInternalServerError{}
 }
 
-/* ListQuotasInternalServerError describes a response with status code 500, with default header values.
+/*
+ListQuotasInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -217,9 +326,44 @@ type ListQuotasInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list quotas internal server error response has a 2xx status code
+func (o *ListQuotasInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list quotas internal server error response has a 3xx status code
+func (o *ListQuotasInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list quotas internal server error response has a 4xx status code
+func (o *ListQuotasInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list quotas internal server error response has a 5xx status code
+func (o *ListQuotasInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this list quotas internal server error response a status code equal to that given
+func (o *ListQuotasInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the list quotas internal server error response
+func (o *ListQuotasInternalServerError) Code() int {
+	return 500
+}
+
 func (o *ListQuotasInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /quotas][%d] listQuotasInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *ListQuotasInternalServerError) String() string {
+	return fmt.Sprintf("[GET /quotas][%d] listQuotasInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *ListQuotasInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

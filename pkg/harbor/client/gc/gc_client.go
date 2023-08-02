@@ -7,13 +7,14 @@ package gc
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/go-openapi/runtime"
 
 	strfmt "github.com/go-openapi/strfmt"
 )
 
-//go:generate mockery -name API -inpkg
+//go:generate mockery --name API --keeptree --with-expecter --case underscore
 
 // API is the interface of the gc client
 type API interface {
@@ -73,7 +74,6 @@ type Client struct {
 CreateGCSchedule creates a gc schedule
 
 This endpoint is for update gc schedule.
-
 */
 func (a *Client) CreateGCSchedule(ctx context.Context, params *CreateGCScheduleParams) (*CreateGCScheduleCreated, error) {
 
@@ -93,8 +93,23 @@ func (a *Client) CreateGCSchedule(ctx context.Context, params *CreateGCScheduleP
 	if err != nil {
 		return nil, err
 	}
-	return result.(*CreateGCScheduleCreated), nil
-
+	switch value := result.(type) {
+	case *CreateGCScheduleCreated:
+		return value, nil
+	case *CreateGCScheduleBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateGCScheduleUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateGCScheduleForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateGCScheduleConflict:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateGCScheduleInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for createGCSchedule: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -120,8 +135,21 @@ func (a *Client) GetGC(ctx context.Context, params *GetGCParams) (*GetGCOK, erro
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetGCOK), nil
-
+	switch value := result.(type) {
+	case *GetGCOK:
+		return value, nil
+	case *GetGCUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetGCForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetGCNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetGCInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getGC: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -147,8 +175,19 @@ func (a *Client) GetGCHistory(ctx context.Context, params *GetGCHistoryParams) (
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetGCHistoryOK), nil
-
+	switch value := result.(type) {
+	case *GetGCHistoryOK:
+		return value, nil
+	case *GetGCHistoryUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetGCHistoryForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetGCHistoryInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getGCHistory: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -174,8 +213,23 @@ func (a *Client) GetGCLog(ctx context.Context, params *GetGCLogParams) (*GetGCLo
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetGCLogOK), nil
-
+	switch value := result.(type) {
+	case *GetGCLogOK:
+		return value, nil
+	case *GetGCLogBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetGCLogUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetGCLogForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetGCLogNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetGCLogInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getGCLog: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -201,15 +255,25 @@ func (a *Client) GetGCSchedule(ctx context.Context, params *GetGCScheduleParams)
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetGCScheduleOK), nil
-
+	switch value := result.(type) {
+	case *GetGCScheduleOK:
+		return value, nil
+	case *GetGCScheduleUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetGCScheduleForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetGCScheduleInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getGCSchedule: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
 UpdateGCSchedule updates gc s schedule
 
 This endpoint is for update gc schedule.
-
 */
 func (a *Client) UpdateGCSchedule(ctx context.Context, params *UpdateGCScheduleParams) (*UpdateGCScheduleOK, error) {
 
@@ -229,6 +293,19 @@ func (a *Client) UpdateGCSchedule(ctx context.Context, params *UpdateGCScheduleP
 	if err != nil {
 		return nil, err
 	}
-	return result.(*UpdateGCScheduleOK), nil
-
+	switch value := result.(type) {
+	case *UpdateGCScheduleOK:
+		return value, nil
+	case *UpdateGCScheduleBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateGCScheduleUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateGCScheduleForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateGCScheduleInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for updateGCSchedule: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }

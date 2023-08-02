@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // StopExecutionReader is a Reader for the StopExecution structure.
@@ -60,7 +60,7 @@ func (o *StopExecutionReader) ReadResponse(response runtime.ClientResponse, cons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PATCH /projects/{project_name}/preheat/policies/{preheat_policy_name}/executions/{execution_id}] StopExecution", response, response.Code())
 	}
 }
 
@@ -69,7 +69,8 @@ func NewStopExecutionOK() *StopExecutionOK {
 	return &StopExecutionOK{}
 }
 
-/* StopExecutionOK describes a response with status code 200, with default header values.
+/*
+StopExecutionOK describes a response with status code 200, with default header values.
 
 Success
 */
@@ -80,7 +81,41 @@ type StopExecutionOK struct {
 	XRequestID string
 }
 
+// IsSuccess returns true when this stop execution o k response has a 2xx status code
+func (o *StopExecutionOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this stop execution o k response has a 3xx status code
+func (o *StopExecutionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stop execution o k response has a 4xx status code
+func (o *StopExecutionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this stop execution o k response has a 5xx status code
+func (o *StopExecutionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stop execution o k response a status code equal to that given
+func (o *StopExecutionOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the stop execution o k response
+func (o *StopExecutionOK) Code() int {
+	return 200
+}
+
 func (o *StopExecutionOK) Error() string {
+	return fmt.Sprintf("[PATCH /projects/{project_name}/preheat/policies/{preheat_policy_name}/executions/{execution_id}][%d] stopExecutionOK ", 200)
+}
+
+func (o *StopExecutionOK) String() string {
 	return fmt.Sprintf("[PATCH /projects/{project_name}/preheat/policies/{preheat_policy_name}/executions/{execution_id}][%d] stopExecutionOK ", 200)
 }
 
@@ -101,7 +136,8 @@ func NewStopExecutionBadRequest() *StopExecutionBadRequest {
 	return &StopExecutionBadRequest{}
 }
 
-/* StopExecutionBadRequest describes a response with status code 400, with default header values.
+/*
+StopExecutionBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
@@ -114,9 +150,44 @@ type StopExecutionBadRequest struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this stop execution bad request response has a 2xx status code
+func (o *StopExecutionBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this stop execution bad request response has a 3xx status code
+func (o *StopExecutionBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stop execution bad request response has a 4xx status code
+func (o *StopExecutionBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this stop execution bad request response has a 5xx status code
+func (o *StopExecutionBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stop execution bad request response a status code equal to that given
+func (o *StopExecutionBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the stop execution bad request response
+func (o *StopExecutionBadRequest) Code() int {
+	return 400
+}
+
 func (o *StopExecutionBadRequest) Error() string {
 	return fmt.Sprintf("[PATCH /projects/{project_name}/preheat/policies/{preheat_policy_name}/executions/{execution_id}][%d] stopExecutionBadRequest  %+v", 400, o.Payload)
 }
+
+func (o *StopExecutionBadRequest) String() string {
+	return fmt.Sprintf("[PATCH /projects/{project_name}/preheat/policies/{preheat_policy_name}/executions/{execution_id}][%d] stopExecutionBadRequest  %+v", 400, o.Payload)
+}
+
 func (o *StopExecutionBadRequest) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -145,7 +216,8 @@ func NewStopExecutionUnauthorized() *StopExecutionUnauthorized {
 	return &StopExecutionUnauthorized{}
 }
 
-/* StopExecutionUnauthorized describes a response with status code 401, with default header values.
+/*
+StopExecutionUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -158,9 +230,44 @@ type StopExecutionUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this stop execution unauthorized response has a 2xx status code
+func (o *StopExecutionUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this stop execution unauthorized response has a 3xx status code
+func (o *StopExecutionUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stop execution unauthorized response has a 4xx status code
+func (o *StopExecutionUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this stop execution unauthorized response has a 5xx status code
+func (o *StopExecutionUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stop execution unauthorized response a status code equal to that given
+func (o *StopExecutionUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the stop execution unauthorized response
+func (o *StopExecutionUnauthorized) Code() int {
+	return 401
+}
+
 func (o *StopExecutionUnauthorized) Error() string {
 	return fmt.Sprintf("[PATCH /projects/{project_name}/preheat/policies/{preheat_policy_name}/executions/{execution_id}][%d] stopExecutionUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *StopExecutionUnauthorized) String() string {
+	return fmt.Sprintf("[PATCH /projects/{project_name}/preheat/policies/{preheat_policy_name}/executions/{execution_id}][%d] stopExecutionUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *StopExecutionUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -189,7 +296,8 @@ func NewStopExecutionForbidden() *StopExecutionForbidden {
 	return &StopExecutionForbidden{}
 }
 
-/* StopExecutionForbidden describes a response with status code 403, with default header values.
+/*
+StopExecutionForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -202,9 +310,44 @@ type StopExecutionForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this stop execution forbidden response has a 2xx status code
+func (o *StopExecutionForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this stop execution forbidden response has a 3xx status code
+func (o *StopExecutionForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stop execution forbidden response has a 4xx status code
+func (o *StopExecutionForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this stop execution forbidden response has a 5xx status code
+func (o *StopExecutionForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stop execution forbidden response a status code equal to that given
+func (o *StopExecutionForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the stop execution forbidden response
+func (o *StopExecutionForbidden) Code() int {
+	return 403
+}
+
 func (o *StopExecutionForbidden) Error() string {
 	return fmt.Sprintf("[PATCH /projects/{project_name}/preheat/policies/{preheat_policy_name}/executions/{execution_id}][%d] stopExecutionForbidden  %+v", 403, o.Payload)
 }
+
+func (o *StopExecutionForbidden) String() string {
+	return fmt.Sprintf("[PATCH /projects/{project_name}/preheat/policies/{preheat_policy_name}/executions/{execution_id}][%d] stopExecutionForbidden  %+v", 403, o.Payload)
+}
+
 func (o *StopExecutionForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -233,7 +376,8 @@ func NewStopExecutionNotFound() *StopExecutionNotFound {
 	return &StopExecutionNotFound{}
 }
 
-/* StopExecutionNotFound describes a response with status code 404, with default header values.
+/*
+StopExecutionNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
@@ -246,9 +390,44 @@ type StopExecutionNotFound struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this stop execution not found response has a 2xx status code
+func (o *StopExecutionNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this stop execution not found response has a 3xx status code
+func (o *StopExecutionNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stop execution not found response has a 4xx status code
+func (o *StopExecutionNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this stop execution not found response has a 5xx status code
+func (o *StopExecutionNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stop execution not found response a status code equal to that given
+func (o *StopExecutionNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the stop execution not found response
+func (o *StopExecutionNotFound) Code() int {
+	return 404
+}
+
 func (o *StopExecutionNotFound) Error() string {
 	return fmt.Sprintf("[PATCH /projects/{project_name}/preheat/policies/{preheat_policy_name}/executions/{execution_id}][%d] stopExecutionNotFound  %+v", 404, o.Payload)
 }
+
+func (o *StopExecutionNotFound) String() string {
+	return fmt.Sprintf("[PATCH /projects/{project_name}/preheat/policies/{preheat_policy_name}/executions/{execution_id}][%d] stopExecutionNotFound  %+v", 404, o.Payload)
+}
+
 func (o *StopExecutionNotFound) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -277,7 +456,8 @@ func NewStopExecutionInternalServerError() *StopExecutionInternalServerError {
 	return &StopExecutionInternalServerError{}
 }
 
-/* StopExecutionInternalServerError describes a response with status code 500, with default header values.
+/*
+StopExecutionInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -290,9 +470,44 @@ type StopExecutionInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this stop execution internal server error response has a 2xx status code
+func (o *StopExecutionInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this stop execution internal server error response has a 3xx status code
+func (o *StopExecutionInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stop execution internal server error response has a 4xx status code
+func (o *StopExecutionInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this stop execution internal server error response has a 5xx status code
+func (o *StopExecutionInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this stop execution internal server error response a status code equal to that given
+func (o *StopExecutionInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the stop execution internal server error response
+func (o *StopExecutionInternalServerError) Code() int {
+	return 500
+}
+
 func (o *StopExecutionInternalServerError) Error() string {
 	return fmt.Sprintf("[PATCH /projects/{project_name}/preheat/policies/{preheat_policy_name}/executions/{execution_id}][%d] stopExecutionInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *StopExecutionInternalServerError) String() string {
+	return fmt.Sprintf("[PATCH /projects/{project_name}/preheat/policies/{preheat_policy_name}/executions/{execution_id}][%d] stopExecutionInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *StopExecutionInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

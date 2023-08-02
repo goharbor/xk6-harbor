@@ -7,6 +7,7 @@ package systeminfo
 
 import (
 	"context"
+	"fmt"
 	"io"
 
 	"github.com/go-openapi/runtime"
@@ -14,7 +15,7 @@ import (
 	strfmt "github.com/go-openapi/strfmt"
 )
 
-//go:generate mockery -name API -inpkg
+//go:generate mockery --name API --keeptree --with-expecter --case underscore
 
 // API is the interface of the systeminfo client
 type API interface {
@@ -60,7 +61,6 @@ type Client struct {
 GetCert gets default root certificate
 
 This endpoint is for downloading a default root certificate.
-
 */
 func (a *Client) GetCert(ctx context.Context, params *GetCertParams, writer io.Writer) (*GetCertOK, error) {
 
@@ -80,15 +80,23 @@ func (a *Client) GetCert(ctx context.Context, params *GetCertParams, writer io.W
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetCertOK), nil
-
+	switch value := result.(type) {
+	case *GetCertOK:
+		return value, nil
+	case *GetCertNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetCertInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getCert: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
 GetSystemInfo gets general system info
 
 This API is for retrieving general system info, this can be called by anonymous request.  Some attributes will be omitted in the response when this API is called by anonymous request.
-
 */
 func (a *Client) GetSystemInfo(ctx context.Context, params *GetSystemInfoParams) (*GetSystemInfoOK, error) {
 
@@ -108,15 +116,21 @@ func (a *Client) GetSystemInfo(ctx context.Context, params *GetSystemInfoParams)
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetSystemInfoOK), nil
-
+	switch value := result.(type) {
+	case *GetSystemInfoOK:
+		return value, nil
+	case *GetSystemInfoInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getSystemInfo: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
 GetVolumes gets system volume info total free size
 
 This endpoint is for retrieving system volume info that only provides for admin user.  Note that the response only reflects the storage status of local disk.
-
 */
 func (a *Client) GetVolumes(ctx context.Context, params *GetVolumesParams) (*GetVolumesOK, error) {
 
@@ -136,6 +150,19 @@ func (a *Client) GetVolumes(ctx context.Context, params *GetVolumesParams) (*Get
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetVolumesOK), nil
-
+	switch value := result.(type) {
+	case *GetVolumesOK:
+		return value, nil
+	case *GetVolumesUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetVolumesForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetVolumesNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetVolumesInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getVolumes: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }

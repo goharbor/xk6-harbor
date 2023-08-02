@@ -53,10 +53,12 @@ func NewListProjectMetadatasParamsWithHTTPClient(client *http.Client) *ListProje
 	}
 }
 
-/* ListProjectMetadatasParams contains all the parameters to send to the API endpoint
-   for the list project metadatas operation.
+/*
+ListProjectMetadatasParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the list project metadatas operation.
+
+	Typically these are written to a http.Request.
 */
 type ListProjectMetadatasParams struct {
 

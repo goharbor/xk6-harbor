@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // GetGCLogReader is a Reader for the GetGCLog structure.
@@ -60,7 +60,7 @@ func (o *GetGCLogReader) ReadResponse(response runtime.ClientResponse, consumer 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /system/gc/{gc_id}/log] getGCLog", response, response.Code())
 	}
 }
 
@@ -69,7 +69,8 @@ func NewGetGCLogOK() *GetGCLogOK {
 	return &GetGCLogOK{}
 }
 
-/* GetGCLogOK describes a response with status code 200, with default header values.
+/*
+GetGCLogOK describes a response with status code 200, with default header values.
 
 Get successfully.
 */
@@ -77,9 +78,44 @@ type GetGCLogOK struct {
 	Payload string
 }
 
+// IsSuccess returns true when this get Gc log o k response has a 2xx status code
+func (o *GetGCLogOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get Gc log o k response has a 3xx status code
+func (o *GetGCLogOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get Gc log o k response has a 4xx status code
+func (o *GetGCLogOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get Gc log o k response has a 5xx status code
+func (o *GetGCLogOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get Gc log o k response a status code equal to that given
+func (o *GetGCLogOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get Gc log o k response
+func (o *GetGCLogOK) Code() int {
+	return 200
+}
+
 func (o *GetGCLogOK) Error() string {
 	return fmt.Sprintf("[GET /system/gc/{gc_id}/log][%d] getGcLogOK  %+v", 200, o.Payload)
 }
+
+func (o *GetGCLogOK) String() string {
+	return fmt.Sprintf("[GET /system/gc/{gc_id}/log][%d] getGcLogOK  %+v", 200, o.Payload)
+}
+
 func (o *GetGCLogOK) GetPayload() string {
 	return o.Payload
 }
@@ -99,7 +135,8 @@ func NewGetGCLogBadRequest() *GetGCLogBadRequest {
 	return &GetGCLogBadRequest{}
 }
 
-/* GetGCLogBadRequest describes a response with status code 400, with default header values.
+/*
+GetGCLogBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
@@ -112,9 +149,44 @@ type GetGCLogBadRequest struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get Gc log bad request response has a 2xx status code
+func (o *GetGCLogBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get Gc log bad request response has a 3xx status code
+func (o *GetGCLogBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get Gc log bad request response has a 4xx status code
+func (o *GetGCLogBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get Gc log bad request response has a 5xx status code
+func (o *GetGCLogBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get Gc log bad request response a status code equal to that given
+func (o *GetGCLogBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the get Gc log bad request response
+func (o *GetGCLogBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetGCLogBadRequest) Error() string {
 	return fmt.Sprintf("[GET /system/gc/{gc_id}/log][%d] getGcLogBadRequest  %+v", 400, o.Payload)
 }
+
+func (o *GetGCLogBadRequest) String() string {
+	return fmt.Sprintf("[GET /system/gc/{gc_id}/log][%d] getGcLogBadRequest  %+v", 400, o.Payload)
+}
+
 func (o *GetGCLogBadRequest) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -143,7 +215,8 @@ func NewGetGCLogUnauthorized() *GetGCLogUnauthorized {
 	return &GetGCLogUnauthorized{}
 }
 
-/* GetGCLogUnauthorized describes a response with status code 401, with default header values.
+/*
+GetGCLogUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -156,9 +229,44 @@ type GetGCLogUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get Gc log unauthorized response has a 2xx status code
+func (o *GetGCLogUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get Gc log unauthorized response has a 3xx status code
+func (o *GetGCLogUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get Gc log unauthorized response has a 4xx status code
+func (o *GetGCLogUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get Gc log unauthorized response has a 5xx status code
+func (o *GetGCLogUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get Gc log unauthorized response a status code equal to that given
+func (o *GetGCLogUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the get Gc log unauthorized response
+func (o *GetGCLogUnauthorized) Code() int {
+	return 401
+}
+
 func (o *GetGCLogUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /system/gc/{gc_id}/log][%d] getGcLogUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *GetGCLogUnauthorized) String() string {
+	return fmt.Sprintf("[GET /system/gc/{gc_id}/log][%d] getGcLogUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *GetGCLogUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -187,7 +295,8 @@ func NewGetGCLogForbidden() *GetGCLogForbidden {
 	return &GetGCLogForbidden{}
 }
 
-/* GetGCLogForbidden describes a response with status code 403, with default header values.
+/*
+GetGCLogForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -200,9 +309,44 @@ type GetGCLogForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get Gc log forbidden response has a 2xx status code
+func (o *GetGCLogForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get Gc log forbidden response has a 3xx status code
+func (o *GetGCLogForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get Gc log forbidden response has a 4xx status code
+func (o *GetGCLogForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get Gc log forbidden response has a 5xx status code
+func (o *GetGCLogForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get Gc log forbidden response a status code equal to that given
+func (o *GetGCLogForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the get Gc log forbidden response
+func (o *GetGCLogForbidden) Code() int {
+	return 403
+}
+
 func (o *GetGCLogForbidden) Error() string {
 	return fmt.Sprintf("[GET /system/gc/{gc_id}/log][%d] getGcLogForbidden  %+v", 403, o.Payload)
 }
+
+func (o *GetGCLogForbidden) String() string {
+	return fmt.Sprintf("[GET /system/gc/{gc_id}/log][%d] getGcLogForbidden  %+v", 403, o.Payload)
+}
+
 func (o *GetGCLogForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -231,7 +375,8 @@ func NewGetGCLogNotFound() *GetGCLogNotFound {
 	return &GetGCLogNotFound{}
 }
 
-/* GetGCLogNotFound describes a response with status code 404, with default header values.
+/*
+GetGCLogNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
@@ -244,9 +389,44 @@ type GetGCLogNotFound struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get Gc log not found response has a 2xx status code
+func (o *GetGCLogNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get Gc log not found response has a 3xx status code
+func (o *GetGCLogNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get Gc log not found response has a 4xx status code
+func (o *GetGCLogNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get Gc log not found response has a 5xx status code
+func (o *GetGCLogNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get Gc log not found response a status code equal to that given
+func (o *GetGCLogNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get Gc log not found response
+func (o *GetGCLogNotFound) Code() int {
+	return 404
+}
+
 func (o *GetGCLogNotFound) Error() string {
 	return fmt.Sprintf("[GET /system/gc/{gc_id}/log][%d] getGcLogNotFound  %+v", 404, o.Payload)
 }
+
+func (o *GetGCLogNotFound) String() string {
+	return fmt.Sprintf("[GET /system/gc/{gc_id}/log][%d] getGcLogNotFound  %+v", 404, o.Payload)
+}
+
 func (o *GetGCLogNotFound) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -275,7 +455,8 @@ func NewGetGCLogInternalServerError() *GetGCLogInternalServerError {
 	return &GetGCLogInternalServerError{}
 }
 
-/* GetGCLogInternalServerError describes a response with status code 500, with default header values.
+/*
+GetGCLogInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -288,9 +469,44 @@ type GetGCLogInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get Gc log internal server error response has a 2xx status code
+func (o *GetGCLogInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get Gc log internal server error response has a 3xx status code
+func (o *GetGCLogInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get Gc log internal server error response has a 4xx status code
+func (o *GetGCLogInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get Gc log internal server error response has a 5xx status code
+func (o *GetGCLogInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get Gc log internal server error response a status code equal to that given
+func (o *GetGCLogInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the get Gc log internal server error response
+func (o *GetGCLogInternalServerError) Code() int {
+	return 500
+}
+
 func (o *GetGCLogInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /system/gc/{gc_id}/log][%d] getGcLogInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *GetGCLogInternalServerError) String() string {
+	return fmt.Sprintf("[GET /system/gc/{gc_id}/log][%d] getGcLogInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *GetGCLogInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // ListScannersReader is a Reader for the ListScanners structure.
@@ -56,7 +56,7 @@ func (o *ListScannersReader) ReadResponse(response runtime.ClientResponse, consu
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /scanners] listScanners", response, response.Code())
 	}
 }
 
@@ -65,7 +65,8 @@ func NewListScannersOK() *ListScannersOK {
 	return &ListScannersOK{}
 }
 
-/* ListScannersOK describes a response with status code 200, with default header values.
+/*
+ListScannersOK describes a response with status code 200, with default header values.
 
 A list of scanner registrations.
 */
@@ -82,9 +83,44 @@ type ListScannersOK struct {
 	Payload []*models.ScannerRegistration
 }
 
+// IsSuccess returns true when this list scanners o k response has a 2xx status code
+func (o *ListScannersOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list scanners o k response has a 3xx status code
+func (o *ListScannersOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list scanners o k response has a 4xx status code
+func (o *ListScannersOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list scanners o k response has a 5xx status code
+func (o *ListScannersOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list scanners o k response a status code equal to that given
+func (o *ListScannersOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list scanners o k response
+func (o *ListScannersOK) Code() int {
+	return 200
+}
+
 func (o *ListScannersOK) Error() string {
 	return fmt.Sprintf("[GET /scanners][%d] listScannersOK  %+v", 200, o.Payload)
 }
+
+func (o *ListScannersOK) String() string {
+	return fmt.Sprintf("[GET /scanners][%d] listScannersOK  %+v", 200, o.Payload)
+}
+
 func (o *ListScannersOK) GetPayload() []*models.ScannerRegistration {
 	return o.Payload
 }
@@ -122,7 +158,8 @@ func NewListScannersBadRequest() *ListScannersBadRequest {
 	return &ListScannersBadRequest{}
 }
 
-/* ListScannersBadRequest describes a response with status code 400, with default header values.
+/*
+ListScannersBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
@@ -135,9 +172,44 @@ type ListScannersBadRequest struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list scanners bad request response has a 2xx status code
+func (o *ListScannersBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list scanners bad request response has a 3xx status code
+func (o *ListScannersBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list scanners bad request response has a 4xx status code
+func (o *ListScannersBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list scanners bad request response has a 5xx status code
+func (o *ListScannersBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list scanners bad request response a status code equal to that given
+func (o *ListScannersBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the list scanners bad request response
+func (o *ListScannersBadRequest) Code() int {
+	return 400
+}
+
 func (o *ListScannersBadRequest) Error() string {
 	return fmt.Sprintf("[GET /scanners][%d] listScannersBadRequest  %+v", 400, o.Payload)
 }
+
+func (o *ListScannersBadRequest) String() string {
+	return fmt.Sprintf("[GET /scanners][%d] listScannersBadRequest  %+v", 400, o.Payload)
+}
+
 func (o *ListScannersBadRequest) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -166,7 +238,8 @@ func NewListScannersUnauthorized() *ListScannersUnauthorized {
 	return &ListScannersUnauthorized{}
 }
 
-/* ListScannersUnauthorized describes a response with status code 401, with default header values.
+/*
+ListScannersUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -179,9 +252,44 @@ type ListScannersUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list scanners unauthorized response has a 2xx status code
+func (o *ListScannersUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list scanners unauthorized response has a 3xx status code
+func (o *ListScannersUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list scanners unauthorized response has a 4xx status code
+func (o *ListScannersUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list scanners unauthorized response has a 5xx status code
+func (o *ListScannersUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list scanners unauthorized response a status code equal to that given
+func (o *ListScannersUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the list scanners unauthorized response
+func (o *ListScannersUnauthorized) Code() int {
+	return 401
+}
+
 func (o *ListScannersUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /scanners][%d] listScannersUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *ListScannersUnauthorized) String() string {
+	return fmt.Sprintf("[GET /scanners][%d] listScannersUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *ListScannersUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -210,7 +318,8 @@ func NewListScannersForbidden() *ListScannersForbidden {
 	return &ListScannersForbidden{}
 }
 
-/* ListScannersForbidden describes a response with status code 403, with default header values.
+/*
+ListScannersForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -223,9 +332,44 @@ type ListScannersForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list scanners forbidden response has a 2xx status code
+func (o *ListScannersForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list scanners forbidden response has a 3xx status code
+func (o *ListScannersForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list scanners forbidden response has a 4xx status code
+func (o *ListScannersForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list scanners forbidden response has a 5xx status code
+func (o *ListScannersForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list scanners forbidden response a status code equal to that given
+func (o *ListScannersForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the list scanners forbidden response
+func (o *ListScannersForbidden) Code() int {
+	return 403
+}
+
 func (o *ListScannersForbidden) Error() string {
 	return fmt.Sprintf("[GET /scanners][%d] listScannersForbidden  %+v", 403, o.Payload)
 }
+
+func (o *ListScannersForbidden) String() string {
+	return fmt.Sprintf("[GET /scanners][%d] listScannersForbidden  %+v", 403, o.Payload)
+}
+
 func (o *ListScannersForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -254,7 +398,8 @@ func NewListScannersInternalServerError() *ListScannersInternalServerError {
 	return &ListScannersInternalServerError{}
 }
 
-/* ListScannersInternalServerError describes a response with status code 500, with default header values.
+/*
+ListScannersInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -267,9 +412,44 @@ type ListScannersInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list scanners internal server error response has a 2xx status code
+func (o *ListScannersInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list scanners internal server error response has a 3xx status code
+func (o *ListScannersInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list scanners internal server error response has a 4xx status code
+func (o *ListScannersInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list scanners internal server error response has a 5xx status code
+func (o *ListScannersInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this list scanners internal server error response a status code equal to that given
+func (o *ListScannersInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the list scanners internal server error response
+func (o *ListScannersInternalServerError) Code() int {
+	return 500
+}
+
 func (o *ListScannersInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /scanners][%d] listScannersInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *ListScannersInternalServerError) String() string {
+	return fmt.Sprintf("[GET /scanners][%d] listScannersInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *ListScannersInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

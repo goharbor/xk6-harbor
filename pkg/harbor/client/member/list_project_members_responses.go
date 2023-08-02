@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // ListProjectMembersReader is a Reader for the ListProjectMembers structure.
@@ -62,7 +62,7 @@ func (o *ListProjectMembersReader) ReadResponse(response runtime.ClientResponse,
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /projects/{project_name_or_id}/members] listProjectMembers", response, response.Code())
 	}
 }
 
@@ -71,7 +71,8 @@ func NewListProjectMembersOK() *ListProjectMembersOK {
 	return &ListProjectMembersOK{}
 }
 
-/* ListProjectMembersOK describes a response with status code 200, with default header values.
+/*
+ListProjectMembersOK describes a response with status code 200, with default header values.
 
 Get project members successfully.
 */
@@ -88,9 +89,44 @@ type ListProjectMembersOK struct {
 	Payload []*models.ProjectMemberEntity
 }
 
+// IsSuccess returns true when this list project members o k response has a 2xx status code
+func (o *ListProjectMembersOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list project members o k response has a 3xx status code
+func (o *ListProjectMembersOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list project members o k response has a 4xx status code
+func (o *ListProjectMembersOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list project members o k response has a 5xx status code
+func (o *ListProjectMembersOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list project members o k response a status code equal to that given
+func (o *ListProjectMembersOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list project members o k response
+func (o *ListProjectMembersOK) Code() int {
+	return 200
+}
+
 func (o *ListProjectMembersOK) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name_or_id}/members][%d] listProjectMembersOK  %+v", 200, o.Payload)
 }
+
+func (o *ListProjectMembersOK) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name_or_id}/members][%d] listProjectMembersOK  %+v", 200, o.Payload)
+}
+
 func (o *ListProjectMembersOK) GetPayload() []*models.ProjectMemberEntity {
 	return o.Payload
 }
@@ -128,7 +164,8 @@ func NewListProjectMembersBadRequest() *ListProjectMembersBadRequest {
 	return &ListProjectMembersBadRequest{}
 }
 
-/* ListProjectMembersBadRequest describes a response with status code 400, with default header values.
+/*
+ListProjectMembersBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
@@ -141,9 +178,44 @@ type ListProjectMembersBadRequest struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list project members bad request response has a 2xx status code
+func (o *ListProjectMembersBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list project members bad request response has a 3xx status code
+func (o *ListProjectMembersBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list project members bad request response has a 4xx status code
+func (o *ListProjectMembersBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list project members bad request response has a 5xx status code
+func (o *ListProjectMembersBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list project members bad request response a status code equal to that given
+func (o *ListProjectMembersBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the list project members bad request response
+func (o *ListProjectMembersBadRequest) Code() int {
+	return 400
+}
+
 func (o *ListProjectMembersBadRequest) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name_or_id}/members][%d] listProjectMembersBadRequest  %+v", 400, o.Payload)
 }
+
+func (o *ListProjectMembersBadRequest) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name_or_id}/members][%d] listProjectMembersBadRequest  %+v", 400, o.Payload)
+}
+
 func (o *ListProjectMembersBadRequest) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -172,7 +244,8 @@ func NewListProjectMembersUnauthorized() *ListProjectMembersUnauthorized {
 	return &ListProjectMembersUnauthorized{}
 }
 
-/* ListProjectMembersUnauthorized describes a response with status code 401, with default header values.
+/*
+ListProjectMembersUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -185,9 +258,44 @@ type ListProjectMembersUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list project members unauthorized response has a 2xx status code
+func (o *ListProjectMembersUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list project members unauthorized response has a 3xx status code
+func (o *ListProjectMembersUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list project members unauthorized response has a 4xx status code
+func (o *ListProjectMembersUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list project members unauthorized response has a 5xx status code
+func (o *ListProjectMembersUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list project members unauthorized response a status code equal to that given
+func (o *ListProjectMembersUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the list project members unauthorized response
+func (o *ListProjectMembersUnauthorized) Code() int {
+	return 401
+}
+
 func (o *ListProjectMembersUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name_or_id}/members][%d] listProjectMembersUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *ListProjectMembersUnauthorized) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name_or_id}/members][%d] listProjectMembersUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *ListProjectMembersUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -216,7 +324,8 @@ func NewListProjectMembersForbidden() *ListProjectMembersForbidden {
 	return &ListProjectMembersForbidden{}
 }
 
-/* ListProjectMembersForbidden describes a response with status code 403, with default header values.
+/*
+ListProjectMembersForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -229,9 +338,44 @@ type ListProjectMembersForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list project members forbidden response has a 2xx status code
+func (o *ListProjectMembersForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list project members forbidden response has a 3xx status code
+func (o *ListProjectMembersForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list project members forbidden response has a 4xx status code
+func (o *ListProjectMembersForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list project members forbidden response has a 5xx status code
+func (o *ListProjectMembersForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list project members forbidden response a status code equal to that given
+func (o *ListProjectMembersForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the list project members forbidden response
+func (o *ListProjectMembersForbidden) Code() int {
+	return 403
+}
+
 func (o *ListProjectMembersForbidden) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name_or_id}/members][%d] listProjectMembersForbidden  %+v", 403, o.Payload)
 }
+
+func (o *ListProjectMembersForbidden) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name_or_id}/members][%d] listProjectMembersForbidden  %+v", 403, o.Payload)
+}
+
 func (o *ListProjectMembersForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -260,7 +404,8 @@ func NewListProjectMembersNotFound() *ListProjectMembersNotFound {
 	return &ListProjectMembersNotFound{}
 }
 
-/* ListProjectMembersNotFound describes a response with status code 404, with default header values.
+/*
+ListProjectMembersNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
@@ -273,9 +418,44 @@ type ListProjectMembersNotFound struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list project members not found response has a 2xx status code
+func (o *ListProjectMembersNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list project members not found response has a 3xx status code
+func (o *ListProjectMembersNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list project members not found response has a 4xx status code
+func (o *ListProjectMembersNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list project members not found response has a 5xx status code
+func (o *ListProjectMembersNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list project members not found response a status code equal to that given
+func (o *ListProjectMembersNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the list project members not found response
+func (o *ListProjectMembersNotFound) Code() int {
+	return 404
+}
+
 func (o *ListProjectMembersNotFound) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name_or_id}/members][%d] listProjectMembersNotFound  %+v", 404, o.Payload)
 }
+
+func (o *ListProjectMembersNotFound) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name_or_id}/members][%d] listProjectMembersNotFound  %+v", 404, o.Payload)
+}
+
 func (o *ListProjectMembersNotFound) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -304,7 +484,8 @@ func NewListProjectMembersInternalServerError() *ListProjectMembersInternalServe
 	return &ListProjectMembersInternalServerError{}
 }
 
-/* ListProjectMembersInternalServerError describes a response with status code 500, with default header values.
+/*
+ListProjectMembersInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -317,9 +498,44 @@ type ListProjectMembersInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list project members internal server error response has a 2xx status code
+func (o *ListProjectMembersInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list project members internal server error response has a 3xx status code
+func (o *ListProjectMembersInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list project members internal server error response has a 4xx status code
+func (o *ListProjectMembersInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list project members internal server error response has a 5xx status code
+func (o *ListProjectMembersInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this list project members internal server error response a status code equal to that given
+func (o *ListProjectMembersInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the list project members internal server error response
+func (o *ListProjectMembersInternalServerError) Code() int {
+	return 500
+}
+
 func (o *ListProjectMembersInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name_or_id}/members][%d] listProjectMembersInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *ListProjectMembersInternalServerError) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name_or_id}/members][%d] listProjectMembersInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *ListProjectMembersInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

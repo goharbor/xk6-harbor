@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // AddProjectMetadatasReader is a Reader for the AddProjectMetadatas structure.
@@ -66,7 +66,7 @@ func (o *AddProjectMetadatasReader) ReadResponse(response runtime.ClientResponse
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /projects/{project_name_or_id}/metadatas/] addProjectMetadatas", response, response.Code())
 	}
 }
 
@@ -75,7 +75,8 @@ func NewAddProjectMetadatasOK() *AddProjectMetadatasOK {
 	return &AddProjectMetadatasOK{}
 }
 
-/* AddProjectMetadatasOK describes a response with status code 200, with default header values.
+/*
+AddProjectMetadatasOK describes a response with status code 200, with default header values.
 
 Success
 */
@@ -86,7 +87,41 @@ type AddProjectMetadatasOK struct {
 	XRequestID string
 }
 
+// IsSuccess returns true when this add project metadatas o k response has a 2xx status code
+func (o *AddProjectMetadatasOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this add project metadatas o k response has a 3xx status code
+func (o *AddProjectMetadatasOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this add project metadatas o k response has a 4xx status code
+func (o *AddProjectMetadatasOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this add project metadatas o k response has a 5xx status code
+func (o *AddProjectMetadatasOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this add project metadatas o k response a status code equal to that given
+func (o *AddProjectMetadatasOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the add project metadatas o k response
+func (o *AddProjectMetadatasOK) Code() int {
+	return 200
+}
+
 func (o *AddProjectMetadatasOK) Error() string {
+	return fmt.Sprintf("[POST /projects/{project_name_or_id}/metadatas/][%d] addProjectMetadatasOK ", 200)
+}
+
+func (o *AddProjectMetadatasOK) String() string {
 	return fmt.Sprintf("[POST /projects/{project_name_or_id}/metadatas/][%d] addProjectMetadatasOK ", 200)
 }
 
@@ -107,7 +142,8 @@ func NewAddProjectMetadatasBadRequest() *AddProjectMetadatasBadRequest {
 	return &AddProjectMetadatasBadRequest{}
 }
 
-/* AddProjectMetadatasBadRequest describes a response with status code 400, with default header values.
+/*
+AddProjectMetadatasBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
@@ -120,9 +156,44 @@ type AddProjectMetadatasBadRequest struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this add project metadatas bad request response has a 2xx status code
+func (o *AddProjectMetadatasBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this add project metadatas bad request response has a 3xx status code
+func (o *AddProjectMetadatasBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this add project metadatas bad request response has a 4xx status code
+func (o *AddProjectMetadatasBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this add project metadatas bad request response has a 5xx status code
+func (o *AddProjectMetadatasBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this add project metadatas bad request response a status code equal to that given
+func (o *AddProjectMetadatasBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the add project metadatas bad request response
+func (o *AddProjectMetadatasBadRequest) Code() int {
+	return 400
+}
+
 func (o *AddProjectMetadatasBadRequest) Error() string {
 	return fmt.Sprintf("[POST /projects/{project_name_or_id}/metadatas/][%d] addProjectMetadatasBadRequest  %+v", 400, o.Payload)
 }
+
+func (o *AddProjectMetadatasBadRequest) String() string {
+	return fmt.Sprintf("[POST /projects/{project_name_or_id}/metadatas/][%d] addProjectMetadatasBadRequest  %+v", 400, o.Payload)
+}
+
 func (o *AddProjectMetadatasBadRequest) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -151,7 +222,8 @@ func NewAddProjectMetadatasUnauthorized() *AddProjectMetadatasUnauthorized {
 	return &AddProjectMetadatasUnauthorized{}
 }
 
-/* AddProjectMetadatasUnauthorized describes a response with status code 401, with default header values.
+/*
+AddProjectMetadatasUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -164,9 +236,44 @@ type AddProjectMetadatasUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this add project metadatas unauthorized response has a 2xx status code
+func (o *AddProjectMetadatasUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this add project metadatas unauthorized response has a 3xx status code
+func (o *AddProjectMetadatasUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this add project metadatas unauthorized response has a 4xx status code
+func (o *AddProjectMetadatasUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this add project metadatas unauthorized response has a 5xx status code
+func (o *AddProjectMetadatasUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this add project metadatas unauthorized response a status code equal to that given
+func (o *AddProjectMetadatasUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the add project metadatas unauthorized response
+func (o *AddProjectMetadatasUnauthorized) Code() int {
+	return 401
+}
+
 func (o *AddProjectMetadatasUnauthorized) Error() string {
 	return fmt.Sprintf("[POST /projects/{project_name_or_id}/metadatas/][%d] addProjectMetadatasUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *AddProjectMetadatasUnauthorized) String() string {
+	return fmt.Sprintf("[POST /projects/{project_name_or_id}/metadatas/][%d] addProjectMetadatasUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *AddProjectMetadatasUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -195,7 +302,8 @@ func NewAddProjectMetadatasForbidden() *AddProjectMetadatasForbidden {
 	return &AddProjectMetadatasForbidden{}
 }
 
-/* AddProjectMetadatasForbidden describes a response with status code 403, with default header values.
+/*
+AddProjectMetadatasForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -208,9 +316,44 @@ type AddProjectMetadatasForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this add project metadatas forbidden response has a 2xx status code
+func (o *AddProjectMetadatasForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this add project metadatas forbidden response has a 3xx status code
+func (o *AddProjectMetadatasForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this add project metadatas forbidden response has a 4xx status code
+func (o *AddProjectMetadatasForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this add project metadatas forbidden response has a 5xx status code
+func (o *AddProjectMetadatasForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this add project metadatas forbidden response a status code equal to that given
+func (o *AddProjectMetadatasForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the add project metadatas forbidden response
+func (o *AddProjectMetadatasForbidden) Code() int {
+	return 403
+}
+
 func (o *AddProjectMetadatasForbidden) Error() string {
 	return fmt.Sprintf("[POST /projects/{project_name_or_id}/metadatas/][%d] addProjectMetadatasForbidden  %+v", 403, o.Payload)
 }
+
+func (o *AddProjectMetadatasForbidden) String() string {
+	return fmt.Sprintf("[POST /projects/{project_name_or_id}/metadatas/][%d] addProjectMetadatasForbidden  %+v", 403, o.Payload)
+}
+
 func (o *AddProjectMetadatasForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -239,7 +382,8 @@ func NewAddProjectMetadatasNotFound() *AddProjectMetadatasNotFound {
 	return &AddProjectMetadatasNotFound{}
 }
 
-/* AddProjectMetadatasNotFound describes a response with status code 404, with default header values.
+/*
+AddProjectMetadatasNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
@@ -252,9 +396,44 @@ type AddProjectMetadatasNotFound struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this add project metadatas not found response has a 2xx status code
+func (o *AddProjectMetadatasNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this add project metadatas not found response has a 3xx status code
+func (o *AddProjectMetadatasNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this add project metadatas not found response has a 4xx status code
+func (o *AddProjectMetadatasNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this add project metadatas not found response has a 5xx status code
+func (o *AddProjectMetadatasNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this add project metadatas not found response a status code equal to that given
+func (o *AddProjectMetadatasNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the add project metadatas not found response
+func (o *AddProjectMetadatasNotFound) Code() int {
+	return 404
+}
+
 func (o *AddProjectMetadatasNotFound) Error() string {
 	return fmt.Sprintf("[POST /projects/{project_name_or_id}/metadatas/][%d] addProjectMetadatasNotFound  %+v", 404, o.Payload)
 }
+
+func (o *AddProjectMetadatasNotFound) String() string {
+	return fmt.Sprintf("[POST /projects/{project_name_or_id}/metadatas/][%d] addProjectMetadatasNotFound  %+v", 404, o.Payload)
+}
+
 func (o *AddProjectMetadatasNotFound) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -283,7 +462,8 @@ func NewAddProjectMetadatasConflict() *AddProjectMetadatasConflict {
 	return &AddProjectMetadatasConflict{}
 }
 
-/* AddProjectMetadatasConflict describes a response with status code 409, with default header values.
+/*
+AddProjectMetadatasConflict describes a response with status code 409, with default header values.
 
 Conflict
 */
@@ -296,9 +476,44 @@ type AddProjectMetadatasConflict struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this add project metadatas conflict response has a 2xx status code
+func (o *AddProjectMetadatasConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this add project metadatas conflict response has a 3xx status code
+func (o *AddProjectMetadatasConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this add project metadatas conflict response has a 4xx status code
+func (o *AddProjectMetadatasConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this add project metadatas conflict response has a 5xx status code
+func (o *AddProjectMetadatasConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this add project metadatas conflict response a status code equal to that given
+func (o *AddProjectMetadatasConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the add project metadatas conflict response
+func (o *AddProjectMetadatasConflict) Code() int {
+	return 409
+}
+
 func (o *AddProjectMetadatasConflict) Error() string {
 	return fmt.Sprintf("[POST /projects/{project_name_or_id}/metadatas/][%d] addProjectMetadatasConflict  %+v", 409, o.Payload)
 }
+
+func (o *AddProjectMetadatasConflict) String() string {
+	return fmt.Sprintf("[POST /projects/{project_name_or_id}/metadatas/][%d] addProjectMetadatasConflict  %+v", 409, o.Payload)
+}
+
 func (o *AddProjectMetadatasConflict) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -327,7 +542,8 @@ func NewAddProjectMetadatasInternalServerError() *AddProjectMetadatasInternalSer
 	return &AddProjectMetadatasInternalServerError{}
 }
 
-/* AddProjectMetadatasInternalServerError describes a response with status code 500, with default header values.
+/*
+AddProjectMetadatasInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -340,9 +556,44 @@ type AddProjectMetadatasInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this add project metadatas internal server error response has a 2xx status code
+func (o *AddProjectMetadatasInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this add project metadatas internal server error response has a 3xx status code
+func (o *AddProjectMetadatasInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this add project metadatas internal server error response has a 4xx status code
+func (o *AddProjectMetadatasInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this add project metadatas internal server error response has a 5xx status code
+func (o *AddProjectMetadatasInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this add project metadatas internal server error response a status code equal to that given
+func (o *AddProjectMetadatasInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the add project metadatas internal server error response
+func (o *AddProjectMetadatasInternalServerError) Code() int {
+	return 500
+}
+
 func (o *AddProjectMetadatasInternalServerError) Error() string {
 	return fmt.Sprintf("[POST /projects/{project_name_or_id}/metadatas/][%d] addProjectMetadatasInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *AddProjectMetadatasInternalServerError) String() string {
+	return fmt.Sprintf("[POST /projects/{project_name_or_id}/metadatas/][%d] addProjectMetadatasInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *AddProjectMetadatasInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

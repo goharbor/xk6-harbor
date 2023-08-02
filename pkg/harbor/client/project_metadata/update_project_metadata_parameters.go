@@ -53,10 +53,12 @@ func NewUpdateProjectMetadataParamsWithHTTPClient(client *http.Client) *UpdatePr
 	}
 }
 
-/* UpdateProjectMetadataParams contains all the parameters to send to the API endpoint
-   for the update project metadata operation.
+/*
+UpdateProjectMetadataParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the update project metadata operation.
+
+	Typically these are written to a http.Request.
 */
 type UpdateProjectMetadataParams struct {
 

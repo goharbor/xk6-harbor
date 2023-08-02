@@ -37,7 +37,7 @@ jobs:
         goarch: [amd64]
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Run go generate
       run: make go-generate
@@ -48,7 +48,7 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         goos: ${{ matrix.goos }}
         goarch: ${{ matrix.goarch }}
-        goversion: https://dl.google.com/go/go1.15.6.linux-amd64.tar.gz
+        goversion: https://dl.google.com/go/go1.20.6.linux-amd64.tar.gz
         pre_command: export CGO_ENABLED=0
         build_flags: -a -tags netgo
         ldflags: -extldflags -static -X "go.k6.io/k6/lib/consts.VersionDetails=${{ needs.create-release.outputs.release-tag }}"

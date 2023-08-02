@@ -52,10 +52,12 @@ func NewScanArtifactParamsWithHTTPClient(client *http.Client) *ScanArtifactParam
 	}
 }
 
-/* ScanArtifactParams contains all the parameters to send to the API endpoint
-   for the scan artifact operation.
+/*
+ScanArtifactParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the scan artifact operation.
+
+	Typically these are written to a http.Request.
 */
 type ScanArtifactParams struct {
 

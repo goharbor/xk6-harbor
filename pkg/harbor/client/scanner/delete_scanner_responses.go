@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // DeleteScannerReader is a Reader for the DeleteScanner structure.
@@ -54,7 +54,7 @@ func (o *DeleteScannerReader) ReadResponse(response runtime.ClientResponse, cons
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /scanners/{registration_id}] deleteScanner", response, response.Code())
 	}
 }
 
@@ -63,7 +63,8 @@ func NewDeleteScannerOK() *DeleteScannerOK {
 	return &DeleteScannerOK{}
 }
 
-/* DeleteScannerOK describes a response with status code 200, with default header values.
+/*
+DeleteScannerOK describes a response with status code 200, with default header values.
 
 Deleted successfully and return the deleted registration
 */
@@ -71,9 +72,44 @@ type DeleteScannerOK struct {
 	Payload *models.ScannerRegistration
 }
 
+// IsSuccess returns true when this delete scanner o k response has a 2xx status code
+func (o *DeleteScannerOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this delete scanner o k response has a 3xx status code
+func (o *DeleteScannerOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete scanner o k response has a 4xx status code
+func (o *DeleteScannerOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete scanner o k response has a 5xx status code
+func (o *DeleteScannerOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete scanner o k response a status code equal to that given
+func (o *DeleteScannerOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the delete scanner o k response
+func (o *DeleteScannerOK) Code() int {
+	return 200
+}
+
 func (o *DeleteScannerOK) Error() string {
 	return fmt.Sprintf("[DELETE /scanners/{registration_id}][%d] deleteScannerOK  %+v", 200, o.Payload)
 }
+
+func (o *DeleteScannerOK) String() string {
+	return fmt.Sprintf("[DELETE /scanners/{registration_id}][%d] deleteScannerOK  %+v", 200, o.Payload)
+}
+
 func (o *DeleteScannerOK) GetPayload() *models.ScannerRegistration {
 	return o.Payload
 }
@@ -95,7 +131,8 @@ func NewDeleteScannerUnauthorized() *DeleteScannerUnauthorized {
 	return &DeleteScannerUnauthorized{}
 }
 
-/* DeleteScannerUnauthorized describes a response with status code 401, with default header values.
+/*
+DeleteScannerUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -108,9 +145,44 @@ type DeleteScannerUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this delete scanner unauthorized response has a 2xx status code
+func (o *DeleteScannerUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete scanner unauthorized response has a 3xx status code
+func (o *DeleteScannerUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete scanner unauthorized response has a 4xx status code
+func (o *DeleteScannerUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete scanner unauthorized response has a 5xx status code
+func (o *DeleteScannerUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete scanner unauthorized response a status code equal to that given
+func (o *DeleteScannerUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the delete scanner unauthorized response
+func (o *DeleteScannerUnauthorized) Code() int {
+	return 401
+}
+
 func (o *DeleteScannerUnauthorized) Error() string {
 	return fmt.Sprintf("[DELETE /scanners/{registration_id}][%d] deleteScannerUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *DeleteScannerUnauthorized) String() string {
+	return fmt.Sprintf("[DELETE /scanners/{registration_id}][%d] deleteScannerUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *DeleteScannerUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -139,7 +211,8 @@ func NewDeleteScannerForbidden() *DeleteScannerForbidden {
 	return &DeleteScannerForbidden{}
 }
 
-/* DeleteScannerForbidden describes a response with status code 403, with default header values.
+/*
+DeleteScannerForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -152,9 +225,44 @@ type DeleteScannerForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this delete scanner forbidden response has a 2xx status code
+func (o *DeleteScannerForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete scanner forbidden response has a 3xx status code
+func (o *DeleteScannerForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete scanner forbidden response has a 4xx status code
+func (o *DeleteScannerForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete scanner forbidden response has a 5xx status code
+func (o *DeleteScannerForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete scanner forbidden response a status code equal to that given
+func (o *DeleteScannerForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the delete scanner forbidden response
+func (o *DeleteScannerForbidden) Code() int {
+	return 403
+}
+
 func (o *DeleteScannerForbidden) Error() string {
 	return fmt.Sprintf("[DELETE /scanners/{registration_id}][%d] deleteScannerForbidden  %+v", 403, o.Payload)
 }
+
+func (o *DeleteScannerForbidden) String() string {
+	return fmt.Sprintf("[DELETE /scanners/{registration_id}][%d] deleteScannerForbidden  %+v", 403, o.Payload)
+}
+
 func (o *DeleteScannerForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -183,7 +291,8 @@ func NewDeleteScannerNotFound() *DeleteScannerNotFound {
 	return &DeleteScannerNotFound{}
 }
 
-/* DeleteScannerNotFound describes a response with status code 404, with default header values.
+/*
+DeleteScannerNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
@@ -196,9 +305,44 @@ type DeleteScannerNotFound struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this delete scanner not found response has a 2xx status code
+func (o *DeleteScannerNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete scanner not found response has a 3xx status code
+func (o *DeleteScannerNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete scanner not found response has a 4xx status code
+func (o *DeleteScannerNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete scanner not found response has a 5xx status code
+func (o *DeleteScannerNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete scanner not found response a status code equal to that given
+func (o *DeleteScannerNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the delete scanner not found response
+func (o *DeleteScannerNotFound) Code() int {
+	return 404
+}
+
 func (o *DeleteScannerNotFound) Error() string {
 	return fmt.Sprintf("[DELETE /scanners/{registration_id}][%d] deleteScannerNotFound  %+v", 404, o.Payload)
 }
+
+func (o *DeleteScannerNotFound) String() string {
+	return fmt.Sprintf("[DELETE /scanners/{registration_id}][%d] deleteScannerNotFound  %+v", 404, o.Payload)
+}
+
 func (o *DeleteScannerNotFound) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -227,7 +371,8 @@ func NewDeleteScannerInternalServerError() *DeleteScannerInternalServerError {
 	return &DeleteScannerInternalServerError{}
 }
 
-/* DeleteScannerInternalServerError describes a response with status code 500, with default header values.
+/*
+DeleteScannerInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -240,9 +385,44 @@ type DeleteScannerInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this delete scanner internal server error response has a 2xx status code
+func (o *DeleteScannerInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete scanner internal server error response has a 3xx status code
+func (o *DeleteScannerInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete scanner internal server error response has a 4xx status code
+func (o *DeleteScannerInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete scanner internal server error response has a 5xx status code
+func (o *DeleteScannerInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this delete scanner internal server error response a status code equal to that given
+func (o *DeleteScannerInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the delete scanner internal server error response
+func (o *DeleteScannerInternalServerError) Code() int {
+	return 500
+}
+
 func (o *DeleteScannerInternalServerError) Error() string {
 	return fmt.Sprintf("[DELETE /scanners/{registration_id}][%d] deleteScannerInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *DeleteScannerInternalServerError) String() string {
+	return fmt.Sprintf("[DELETE /scanners/{registration_id}][%d] deleteScannerInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *DeleteScannerInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

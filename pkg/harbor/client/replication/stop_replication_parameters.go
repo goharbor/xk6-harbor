@@ -53,10 +53,12 @@ func NewStopReplicationParamsWithHTTPClient(client *http.Client) *StopReplicatio
 	}
 }
 
-/* StopReplicationParams contains all the parameters to send to the API endpoint
-   for the stop replication operation.
+/*
+StopReplicationParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the stop replication operation.
+
+	Typically these are written to a http.Request.
 */
 type StopReplicationParams struct {
 

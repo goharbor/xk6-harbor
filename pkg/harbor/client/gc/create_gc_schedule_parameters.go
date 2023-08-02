@@ -15,7 +15,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // NewCreateGCScheduleParams creates a new CreateGCScheduleParams object,
@@ -54,10 +54,12 @@ func NewCreateGCScheduleParamsWithHTTPClient(client *http.Client) *CreateGCSched
 	}
 }
 
-/* CreateGCScheduleParams contains all the parameters to send to the API endpoint
-   for the create GC schedule operation.
+/*
+CreateGCScheduleParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the create GC schedule operation.
+
+	Typically these are written to a http.Request.
 */
 type CreateGCScheduleParams struct {
 

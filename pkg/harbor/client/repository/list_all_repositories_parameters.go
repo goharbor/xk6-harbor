@@ -53,10 +53,12 @@ func NewListAllRepositoriesParamsWithHTTPClient(client *http.Client) *ListAllRep
 	}
 }
 
-/* ListAllRepositoriesParams contains all the parameters to send to the API endpoint
-   for the list all repositories operation.
+/*
+ListAllRepositoriesParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the list all repositories operation.
+
+	Typically these are written to a http.Request.
 */
 type ListAllRepositoriesParams struct {
 

@@ -53,10 +53,12 @@ func NewListReplicationTasksParamsWithHTTPClient(client *http.Client) *ListRepli
 	}
 }
 
-/* ListReplicationTasksParams contains all the parameters to send to the API endpoint
-   for the list replication tasks operation.
+/*
+ListReplicationTasksParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the list replication tasks operation.
+
+	Typically these are written to a http.Request.
 */
 type ListReplicationTasksParams struct {
 

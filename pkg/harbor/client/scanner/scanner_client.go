@@ -7,13 +7,14 @@ package scanner
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/go-openapi/runtime"
 
 	strfmt "github.com/go-openapi/strfmt"
 )
 
-//go:generate mockery -name API -inpkg
+//go:generate mockery --name API --keeptree --with-expecter --case underscore
 
 // API is the interface of the scanner client
 type API interface {
@@ -89,7 +90,6 @@ type Client struct {
 CreateScanner creates a scanner registration
 
 Creats a new scanner registration with the given data.
-
 */
 func (a *Client) CreateScanner(ctx context.Context, params *CreateScannerParams) (*CreateScannerCreated, error) {
 
@@ -109,15 +109,27 @@ func (a *Client) CreateScanner(ctx context.Context, params *CreateScannerParams)
 	if err != nil {
 		return nil, err
 	}
-	return result.(*CreateScannerCreated), nil
-
+	switch value := result.(type) {
+	case *CreateScannerCreated:
+		return value, nil
+	case *CreateScannerBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateScannerUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateScannerForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateScannerInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for createScanner: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
 DeleteScanner deletes a scanner registration
 
 Deletes the specified scanner registration.
-
 */
 func (a *Client) DeleteScanner(ctx context.Context, params *DeleteScannerParams) (*DeleteScannerOK, error) {
 
@@ -137,15 +149,27 @@ func (a *Client) DeleteScanner(ctx context.Context, params *DeleteScannerParams)
 	if err != nil {
 		return nil, err
 	}
-	return result.(*DeleteScannerOK), nil
-
+	switch value := result.(type) {
+	case *DeleteScannerOK:
+		return value, nil
+	case *DeleteScannerUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteScannerForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteScannerNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteScannerInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for deleteScanner: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
 GetScanner gets a scanner registration details
 
 Retruns the details of the specified scanner registration.
-
 */
 func (a *Client) GetScanner(ctx context.Context, params *GetScannerParams) (*GetScannerOK, error) {
 
@@ -165,15 +189,27 @@ func (a *Client) GetScanner(ctx context.Context, params *GetScannerParams) (*Get
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetScannerOK), nil
-
+	switch value := result.(type) {
+	case *GetScannerOK:
+		return value, nil
+	case *GetScannerUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetScannerForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetScannerNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetScannerInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getScanner: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
 GetScannerMetadata gets the metadata of the specified scanner registration
 
 Get the metadata of the specified scanner registration, including the capabilities and customized properties.
-
 */
 func (a *Client) GetScannerMetadata(ctx context.Context, params *GetScannerMetadataParams) (*GetScannerMetadataOK, error) {
 
@@ -193,15 +229,25 @@ func (a *Client) GetScannerMetadata(ctx context.Context, params *GetScannerMetad
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetScannerMetadataOK), nil
-
+	switch value := result.(type) {
+	case *GetScannerMetadataOK:
+		return value, nil
+	case *GetScannerMetadataUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetScannerMetadataForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetScannerMetadataInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getScannerMetadata: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
 ListScanners lists scanner registrations
 
 Returns a list of currently configured scanner registrations.
-
 */
 func (a *Client) ListScanners(ctx context.Context, params *ListScannersParams) (*ListScannersOK, error) {
 
@@ -221,15 +267,27 @@ func (a *Client) ListScanners(ctx context.Context, params *ListScannersParams) (
 	if err != nil {
 		return nil, err
 	}
-	return result.(*ListScannersOK), nil
-
+	switch value := result.(type) {
+	case *ListScannersOK:
+		return value, nil
+	case *ListScannersBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListScannersUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListScannersForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListScannersInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for listScanners: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
 PingScanner tests scanner registration settings
 
 Pings scanner adapter to test endpoint URL and authorization settings.
-
 */
 func (a *Client) PingScanner(ctx context.Context, params *PingScannerParams) (*PingScannerOK, error) {
 
@@ -249,15 +307,27 @@ func (a *Client) PingScanner(ctx context.Context, params *PingScannerParams) (*P
 	if err != nil {
 		return nil, err
 	}
-	return result.(*PingScannerOK), nil
-
+	switch value := result.(type) {
+	case *PingScannerOK:
+		return value, nil
+	case *PingScannerBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *PingScannerUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *PingScannerForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *PingScannerInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for pingScanner: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
 SetScannerAsDefault sets system default scanner registration
 
 Set the specified scanner registration as the system default one.
-
 */
 func (a *Client) SetScannerAsDefault(ctx context.Context, params *SetScannerAsDefaultParams) (*SetScannerAsDefaultOK, error) {
 
@@ -277,15 +347,25 @@ func (a *Client) SetScannerAsDefault(ctx context.Context, params *SetScannerAsDe
 	if err != nil {
 		return nil, err
 	}
-	return result.(*SetScannerAsDefaultOK), nil
-
+	switch value := result.(type) {
+	case *SetScannerAsDefaultOK:
+		return value, nil
+	case *SetScannerAsDefaultUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *SetScannerAsDefaultForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *SetScannerAsDefaultInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for setScannerAsDefault: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
 UpdateScanner updates a scanner registration
 
 Updates the specified scanner registration.
-
 */
 func (a *Client) UpdateScanner(ctx context.Context, params *UpdateScannerParams) (*UpdateScannerOK, error) {
 
@@ -305,6 +385,19 @@ func (a *Client) UpdateScanner(ctx context.Context, params *UpdateScannerParams)
 	if err != nil {
 		return nil, err
 	}
-	return result.(*UpdateScannerOK), nil
-
+	switch value := result.(type) {
+	case *UpdateScannerOK:
+		return value, nil
+	case *UpdateScannerUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateScannerForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateScannerNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateScannerInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for updateScanner: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }

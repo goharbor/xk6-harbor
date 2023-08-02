@@ -52,10 +52,12 @@ func NewGetIconParamsWithHTTPClient(client *http.Client) *GetIconParams {
 	}
 }
 
-/* GetIconParams contains all the parameters to send to the API endpoint
-   for the get icon operation.
+/*
+GetIconParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get icon operation.
+
+	Typically these are written to a http.Request.
 */
 type GetIconParams struct {
 

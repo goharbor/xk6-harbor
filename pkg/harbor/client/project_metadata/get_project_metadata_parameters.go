@@ -53,10 +53,12 @@ func NewGetProjectMetadataParamsWithHTTPClient(client *http.Client) *GetProjectM
 	}
 }
 
-/* GetProjectMetadataParams contains all the parameters to send to the API endpoint
-   for the get project metadata operation.
+/*
+GetProjectMetadataParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get project metadata operation.
+
+	Typically these are written to a http.Request.
 */
 type GetProjectMetadataParams struct {
 

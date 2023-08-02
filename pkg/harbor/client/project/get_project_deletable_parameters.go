@@ -53,10 +53,12 @@ func NewGetProjectDeletableParamsWithHTTPClient(client *http.Client) *GetProject
 	}
 }
 
-/* GetProjectDeletableParams contains all the parameters to send to the API endpoint
-   for the get project deletable operation.
+/*
+GetProjectDeletableParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get project deletable operation.
+
+	Typically these are written to a http.Request.
 */
 type GetProjectDeletableParams struct {
 

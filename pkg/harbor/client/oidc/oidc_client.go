@@ -7,13 +7,14 @@ package oidc
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/go-openapi/runtime"
 
 	strfmt "github.com/go-openapi/strfmt"
 )
 
-//go:generate mockery -name API -inpkg
+//go:generate mockery --name API --keeptree --with-expecter --case underscore
 
 // API is the interface of the oidc client
 type API interface {
@@ -47,7 +48,6 @@ type Client struct {
 PingOIDC tests the OIDC endpoint
 
 Test the OIDC endpoint, the setting of the endpoint is provided in the request.  This API can only be called by system admin.
-
 */
 func (a *Client) PingOIDC(ctx context.Context, params *PingOIDCParams) (*PingOIDCOK, error) {
 
@@ -67,6 +67,17 @@ func (a *Client) PingOIDC(ctx context.Context, params *PingOIDCParams) (*PingOID
 	if err != nil {
 		return nil, err
 	}
-	return result.(*PingOIDCOK), nil
-
+	switch value := result.(type) {
+	case *PingOIDCOK:
+		return value, nil
+	case *PingOIDCBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *PingOIDCUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *PingOIDCForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for pingOIDC: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }

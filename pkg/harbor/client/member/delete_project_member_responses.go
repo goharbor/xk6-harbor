@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // DeleteProjectMemberReader is a Reader for the DeleteProjectMember structure.
@@ -54,7 +54,7 @@ func (o *DeleteProjectMemberReader) ReadResponse(response runtime.ClientResponse
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /projects/{project_name_or_id}/members/{mid}] deleteProjectMember", response, response.Code())
 	}
 }
 
@@ -63,7 +63,8 @@ func NewDeleteProjectMemberOK() *DeleteProjectMemberOK {
 	return &DeleteProjectMemberOK{}
 }
 
-/* DeleteProjectMemberOK describes a response with status code 200, with default header values.
+/*
+DeleteProjectMemberOK describes a response with status code 200, with default header values.
 
 Success
 */
@@ -74,7 +75,41 @@ type DeleteProjectMemberOK struct {
 	XRequestID string
 }
 
+// IsSuccess returns true when this delete project member o k response has a 2xx status code
+func (o *DeleteProjectMemberOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this delete project member o k response has a 3xx status code
+func (o *DeleteProjectMemberOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete project member o k response has a 4xx status code
+func (o *DeleteProjectMemberOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete project member o k response has a 5xx status code
+func (o *DeleteProjectMemberOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete project member o k response a status code equal to that given
+func (o *DeleteProjectMemberOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the delete project member o k response
+func (o *DeleteProjectMemberOK) Code() int {
+	return 200
+}
+
 func (o *DeleteProjectMemberOK) Error() string {
+	return fmt.Sprintf("[DELETE /projects/{project_name_or_id}/members/{mid}][%d] deleteProjectMemberOK ", 200)
+}
+
+func (o *DeleteProjectMemberOK) String() string {
 	return fmt.Sprintf("[DELETE /projects/{project_name_or_id}/members/{mid}][%d] deleteProjectMemberOK ", 200)
 }
 
@@ -95,7 +130,8 @@ func NewDeleteProjectMemberBadRequest() *DeleteProjectMemberBadRequest {
 	return &DeleteProjectMemberBadRequest{}
 }
 
-/* DeleteProjectMemberBadRequest describes a response with status code 400, with default header values.
+/*
+DeleteProjectMemberBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
@@ -108,9 +144,44 @@ type DeleteProjectMemberBadRequest struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this delete project member bad request response has a 2xx status code
+func (o *DeleteProjectMemberBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete project member bad request response has a 3xx status code
+func (o *DeleteProjectMemberBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete project member bad request response has a 4xx status code
+func (o *DeleteProjectMemberBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete project member bad request response has a 5xx status code
+func (o *DeleteProjectMemberBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete project member bad request response a status code equal to that given
+func (o *DeleteProjectMemberBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the delete project member bad request response
+func (o *DeleteProjectMemberBadRequest) Code() int {
+	return 400
+}
+
 func (o *DeleteProjectMemberBadRequest) Error() string {
 	return fmt.Sprintf("[DELETE /projects/{project_name_or_id}/members/{mid}][%d] deleteProjectMemberBadRequest  %+v", 400, o.Payload)
 }
+
+func (o *DeleteProjectMemberBadRequest) String() string {
+	return fmt.Sprintf("[DELETE /projects/{project_name_or_id}/members/{mid}][%d] deleteProjectMemberBadRequest  %+v", 400, o.Payload)
+}
+
 func (o *DeleteProjectMemberBadRequest) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -139,7 +210,8 @@ func NewDeleteProjectMemberUnauthorized() *DeleteProjectMemberUnauthorized {
 	return &DeleteProjectMemberUnauthorized{}
 }
 
-/* DeleteProjectMemberUnauthorized describes a response with status code 401, with default header values.
+/*
+DeleteProjectMemberUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -152,9 +224,44 @@ type DeleteProjectMemberUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this delete project member unauthorized response has a 2xx status code
+func (o *DeleteProjectMemberUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete project member unauthorized response has a 3xx status code
+func (o *DeleteProjectMemberUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete project member unauthorized response has a 4xx status code
+func (o *DeleteProjectMemberUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete project member unauthorized response has a 5xx status code
+func (o *DeleteProjectMemberUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete project member unauthorized response a status code equal to that given
+func (o *DeleteProjectMemberUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the delete project member unauthorized response
+func (o *DeleteProjectMemberUnauthorized) Code() int {
+	return 401
+}
+
 func (o *DeleteProjectMemberUnauthorized) Error() string {
 	return fmt.Sprintf("[DELETE /projects/{project_name_or_id}/members/{mid}][%d] deleteProjectMemberUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *DeleteProjectMemberUnauthorized) String() string {
+	return fmt.Sprintf("[DELETE /projects/{project_name_or_id}/members/{mid}][%d] deleteProjectMemberUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *DeleteProjectMemberUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -183,7 +290,8 @@ func NewDeleteProjectMemberForbidden() *DeleteProjectMemberForbidden {
 	return &DeleteProjectMemberForbidden{}
 }
 
-/* DeleteProjectMemberForbidden describes a response with status code 403, with default header values.
+/*
+DeleteProjectMemberForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -196,9 +304,44 @@ type DeleteProjectMemberForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this delete project member forbidden response has a 2xx status code
+func (o *DeleteProjectMemberForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete project member forbidden response has a 3xx status code
+func (o *DeleteProjectMemberForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete project member forbidden response has a 4xx status code
+func (o *DeleteProjectMemberForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete project member forbidden response has a 5xx status code
+func (o *DeleteProjectMemberForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete project member forbidden response a status code equal to that given
+func (o *DeleteProjectMemberForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the delete project member forbidden response
+func (o *DeleteProjectMemberForbidden) Code() int {
+	return 403
+}
+
 func (o *DeleteProjectMemberForbidden) Error() string {
 	return fmt.Sprintf("[DELETE /projects/{project_name_or_id}/members/{mid}][%d] deleteProjectMemberForbidden  %+v", 403, o.Payload)
 }
+
+func (o *DeleteProjectMemberForbidden) String() string {
+	return fmt.Sprintf("[DELETE /projects/{project_name_or_id}/members/{mid}][%d] deleteProjectMemberForbidden  %+v", 403, o.Payload)
+}
+
 func (o *DeleteProjectMemberForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -227,7 +370,8 @@ func NewDeleteProjectMemberInternalServerError() *DeleteProjectMemberInternalSer
 	return &DeleteProjectMemberInternalServerError{}
 }
 
-/* DeleteProjectMemberInternalServerError describes a response with status code 500, with default header values.
+/*
+DeleteProjectMemberInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -240,9 +384,44 @@ type DeleteProjectMemberInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this delete project member internal server error response has a 2xx status code
+func (o *DeleteProjectMemberInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete project member internal server error response has a 3xx status code
+func (o *DeleteProjectMemberInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete project member internal server error response has a 4xx status code
+func (o *DeleteProjectMemberInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete project member internal server error response has a 5xx status code
+func (o *DeleteProjectMemberInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this delete project member internal server error response a status code equal to that given
+func (o *DeleteProjectMemberInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the delete project member internal server error response
+func (o *DeleteProjectMemberInternalServerError) Code() int {
+	return 500
+}
+
 func (o *DeleteProjectMemberInternalServerError) Error() string {
 	return fmt.Sprintf("[DELETE /projects/{project_name_or_id}/members/{mid}][%d] deleteProjectMemberInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *DeleteProjectMemberInternalServerError) String() string {
+	return fmt.Sprintf("[DELETE /projects/{project_name_or_id}/members/{mid}][%d] deleteProjectMemberInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *DeleteProjectMemberInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

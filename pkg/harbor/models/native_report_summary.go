@@ -103,6 +103,8 @@ func (m *NativeReportSummary) validateScanner(formats strfmt.Registry) error {
 		if err := m.Scanner.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("scanner")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("scanner")
 			}
 			return err
 		}
@@ -132,6 +134,8 @@ func (m *NativeReportSummary) validateSummary(formats strfmt.Registry) error {
 		if err := m.Summary.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("summary")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("summary")
 			}
 			return err
 		}
@@ -161,9 +165,16 @@ func (m *NativeReportSummary) ContextValidate(ctx context.Context, formats strfm
 func (m *NativeReportSummary) contextValidateScanner(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Scanner != nil {
+
+		if swag.IsZero(m.Scanner) { // not required
+			return nil
+		}
+
 		if err := m.Scanner.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("scanner")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("scanner")
 			}
 			return err
 		}
@@ -175,9 +186,16 @@ func (m *NativeReportSummary) contextValidateScanner(ctx context.Context, format
 func (m *NativeReportSummary) contextValidateSummary(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Summary != nil {
+
+		if swag.IsZero(m.Summary) { // not required
+			return nil
+		}
+
 		if err := m.Summary.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("summary")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("summary")
 			}
 			return err
 		}

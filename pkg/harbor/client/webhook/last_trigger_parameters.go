@@ -53,10 +53,12 @@ func NewLastTriggerParamsWithHTTPClient(client *http.Client) *LastTriggerParams 
 	}
 }
 
-/* LastTriggerParams contains all the parameters to send to the API endpoint
-   for the last trigger operation.
+/*
+LastTriggerParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the last trigger operation.
+
+	Typically these are written to a http.Request.
 */
 type LastTriggerParams struct {
 

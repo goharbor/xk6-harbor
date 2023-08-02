@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // ListExecutionsReader is a Reader for the ListExecutions structure.
@@ -62,7 +62,7 @@ func (o *ListExecutionsReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /projects/{project_name}/preheat/policies/{preheat_policy_name}/executions] ListExecutions", response, response.Code())
 	}
 }
 
@@ -71,7 +71,8 @@ func NewListExecutionsOK() *ListExecutionsOK {
 	return &ListExecutionsOK{}
 }
 
-/* ListExecutionsOK describes a response with status code 200, with default header values.
+/*
+ListExecutionsOK describes a response with status code 200, with default header values.
 
 List executions success
 */
@@ -88,9 +89,44 @@ type ListExecutionsOK struct {
 	Payload []*models.Execution
 }
 
+// IsSuccess returns true when this list executions o k response has a 2xx status code
+func (o *ListExecutionsOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list executions o k response has a 3xx status code
+func (o *ListExecutionsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list executions o k response has a 4xx status code
+func (o *ListExecutionsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list executions o k response has a 5xx status code
+func (o *ListExecutionsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list executions o k response a status code equal to that given
+func (o *ListExecutionsOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list executions o k response
+func (o *ListExecutionsOK) Code() int {
+	return 200
+}
+
 func (o *ListExecutionsOK) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/preheat/policies/{preheat_policy_name}/executions][%d] listExecutionsOK  %+v", 200, o.Payload)
 }
+
+func (o *ListExecutionsOK) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/preheat/policies/{preheat_policy_name}/executions][%d] listExecutionsOK  %+v", 200, o.Payload)
+}
+
 func (o *ListExecutionsOK) GetPayload() []*models.Execution {
 	return o.Payload
 }
@@ -128,7 +164,8 @@ func NewListExecutionsBadRequest() *ListExecutionsBadRequest {
 	return &ListExecutionsBadRequest{}
 }
 
-/* ListExecutionsBadRequest describes a response with status code 400, with default header values.
+/*
+ListExecutionsBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
@@ -141,9 +178,44 @@ type ListExecutionsBadRequest struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list executions bad request response has a 2xx status code
+func (o *ListExecutionsBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list executions bad request response has a 3xx status code
+func (o *ListExecutionsBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list executions bad request response has a 4xx status code
+func (o *ListExecutionsBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list executions bad request response has a 5xx status code
+func (o *ListExecutionsBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list executions bad request response a status code equal to that given
+func (o *ListExecutionsBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the list executions bad request response
+func (o *ListExecutionsBadRequest) Code() int {
+	return 400
+}
+
 func (o *ListExecutionsBadRequest) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/preheat/policies/{preheat_policy_name}/executions][%d] listExecutionsBadRequest  %+v", 400, o.Payload)
 }
+
+func (o *ListExecutionsBadRequest) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/preheat/policies/{preheat_policy_name}/executions][%d] listExecutionsBadRequest  %+v", 400, o.Payload)
+}
+
 func (o *ListExecutionsBadRequest) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -172,7 +244,8 @@ func NewListExecutionsUnauthorized() *ListExecutionsUnauthorized {
 	return &ListExecutionsUnauthorized{}
 }
 
-/* ListExecutionsUnauthorized describes a response with status code 401, with default header values.
+/*
+ListExecutionsUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -185,9 +258,44 @@ type ListExecutionsUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list executions unauthorized response has a 2xx status code
+func (o *ListExecutionsUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list executions unauthorized response has a 3xx status code
+func (o *ListExecutionsUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list executions unauthorized response has a 4xx status code
+func (o *ListExecutionsUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list executions unauthorized response has a 5xx status code
+func (o *ListExecutionsUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list executions unauthorized response a status code equal to that given
+func (o *ListExecutionsUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the list executions unauthorized response
+func (o *ListExecutionsUnauthorized) Code() int {
+	return 401
+}
+
 func (o *ListExecutionsUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/preheat/policies/{preheat_policy_name}/executions][%d] listExecutionsUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *ListExecutionsUnauthorized) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/preheat/policies/{preheat_policy_name}/executions][%d] listExecutionsUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *ListExecutionsUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -216,7 +324,8 @@ func NewListExecutionsForbidden() *ListExecutionsForbidden {
 	return &ListExecutionsForbidden{}
 }
 
-/* ListExecutionsForbidden describes a response with status code 403, with default header values.
+/*
+ListExecutionsForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -229,9 +338,44 @@ type ListExecutionsForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list executions forbidden response has a 2xx status code
+func (o *ListExecutionsForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list executions forbidden response has a 3xx status code
+func (o *ListExecutionsForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list executions forbidden response has a 4xx status code
+func (o *ListExecutionsForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list executions forbidden response has a 5xx status code
+func (o *ListExecutionsForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list executions forbidden response a status code equal to that given
+func (o *ListExecutionsForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the list executions forbidden response
+func (o *ListExecutionsForbidden) Code() int {
+	return 403
+}
+
 func (o *ListExecutionsForbidden) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/preheat/policies/{preheat_policy_name}/executions][%d] listExecutionsForbidden  %+v", 403, o.Payload)
 }
+
+func (o *ListExecutionsForbidden) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/preheat/policies/{preheat_policy_name}/executions][%d] listExecutionsForbidden  %+v", 403, o.Payload)
+}
+
 func (o *ListExecutionsForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -260,7 +404,8 @@ func NewListExecutionsNotFound() *ListExecutionsNotFound {
 	return &ListExecutionsNotFound{}
 }
 
-/* ListExecutionsNotFound describes a response with status code 404, with default header values.
+/*
+ListExecutionsNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
@@ -273,9 +418,44 @@ type ListExecutionsNotFound struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list executions not found response has a 2xx status code
+func (o *ListExecutionsNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list executions not found response has a 3xx status code
+func (o *ListExecutionsNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list executions not found response has a 4xx status code
+func (o *ListExecutionsNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list executions not found response has a 5xx status code
+func (o *ListExecutionsNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list executions not found response a status code equal to that given
+func (o *ListExecutionsNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the list executions not found response
+func (o *ListExecutionsNotFound) Code() int {
+	return 404
+}
+
 func (o *ListExecutionsNotFound) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/preheat/policies/{preheat_policy_name}/executions][%d] listExecutionsNotFound  %+v", 404, o.Payload)
 }
+
+func (o *ListExecutionsNotFound) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/preheat/policies/{preheat_policy_name}/executions][%d] listExecutionsNotFound  %+v", 404, o.Payload)
+}
+
 func (o *ListExecutionsNotFound) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -304,7 +484,8 @@ func NewListExecutionsInternalServerError() *ListExecutionsInternalServerError {
 	return &ListExecutionsInternalServerError{}
 }
 
-/* ListExecutionsInternalServerError describes a response with status code 500, with default header values.
+/*
+ListExecutionsInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -317,9 +498,44 @@ type ListExecutionsInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list executions internal server error response has a 2xx status code
+func (o *ListExecutionsInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list executions internal server error response has a 3xx status code
+func (o *ListExecutionsInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list executions internal server error response has a 4xx status code
+func (o *ListExecutionsInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list executions internal server error response has a 5xx status code
+func (o *ListExecutionsInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this list executions internal server error response a status code equal to that given
+func (o *ListExecutionsInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the list executions internal server error response
+func (o *ListExecutionsInternalServerError) Code() int {
+	return 500
+}
+
 func (o *ListExecutionsInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/preheat/policies/{preheat_policy_name}/executions][%d] listExecutionsInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *ListExecutionsInternalServerError) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/preheat/policies/{preheat_policy_name}/executions][%d] listExecutionsInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *ListExecutionsInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

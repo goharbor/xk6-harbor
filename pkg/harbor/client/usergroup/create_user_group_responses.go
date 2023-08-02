@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // CreateUserGroupReader is a Reader for the CreateUserGroup structure.
@@ -60,7 +60,7 @@ func (o *CreateUserGroupReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /usergroups] createUserGroup", response, response.Code())
 	}
 }
 
@@ -69,7 +69,8 @@ func NewCreateUserGroupCreated() *CreateUserGroupCreated {
 	return &CreateUserGroupCreated{}
 }
 
-/* CreateUserGroupCreated describes a response with status code 201, with default header values.
+/*
+CreateUserGroupCreated describes a response with status code 201, with default header values.
 
 User group created successfully.
 */
@@ -80,7 +81,41 @@ type CreateUserGroupCreated struct {
 	Location string
 }
 
+// IsSuccess returns true when this create user group created response has a 2xx status code
+func (o *CreateUserGroupCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create user group created response has a 3xx status code
+func (o *CreateUserGroupCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create user group created response has a 4xx status code
+func (o *CreateUserGroupCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create user group created response has a 5xx status code
+func (o *CreateUserGroupCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create user group created response a status code equal to that given
+func (o *CreateUserGroupCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create user group created response
+func (o *CreateUserGroupCreated) Code() int {
+	return 201
+}
+
 func (o *CreateUserGroupCreated) Error() string {
+	return fmt.Sprintf("[POST /usergroups][%d] createUserGroupCreated ", 201)
+}
+
+func (o *CreateUserGroupCreated) String() string {
 	return fmt.Sprintf("[POST /usergroups][%d] createUserGroupCreated ", 201)
 }
 
@@ -101,7 +136,8 @@ func NewCreateUserGroupBadRequest() *CreateUserGroupBadRequest {
 	return &CreateUserGroupBadRequest{}
 }
 
-/* CreateUserGroupBadRequest describes a response with status code 400, with default header values.
+/*
+CreateUserGroupBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
@@ -114,9 +150,44 @@ type CreateUserGroupBadRequest struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create user group bad request response has a 2xx status code
+func (o *CreateUserGroupBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create user group bad request response has a 3xx status code
+func (o *CreateUserGroupBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create user group bad request response has a 4xx status code
+func (o *CreateUserGroupBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create user group bad request response has a 5xx status code
+func (o *CreateUserGroupBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create user group bad request response a status code equal to that given
+func (o *CreateUserGroupBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create user group bad request response
+func (o *CreateUserGroupBadRequest) Code() int {
+	return 400
+}
+
 func (o *CreateUserGroupBadRequest) Error() string {
 	return fmt.Sprintf("[POST /usergroups][%d] createUserGroupBadRequest  %+v", 400, o.Payload)
 }
+
+func (o *CreateUserGroupBadRequest) String() string {
+	return fmt.Sprintf("[POST /usergroups][%d] createUserGroupBadRequest  %+v", 400, o.Payload)
+}
+
 func (o *CreateUserGroupBadRequest) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -145,7 +216,8 @@ func NewCreateUserGroupUnauthorized() *CreateUserGroupUnauthorized {
 	return &CreateUserGroupUnauthorized{}
 }
 
-/* CreateUserGroupUnauthorized describes a response with status code 401, with default header values.
+/*
+CreateUserGroupUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -158,9 +230,44 @@ type CreateUserGroupUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create user group unauthorized response has a 2xx status code
+func (o *CreateUserGroupUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create user group unauthorized response has a 3xx status code
+func (o *CreateUserGroupUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create user group unauthorized response has a 4xx status code
+func (o *CreateUserGroupUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create user group unauthorized response has a 5xx status code
+func (o *CreateUserGroupUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create user group unauthorized response a status code equal to that given
+func (o *CreateUserGroupUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the create user group unauthorized response
+func (o *CreateUserGroupUnauthorized) Code() int {
+	return 401
+}
+
 func (o *CreateUserGroupUnauthorized) Error() string {
 	return fmt.Sprintf("[POST /usergroups][%d] createUserGroupUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *CreateUserGroupUnauthorized) String() string {
+	return fmt.Sprintf("[POST /usergroups][%d] createUserGroupUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *CreateUserGroupUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -189,7 +296,8 @@ func NewCreateUserGroupForbidden() *CreateUserGroupForbidden {
 	return &CreateUserGroupForbidden{}
 }
 
-/* CreateUserGroupForbidden describes a response with status code 403, with default header values.
+/*
+CreateUserGroupForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -202,9 +310,44 @@ type CreateUserGroupForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create user group forbidden response has a 2xx status code
+func (o *CreateUserGroupForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create user group forbidden response has a 3xx status code
+func (o *CreateUserGroupForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create user group forbidden response has a 4xx status code
+func (o *CreateUserGroupForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create user group forbidden response has a 5xx status code
+func (o *CreateUserGroupForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create user group forbidden response a status code equal to that given
+func (o *CreateUserGroupForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the create user group forbidden response
+func (o *CreateUserGroupForbidden) Code() int {
+	return 403
+}
+
 func (o *CreateUserGroupForbidden) Error() string {
 	return fmt.Sprintf("[POST /usergroups][%d] createUserGroupForbidden  %+v", 403, o.Payload)
 }
+
+func (o *CreateUserGroupForbidden) String() string {
+	return fmt.Sprintf("[POST /usergroups][%d] createUserGroupForbidden  %+v", 403, o.Payload)
+}
+
 func (o *CreateUserGroupForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -233,7 +376,8 @@ func NewCreateUserGroupConflict() *CreateUserGroupConflict {
 	return &CreateUserGroupConflict{}
 }
 
-/* CreateUserGroupConflict describes a response with status code 409, with default header values.
+/*
+CreateUserGroupConflict describes a response with status code 409, with default header values.
 
 Conflict
 */
@@ -246,9 +390,44 @@ type CreateUserGroupConflict struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create user group conflict response has a 2xx status code
+func (o *CreateUserGroupConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create user group conflict response has a 3xx status code
+func (o *CreateUserGroupConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create user group conflict response has a 4xx status code
+func (o *CreateUserGroupConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create user group conflict response has a 5xx status code
+func (o *CreateUserGroupConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create user group conflict response a status code equal to that given
+func (o *CreateUserGroupConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the create user group conflict response
+func (o *CreateUserGroupConflict) Code() int {
+	return 409
+}
+
 func (o *CreateUserGroupConflict) Error() string {
 	return fmt.Sprintf("[POST /usergroups][%d] createUserGroupConflict  %+v", 409, o.Payload)
 }
+
+func (o *CreateUserGroupConflict) String() string {
+	return fmt.Sprintf("[POST /usergroups][%d] createUserGroupConflict  %+v", 409, o.Payload)
+}
+
 func (o *CreateUserGroupConflict) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -277,7 +456,8 @@ func NewCreateUserGroupInternalServerError() *CreateUserGroupInternalServerError
 	return &CreateUserGroupInternalServerError{}
 }
 
-/* CreateUserGroupInternalServerError describes a response with status code 500, with default header values.
+/*
+CreateUserGroupInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -290,9 +470,44 @@ type CreateUserGroupInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create user group internal server error response has a 2xx status code
+func (o *CreateUserGroupInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create user group internal server error response has a 3xx status code
+func (o *CreateUserGroupInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create user group internal server error response has a 4xx status code
+func (o *CreateUserGroupInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create user group internal server error response has a 5xx status code
+func (o *CreateUserGroupInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this create user group internal server error response a status code equal to that given
+func (o *CreateUserGroupInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the create user group internal server error response
+func (o *CreateUserGroupInternalServerError) Code() int {
+	return 500
+}
+
 func (o *CreateUserGroupInternalServerError) Error() string {
 	return fmt.Sprintf("[POST /usergroups][%d] createUserGroupInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *CreateUserGroupInternalServerError) String() string {
+	return fmt.Sprintf("[POST /usergroups][%d] createUserGroupInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *CreateUserGroupInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

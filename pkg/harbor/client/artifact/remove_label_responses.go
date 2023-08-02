@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // RemoveLabelReader is a Reader for the RemoveLabel structure.
@@ -60,7 +60,7 @@ func (o *RemoveLabelReader) ReadResponse(response runtime.ClientResponse, consum
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/labels/{label_id}] removeLabel", response, response.Code())
 	}
 }
 
@@ -69,7 +69,8 @@ func NewRemoveLabelOK() *RemoveLabelOK {
 	return &RemoveLabelOK{}
 }
 
-/* RemoveLabelOK describes a response with status code 200, with default header values.
+/*
+RemoveLabelOK describes a response with status code 200, with default header values.
 
 Success
 */
@@ -80,7 +81,41 @@ type RemoveLabelOK struct {
 	XRequestID string
 }
 
+// IsSuccess returns true when this remove label o k response has a 2xx status code
+func (o *RemoveLabelOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this remove label o k response has a 3xx status code
+func (o *RemoveLabelOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this remove label o k response has a 4xx status code
+func (o *RemoveLabelOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this remove label o k response has a 5xx status code
+func (o *RemoveLabelOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this remove label o k response a status code equal to that given
+func (o *RemoveLabelOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the remove label o k response
+func (o *RemoveLabelOK) Code() int {
+	return 200
+}
+
 func (o *RemoveLabelOK) Error() string {
+	return fmt.Sprintf("[DELETE /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/labels/{label_id}][%d] removeLabelOK ", 200)
+}
+
+func (o *RemoveLabelOK) String() string {
 	return fmt.Sprintf("[DELETE /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/labels/{label_id}][%d] removeLabelOK ", 200)
 }
 
@@ -101,7 +136,8 @@ func NewRemoveLabelUnauthorized() *RemoveLabelUnauthorized {
 	return &RemoveLabelUnauthorized{}
 }
 
-/* RemoveLabelUnauthorized describes a response with status code 401, with default header values.
+/*
+RemoveLabelUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -114,9 +150,44 @@ type RemoveLabelUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this remove label unauthorized response has a 2xx status code
+func (o *RemoveLabelUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this remove label unauthorized response has a 3xx status code
+func (o *RemoveLabelUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this remove label unauthorized response has a 4xx status code
+func (o *RemoveLabelUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this remove label unauthorized response has a 5xx status code
+func (o *RemoveLabelUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this remove label unauthorized response a status code equal to that given
+func (o *RemoveLabelUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the remove label unauthorized response
+func (o *RemoveLabelUnauthorized) Code() int {
+	return 401
+}
+
 func (o *RemoveLabelUnauthorized) Error() string {
 	return fmt.Sprintf("[DELETE /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/labels/{label_id}][%d] removeLabelUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *RemoveLabelUnauthorized) String() string {
+	return fmt.Sprintf("[DELETE /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/labels/{label_id}][%d] removeLabelUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *RemoveLabelUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -145,7 +216,8 @@ func NewRemoveLabelForbidden() *RemoveLabelForbidden {
 	return &RemoveLabelForbidden{}
 }
 
-/* RemoveLabelForbidden describes a response with status code 403, with default header values.
+/*
+RemoveLabelForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -158,9 +230,44 @@ type RemoveLabelForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this remove label forbidden response has a 2xx status code
+func (o *RemoveLabelForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this remove label forbidden response has a 3xx status code
+func (o *RemoveLabelForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this remove label forbidden response has a 4xx status code
+func (o *RemoveLabelForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this remove label forbidden response has a 5xx status code
+func (o *RemoveLabelForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this remove label forbidden response a status code equal to that given
+func (o *RemoveLabelForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the remove label forbidden response
+func (o *RemoveLabelForbidden) Code() int {
+	return 403
+}
+
 func (o *RemoveLabelForbidden) Error() string {
 	return fmt.Sprintf("[DELETE /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/labels/{label_id}][%d] removeLabelForbidden  %+v", 403, o.Payload)
 }
+
+func (o *RemoveLabelForbidden) String() string {
+	return fmt.Sprintf("[DELETE /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/labels/{label_id}][%d] removeLabelForbidden  %+v", 403, o.Payload)
+}
+
 func (o *RemoveLabelForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -189,7 +296,8 @@ func NewRemoveLabelNotFound() *RemoveLabelNotFound {
 	return &RemoveLabelNotFound{}
 }
 
-/* RemoveLabelNotFound describes a response with status code 404, with default header values.
+/*
+RemoveLabelNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
@@ -202,9 +310,44 @@ type RemoveLabelNotFound struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this remove label not found response has a 2xx status code
+func (o *RemoveLabelNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this remove label not found response has a 3xx status code
+func (o *RemoveLabelNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this remove label not found response has a 4xx status code
+func (o *RemoveLabelNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this remove label not found response has a 5xx status code
+func (o *RemoveLabelNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this remove label not found response a status code equal to that given
+func (o *RemoveLabelNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the remove label not found response
+func (o *RemoveLabelNotFound) Code() int {
+	return 404
+}
+
 func (o *RemoveLabelNotFound) Error() string {
 	return fmt.Sprintf("[DELETE /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/labels/{label_id}][%d] removeLabelNotFound  %+v", 404, o.Payload)
 }
+
+func (o *RemoveLabelNotFound) String() string {
+	return fmt.Sprintf("[DELETE /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/labels/{label_id}][%d] removeLabelNotFound  %+v", 404, o.Payload)
+}
+
 func (o *RemoveLabelNotFound) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -233,7 +376,8 @@ func NewRemoveLabelConflict() *RemoveLabelConflict {
 	return &RemoveLabelConflict{}
 }
 
-/* RemoveLabelConflict describes a response with status code 409, with default header values.
+/*
+RemoveLabelConflict describes a response with status code 409, with default header values.
 
 Conflict
 */
@@ -246,9 +390,44 @@ type RemoveLabelConflict struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this remove label conflict response has a 2xx status code
+func (o *RemoveLabelConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this remove label conflict response has a 3xx status code
+func (o *RemoveLabelConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this remove label conflict response has a 4xx status code
+func (o *RemoveLabelConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this remove label conflict response has a 5xx status code
+func (o *RemoveLabelConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this remove label conflict response a status code equal to that given
+func (o *RemoveLabelConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the remove label conflict response
+func (o *RemoveLabelConflict) Code() int {
+	return 409
+}
+
 func (o *RemoveLabelConflict) Error() string {
 	return fmt.Sprintf("[DELETE /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/labels/{label_id}][%d] removeLabelConflict  %+v", 409, o.Payload)
 }
+
+func (o *RemoveLabelConflict) String() string {
+	return fmt.Sprintf("[DELETE /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/labels/{label_id}][%d] removeLabelConflict  %+v", 409, o.Payload)
+}
+
 func (o *RemoveLabelConflict) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -277,7 +456,8 @@ func NewRemoveLabelInternalServerError() *RemoveLabelInternalServerError {
 	return &RemoveLabelInternalServerError{}
 }
 
-/* RemoveLabelInternalServerError describes a response with status code 500, with default header values.
+/*
+RemoveLabelInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -290,9 +470,44 @@ type RemoveLabelInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this remove label internal server error response has a 2xx status code
+func (o *RemoveLabelInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this remove label internal server error response has a 3xx status code
+func (o *RemoveLabelInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this remove label internal server error response has a 4xx status code
+func (o *RemoveLabelInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this remove label internal server error response has a 5xx status code
+func (o *RemoveLabelInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this remove label internal server error response a status code equal to that given
+func (o *RemoveLabelInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the remove label internal server error response
+func (o *RemoveLabelInternalServerError) Code() int {
+	return 500
+}
+
 func (o *RemoveLabelInternalServerError) Error() string {
 	return fmt.Sprintf("[DELETE /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/labels/{label_id}][%d] removeLabelInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *RemoveLabelInternalServerError) String() string {
+	return fmt.Sprintf("[DELETE /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/labels/{label_id}][%d] removeLabelInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *RemoveLabelInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

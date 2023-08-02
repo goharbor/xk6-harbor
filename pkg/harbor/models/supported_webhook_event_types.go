@@ -54,6 +54,8 @@ func (m *SupportedWebhookEventTypes) validateEventType(formats strfmt.Registry) 
 		if err := m.EventType[i].Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("event_type" + "." + strconv.Itoa(i))
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("event_type" + "." + strconv.Itoa(i))
 			}
 			return err
 		}
@@ -73,6 +75,8 @@ func (m *SupportedWebhookEventTypes) validateNotifyType(formats strfmt.Registry)
 		if err := m.NotifyType[i].Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("notify_type" + "." + strconv.Itoa(i))
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("notify_type" + "." + strconv.Itoa(i))
 			}
 			return err
 		}
@@ -104,9 +108,15 @@ func (m *SupportedWebhookEventTypes) contextValidateEventType(ctx context.Contex
 
 	for i := 0; i < len(m.EventType); i++ {
 
+		if swag.IsZero(m.EventType[i]) { // not required
+			return nil
+		}
+
 		if err := m.EventType[i].ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("event_type" + "." + strconv.Itoa(i))
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("event_type" + "." + strconv.Itoa(i))
 			}
 			return err
 		}
@@ -120,9 +130,15 @@ func (m *SupportedWebhookEventTypes) contextValidateNotifyType(ctx context.Conte
 
 	for i := 0; i < len(m.NotifyType); i++ {
 
+		if swag.IsZero(m.NotifyType[i]) { // not required
+			return nil
+		}
+
 		if err := m.NotifyType[i].ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("notify_type" + "." + strconv.Itoa(i))
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("notify_type" + "." + strconv.Itoa(i))
 			}
 			return err
 		}

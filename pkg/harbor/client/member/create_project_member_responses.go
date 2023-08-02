@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // CreateProjectMemberReader is a Reader for the CreateProjectMember structure.
@@ -60,7 +60,7 @@ func (o *CreateProjectMemberReader) ReadResponse(response runtime.ClientResponse
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /projects/{project_name_or_id}/members] createProjectMember", response, response.Code())
 	}
 }
 
@@ -69,7 +69,8 @@ func NewCreateProjectMemberCreated() *CreateProjectMemberCreated {
 	return &CreateProjectMemberCreated{}
 }
 
-/* CreateProjectMemberCreated describes a response with status code 201, with default header values.
+/*
+CreateProjectMemberCreated describes a response with status code 201, with default header values.
 
 Project member created successfully.
 */
@@ -80,7 +81,41 @@ type CreateProjectMemberCreated struct {
 	Location string
 }
 
+// IsSuccess returns true when this create project member created response has a 2xx status code
+func (o *CreateProjectMemberCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create project member created response has a 3xx status code
+func (o *CreateProjectMemberCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create project member created response has a 4xx status code
+func (o *CreateProjectMemberCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create project member created response has a 5xx status code
+func (o *CreateProjectMemberCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create project member created response a status code equal to that given
+func (o *CreateProjectMemberCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create project member created response
+func (o *CreateProjectMemberCreated) Code() int {
+	return 201
+}
+
 func (o *CreateProjectMemberCreated) Error() string {
+	return fmt.Sprintf("[POST /projects/{project_name_or_id}/members][%d] createProjectMemberCreated ", 201)
+}
+
+func (o *CreateProjectMemberCreated) String() string {
 	return fmt.Sprintf("[POST /projects/{project_name_or_id}/members][%d] createProjectMemberCreated ", 201)
 }
 
@@ -101,7 +136,8 @@ func NewCreateProjectMemberBadRequest() *CreateProjectMemberBadRequest {
 	return &CreateProjectMemberBadRequest{}
 }
 
-/* CreateProjectMemberBadRequest describes a response with status code 400, with default header values.
+/*
+CreateProjectMemberBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
@@ -114,9 +150,44 @@ type CreateProjectMemberBadRequest struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create project member bad request response has a 2xx status code
+func (o *CreateProjectMemberBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create project member bad request response has a 3xx status code
+func (o *CreateProjectMemberBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create project member bad request response has a 4xx status code
+func (o *CreateProjectMemberBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create project member bad request response has a 5xx status code
+func (o *CreateProjectMemberBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create project member bad request response a status code equal to that given
+func (o *CreateProjectMemberBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create project member bad request response
+func (o *CreateProjectMemberBadRequest) Code() int {
+	return 400
+}
+
 func (o *CreateProjectMemberBadRequest) Error() string {
 	return fmt.Sprintf("[POST /projects/{project_name_or_id}/members][%d] createProjectMemberBadRequest  %+v", 400, o.Payload)
 }
+
+func (o *CreateProjectMemberBadRequest) String() string {
+	return fmt.Sprintf("[POST /projects/{project_name_or_id}/members][%d] createProjectMemberBadRequest  %+v", 400, o.Payload)
+}
+
 func (o *CreateProjectMemberBadRequest) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -145,7 +216,8 @@ func NewCreateProjectMemberUnauthorized() *CreateProjectMemberUnauthorized {
 	return &CreateProjectMemberUnauthorized{}
 }
 
-/* CreateProjectMemberUnauthorized describes a response with status code 401, with default header values.
+/*
+CreateProjectMemberUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -158,9 +230,44 @@ type CreateProjectMemberUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create project member unauthorized response has a 2xx status code
+func (o *CreateProjectMemberUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create project member unauthorized response has a 3xx status code
+func (o *CreateProjectMemberUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create project member unauthorized response has a 4xx status code
+func (o *CreateProjectMemberUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create project member unauthorized response has a 5xx status code
+func (o *CreateProjectMemberUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create project member unauthorized response a status code equal to that given
+func (o *CreateProjectMemberUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the create project member unauthorized response
+func (o *CreateProjectMemberUnauthorized) Code() int {
+	return 401
+}
+
 func (o *CreateProjectMemberUnauthorized) Error() string {
 	return fmt.Sprintf("[POST /projects/{project_name_or_id}/members][%d] createProjectMemberUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *CreateProjectMemberUnauthorized) String() string {
+	return fmt.Sprintf("[POST /projects/{project_name_or_id}/members][%d] createProjectMemberUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *CreateProjectMemberUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -189,7 +296,8 @@ func NewCreateProjectMemberForbidden() *CreateProjectMemberForbidden {
 	return &CreateProjectMemberForbidden{}
 }
 
-/* CreateProjectMemberForbidden describes a response with status code 403, with default header values.
+/*
+CreateProjectMemberForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -202,9 +310,44 @@ type CreateProjectMemberForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create project member forbidden response has a 2xx status code
+func (o *CreateProjectMemberForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create project member forbidden response has a 3xx status code
+func (o *CreateProjectMemberForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create project member forbidden response has a 4xx status code
+func (o *CreateProjectMemberForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create project member forbidden response has a 5xx status code
+func (o *CreateProjectMemberForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create project member forbidden response a status code equal to that given
+func (o *CreateProjectMemberForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the create project member forbidden response
+func (o *CreateProjectMemberForbidden) Code() int {
+	return 403
+}
+
 func (o *CreateProjectMemberForbidden) Error() string {
 	return fmt.Sprintf("[POST /projects/{project_name_or_id}/members][%d] createProjectMemberForbidden  %+v", 403, o.Payload)
 }
+
+func (o *CreateProjectMemberForbidden) String() string {
+	return fmt.Sprintf("[POST /projects/{project_name_or_id}/members][%d] createProjectMemberForbidden  %+v", 403, o.Payload)
+}
+
 func (o *CreateProjectMemberForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -233,7 +376,8 @@ func NewCreateProjectMemberConflict() *CreateProjectMemberConflict {
 	return &CreateProjectMemberConflict{}
 }
 
-/* CreateProjectMemberConflict describes a response with status code 409, with default header values.
+/*
+CreateProjectMemberConflict describes a response with status code 409, with default header values.
 
 Conflict
 */
@@ -246,9 +390,44 @@ type CreateProjectMemberConflict struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create project member conflict response has a 2xx status code
+func (o *CreateProjectMemberConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create project member conflict response has a 3xx status code
+func (o *CreateProjectMemberConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create project member conflict response has a 4xx status code
+func (o *CreateProjectMemberConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create project member conflict response has a 5xx status code
+func (o *CreateProjectMemberConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create project member conflict response a status code equal to that given
+func (o *CreateProjectMemberConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the create project member conflict response
+func (o *CreateProjectMemberConflict) Code() int {
+	return 409
+}
+
 func (o *CreateProjectMemberConflict) Error() string {
 	return fmt.Sprintf("[POST /projects/{project_name_or_id}/members][%d] createProjectMemberConflict  %+v", 409, o.Payload)
 }
+
+func (o *CreateProjectMemberConflict) String() string {
+	return fmt.Sprintf("[POST /projects/{project_name_or_id}/members][%d] createProjectMemberConflict  %+v", 409, o.Payload)
+}
+
 func (o *CreateProjectMemberConflict) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -277,7 +456,8 @@ func NewCreateProjectMemberInternalServerError() *CreateProjectMemberInternalSer
 	return &CreateProjectMemberInternalServerError{}
 }
 
-/* CreateProjectMemberInternalServerError describes a response with status code 500, with default header values.
+/*
+CreateProjectMemberInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -290,9 +470,44 @@ type CreateProjectMemberInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create project member internal server error response has a 2xx status code
+func (o *CreateProjectMemberInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create project member internal server error response has a 3xx status code
+func (o *CreateProjectMemberInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create project member internal server error response has a 4xx status code
+func (o *CreateProjectMemberInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create project member internal server error response has a 5xx status code
+func (o *CreateProjectMemberInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this create project member internal server error response a status code equal to that given
+func (o *CreateProjectMemberInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the create project member internal server error response
+func (o *CreateProjectMemberInternalServerError) Code() int {
+	return 500
+}
+
 func (o *CreateProjectMemberInternalServerError) Error() string {
 	return fmt.Sprintf("[POST /projects/{project_name_or_id}/members][%d] createProjectMemberInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *CreateProjectMemberInternalServerError) String() string {
+	return fmt.Sprintf("[POST /projects/{project_name_or_id}/members][%d] createProjectMemberInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *CreateProjectMemberInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

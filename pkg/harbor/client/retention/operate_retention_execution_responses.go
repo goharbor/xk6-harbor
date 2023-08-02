@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // OperateRetentionExecutionReader is a Reader for the OperateRetentionExecution structure.
@@ -50,7 +50,7 @@ func (o *OperateRetentionExecutionReader) ReadResponse(response runtime.ClientRe
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PATCH /retentions/{id}/executions/{eid}] operateRetentionExecution", response, response.Code())
 	}
 }
 
@@ -59,14 +59,49 @@ func NewOperateRetentionExecutionOK() *OperateRetentionExecutionOK {
 	return &OperateRetentionExecutionOK{}
 }
 
-/* OperateRetentionExecutionOK describes a response with status code 200, with default header values.
+/*
+OperateRetentionExecutionOK describes a response with status code 200, with default header values.
 
 Stop a Retention job successfully.
 */
 type OperateRetentionExecutionOK struct {
 }
 
+// IsSuccess returns true when this operate retention execution o k response has a 2xx status code
+func (o *OperateRetentionExecutionOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this operate retention execution o k response has a 3xx status code
+func (o *OperateRetentionExecutionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this operate retention execution o k response has a 4xx status code
+func (o *OperateRetentionExecutionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this operate retention execution o k response has a 5xx status code
+func (o *OperateRetentionExecutionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this operate retention execution o k response a status code equal to that given
+func (o *OperateRetentionExecutionOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the operate retention execution o k response
+func (o *OperateRetentionExecutionOK) Code() int {
+	return 200
+}
+
 func (o *OperateRetentionExecutionOK) Error() string {
+	return fmt.Sprintf("[PATCH /retentions/{id}/executions/{eid}][%d] operateRetentionExecutionOK ", 200)
+}
+
+func (o *OperateRetentionExecutionOK) String() string {
 	return fmt.Sprintf("[PATCH /retentions/{id}/executions/{eid}][%d] operateRetentionExecutionOK ", 200)
 }
 
@@ -80,7 +115,8 @@ func NewOperateRetentionExecutionUnauthorized() *OperateRetentionExecutionUnauth
 	return &OperateRetentionExecutionUnauthorized{}
 }
 
-/* OperateRetentionExecutionUnauthorized describes a response with status code 401, with default header values.
+/*
+OperateRetentionExecutionUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -93,9 +129,44 @@ type OperateRetentionExecutionUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this operate retention execution unauthorized response has a 2xx status code
+func (o *OperateRetentionExecutionUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this operate retention execution unauthorized response has a 3xx status code
+func (o *OperateRetentionExecutionUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this operate retention execution unauthorized response has a 4xx status code
+func (o *OperateRetentionExecutionUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this operate retention execution unauthorized response has a 5xx status code
+func (o *OperateRetentionExecutionUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this operate retention execution unauthorized response a status code equal to that given
+func (o *OperateRetentionExecutionUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the operate retention execution unauthorized response
+func (o *OperateRetentionExecutionUnauthorized) Code() int {
+	return 401
+}
+
 func (o *OperateRetentionExecutionUnauthorized) Error() string {
 	return fmt.Sprintf("[PATCH /retentions/{id}/executions/{eid}][%d] operateRetentionExecutionUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *OperateRetentionExecutionUnauthorized) String() string {
+	return fmt.Sprintf("[PATCH /retentions/{id}/executions/{eid}][%d] operateRetentionExecutionUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *OperateRetentionExecutionUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -124,7 +195,8 @@ func NewOperateRetentionExecutionForbidden() *OperateRetentionExecutionForbidden
 	return &OperateRetentionExecutionForbidden{}
 }
 
-/* OperateRetentionExecutionForbidden describes a response with status code 403, with default header values.
+/*
+OperateRetentionExecutionForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -137,9 +209,44 @@ type OperateRetentionExecutionForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this operate retention execution forbidden response has a 2xx status code
+func (o *OperateRetentionExecutionForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this operate retention execution forbidden response has a 3xx status code
+func (o *OperateRetentionExecutionForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this operate retention execution forbidden response has a 4xx status code
+func (o *OperateRetentionExecutionForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this operate retention execution forbidden response has a 5xx status code
+func (o *OperateRetentionExecutionForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this operate retention execution forbidden response a status code equal to that given
+func (o *OperateRetentionExecutionForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the operate retention execution forbidden response
+func (o *OperateRetentionExecutionForbidden) Code() int {
+	return 403
+}
+
 func (o *OperateRetentionExecutionForbidden) Error() string {
 	return fmt.Sprintf("[PATCH /retentions/{id}/executions/{eid}][%d] operateRetentionExecutionForbidden  %+v", 403, o.Payload)
 }
+
+func (o *OperateRetentionExecutionForbidden) String() string {
+	return fmt.Sprintf("[PATCH /retentions/{id}/executions/{eid}][%d] operateRetentionExecutionForbidden  %+v", 403, o.Payload)
+}
+
 func (o *OperateRetentionExecutionForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -168,7 +275,8 @@ func NewOperateRetentionExecutionInternalServerError() *OperateRetentionExecutio
 	return &OperateRetentionExecutionInternalServerError{}
 }
 
-/* OperateRetentionExecutionInternalServerError describes a response with status code 500, with default header values.
+/*
+OperateRetentionExecutionInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -181,9 +289,44 @@ type OperateRetentionExecutionInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this operate retention execution internal server error response has a 2xx status code
+func (o *OperateRetentionExecutionInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this operate retention execution internal server error response has a 3xx status code
+func (o *OperateRetentionExecutionInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this operate retention execution internal server error response has a 4xx status code
+func (o *OperateRetentionExecutionInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this operate retention execution internal server error response has a 5xx status code
+func (o *OperateRetentionExecutionInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this operate retention execution internal server error response a status code equal to that given
+func (o *OperateRetentionExecutionInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the operate retention execution internal server error response
+func (o *OperateRetentionExecutionInternalServerError) Code() int {
+	return 500
+}
+
 func (o *OperateRetentionExecutionInternalServerError) Error() string {
 	return fmt.Sprintf("[PATCH /retentions/{id}/executions/{eid}][%d] operateRetentionExecutionInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *OperateRetentionExecutionInternalServerError) String() string {
+	return fmt.Sprintf("[PATCH /retentions/{id}/executions/{eid}][%d] operateRetentionExecutionInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *OperateRetentionExecutionInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -207,7 +350,8 @@ func (o *OperateRetentionExecutionInternalServerError) readResponse(response run
 	return nil
 }
 
-/*OperateRetentionExecutionBody operate retention execution body
+/*
+OperateRetentionExecutionBody operate retention execution body
 swagger:model OperateRetentionExecutionBody
 */
 type OperateRetentionExecutionBody struct {

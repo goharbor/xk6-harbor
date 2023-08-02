@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // GetAdditionReader is a Reader for the GetAddition structure.
@@ -60,7 +60,7 @@ func (o *GetAdditionReader) ReadResponse(response runtime.ClientResponse, consum
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/additions/{addition}] getAddition", response, response.Code())
 	}
 }
 
@@ -69,7 +69,8 @@ func NewGetAdditionOK() *GetAdditionOK {
 	return &GetAdditionOK{}
 }
 
-/* GetAdditionOK describes a response with status code 200, with default header values.
+/*
+GetAdditionOK describes a response with status code 200, with default header values.
 
 Success
 */
@@ -82,9 +83,44 @@ type GetAdditionOK struct {
 	Payload string
 }
 
+// IsSuccess returns true when this get addition o k response has a 2xx status code
+func (o *GetAdditionOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get addition o k response has a 3xx status code
+func (o *GetAdditionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get addition o k response has a 4xx status code
+func (o *GetAdditionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get addition o k response has a 5xx status code
+func (o *GetAdditionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get addition o k response a status code equal to that given
+func (o *GetAdditionOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get addition o k response
+func (o *GetAdditionOK) Code() int {
+	return 200
+}
+
 func (o *GetAdditionOK) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/additions/{addition}][%d] getAdditionOK  %+v", 200, o.Payload)
 }
+
+func (o *GetAdditionOK) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/additions/{addition}][%d] getAdditionOK  %+v", 200, o.Payload)
+}
+
 func (o *GetAdditionOK) GetPayload() string {
 	return o.Payload
 }
@@ -111,7 +147,8 @@ func NewGetAdditionBadRequest() *GetAdditionBadRequest {
 	return &GetAdditionBadRequest{}
 }
 
-/* GetAdditionBadRequest describes a response with status code 400, with default header values.
+/*
+GetAdditionBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
@@ -124,9 +161,44 @@ type GetAdditionBadRequest struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get addition bad request response has a 2xx status code
+func (o *GetAdditionBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get addition bad request response has a 3xx status code
+func (o *GetAdditionBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get addition bad request response has a 4xx status code
+func (o *GetAdditionBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get addition bad request response has a 5xx status code
+func (o *GetAdditionBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get addition bad request response a status code equal to that given
+func (o *GetAdditionBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the get addition bad request response
+func (o *GetAdditionBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetAdditionBadRequest) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/additions/{addition}][%d] getAdditionBadRequest  %+v", 400, o.Payload)
 }
+
+func (o *GetAdditionBadRequest) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/additions/{addition}][%d] getAdditionBadRequest  %+v", 400, o.Payload)
+}
+
 func (o *GetAdditionBadRequest) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -155,7 +227,8 @@ func NewGetAdditionUnauthorized() *GetAdditionUnauthorized {
 	return &GetAdditionUnauthorized{}
 }
 
-/* GetAdditionUnauthorized describes a response with status code 401, with default header values.
+/*
+GetAdditionUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -168,9 +241,44 @@ type GetAdditionUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get addition unauthorized response has a 2xx status code
+func (o *GetAdditionUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get addition unauthorized response has a 3xx status code
+func (o *GetAdditionUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get addition unauthorized response has a 4xx status code
+func (o *GetAdditionUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get addition unauthorized response has a 5xx status code
+func (o *GetAdditionUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get addition unauthorized response a status code equal to that given
+func (o *GetAdditionUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the get addition unauthorized response
+func (o *GetAdditionUnauthorized) Code() int {
+	return 401
+}
+
 func (o *GetAdditionUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/additions/{addition}][%d] getAdditionUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *GetAdditionUnauthorized) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/additions/{addition}][%d] getAdditionUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *GetAdditionUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -199,7 +307,8 @@ func NewGetAdditionForbidden() *GetAdditionForbidden {
 	return &GetAdditionForbidden{}
 }
 
-/* GetAdditionForbidden describes a response with status code 403, with default header values.
+/*
+GetAdditionForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -212,9 +321,44 @@ type GetAdditionForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get addition forbidden response has a 2xx status code
+func (o *GetAdditionForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get addition forbidden response has a 3xx status code
+func (o *GetAdditionForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get addition forbidden response has a 4xx status code
+func (o *GetAdditionForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get addition forbidden response has a 5xx status code
+func (o *GetAdditionForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get addition forbidden response a status code equal to that given
+func (o *GetAdditionForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the get addition forbidden response
+func (o *GetAdditionForbidden) Code() int {
+	return 403
+}
+
 func (o *GetAdditionForbidden) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/additions/{addition}][%d] getAdditionForbidden  %+v", 403, o.Payload)
 }
+
+func (o *GetAdditionForbidden) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/additions/{addition}][%d] getAdditionForbidden  %+v", 403, o.Payload)
+}
+
 func (o *GetAdditionForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -243,7 +387,8 @@ func NewGetAdditionNotFound() *GetAdditionNotFound {
 	return &GetAdditionNotFound{}
 }
 
-/* GetAdditionNotFound describes a response with status code 404, with default header values.
+/*
+GetAdditionNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
@@ -256,9 +401,44 @@ type GetAdditionNotFound struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get addition not found response has a 2xx status code
+func (o *GetAdditionNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get addition not found response has a 3xx status code
+func (o *GetAdditionNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get addition not found response has a 4xx status code
+func (o *GetAdditionNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get addition not found response has a 5xx status code
+func (o *GetAdditionNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get addition not found response a status code equal to that given
+func (o *GetAdditionNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get addition not found response
+func (o *GetAdditionNotFound) Code() int {
+	return 404
+}
+
 func (o *GetAdditionNotFound) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/additions/{addition}][%d] getAdditionNotFound  %+v", 404, o.Payload)
 }
+
+func (o *GetAdditionNotFound) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/additions/{addition}][%d] getAdditionNotFound  %+v", 404, o.Payload)
+}
+
 func (o *GetAdditionNotFound) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -287,7 +467,8 @@ func NewGetAdditionInternalServerError() *GetAdditionInternalServerError {
 	return &GetAdditionInternalServerError{}
 }
 
-/* GetAdditionInternalServerError describes a response with status code 500, with default header values.
+/*
+GetAdditionInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -300,9 +481,44 @@ type GetAdditionInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get addition internal server error response has a 2xx status code
+func (o *GetAdditionInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get addition internal server error response has a 3xx status code
+func (o *GetAdditionInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get addition internal server error response has a 4xx status code
+func (o *GetAdditionInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get addition internal server error response has a 5xx status code
+func (o *GetAdditionInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get addition internal server error response a status code equal to that given
+func (o *GetAdditionInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the get addition internal server error response
+func (o *GetAdditionInternalServerError) Code() int {
+	return 500
+}
+
 func (o *GetAdditionInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/additions/{addition}][%d] getAdditionInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *GetAdditionInternalServerError) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/additions/{addition}][%d] getAdditionInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *GetAdditionInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

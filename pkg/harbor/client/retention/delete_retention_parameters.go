@@ -53,10 +53,12 @@ func NewDeleteRetentionParamsWithHTTPClient(client *http.Client) *DeleteRetentio
 	}
 }
 
-/* DeleteRetentionParams contains all the parameters to send to the API endpoint
-   for the delete retention operation.
+/*
+DeleteRetentionParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the delete retention operation.
+
+	Typically these are written to a http.Request.
 */
 type DeleteRetentionParams struct {
 

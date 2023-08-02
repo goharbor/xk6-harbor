@@ -48,6 +48,8 @@ func (m *ReplicationTrigger) validateTriggerSettings(formats strfmt.Registry) er
 		if err := m.TriggerSettings.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("trigger_settings")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("trigger_settings")
 			}
 			return err
 		}
@@ -73,9 +75,16 @@ func (m *ReplicationTrigger) ContextValidate(ctx context.Context, formats strfmt
 func (m *ReplicationTrigger) contextValidateTriggerSettings(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.TriggerSettings != nil {
+
+		if swag.IsZero(m.TriggerSettings) { // not required
+			return nil
+		}
+
 		if err := m.TriggerSettings.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("trigger_settings")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("trigger_settings")
 			}
 			return err
 		}

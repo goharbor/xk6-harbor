@@ -52,10 +52,12 @@ func NewGetInternalconfigParamsWithHTTPClient(client *http.Client) *GetInternalc
 	}
 }
 
-/* GetInternalconfigParams contains all the parameters to send to the API endpoint
-   for the get internalconfig operation.
+/*
+GetInternalconfigParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get internalconfig operation.
+
+	Typically these are written to a http.Request.
 */
 type GetInternalconfigParams struct {
 

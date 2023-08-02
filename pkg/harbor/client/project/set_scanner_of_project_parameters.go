@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // NewSetScannerOfProjectParams creates a new SetScannerOfProjectParams object,
@@ -55,10 +55,12 @@ func NewSetScannerOfProjectParamsWithHTTPClient(client *http.Client) *SetScanner
 	}
 }
 
-/* SetScannerOfProjectParams contains all the parameters to send to the API endpoint
-   for the set scanner of project operation.
+/*
+SetScannerOfProjectParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the set scanner of project operation.
+
+	Typically these are written to a http.Request.
 */
 type SetScannerOfProjectParams struct {
 

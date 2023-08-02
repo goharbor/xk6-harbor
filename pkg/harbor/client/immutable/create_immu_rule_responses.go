@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // CreateImmuRuleReader is a Reader for the CreateImmuRule structure.
@@ -60,7 +60,7 @@ func (o *CreateImmuRuleReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /projects/{project_name_or_id}/immutabletagrules] CreateImmuRule", response, response.Code())
 	}
 }
 
@@ -69,7 +69,8 @@ func NewCreateImmuRuleCreated() *CreateImmuRuleCreated {
 	return &CreateImmuRuleCreated{}
 }
 
-/* CreateImmuRuleCreated describes a response with status code 201, with default header values.
+/*
+CreateImmuRuleCreated describes a response with status code 201, with default header values.
 
 Created
 */
@@ -84,7 +85,41 @@ type CreateImmuRuleCreated struct {
 	XRequestID string
 }
 
+// IsSuccess returns true when this create immu rule created response has a 2xx status code
+func (o *CreateImmuRuleCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create immu rule created response has a 3xx status code
+func (o *CreateImmuRuleCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create immu rule created response has a 4xx status code
+func (o *CreateImmuRuleCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create immu rule created response has a 5xx status code
+func (o *CreateImmuRuleCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create immu rule created response a status code equal to that given
+func (o *CreateImmuRuleCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create immu rule created response
+func (o *CreateImmuRuleCreated) Code() int {
+	return 201
+}
+
 func (o *CreateImmuRuleCreated) Error() string {
+	return fmt.Sprintf("[POST /projects/{project_name_or_id}/immutabletagrules][%d] createImmuRuleCreated ", 201)
+}
+
+func (o *CreateImmuRuleCreated) String() string {
 	return fmt.Sprintf("[POST /projects/{project_name_or_id}/immutabletagrules][%d] createImmuRuleCreated ", 201)
 }
 
@@ -112,7 +147,8 @@ func NewCreateImmuRuleBadRequest() *CreateImmuRuleBadRequest {
 	return &CreateImmuRuleBadRequest{}
 }
 
-/* CreateImmuRuleBadRequest describes a response with status code 400, with default header values.
+/*
+CreateImmuRuleBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
@@ -125,9 +161,44 @@ type CreateImmuRuleBadRequest struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create immu rule bad request response has a 2xx status code
+func (o *CreateImmuRuleBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create immu rule bad request response has a 3xx status code
+func (o *CreateImmuRuleBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create immu rule bad request response has a 4xx status code
+func (o *CreateImmuRuleBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create immu rule bad request response has a 5xx status code
+func (o *CreateImmuRuleBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create immu rule bad request response a status code equal to that given
+func (o *CreateImmuRuleBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create immu rule bad request response
+func (o *CreateImmuRuleBadRequest) Code() int {
+	return 400
+}
+
 func (o *CreateImmuRuleBadRequest) Error() string {
 	return fmt.Sprintf("[POST /projects/{project_name_or_id}/immutabletagrules][%d] createImmuRuleBadRequest  %+v", 400, o.Payload)
 }
+
+func (o *CreateImmuRuleBadRequest) String() string {
+	return fmt.Sprintf("[POST /projects/{project_name_or_id}/immutabletagrules][%d] createImmuRuleBadRequest  %+v", 400, o.Payload)
+}
+
 func (o *CreateImmuRuleBadRequest) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -156,7 +227,8 @@ func NewCreateImmuRuleUnauthorized() *CreateImmuRuleUnauthorized {
 	return &CreateImmuRuleUnauthorized{}
 }
 
-/* CreateImmuRuleUnauthorized describes a response with status code 401, with default header values.
+/*
+CreateImmuRuleUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -169,9 +241,44 @@ type CreateImmuRuleUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create immu rule unauthorized response has a 2xx status code
+func (o *CreateImmuRuleUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create immu rule unauthorized response has a 3xx status code
+func (o *CreateImmuRuleUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create immu rule unauthorized response has a 4xx status code
+func (o *CreateImmuRuleUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create immu rule unauthorized response has a 5xx status code
+func (o *CreateImmuRuleUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create immu rule unauthorized response a status code equal to that given
+func (o *CreateImmuRuleUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the create immu rule unauthorized response
+func (o *CreateImmuRuleUnauthorized) Code() int {
+	return 401
+}
+
 func (o *CreateImmuRuleUnauthorized) Error() string {
 	return fmt.Sprintf("[POST /projects/{project_name_or_id}/immutabletagrules][%d] createImmuRuleUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *CreateImmuRuleUnauthorized) String() string {
+	return fmt.Sprintf("[POST /projects/{project_name_or_id}/immutabletagrules][%d] createImmuRuleUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *CreateImmuRuleUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -200,7 +307,8 @@ func NewCreateImmuRuleForbidden() *CreateImmuRuleForbidden {
 	return &CreateImmuRuleForbidden{}
 }
 
-/* CreateImmuRuleForbidden describes a response with status code 403, with default header values.
+/*
+CreateImmuRuleForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -213,9 +321,44 @@ type CreateImmuRuleForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create immu rule forbidden response has a 2xx status code
+func (o *CreateImmuRuleForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create immu rule forbidden response has a 3xx status code
+func (o *CreateImmuRuleForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create immu rule forbidden response has a 4xx status code
+func (o *CreateImmuRuleForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create immu rule forbidden response has a 5xx status code
+func (o *CreateImmuRuleForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create immu rule forbidden response a status code equal to that given
+func (o *CreateImmuRuleForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the create immu rule forbidden response
+func (o *CreateImmuRuleForbidden) Code() int {
+	return 403
+}
+
 func (o *CreateImmuRuleForbidden) Error() string {
 	return fmt.Sprintf("[POST /projects/{project_name_or_id}/immutabletagrules][%d] createImmuRuleForbidden  %+v", 403, o.Payload)
 }
+
+func (o *CreateImmuRuleForbidden) String() string {
+	return fmt.Sprintf("[POST /projects/{project_name_or_id}/immutabletagrules][%d] createImmuRuleForbidden  %+v", 403, o.Payload)
+}
+
 func (o *CreateImmuRuleForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -244,7 +387,8 @@ func NewCreateImmuRuleNotFound() *CreateImmuRuleNotFound {
 	return &CreateImmuRuleNotFound{}
 }
 
-/* CreateImmuRuleNotFound describes a response with status code 404, with default header values.
+/*
+CreateImmuRuleNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
@@ -257,9 +401,44 @@ type CreateImmuRuleNotFound struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create immu rule not found response has a 2xx status code
+func (o *CreateImmuRuleNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create immu rule not found response has a 3xx status code
+func (o *CreateImmuRuleNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create immu rule not found response has a 4xx status code
+func (o *CreateImmuRuleNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create immu rule not found response has a 5xx status code
+func (o *CreateImmuRuleNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create immu rule not found response a status code equal to that given
+func (o *CreateImmuRuleNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the create immu rule not found response
+func (o *CreateImmuRuleNotFound) Code() int {
+	return 404
+}
+
 func (o *CreateImmuRuleNotFound) Error() string {
 	return fmt.Sprintf("[POST /projects/{project_name_or_id}/immutabletagrules][%d] createImmuRuleNotFound  %+v", 404, o.Payload)
 }
+
+func (o *CreateImmuRuleNotFound) String() string {
+	return fmt.Sprintf("[POST /projects/{project_name_or_id}/immutabletagrules][%d] createImmuRuleNotFound  %+v", 404, o.Payload)
+}
+
 func (o *CreateImmuRuleNotFound) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -288,7 +467,8 @@ func NewCreateImmuRuleInternalServerError() *CreateImmuRuleInternalServerError {
 	return &CreateImmuRuleInternalServerError{}
 }
 
-/* CreateImmuRuleInternalServerError describes a response with status code 500, with default header values.
+/*
+CreateImmuRuleInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -301,9 +481,44 @@ type CreateImmuRuleInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create immu rule internal server error response has a 2xx status code
+func (o *CreateImmuRuleInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create immu rule internal server error response has a 3xx status code
+func (o *CreateImmuRuleInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create immu rule internal server error response has a 4xx status code
+func (o *CreateImmuRuleInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create immu rule internal server error response has a 5xx status code
+func (o *CreateImmuRuleInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this create immu rule internal server error response a status code equal to that given
+func (o *CreateImmuRuleInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the create immu rule internal server error response
+func (o *CreateImmuRuleInternalServerError) Code() int {
+	return 500
+}
+
 func (o *CreateImmuRuleInternalServerError) Error() string {
 	return fmt.Sprintf("[POST /projects/{project_name_or_id}/immutabletagrules][%d] createImmuRuleInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *CreateImmuRuleInternalServerError) String() string {
+	return fmt.Sprintf("[POST /projects/{project_name_or_id}/immutabletagrules][%d] createImmuRuleInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *CreateImmuRuleInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

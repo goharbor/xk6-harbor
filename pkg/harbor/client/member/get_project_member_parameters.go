@@ -53,10 +53,12 @@ func NewGetProjectMemberParamsWithHTTPClient(client *http.Client) *GetProjectMem
 	}
 }
 
-/* GetProjectMemberParams contains all the parameters to send to the API endpoint
-   for the get project member operation.
+/*
+GetProjectMemberParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get project member operation.
+
+	Typically these are written to a http.Request.
 */
 type GetProjectMemberParams struct {
 
