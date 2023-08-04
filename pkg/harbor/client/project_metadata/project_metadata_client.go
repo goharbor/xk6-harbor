@@ -7,13 +7,14 @@ package project_metadata
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/go-openapi/runtime"
 
 	strfmt "github.com/go-openapi/strfmt"
 )
 
-//go:generate mockery -name API -inpkg
+//go:generate mockery --name API --keeptree --with-expecter --case underscore
 
 // API is the interface of the project metadata client
 type API interface {
@@ -85,8 +86,25 @@ func (a *Client) AddProjectMetadatas(ctx context.Context, params *AddProjectMeta
 	if err != nil {
 		return nil, err
 	}
-	return result.(*AddProjectMetadatasOK), nil
-
+	switch value := result.(type) {
+	case *AddProjectMetadatasOK:
+		return value, nil
+	case *AddProjectMetadatasBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *AddProjectMetadatasUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *AddProjectMetadatasForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *AddProjectMetadatasNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *AddProjectMetadatasConflict:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *AddProjectMetadatasInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for addProjectMetadatas: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -112,8 +130,25 @@ func (a *Client) DeleteProjectMetadata(ctx context.Context, params *DeleteProjec
 	if err != nil {
 		return nil, err
 	}
-	return result.(*DeleteProjectMetadataOK), nil
-
+	switch value := result.(type) {
+	case *DeleteProjectMetadataOK:
+		return value, nil
+	case *DeleteProjectMetadataBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteProjectMetadataUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteProjectMetadataForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteProjectMetadataNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteProjectMetadataConflict:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteProjectMetadataInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for deleteProjectMetadata: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -139,8 +174,23 @@ func (a *Client) GetProjectMetadata(ctx context.Context, params *GetProjectMetad
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetProjectMetadataOK), nil
-
+	switch value := result.(type) {
+	case *GetProjectMetadataOK:
+		return value, nil
+	case *GetProjectMetadataBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetProjectMetadataUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetProjectMetadataForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetProjectMetadataNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetProjectMetadataInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getProjectMetadata: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -166,8 +216,23 @@ func (a *Client) ListProjectMetadatas(ctx context.Context, params *ListProjectMe
 	if err != nil {
 		return nil, err
 	}
-	return result.(*ListProjectMetadatasOK), nil
-
+	switch value := result.(type) {
+	case *ListProjectMetadatasOK:
+		return value, nil
+	case *ListProjectMetadatasBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListProjectMetadatasUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListProjectMetadatasForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListProjectMetadatasNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListProjectMetadatasInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for listProjectMetadatas: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -193,6 +258,23 @@ func (a *Client) UpdateProjectMetadata(ctx context.Context, params *UpdateProjec
 	if err != nil {
 		return nil, err
 	}
-	return result.(*UpdateProjectMetadataOK), nil
-
+	switch value := result.(type) {
+	case *UpdateProjectMetadataOK:
+		return value, nil
+	case *UpdateProjectMetadataBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateProjectMetadataUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateProjectMetadataForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateProjectMetadataNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateProjectMetadataConflict:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateProjectMetadataInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for updateProjectMetadata: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }

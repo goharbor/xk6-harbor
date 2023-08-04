@@ -1,10 +1,7 @@
 package module
 
 import (
-	"context"
-	"errors"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path"
 	"path/filepath"
@@ -14,16 +11,15 @@ import (
 	"github.com/containerd/containerd/content"
 	"github.com/containerd/containerd/content/local"
 	"github.com/dop251/goja"
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
 	"github.com/opencontainers/go-digest"
 	"go.k6.io/k6/js/common"
 )
 
-func newLocalStore(ctx context.Context, name string) (string, content.Store) {
+func newLocalStore(rt *goja.Runtime, name string) (string, content.Store) {
 	rootPath := filepath.Join(DefaultRootPath, name)
 
 	store, err := local.NewStore(rootPath)
-	Check(ctx, err)
+	Check(rt, err)
 
 	return rootPath, store
 }
@@ -51,73 +47,72 @@ func writeBlob(rootPath string, data []byte) (digest.Digest, error) {
 	}
 
 	filename := path.Join(dir, dgt.Hex())
-	if err := ioutil.WriteFile(filename, data, 0664); err != nil {
+	if err := os.WriteFile(filename, data, 0664); err != nil {
 		return "", err
 	}
 
 	return dgt, nil
 }
 
-func getErrors(i interface{}) *models.Errors {
-	if v, ok := i.(interface {
-		GetPayload() *models.Errors
-	}); ok {
-		return v.GetPayload()
-	}
+// func getErrors(i interface{}) *models.Errors {
+// 	if v, ok := i.(interface {
+// 		GetPayload() *models.Errors
+// 	}); ok {
+// 		return v.GetPayload()
+// 	}
 
-	return nil
-}
+// 	return nil
+// }
 
-func getErrorMessage(err error) string {
-	if errs := getErrors(err); errs != nil && len(errs.Errors) > 0 {
-		return errs.Errors[0].Message
-	}
+// func getErrorMessage(err error) string {
+// 	if errs := getErrors(err); errs != nil && len(errs.Errors) > 0 {
+// 		return errs.Errors[0].Message
+// 	}
 
-	return err.Error()
-}
+// 	return err.Error()
+// }
 
-func Check(ctx context.Context, err error) {
+func Check(rt *goja.Runtime, err error) {
 	if err == nil {
 		return
 	}
 
-	common.Throw(common.GetRuntime(ctx), errors.New(getErrorMessage(err)))
+	common.Throw(rt, err)
 }
 
-func Checkf(ctx context.Context, err error, format string, a ...interface{}) {
+func Checkf(rt *goja.Runtime, err error, format string, a ...interface{}) {
 	if err == nil {
 		return
 	}
 
 	common.Throw(
-		common.GetRuntime(ctx),
-		fmt.Errorf("%s, error: %s", fmt.Sprintf(format, a...), getErrorMessage(err)),
+		rt,
+		fmt.Errorf("%s, error: %s", fmt.Sprintf(format, a...), err),
 	)
 }
 
-func Throwf(ctx context.Context, format string, a ...interface{}) {
-	common.Throw(common.GetRuntime(ctx), fmt.Errorf(format, a...))
+func Throwf(rt *goja.Runtime, format string, a ...interface{}) {
+	common.Throw(rt, fmt.Errorf(format, a...))
 }
 
-func ExportTo(ctx context.Context, target interface{}, args ...goja.Value) {
+func ExportTo(rt *goja.Runtime, target interface{}, args ...goja.Value) {
 	if len(args) > 0 {
-		rt := common.GetRuntime(ctx)
 		if err := rt.ExportTo(args[0], target); err != nil {
-			common.Throw(common.GetRuntime(ctx), err)
+			common.Throw(rt, err)
 		}
 	}
 }
 
-func IDFromLocation(ctx context.Context, loc string) int64 {
+func IDFromLocation(rt *goja.Runtime, loc string) int64 {
 	parts := strings.Split(loc, "/")
 
 	id, err := strconv.ParseInt(parts[len(parts)-1], 10, 64)
-	Check(ctx, err)
+	Check(rt, err)
 
 	return id
 }
 
-func NameFromLocation(ctx context.Context, loc string) string {
+func NameFromLocation(loc string) string {
 	parts := strings.Split(loc, "/")
 
 	return parts[len(parts)-1]

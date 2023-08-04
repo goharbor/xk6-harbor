@@ -53,10 +53,12 @@ func NewListRobotParamsWithHTTPClient(client *http.Client) *ListRobotParams {
 	}
 }
 
-/* ListRobotParams contains all the parameters to send to the API endpoint
-   for the list robot operation.
+/*
+ListRobotParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the list robot operation.
+
+	Typically these are written to a http.Request.
 */
 type ListRobotParams struct {
 

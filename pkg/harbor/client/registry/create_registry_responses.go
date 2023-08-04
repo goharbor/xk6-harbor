@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // CreateRegistryReader is a Reader for the CreateRegistry structure.
@@ -60,7 +60,7 @@ func (o *CreateRegistryReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /registries] createRegistry", response, response.Code())
 	}
 }
 
@@ -69,7 +69,8 @@ func NewCreateRegistryCreated() *CreateRegistryCreated {
 	return &CreateRegistryCreated{}
 }
 
-/* CreateRegistryCreated describes a response with status code 201, with default header values.
+/*
+CreateRegistryCreated describes a response with status code 201, with default header values.
 
 Created
 */
@@ -84,7 +85,41 @@ type CreateRegistryCreated struct {
 	XRequestID string
 }
 
+// IsSuccess returns true when this create registry created response has a 2xx status code
+func (o *CreateRegistryCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create registry created response has a 3xx status code
+func (o *CreateRegistryCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create registry created response has a 4xx status code
+func (o *CreateRegistryCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create registry created response has a 5xx status code
+func (o *CreateRegistryCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create registry created response a status code equal to that given
+func (o *CreateRegistryCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create registry created response
+func (o *CreateRegistryCreated) Code() int {
+	return 201
+}
+
 func (o *CreateRegistryCreated) Error() string {
+	return fmt.Sprintf("[POST /registries][%d] createRegistryCreated ", 201)
+}
+
+func (o *CreateRegistryCreated) String() string {
 	return fmt.Sprintf("[POST /registries][%d] createRegistryCreated ", 201)
 }
 
@@ -112,7 +147,8 @@ func NewCreateRegistryBadRequest() *CreateRegistryBadRequest {
 	return &CreateRegistryBadRequest{}
 }
 
-/* CreateRegistryBadRequest describes a response with status code 400, with default header values.
+/*
+CreateRegistryBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
@@ -125,9 +161,44 @@ type CreateRegistryBadRequest struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create registry bad request response has a 2xx status code
+func (o *CreateRegistryBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create registry bad request response has a 3xx status code
+func (o *CreateRegistryBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create registry bad request response has a 4xx status code
+func (o *CreateRegistryBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create registry bad request response has a 5xx status code
+func (o *CreateRegistryBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create registry bad request response a status code equal to that given
+func (o *CreateRegistryBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create registry bad request response
+func (o *CreateRegistryBadRequest) Code() int {
+	return 400
+}
+
 func (o *CreateRegistryBadRequest) Error() string {
 	return fmt.Sprintf("[POST /registries][%d] createRegistryBadRequest  %+v", 400, o.Payload)
 }
+
+func (o *CreateRegistryBadRequest) String() string {
+	return fmt.Sprintf("[POST /registries][%d] createRegistryBadRequest  %+v", 400, o.Payload)
+}
+
 func (o *CreateRegistryBadRequest) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -156,7 +227,8 @@ func NewCreateRegistryUnauthorized() *CreateRegistryUnauthorized {
 	return &CreateRegistryUnauthorized{}
 }
 
-/* CreateRegistryUnauthorized describes a response with status code 401, with default header values.
+/*
+CreateRegistryUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -169,9 +241,44 @@ type CreateRegistryUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create registry unauthorized response has a 2xx status code
+func (o *CreateRegistryUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create registry unauthorized response has a 3xx status code
+func (o *CreateRegistryUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create registry unauthorized response has a 4xx status code
+func (o *CreateRegistryUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create registry unauthorized response has a 5xx status code
+func (o *CreateRegistryUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create registry unauthorized response a status code equal to that given
+func (o *CreateRegistryUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the create registry unauthorized response
+func (o *CreateRegistryUnauthorized) Code() int {
+	return 401
+}
+
 func (o *CreateRegistryUnauthorized) Error() string {
 	return fmt.Sprintf("[POST /registries][%d] createRegistryUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *CreateRegistryUnauthorized) String() string {
+	return fmt.Sprintf("[POST /registries][%d] createRegistryUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *CreateRegistryUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -200,7 +307,8 @@ func NewCreateRegistryForbidden() *CreateRegistryForbidden {
 	return &CreateRegistryForbidden{}
 }
 
-/* CreateRegistryForbidden describes a response with status code 403, with default header values.
+/*
+CreateRegistryForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -213,9 +321,44 @@ type CreateRegistryForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create registry forbidden response has a 2xx status code
+func (o *CreateRegistryForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create registry forbidden response has a 3xx status code
+func (o *CreateRegistryForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create registry forbidden response has a 4xx status code
+func (o *CreateRegistryForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create registry forbidden response has a 5xx status code
+func (o *CreateRegistryForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create registry forbidden response a status code equal to that given
+func (o *CreateRegistryForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the create registry forbidden response
+func (o *CreateRegistryForbidden) Code() int {
+	return 403
+}
+
 func (o *CreateRegistryForbidden) Error() string {
 	return fmt.Sprintf("[POST /registries][%d] createRegistryForbidden  %+v", 403, o.Payload)
 }
+
+func (o *CreateRegistryForbidden) String() string {
+	return fmt.Sprintf("[POST /registries][%d] createRegistryForbidden  %+v", 403, o.Payload)
+}
+
 func (o *CreateRegistryForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -244,7 +387,8 @@ func NewCreateRegistryConflict() *CreateRegistryConflict {
 	return &CreateRegistryConflict{}
 }
 
-/* CreateRegistryConflict describes a response with status code 409, with default header values.
+/*
+CreateRegistryConflict describes a response with status code 409, with default header values.
 
 Conflict
 */
@@ -257,9 +401,44 @@ type CreateRegistryConflict struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create registry conflict response has a 2xx status code
+func (o *CreateRegistryConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create registry conflict response has a 3xx status code
+func (o *CreateRegistryConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create registry conflict response has a 4xx status code
+func (o *CreateRegistryConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create registry conflict response has a 5xx status code
+func (o *CreateRegistryConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create registry conflict response a status code equal to that given
+func (o *CreateRegistryConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the create registry conflict response
+func (o *CreateRegistryConflict) Code() int {
+	return 409
+}
+
 func (o *CreateRegistryConflict) Error() string {
 	return fmt.Sprintf("[POST /registries][%d] createRegistryConflict  %+v", 409, o.Payload)
 }
+
+func (o *CreateRegistryConflict) String() string {
+	return fmt.Sprintf("[POST /registries][%d] createRegistryConflict  %+v", 409, o.Payload)
+}
+
 func (o *CreateRegistryConflict) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -288,7 +467,8 @@ func NewCreateRegistryInternalServerError() *CreateRegistryInternalServerError {
 	return &CreateRegistryInternalServerError{}
 }
 
-/* CreateRegistryInternalServerError describes a response with status code 500, with default header values.
+/*
+CreateRegistryInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -301,9 +481,44 @@ type CreateRegistryInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create registry internal server error response has a 2xx status code
+func (o *CreateRegistryInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create registry internal server error response has a 3xx status code
+func (o *CreateRegistryInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create registry internal server error response has a 4xx status code
+func (o *CreateRegistryInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create registry internal server error response has a 5xx status code
+func (o *CreateRegistryInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this create registry internal server error response a status code equal to that given
+func (o *CreateRegistryInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the create registry internal server error response
+func (o *CreateRegistryInternalServerError) Code() int {
+	return 500
+}
+
 func (o *CreateRegistryInternalServerError) Error() string {
 	return fmt.Sprintf("[POST /registries][%d] createRegistryInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *CreateRegistryInternalServerError) String() string {
+	return fmt.Sprintf("[POST /registries][%d] createRegistryInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *CreateRegistryInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

@@ -53,10 +53,12 @@ func NewDeleteWebhookPolicyOfProjectParamsWithHTTPClient(client *http.Client) *D
 	}
 }
 
-/* DeleteWebhookPolicyOfProjectParams contains all the parameters to send to the API endpoint
-   for the delete webhook policy of project operation.
+/*
+DeleteWebhookPolicyOfProjectParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the delete webhook policy of project operation.
+
+	Typically these are written to a http.Request.
 */
 type DeleteWebhookPolicyOfProjectParams struct {
 

@@ -15,7 +15,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // NewCreateInstanceParams creates a new CreateInstanceParams object,
@@ -54,10 +54,12 @@ func NewCreateInstanceParamsWithHTTPClient(client *http.Client) *CreateInstanceP
 	}
 }
 
-/* CreateInstanceParams contains all the parameters to send to the API endpoint
-   for the create instance operation.
+/*
+CreateInstanceParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the create instance operation.
+
+	Typically these are written to a http.Request.
 */
 type CreateInstanceParams struct {
 

@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // DeleteWebhookPolicyOfProjectReader is a Reader for the DeleteWebhookPolicyOfProject structure.
@@ -60,7 +60,7 @@ func (o *DeleteWebhookPolicyOfProjectReader) ReadResponse(response runtime.Clien
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /projects/{project_name_or_id}/webhook/policies/{webhook_policy_id}] DeleteWebhookPolicyOfProject", response, response.Code())
 	}
 }
 
@@ -69,7 +69,8 @@ func NewDeleteWebhookPolicyOfProjectOK() *DeleteWebhookPolicyOfProjectOK {
 	return &DeleteWebhookPolicyOfProjectOK{}
 }
 
-/* DeleteWebhookPolicyOfProjectOK describes a response with status code 200, with default header values.
+/*
+DeleteWebhookPolicyOfProjectOK describes a response with status code 200, with default header values.
 
 Success
 */
@@ -80,7 +81,41 @@ type DeleteWebhookPolicyOfProjectOK struct {
 	XRequestID string
 }
 
+// IsSuccess returns true when this delete webhook policy of project o k response has a 2xx status code
+func (o *DeleteWebhookPolicyOfProjectOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this delete webhook policy of project o k response has a 3xx status code
+func (o *DeleteWebhookPolicyOfProjectOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete webhook policy of project o k response has a 4xx status code
+func (o *DeleteWebhookPolicyOfProjectOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete webhook policy of project o k response has a 5xx status code
+func (o *DeleteWebhookPolicyOfProjectOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete webhook policy of project o k response a status code equal to that given
+func (o *DeleteWebhookPolicyOfProjectOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the delete webhook policy of project o k response
+func (o *DeleteWebhookPolicyOfProjectOK) Code() int {
+	return 200
+}
+
 func (o *DeleteWebhookPolicyOfProjectOK) Error() string {
+	return fmt.Sprintf("[DELETE /projects/{project_name_or_id}/webhook/policies/{webhook_policy_id}][%d] deleteWebhookPolicyOfProjectOK ", 200)
+}
+
+func (o *DeleteWebhookPolicyOfProjectOK) String() string {
 	return fmt.Sprintf("[DELETE /projects/{project_name_or_id}/webhook/policies/{webhook_policy_id}][%d] deleteWebhookPolicyOfProjectOK ", 200)
 }
 
@@ -101,7 +136,8 @@ func NewDeleteWebhookPolicyOfProjectBadRequest() *DeleteWebhookPolicyOfProjectBa
 	return &DeleteWebhookPolicyOfProjectBadRequest{}
 }
 
-/* DeleteWebhookPolicyOfProjectBadRequest describes a response with status code 400, with default header values.
+/*
+DeleteWebhookPolicyOfProjectBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
@@ -114,9 +150,44 @@ type DeleteWebhookPolicyOfProjectBadRequest struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this delete webhook policy of project bad request response has a 2xx status code
+func (o *DeleteWebhookPolicyOfProjectBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete webhook policy of project bad request response has a 3xx status code
+func (o *DeleteWebhookPolicyOfProjectBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete webhook policy of project bad request response has a 4xx status code
+func (o *DeleteWebhookPolicyOfProjectBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete webhook policy of project bad request response has a 5xx status code
+func (o *DeleteWebhookPolicyOfProjectBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete webhook policy of project bad request response a status code equal to that given
+func (o *DeleteWebhookPolicyOfProjectBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the delete webhook policy of project bad request response
+func (o *DeleteWebhookPolicyOfProjectBadRequest) Code() int {
+	return 400
+}
+
 func (o *DeleteWebhookPolicyOfProjectBadRequest) Error() string {
 	return fmt.Sprintf("[DELETE /projects/{project_name_or_id}/webhook/policies/{webhook_policy_id}][%d] deleteWebhookPolicyOfProjectBadRequest  %+v", 400, o.Payload)
 }
+
+func (o *DeleteWebhookPolicyOfProjectBadRequest) String() string {
+	return fmt.Sprintf("[DELETE /projects/{project_name_or_id}/webhook/policies/{webhook_policy_id}][%d] deleteWebhookPolicyOfProjectBadRequest  %+v", 400, o.Payload)
+}
+
 func (o *DeleteWebhookPolicyOfProjectBadRequest) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -145,7 +216,8 @@ func NewDeleteWebhookPolicyOfProjectUnauthorized() *DeleteWebhookPolicyOfProject
 	return &DeleteWebhookPolicyOfProjectUnauthorized{}
 }
 
-/* DeleteWebhookPolicyOfProjectUnauthorized describes a response with status code 401, with default header values.
+/*
+DeleteWebhookPolicyOfProjectUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -158,9 +230,44 @@ type DeleteWebhookPolicyOfProjectUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this delete webhook policy of project unauthorized response has a 2xx status code
+func (o *DeleteWebhookPolicyOfProjectUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete webhook policy of project unauthorized response has a 3xx status code
+func (o *DeleteWebhookPolicyOfProjectUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete webhook policy of project unauthorized response has a 4xx status code
+func (o *DeleteWebhookPolicyOfProjectUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete webhook policy of project unauthorized response has a 5xx status code
+func (o *DeleteWebhookPolicyOfProjectUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete webhook policy of project unauthorized response a status code equal to that given
+func (o *DeleteWebhookPolicyOfProjectUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the delete webhook policy of project unauthorized response
+func (o *DeleteWebhookPolicyOfProjectUnauthorized) Code() int {
+	return 401
+}
+
 func (o *DeleteWebhookPolicyOfProjectUnauthorized) Error() string {
 	return fmt.Sprintf("[DELETE /projects/{project_name_or_id}/webhook/policies/{webhook_policy_id}][%d] deleteWebhookPolicyOfProjectUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *DeleteWebhookPolicyOfProjectUnauthorized) String() string {
+	return fmt.Sprintf("[DELETE /projects/{project_name_or_id}/webhook/policies/{webhook_policy_id}][%d] deleteWebhookPolicyOfProjectUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *DeleteWebhookPolicyOfProjectUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -189,7 +296,8 @@ func NewDeleteWebhookPolicyOfProjectForbidden() *DeleteWebhookPolicyOfProjectFor
 	return &DeleteWebhookPolicyOfProjectForbidden{}
 }
 
-/* DeleteWebhookPolicyOfProjectForbidden describes a response with status code 403, with default header values.
+/*
+DeleteWebhookPolicyOfProjectForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -202,9 +310,44 @@ type DeleteWebhookPolicyOfProjectForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this delete webhook policy of project forbidden response has a 2xx status code
+func (o *DeleteWebhookPolicyOfProjectForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete webhook policy of project forbidden response has a 3xx status code
+func (o *DeleteWebhookPolicyOfProjectForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete webhook policy of project forbidden response has a 4xx status code
+func (o *DeleteWebhookPolicyOfProjectForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete webhook policy of project forbidden response has a 5xx status code
+func (o *DeleteWebhookPolicyOfProjectForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete webhook policy of project forbidden response a status code equal to that given
+func (o *DeleteWebhookPolicyOfProjectForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the delete webhook policy of project forbidden response
+func (o *DeleteWebhookPolicyOfProjectForbidden) Code() int {
+	return 403
+}
+
 func (o *DeleteWebhookPolicyOfProjectForbidden) Error() string {
 	return fmt.Sprintf("[DELETE /projects/{project_name_or_id}/webhook/policies/{webhook_policy_id}][%d] deleteWebhookPolicyOfProjectForbidden  %+v", 403, o.Payload)
 }
+
+func (o *DeleteWebhookPolicyOfProjectForbidden) String() string {
+	return fmt.Sprintf("[DELETE /projects/{project_name_or_id}/webhook/policies/{webhook_policy_id}][%d] deleteWebhookPolicyOfProjectForbidden  %+v", 403, o.Payload)
+}
+
 func (o *DeleteWebhookPolicyOfProjectForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -233,7 +376,8 @@ func NewDeleteWebhookPolicyOfProjectNotFound() *DeleteWebhookPolicyOfProjectNotF
 	return &DeleteWebhookPolicyOfProjectNotFound{}
 }
 
-/* DeleteWebhookPolicyOfProjectNotFound describes a response with status code 404, with default header values.
+/*
+DeleteWebhookPolicyOfProjectNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
@@ -246,9 +390,44 @@ type DeleteWebhookPolicyOfProjectNotFound struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this delete webhook policy of project not found response has a 2xx status code
+func (o *DeleteWebhookPolicyOfProjectNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete webhook policy of project not found response has a 3xx status code
+func (o *DeleteWebhookPolicyOfProjectNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete webhook policy of project not found response has a 4xx status code
+func (o *DeleteWebhookPolicyOfProjectNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete webhook policy of project not found response has a 5xx status code
+func (o *DeleteWebhookPolicyOfProjectNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete webhook policy of project not found response a status code equal to that given
+func (o *DeleteWebhookPolicyOfProjectNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the delete webhook policy of project not found response
+func (o *DeleteWebhookPolicyOfProjectNotFound) Code() int {
+	return 404
+}
+
 func (o *DeleteWebhookPolicyOfProjectNotFound) Error() string {
 	return fmt.Sprintf("[DELETE /projects/{project_name_or_id}/webhook/policies/{webhook_policy_id}][%d] deleteWebhookPolicyOfProjectNotFound  %+v", 404, o.Payload)
 }
+
+func (o *DeleteWebhookPolicyOfProjectNotFound) String() string {
+	return fmt.Sprintf("[DELETE /projects/{project_name_or_id}/webhook/policies/{webhook_policy_id}][%d] deleteWebhookPolicyOfProjectNotFound  %+v", 404, o.Payload)
+}
+
 func (o *DeleteWebhookPolicyOfProjectNotFound) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -277,7 +456,8 @@ func NewDeleteWebhookPolicyOfProjectInternalServerError() *DeleteWebhookPolicyOf
 	return &DeleteWebhookPolicyOfProjectInternalServerError{}
 }
 
-/* DeleteWebhookPolicyOfProjectInternalServerError describes a response with status code 500, with default header values.
+/*
+DeleteWebhookPolicyOfProjectInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -290,9 +470,44 @@ type DeleteWebhookPolicyOfProjectInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this delete webhook policy of project internal server error response has a 2xx status code
+func (o *DeleteWebhookPolicyOfProjectInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete webhook policy of project internal server error response has a 3xx status code
+func (o *DeleteWebhookPolicyOfProjectInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete webhook policy of project internal server error response has a 4xx status code
+func (o *DeleteWebhookPolicyOfProjectInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete webhook policy of project internal server error response has a 5xx status code
+func (o *DeleteWebhookPolicyOfProjectInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this delete webhook policy of project internal server error response a status code equal to that given
+func (o *DeleteWebhookPolicyOfProjectInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the delete webhook policy of project internal server error response
+func (o *DeleteWebhookPolicyOfProjectInternalServerError) Code() int {
+	return 500
+}
+
 func (o *DeleteWebhookPolicyOfProjectInternalServerError) Error() string {
 	return fmt.Sprintf("[DELETE /projects/{project_name_or_id}/webhook/policies/{webhook_policy_id}][%d] deleteWebhookPolicyOfProjectInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *DeleteWebhookPolicyOfProjectInternalServerError) String() string {
+	return fmt.Sprintf("[DELETE /projects/{project_name_or_id}/webhook/policies/{webhook_policy_id}][%d] deleteWebhookPolicyOfProjectInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *DeleteWebhookPolicyOfProjectInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

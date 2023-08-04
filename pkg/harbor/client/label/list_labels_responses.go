@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // ListLabelsReader is a Reader for the ListLabels structure.
@@ -50,7 +50,7 @@ func (o *ListLabelsReader) ReadResponse(response runtime.ClientResponse, consume
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /labels] ListLabels", response, response.Code())
 	}
 }
 
@@ -59,7 +59,8 @@ func NewListLabelsOK() *ListLabelsOK {
 	return &ListLabelsOK{}
 }
 
-/* ListLabelsOK describes a response with status code 200, with default header values.
+/*
+ListLabelsOK describes a response with status code 200, with default header values.
 
 Get successfully.
 */
@@ -76,9 +77,44 @@ type ListLabelsOK struct {
 	Payload []*models.Label
 }
 
+// IsSuccess returns true when this list labels o k response has a 2xx status code
+func (o *ListLabelsOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list labels o k response has a 3xx status code
+func (o *ListLabelsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list labels o k response has a 4xx status code
+func (o *ListLabelsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list labels o k response has a 5xx status code
+func (o *ListLabelsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list labels o k response a status code equal to that given
+func (o *ListLabelsOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list labels o k response
+func (o *ListLabelsOK) Code() int {
+	return 200
+}
+
 func (o *ListLabelsOK) Error() string {
 	return fmt.Sprintf("[GET /labels][%d] listLabelsOK  %+v", 200, o.Payload)
 }
+
+func (o *ListLabelsOK) String() string {
+	return fmt.Sprintf("[GET /labels][%d] listLabelsOK  %+v", 200, o.Payload)
+}
+
 func (o *ListLabelsOK) GetPayload() []*models.Label {
 	return o.Payload
 }
@@ -116,7 +152,8 @@ func NewListLabelsBadRequest() *ListLabelsBadRequest {
 	return &ListLabelsBadRequest{}
 }
 
-/* ListLabelsBadRequest describes a response with status code 400, with default header values.
+/*
+ListLabelsBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
@@ -129,9 +166,44 @@ type ListLabelsBadRequest struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list labels bad request response has a 2xx status code
+func (o *ListLabelsBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list labels bad request response has a 3xx status code
+func (o *ListLabelsBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list labels bad request response has a 4xx status code
+func (o *ListLabelsBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list labels bad request response has a 5xx status code
+func (o *ListLabelsBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list labels bad request response a status code equal to that given
+func (o *ListLabelsBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the list labels bad request response
+func (o *ListLabelsBadRequest) Code() int {
+	return 400
+}
+
 func (o *ListLabelsBadRequest) Error() string {
 	return fmt.Sprintf("[GET /labels][%d] listLabelsBadRequest  %+v", 400, o.Payload)
 }
+
+func (o *ListLabelsBadRequest) String() string {
+	return fmt.Sprintf("[GET /labels][%d] listLabelsBadRequest  %+v", 400, o.Payload)
+}
+
 func (o *ListLabelsBadRequest) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -160,7 +232,8 @@ func NewListLabelsUnauthorized() *ListLabelsUnauthorized {
 	return &ListLabelsUnauthorized{}
 }
 
-/* ListLabelsUnauthorized describes a response with status code 401, with default header values.
+/*
+ListLabelsUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -173,9 +246,44 @@ type ListLabelsUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list labels unauthorized response has a 2xx status code
+func (o *ListLabelsUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list labels unauthorized response has a 3xx status code
+func (o *ListLabelsUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list labels unauthorized response has a 4xx status code
+func (o *ListLabelsUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list labels unauthorized response has a 5xx status code
+func (o *ListLabelsUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list labels unauthorized response a status code equal to that given
+func (o *ListLabelsUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the list labels unauthorized response
+func (o *ListLabelsUnauthorized) Code() int {
+	return 401
+}
+
 func (o *ListLabelsUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /labels][%d] listLabelsUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *ListLabelsUnauthorized) String() string {
+	return fmt.Sprintf("[GET /labels][%d] listLabelsUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *ListLabelsUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -204,7 +312,8 @@ func NewListLabelsInternalServerError() *ListLabelsInternalServerError {
 	return &ListLabelsInternalServerError{}
 }
 
-/* ListLabelsInternalServerError describes a response with status code 500, with default header values.
+/*
+ListLabelsInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -217,9 +326,44 @@ type ListLabelsInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list labels internal server error response has a 2xx status code
+func (o *ListLabelsInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list labels internal server error response has a 3xx status code
+func (o *ListLabelsInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list labels internal server error response has a 4xx status code
+func (o *ListLabelsInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list labels internal server error response has a 5xx status code
+func (o *ListLabelsInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this list labels internal server error response a status code equal to that given
+func (o *ListLabelsInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the list labels internal server error response
+func (o *ListLabelsInternalServerError) Code() int {
+	return 500
+}
+
 func (o *ListLabelsInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /labels][%d] listLabelsInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *ListLabelsInternalServerError) String() string {
+	return fmt.Sprintf("[GET /labels][%d] listLabelsInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *ListLabelsInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

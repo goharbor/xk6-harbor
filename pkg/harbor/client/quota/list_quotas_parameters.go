@@ -53,10 +53,12 @@ func NewListQuotasParamsWithHTTPClient(client *http.Client) *ListQuotasParams {
 	}
 }
 
-/* ListQuotasParams contains all the parameters to send to the API endpoint
-   for the list quotas operation.
+/*
+ListQuotasParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the list quotas operation.
+
+	Typically these are written to a http.Request.
 */
 type ListQuotasParams struct {
 

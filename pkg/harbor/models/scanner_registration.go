@@ -16,7 +16,6 @@ import (
 
 // ScannerRegistration Registration represents a named configuration for invoking a scanner via its adapter.
 //
-//
 // swagger:model ScannerRegistration
 type ScannerRegistration struct {
 

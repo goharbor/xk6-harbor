@@ -53,10 +53,12 @@ func NewGetGCHistoryParamsWithHTTPClient(client *http.Client) *GetGCHistoryParam
 	}
 }
 
-/* GetGCHistoryParams contains all the parameters to send to the API endpoint
-   for the get GC history operation.
+/*
+GetGCHistoryParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get GC history operation.
+
+	Typically these are written to a http.Request.
 */
 type GetGCHistoryParams struct {
 

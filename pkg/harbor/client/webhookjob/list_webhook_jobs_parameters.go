@@ -53,10 +53,12 @@ func NewListWebhookJobsParamsWithHTTPClient(client *http.Client) *ListWebhookJob
 	}
 }
 
-/* ListWebhookJobsParams contains all the parameters to send to the API endpoint
-   for the list webhook jobs operation.
+/*
+ListWebhookJobsParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the list webhook jobs operation.
+
+	Typically these are written to a http.Request.
 */
 type ListWebhookJobsParams struct {
 

@@ -55,6 +55,8 @@ func (m *ProjectMember) validateMemberGroup(formats strfmt.Registry) error {
 		if err := m.MemberGroup.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("member_group")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("member_group")
 			}
 			return err
 		}
@@ -72,6 +74,8 @@ func (m *ProjectMember) validateMemberUser(formats strfmt.Registry) error {
 		if err := m.MemberUser.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("member_user")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("member_user")
 			}
 			return err
 		}
@@ -101,9 +105,16 @@ func (m *ProjectMember) ContextValidate(ctx context.Context, formats strfmt.Regi
 func (m *ProjectMember) contextValidateMemberGroup(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.MemberGroup != nil {
+
+		if swag.IsZero(m.MemberGroup) { // not required
+			return nil
+		}
+
 		if err := m.MemberGroup.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("member_group")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("member_group")
 			}
 			return err
 		}
@@ -115,9 +126,16 @@ func (m *ProjectMember) contextValidateMemberGroup(ctx context.Context, formats 
 func (m *ProjectMember) contextValidateMemberUser(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.MemberUser != nil {
+
+		if swag.IsZero(m.MemberUser) { // not required
+			return nil
+		}
+
 		if err := m.MemberUser.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("member_user")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("member_user")
 			}
 			return err
 		}

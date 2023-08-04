@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // GetLatestScheduledScanAllMetricsReader is a Reader for the GetLatestScheduledScanAllMetrics structure.
@@ -54,7 +54,7 @@ func (o *GetLatestScheduledScanAllMetricsReader) ReadResponse(response runtime.C
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /scans/schedule/metrics] getLatestScheduledScanAllMetrics", response, response.Code())
 	}
 }
 
@@ -63,7 +63,8 @@ func NewGetLatestScheduledScanAllMetricsOK() *GetLatestScheduledScanAllMetricsOK
 	return &GetLatestScheduledScanAllMetricsOK{}
 }
 
-/* GetLatestScheduledScanAllMetricsOK describes a response with status code 200, with default header values.
+/*
+GetLatestScheduledScanAllMetricsOK describes a response with status code 200, with default header values.
 
 OK
 */
@@ -71,9 +72,44 @@ type GetLatestScheduledScanAllMetricsOK struct {
 	Payload *models.Stats
 }
 
+// IsSuccess returns true when this get latest scheduled scan all metrics o k response has a 2xx status code
+func (o *GetLatestScheduledScanAllMetricsOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get latest scheduled scan all metrics o k response has a 3xx status code
+func (o *GetLatestScheduledScanAllMetricsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get latest scheduled scan all metrics o k response has a 4xx status code
+func (o *GetLatestScheduledScanAllMetricsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get latest scheduled scan all metrics o k response has a 5xx status code
+func (o *GetLatestScheduledScanAllMetricsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get latest scheduled scan all metrics o k response a status code equal to that given
+func (o *GetLatestScheduledScanAllMetricsOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get latest scheduled scan all metrics o k response
+func (o *GetLatestScheduledScanAllMetricsOK) Code() int {
+	return 200
+}
+
 func (o *GetLatestScheduledScanAllMetricsOK) Error() string {
 	return fmt.Sprintf("[GET /scans/schedule/metrics][%d] getLatestScheduledScanAllMetricsOK  %+v", 200, o.Payload)
 }
+
+func (o *GetLatestScheduledScanAllMetricsOK) String() string {
+	return fmt.Sprintf("[GET /scans/schedule/metrics][%d] getLatestScheduledScanAllMetricsOK  %+v", 200, o.Payload)
+}
+
 func (o *GetLatestScheduledScanAllMetricsOK) GetPayload() *models.Stats {
 	return o.Payload
 }
@@ -95,7 +131,8 @@ func NewGetLatestScheduledScanAllMetricsUnauthorized() *GetLatestScheduledScanAl
 	return &GetLatestScheduledScanAllMetricsUnauthorized{}
 }
 
-/* GetLatestScheduledScanAllMetricsUnauthorized describes a response with status code 401, with default header values.
+/*
+GetLatestScheduledScanAllMetricsUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -108,9 +145,44 @@ type GetLatestScheduledScanAllMetricsUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get latest scheduled scan all metrics unauthorized response has a 2xx status code
+func (o *GetLatestScheduledScanAllMetricsUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get latest scheduled scan all metrics unauthorized response has a 3xx status code
+func (o *GetLatestScheduledScanAllMetricsUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get latest scheduled scan all metrics unauthorized response has a 4xx status code
+func (o *GetLatestScheduledScanAllMetricsUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get latest scheduled scan all metrics unauthorized response has a 5xx status code
+func (o *GetLatestScheduledScanAllMetricsUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get latest scheduled scan all metrics unauthorized response a status code equal to that given
+func (o *GetLatestScheduledScanAllMetricsUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the get latest scheduled scan all metrics unauthorized response
+func (o *GetLatestScheduledScanAllMetricsUnauthorized) Code() int {
+	return 401
+}
+
 func (o *GetLatestScheduledScanAllMetricsUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /scans/schedule/metrics][%d] getLatestScheduledScanAllMetricsUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *GetLatestScheduledScanAllMetricsUnauthorized) String() string {
+	return fmt.Sprintf("[GET /scans/schedule/metrics][%d] getLatestScheduledScanAllMetricsUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *GetLatestScheduledScanAllMetricsUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -139,7 +211,8 @@ func NewGetLatestScheduledScanAllMetricsForbidden() *GetLatestScheduledScanAllMe
 	return &GetLatestScheduledScanAllMetricsForbidden{}
 }
 
-/* GetLatestScheduledScanAllMetricsForbidden describes a response with status code 403, with default header values.
+/*
+GetLatestScheduledScanAllMetricsForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -152,9 +225,44 @@ type GetLatestScheduledScanAllMetricsForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get latest scheduled scan all metrics forbidden response has a 2xx status code
+func (o *GetLatestScheduledScanAllMetricsForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get latest scheduled scan all metrics forbidden response has a 3xx status code
+func (o *GetLatestScheduledScanAllMetricsForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get latest scheduled scan all metrics forbidden response has a 4xx status code
+func (o *GetLatestScheduledScanAllMetricsForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get latest scheduled scan all metrics forbidden response has a 5xx status code
+func (o *GetLatestScheduledScanAllMetricsForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get latest scheduled scan all metrics forbidden response a status code equal to that given
+func (o *GetLatestScheduledScanAllMetricsForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the get latest scheduled scan all metrics forbidden response
+func (o *GetLatestScheduledScanAllMetricsForbidden) Code() int {
+	return 403
+}
+
 func (o *GetLatestScheduledScanAllMetricsForbidden) Error() string {
 	return fmt.Sprintf("[GET /scans/schedule/metrics][%d] getLatestScheduledScanAllMetricsForbidden  %+v", 403, o.Payload)
 }
+
+func (o *GetLatestScheduledScanAllMetricsForbidden) String() string {
+	return fmt.Sprintf("[GET /scans/schedule/metrics][%d] getLatestScheduledScanAllMetricsForbidden  %+v", 403, o.Payload)
+}
+
 func (o *GetLatestScheduledScanAllMetricsForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -183,7 +291,8 @@ func NewGetLatestScheduledScanAllMetricsPreconditionFailed() *GetLatestScheduled
 	return &GetLatestScheduledScanAllMetricsPreconditionFailed{}
 }
 
-/* GetLatestScheduledScanAllMetricsPreconditionFailed describes a response with status code 412, with default header values.
+/*
+GetLatestScheduledScanAllMetricsPreconditionFailed describes a response with status code 412, with default header values.
 
 Precondition failed
 */
@@ -196,9 +305,44 @@ type GetLatestScheduledScanAllMetricsPreconditionFailed struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get latest scheduled scan all metrics precondition failed response has a 2xx status code
+func (o *GetLatestScheduledScanAllMetricsPreconditionFailed) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get latest scheduled scan all metrics precondition failed response has a 3xx status code
+func (o *GetLatestScheduledScanAllMetricsPreconditionFailed) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get latest scheduled scan all metrics precondition failed response has a 4xx status code
+func (o *GetLatestScheduledScanAllMetricsPreconditionFailed) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get latest scheduled scan all metrics precondition failed response has a 5xx status code
+func (o *GetLatestScheduledScanAllMetricsPreconditionFailed) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get latest scheduled scan all metrics precondition failed response a status code equal to that given
+func (o *GetLatestScheduledScanAllMetricsPreconditionFailed) IsCode(code int) bool {
+	return code == 412
+}
+
+// Code gets the status code for the get latest scheduled scan all metrics precondition failed response
+func (o *GetLatestScheduledScanAllMetricsPreconditionFailed) Code() int {
+	return 412
+}
+
 func (o *GetLatestScheduledScanAllMetricsPreconditionFailed) Error() string {
 	return fmt.Sprintf("[GET /scans/schedule/metrics][%d] getLatestScheduledScanAllMetricsPreconditionFailed  %+v", 412, o.Payload)
 }
+
+func (o *GetLatestScheduledScanAllMetricsPreconditionFailed) String() string {
+	return fmt.Sprintf("[GET /scans/schedule/metrics][%d] getLatestScheduledScanAllMetricsPreconditionFailed  %+v", 412, o.Payload)
+}
+
 func (o *GetLatestScheduledScanAllMetricsPreconditionFailed) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -227,7 +371,8 @@ func NewGetLatestScheduledScanAllMetricsInternalServerError() *GetLatestSchedule
 	return &GetLatestScheduledScanAllMetricsInternalServerError{}
 }
 
-/* GetLatestScheduledScanAllMetricsInternalServerError describes a response with status code 500, with default header values.
+/*
+GetLatestScheduledScanAllMetricsInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -240,9 +385,44 @@ type GetLatestScheduledScanAllMetricsInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get latest scheduled scan all metrics internal server error response has a 2xx status code
+func (o *GetLatestScheduledScanAllMetricsInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get latest scheduled scan all metrics internal server error response has a 3xx status code
+func (o *GetLatestScheduledScanAllMetricsInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get latest scheduled scan all metrics internal server error response has a 4xx status code
+func (o *GetLatestScheduledScanAllMetricsInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get latest scheduled scan all metrics internal server error response has a 5xx status code
+func (o *GetLatestScheduledScanAllMetricsInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get latest scheduled scan all metrics internal server error response a status code equal to that given
+func (o *GetLatestScheduledScanAllMetricsInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the get latest scheduled scan all metrics internal server error response
+func (o *GetLatestScheduledScanAllMetricsInternalServerError) Code() int {
+	return 500
+}
+
 func (o *GetLatestScheduledScanAllMetricsInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /scans/schedule/metrics][%d] getLatestScheduledScanAllMetricsInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *GetLatestScheduledScanAllMetricsInternalServerError) String() string {
+	return fmt.Sprintf("[GET /scans/schedule/metrics][%d] getLatestScheduledScanAllMetricsInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *GetLatestScheduledScanAllMetricsInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

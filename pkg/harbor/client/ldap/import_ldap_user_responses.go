@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // ImportLdapUserReader is a Reader for the ImportLdapUser structure.
@@ -60,7 +60,7 @@ func (o *ImportLdapUserReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /ldap/users/import] importLdapUser", response, response.Code())
 	}
 }
 
@@ -69,14 +69,49 @@ func NewImportLdapUserOK() *ImportLdapUserOK {
 	return &ImportLdapUserOK{}
 }
 
-/* ImportLdapUserOK describes a response with status code 200, with default header values.
+/*
+ImportLdapUserOK describes a response with status code 200, with default header values.
 
 Add ldap users successfully.
 */
 type ImportLdapUserOK struct {
 }
 
+// IsSuccess returns true when this import ldap user o k response has a 2xx status code
+func (o *ImportLdapUserOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this import ldap user o k response has a 3xx status code
+func (o *ImportLdapUserOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this import ldap user o k response has a 4xx status code
+func (o *ImportLdapUserOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this import ldap user o k response has a 5xx status code
+func (o *ImportLdapUserOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this import ldap user o k response a status code equal to that given
+func (o *ImportLdapUserOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the import ldap user o k response
+func (o *ImportLdapUserOK) Code() int {
+	return 200
+}
+
 func (o *ImportLdapUserOK) Error() string {
+	return fmt.Sprintf("[POST /ldap/users/import][%d] importLdapUserOK ", 200)
+}
+
+func (o *ImportLdapUserOK) String() string {
 	return fmt.Sprintf("[POST /ldap/users/import][%d] importLdapUserOK ", 200)
 }
 
@@ -90,7 +125,8 @@ func NewImportLdapUserBadRequest() *ImportLdapUserBadRequest {
 	return &ImportLdapUserBadRequest{}
 }
 
-/* ImportLdapUserBadRequest describes a response with status code 400, with default header values.
+/*
+ImportLdapUserBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
@@ -103,9 +139,44 @@ type ImportLdapUserBadRequest struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this import ldap user bad request response has a 2xx status code
+func (o *ImportLdapUserBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this import ldap user bad request response has a 3xx status code
+func (o *ImportLdapUserBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this import ldap user bad request response has a 4xx status code
+func (o *ImportLdapUserBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this import ldap user bad request response has a 5xx status code
+func (o *ImportLdapUserBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this import ldap user bad request response a status code equal to that given
+func (o *ImportLdapUserBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the import ldap user bad request response
+func (o *ImportLdapUserBadRequest) Code() int {
+	return 400
+}
+
 func (o *ImportLdapUserBadRequest) Error() string {
 	return fmt.Sprintf("[POST /ldap/users/import][%d] importLdapUserBadRequest  %+v", 400, o.Payload)
 }
+
+func (o *ImportLdapUserBadRequest) String() string {
+	return fmt.Sprintf("[POST /ldap/users/import][%d] importLdapUserBadRequest  %+v", 400, o.Payload)
+}
+
 func (o *ImportLdapUserBadRequest) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -134,7 +205,8 @@ func NewImportLdapUserUnauthorized() *ImportLdapUserUnauthorized {
 	return &ImportLdapUserUnauthorized{}
 }
 
-/* ImportLdapUserUnauthorized describes a response with status code 401, with default header values.
+/*
+ImportLdapUserUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -147,9 +219,44 @@ type ImportLdapUserUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this import ldap user unauthorized response has a 2xx status code
+func (o *ImportLdapUserUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this import ldap user unauthorized response has a 3xx status code
+func (o *ImportLdapUserUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this import ldap user unauthorized response has a 4xx status code
+func (o *ImportLdapUserUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this import ldap user unauthorized response has a 5xx status code
+func (o *ImportLdapUserUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this import ldap user unauthorized response a status code equal to that given
+func (o *ImportLdapUserUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the import ldap user unauthorized response
+func (o *ImportLdapUserUnauthorized) Code() int {
+	return 401
+}
+
 func (o *ImportLdapUserUnauthorized) Error() string {
 	return fmt.Sprintf("[POST /ldap/users/import][%d] importLdapUserUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *ImportLdapUserUnauthorized) String() string {
+	return fmt.Sprintf("[POST /ldap/users/import][%d] importLdapUserUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *ImportLdapUserUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -178,7 +285,8 @@ func NewImportLdapUserForbidden() *ImportLdapUserForbidden {
 	return &ImportLdapUserForbidden{}
 }
 
-/* ImportLdapUserForbidden describes a response with status code 403, with default header values.
+/*
+ImportLdapUserForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -191,9 +299,44 @@ type ImportLdapUserForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this import ldap user forbidden response has a 2xx status code
+func (o *ImportLdapUserForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this import ldap user forbidden response has a 3xx status code
+func (o *ImportLdapUserForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this import ldap user forbidden response has a 4xx status code
+func (o *ImportLdapUserForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this import ldap user forbidden response has a 5xx status code
+func (o *ImportLdapUserForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this import ldap user forbidden response a status code equal to that given
+func (o *ImportLdapUserForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the import ldap user forbidden response
+func (o *ImportLdapUserForbidden) Code() int {
+	return 403
+}
+
 func (o *ImportLdapUserForbidden) Error() string {
 	return fmt.Sprintf("[POST /ldap/users/import][%d] importLdapUserForbidden  %+v", 403, o.Payload)
 }
+
+func (o *ImportLdapUserForbidden) String() string {
+	return fmt.Sprintf("[POST /ldap/users/import][%d] importLdapUserForbidden  %+v", 403, o.Payload)
+}
+
 func (o *ImportLdapUserForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -222,7 +365,8 @@ func NewImportLdapUserNotFound() *ImportLdapUserNotFound {
 	return &ImportLdapUserNotFound{}
 }
 
-/* ImportLdapUserNotFound describes a response with status code 404, with default header values.
+/*
+ImportLdapUserNotFound describes a response with status code 404, with default header values.
 
 Failed import some users.
 */
@@ -230,9 +374,44 @@ type ImportLdapUserNotFound struct {
 	Payload []*models.LdapFailedImportUser
 }
 
+// IsSuccess returns true when this import ldap user not found response has a 2xx status code
+func (o *ImportLdapUserNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this import ldap user not found response has a 3xx status code
+func (o *ImportLdapUserNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this import ldap user not found response has a 4xx status code
+func (o *ImportLdapUserNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this import ldap user not found response has a 5xx status code
+func (o *ImportLdapUserNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this import ldap user not found response a status code equal to that given
+func (o *ImportLdapUserNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the import ldap user not found response
+func (o *ImportLdapUserNotFound) Code() int {
+	return 404
+}
+
 func (o *ImportLdapUserNotFound) Error() string {
 	return fmt.Sprintf("[POST /ldap/users/import][%d] importLdapUserNotFound  %+v", 404, o.Payload)
 }
+
+func (o *ImportLdapUserNotFound) String() string {
+	return fmt.Sprintf("[POST /ldap/users/import][%d] importLdapUserNotFound  %+v", 404, o.Payload)
+}
+
 func (o *ImportLdapUserNotFound) GetPayload() []*models.LdapFailedImportUser {
 	return o.Payload
 }
@@ -252,7 +431,8 @@ func NewImportLdapUserInternalServerError() *ImportLdapUserInternalServerError {
 	return &ImportLdapUserInternalServerError{}
 }
 
-/* ImportLdapUserInternalServerError describes a response with status code 500, with default header values.
+/*
+ImportLdapUserInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -265,9 +445,44 @@ type ImportLdapUserInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this import ldap user internal server error response has a 2xx status code
+func (o *ImportLdapUserInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this import ldap user internal server error response has a 3xx status code
+func (o *ImportLdapUserInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this import ldap user internal server error response has a 4xx status code
+func (o *ImportLdapUserInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this import ldap user internal server error response has a 5xx status code
+func (o *ImportLdapUserInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this import ldap user internal server error response a status code equal to that given
+func (o *ImportLdapUserInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the import ldap user internal server error response
+func (o *ImportLdapUserInternalServerError) Code() int {
+	return 500
+}
+
 func (o *ImportLdapUserInternalServerError) Error() string {
 	return fmt.Sprintf("[POST /ldap/users/import][%d] importLdapUserInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *ImportLdapUserInternalServerError) String() string {
+	return fmt.Sprintf("[POST /ldap/users/import][%d] importLdapUserInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *ImportLdapUserInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

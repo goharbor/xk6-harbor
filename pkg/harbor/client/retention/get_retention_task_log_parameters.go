@@ -53,10 +53,12 @@ func NewGetRetentionTaskLogParamsWithHTTPClient(client *http.Client) *GetRetenti
 	}
 }
 
-/* GetRetentionTaskLogParams contains all the parameters to send to the API endpoint
-   for the get retention task log operation.
+/*
+GetRetentionTaskLogParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get retention task log operation.
+
+	Typically these are written to a http.Request.
 */
 type GetRetentionTaskLogParams struct {
 

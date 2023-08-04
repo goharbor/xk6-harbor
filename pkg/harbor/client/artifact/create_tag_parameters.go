@@ -15,7 +15,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // NewCreateTagParams creates a new CreateTagParams object,
@@ -54,10 +54,12 @@ func NewCreateTagParamsWithHTTPClient(client *http.Client) *CreateTagParams {
 	}
 }
 
-/* CreateTagParams contains all the parameters to send to the API endpoint
-   for the create tag operation.
+/*
+CreateTagParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the create tag operation.
+
+	Typically these are written to a http.Request.
 */
 type CreateTagParams struct {
 

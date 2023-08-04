@@ -1,6 +1,6 @@
 // List artifact tags in the artifact which has 10K tags
 
-import harbor from 'k6/x/harbor'
+import { Harbor } from 'k6/x/harbor'
 
 import { Rate } from 'k6/metrics'
 
@@ -41,15 +41,15 @@ export let options = {
     }
 };
 
-export function setup() {
-    harbor.initialize({
-        scheme: getEnv('HARBOR_SCHEME', 'https'),
-        host: getEnv('HARBOR_HOST'),
-        username: getEnv('HARBOR_USERNAME', 'admin'),
-        password: getEnv('HARBOR_PASSWORD', 'Harbor12345'),
-        insecure: true,
-    })
+const harbor = new Harbor({
+    scheme: getEnv('HARBOR_SCHEME', 'https'),
+    host: getEnv('HARBOR_HOST'),
+    username: getEnv('HARBOR_USERNAME', 'admin'),
+    password: getEnv('HARBOR_PASSWORD', 'Harbor12345'),
+    insecure: true,
+})
 
+export function setup() {
     const projectName = `project-${Date.now()}`
     harbor.createProject({ projectName })
 

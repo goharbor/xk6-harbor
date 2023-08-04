@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // LastTriggerReader is a Reader for the LastTrigger structure.
@@ -54,7 +54,7 @@ func (o *LastTriggerReader) ReadResponse(response runtime.ClientResponse, consum
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /projects/{project_name_or_id}/webhook/lasttrigger] LastTrigger", response, response.Code())
 	}
 }
 
@@ -63,7 +63,8 @@ func NewLastTriggerOK() *LastTriggerOK {
 	return &LastTriggerOK{}
 }
 
-/* LastTriggerOK describes a response with status code 200, with default header values.
+/*
+LastTriggerOK describes a response with status code 200, with default header values.
 
 Test webhook connection successfully.
 */
@@ -71,9 +72,44 @@ type LastTriggerOK struct {
 	Payload []*models.WebhookLastTrigger
 }
 
+// IsSuccess returns true when this last trigger o k response has a 2xx status code
+func (o *LastTriggerOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this last trigger o k response has a 3xx status code
+func (o *LastTriggerOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this last trigger o k response has a 4xx status code
+func (o *LastTriggerOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this last trigger o k response has a 5xx status code
+func (o *LastTriggerOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this last trigger o k response a status code equal to that given
+func (o *LastTriggerOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the last trigger o k response
+func (o *LastTriggerOK) Code() int {
+	return 200
+}
+
 func (o *LastTriggerOK) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name_or_id}/webhook/lasttrigger][%d] lastTriggerOK  %+v", 200, o.Payload)
 }
+
+func (o *LastTriggerOK) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name_or_id}/webhook/lasttrigger][%d] lastTriggerOK  %+v", 200, o.Payload)
+}
+
 func (o *LastTriggerOK) GetPayload() []*models.WebhookLastTrigger {
 	return o.Payload
 }
@@ -93,7 +129,8 @@ func NewLastTriggerBadRequest() *LastTriggerBadRequest {
 	return &LastTriggerBadRequest{}
 }
 
-/* LastTriggerBadRequest describes a response with status code 400, with default header values.
+/*
+LastTriggerBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
@@ -106,9 +143,44 @@ type LastTriggerBadRequest struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this last trigger bad request response has a 2xx status code
+func (o *LastTriggerBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this last trigger bad request response has a 3xx status code
+func (o *LastTriggerBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this last trigger bad request response has a 4xx status code
+func (o *LastTriggerBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this last trigger bad request response has a 5xx status code
+func (o *LastTriggerBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this last trigger bad request response a status code equal to that given
+func (o *LastTriggerBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the last trigger bad request response
+func (o *LastTriggerBadRequest) Code() int {
+	return 400
+}
+
 func (o *LastTriggerBadRequest) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name_or_id}/webhook/lasttrigger][%d] lastTriggerBadRequest  %+v", 400, o.Payload)
 }
+
+func (o *LastTriggerBadRequest) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name_or_id}/webhook/lasttrigger][%d] lastTriggerBadRequest  %+v", 400, o.Payload)
+}
+
 func (o *LastTriggerBadRequest) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -137,7 +209,8 @@ func NewLastTriggerUnauthorized() *LastTriggerUnauthorized {
 	return &LastTriggerUnauthorized{}
 }
 
-/* LastTriggerUnauthorized describes a response with status code 401, with default header values.
+/*
+LastTriggerUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -150,9 +223,44 @@ type LastTriggerUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this last trigger unauthorized response has a 2xx status code
+func (o *LastTriggerUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this last trigger unauthorized response has a 3xx status code
+func (o *LastTriggerUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this last trigger unauthorized response has a 4xx status code
+func (o *LastTriggerUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this last trigger unauthorized response has a 5xx status code
+func (o *LastTriggerUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this last trigger unauthorized response a status code equal to that given
+func (o *LastTriggerUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the last trigger unauthorized response
+func (o *LastTriggerUnauthorized) Code() int {
+	return 401
+}
+
 func (o *LastTriggerUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name_or_id}/webhook/lasttrigger][%d] lastTriggerUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *LastTriggerUnauthorized) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name_or_id}/webhook/lasttrigger][%d] lastTriggerUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *LastTriggerUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -181,7 +289,8 @@ func NewLastTriggerForbidden() *LastTriggerForbidden {
 	return &LastTriggerForbidden{}
 }
 
-/* LastTriggerForbidden describes a response with status code 403, with default header values.
+/*
+LastTriggerForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -194,9 +303,44 @@ type LastTriggerForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this last trigger forbidden response has a 2xx status code
+func (o *LastTriggerForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this last trigger forbidden response has a 3xx status code
+func (o *LastTriggerForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this last trigger forbidden response has a 4xx status code
+func (o *LastTriggerForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this last trigger forbidden response has a 5xx status code
+func (o *LastTriggerForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this last trigger forbidden response a status code equal to that given
+func (o *LastTriggerForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the last trigger forbidden response
+func (o *LastTriggerForbidden) Code() int {
+	return 403
+}
+
 func (o *LastTriggerForbidden) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name_or_id}/webhook/lasttrigger][%d] lastTriggerForbidden  %+v", 403, o.Payload)
 }
+
+func (o *LastTriggerForbidden) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name_or_id}/webhook/lasttrigger][%d] lastTriggerForbidden  %+v", 403, o.Payload)
+}
+
 func (o *LastTriggerForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -225,7 +369,8 @@ func NewLastTriggerInternalServerError() *LastTriggerInternalServerError {
 	return &LastTriggerInternalServerError{}
 }
 
-/* LastTriggerInternalServerError describes a response with status code 500, with default header values.
+/*
+LastTriggerInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -238,9 +383,44 @@ type LastTriggerInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this last trigger internal server error response has a 2xx status code
+func (o *LastTriggerInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this last trigger internal server error response has a 3xx status code
+func (o *LastTriggerInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this last trigger internal server error response has a 4xx status code
+func (o *LastTriggerInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this last trigger internal server error response has a 5xx status code
+func (o *LastTriggerInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this last trigger internal server error response a status code equal to that given
+func (o *LastTriggerInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the last trigger internal server error response
+func (o *LastTriggerInternalServerError) Code() int {
+	return 500
+}
+
 func (o *LastTriggerInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name_or_id}/webhook/lasttrigger][%d] lastTriggerInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *LastTriggerInternalServerError) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name_or_id}/webhook/lasttrigger][%d] lastTriggerInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *LastTriggerInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

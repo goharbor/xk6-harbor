@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // SearchUsersReader is a Reader for the SearchUsers structure.
@@ -44,7 +44,7 @@ func (o *SearchUsersReader) ReadResponse(response runtime.ClientResponse, consum
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /users/search] searchUsers", response, response.Code())
 	}
 }
 
@@ -53,7 +53,8 @@ func NewSearchUsersOK() *SearchUsersOK {
 	return &SearchUsersOK{}
 }
 
-/* SearchUsersOK describes a response with status code 200, with default header values.
+/*
+SearchUsersOK describes a response with status code 200, with default header values.
 
 Search users by username successfully.
 */
@@ -70,9 +71,44 @@ type SearchUsersOK struct {
 	Payload []*models.UserSearchRespItem
 }
 
+// IsSuccess returns true when this search users o k response has a 2xx status code
+func (o *SearchUsersOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this search users o k response has a 3xx status code
+func (o *SearchUsersOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this search users o k response has a 4xx status code
+func (o *SearchUsersOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this search users o k response has a 5xx status code
+func (o *SearchUsersOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this search users o k response a status code equal to that given
+func (o *SearchUsersOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the search users o k response
+func (o *SearchUsersOK) Code() int {
+	return 200
+}
+
 func (o *SearchUsersOK) Error() string {
 	return fmt.Sprintf("[GET /users/search][%d] searchUsersOK  %+v", 200, o.Payload)
 }
+
+func (o *SearchUsersOK) String() string {
+	return fmt.Sprintf("[GET /users/search][%d] searchUsersOK  %+v", 200, o.Payload)
+}
+
 func (o *SearchUsersOK) GetPayload() []*models.UserSearchRespItem {
 	return o.Payload
 }
@@ -110,7 +146,8 @@ func NewSearchUsersUnauthorized() *SearchUsersUnauthorized {
 	return &SearchUsersUnauthorized{}
 }
 
-/* SearchUsersUnauthorized describes a response with status code 401, with default header values.
+/*
+SearchUsersUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -123,9 +160,44 @@ type SearchUsersUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this search users unauthorized response has a 2xx status code
+func (o *SearchUsersUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this search users unauthorized response has a 3xx status code
+func (o *SearchUsersUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this search users unauthorized response has a 4xx status code
+func (o *SearchUsersUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this search users unauthorized response has a 5xx status code
+func (o *SearchUsersUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this search users unauthorized response a status code equal to that given
+func (o *SearchUsersUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the search users unauthorized response
+func (o *SearchUsersUnauthorized) Code() int {
+	return 401
+}
+
 func (o *SearchUsersUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /users/search][%d] searchUsersUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *SearchUsersUnauthorized) String() string {
+	return fmt.Sprintf("[GET /users/search][%d] searchUsersUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *SearchUsersUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -154,7 +226,8 @@ func NewSearchUsersInternalServerError() *SearchUsersInternalServerError {
 	return &SearchUsersInternalServerError{}
 }
 
-/* SearchUsersInternalServerError describes a response with status code 500, with default header values.
+/*
+SearchUsersInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -167,9 +240,44 @@ type SearchUsersInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this search users internal server error response has a 2xx status code
+func (o *SearchUsersInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this search users internal server error response has a 3xx status code
+func (o *SearchUsersInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this search users internal server error response has a 4xx status code
+func (o *SearchUsersInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this search users internal server error response has a 5xx status code
+func (o *SearchUsersInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this search users internal server error response a status code equal to that given
+func (o *SearchUsersInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the search users internal server error response
+func (o *SearchUsersInternalServerError) Code() int {
+	return 500
+}
+
 func (o *SearchUsersInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /users/search][%d] searchUsersInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *SearchUsersInternalServerError) String() string {
+	return fmt.Sprintf("[GET /users/search][%d] searchUsersInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *SearchUsersInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

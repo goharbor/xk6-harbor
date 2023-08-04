@@ -7,13 +7,14 @@ package webhookjob
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/go-openapi/runtime"
 
 	strfmt "github.com/go-openapi/strfmt"
 )
 
-//go:generate mockery -name API -inpkg
+//go:generate mockery --name API --keeptree --with-expecter --case underscore
 
 // API is the interface of the webhookjob client
 type API interface {
@@ -47,7 +48,6 @@ type Client struct {
 ListWebhookJobs lists project webhook jobs
 
 This endpoint returns webhook jobs of a project.
-
 */
 func (a *Client) ListWebhookJobs(ctx context.Context, params *ListWebhookJobsParams) (*ListWebhookJobsOK, error) {
 
@@ -67,6 +67,19 @@ func (a *Client) ListWebhookJobs(ctx context.Context, params *ListWebhookJobsPar
 	if err != nil {
 		return nil, err
 	}
-	return result.(*ListWebhookJobsOK), nil
-
+	switch value := result.(type) {
+	case *ListWebhookJobsOK:
+		return value, nil
+	case *ListWebhookJobsBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListWebhookJobsUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListWebhookJobsForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListWebhookJobsInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ListWebhookJobs: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }

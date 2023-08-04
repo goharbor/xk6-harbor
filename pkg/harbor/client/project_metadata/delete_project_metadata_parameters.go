@@ -53,10 +53,12 @@ func NewDeleteProjectMetadataParamsWithHTTPClient(client *http.Client) *DeletePr
 	}
 }
 
-/* DeleteProjectMetadataParams contains all the parameters to send to the API endpoint
-   for the delete project metadata operation.
+/*
+DeleteProjectMetadataParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the delete project metadata operation.
+
+	Typically these are written to a http.Request.
 */
 type DeleteProjectMetadataParams struct {
 

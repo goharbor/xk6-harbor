@@ -60,6 +60,8 @@ func (m *RegistryInfo) validateSupportedResourceFilters(formats strfmt.Registry)
 			if err := m.SupportedResourceFilters[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("supported_resource_filters" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("supported_resource_filters" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -89,9 +91,16 @@ func (m *RegistryInfo) contextValidateSupportedResourceFilters(ctx context.Conte
 	for i := 0; i < len(m.SupportedResourceFilters); i++ {
 
 		if m.SupportedResourceFilters[i] != nil {
+
+			if swag.IsZero(m.SupportedResourceFilters[i]) { // not required
+				return nil
+			}
+
 			if err := m.SupportedResourceFilters[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("supported_resource_filters" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("supported_resource_filters" + "." + strconv.Itoa(i))
 				}
 				return err
 			}

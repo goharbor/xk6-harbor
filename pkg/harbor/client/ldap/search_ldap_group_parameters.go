@@ -52,10 +52,12 @@ func NewSearchLdapGroupParamsWithHTTPClient(client *http.Client) *SearchLdapGrou
 	}
 }
 
-/* SearchLdapGroupParams contains all the parameters to send to the API endpoint
-   for the search ldap group operation.
+/*
+SearchLdapGroupParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the search ldap group operation.
+
+	Typically these are written to a http.Request.
 */
 type SearchLdapGroupParams struct {
 

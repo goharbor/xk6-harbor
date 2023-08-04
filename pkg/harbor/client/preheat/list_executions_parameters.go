@@ -53,10 +53,12 @@ func NewListExecutionsParamsWithHTTPClient(client *http.Client) *ListExecutionsP
 	}
 }
 
-/* ListExecutionsParams contains all the parameters to send to the API endpoint
-   for the list executions operation.
+/*
+ListExecutionsParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the list executions operation.
+
+	Typically these are written to a http.Request.
 */
 type ListExecutionsParams struct {
 

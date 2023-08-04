@@ -76,6 +76,8 @@ func (m *Execution) validateExtraAttrs(formats strfmt.Registry) error {
 		if err := m.ExtraAttrs.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("extra_attrs")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("extra_attrs")
 			}
 			return err
 		}
@@ -93,6 +95,8 @@ func (m *Execution) validateMetrics(formats strfmt.Registry) error {
 		if err := m.Metrics.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("metrics")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("metrics")
 			}
 			return err
 		}
@@ -121,9 +125,15 @@ func (m *Execution) ContextValidate(ctx context.Context, formats strfmt.Registry
 
 func (m *Execution) contextValidateExtraAttrs(ctx context.Context, formats strfmt.Registry) error {
 
+	if swag.IsZero(m.ExtraAttrs) { // not required
+		return nil
+	}
+
 	if err := m.ExtraAttrs.ContextValidate(ctx, formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {
 			return ve.ValidateName("extra_attrs")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("extra_attrs")
 		}
 		return err
 	}
@@ -134,9 +144,16 @@ func (m *Execution) contextValidateExtraAttrs(ctx context.Context, formats strfm
 func (m *Execution) contextValidateMetrics(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Metrics != nil {
+
+		if swag.IsZero(m.Metrics) { // not required
+			return nil
+		}
+
 		if err := m.Metrics.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("metrics")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("metrics")
 			}
 			return err
 		}

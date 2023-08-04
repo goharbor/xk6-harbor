@@ -7,13 +7,14 @@ package repository
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/go-openapi/runtime"
 
 	strfmt "github.com/go-openapi/strfmt"
 )
 
-//go:generate mockery -name API -inpkg
+//go:generate mockery --name API --keeptree --with-expecter --case underscore
 
 // API is the interface of the repository client
 type API interface {
@@ -85,8 +86,23 @@ func (a *Client) DeleteRepository(ctx context.Context, params *DeleteRepositoryP
 	if err != nil {
 		return nil, err
 	}
-	return result.(*DeleteRepositoryOK), nil
-
+	switch value := result.(type) {
+	case *DeleteRepositoryOK:
+		return value, nil
+	case *DeleteRepositoryBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteRepositoryUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteRepositoryForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteRepositoryNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteRepositoryInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for deleteRepository: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -112,8 +128,23 @@ func (a *Client) GetRepository(ctx context.Context, params *GetRepositoryParams)
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetRepositoryOK), nil
-
+	switch value := result.(type) {
+	case *GetRepositoryOK:
+		return value, nil
+	case *GetRepositoryBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetRepositoryUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetRepositoryForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetRepositoryNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetRepositoryInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getRepository: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -139,8 +170,17 @@ func (a *Client) ListAllRepositories(ctx context.Context, params *ListAllReposit
 	if err != nil {
 		return nil, err
 	}
-	return result.(*ListAllRepositoriesOK), nil
-
+	switch value := result.(type) {
+	case *ListAllRepositoriesOK:
+		return value, nil
+	case *ListAllRepositoriesBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListAllRepositoriesInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for listAllRepositories: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -166,8 +206,23 @@ func (a *Client) ListRepositories(ctx context.Context, params *ListRepositoriesP
 	if err != nil {
 		return nil, err
 	}
-	return result.(*ListRepositoriesOK), nil
-
+	switch value := result.(type) {
+	case *ListRepositoriesOK:
+		return value, nil
+	case *ListRepositoriesBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListRepositoriesUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListRepositoriesForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListRepositoriesNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListRepositoriesInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for listRepositories: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -193,6 +248,21 @@ func (a *Client) UpdateRepository(ctx context.Context, params *UpdateRepositoryP
 	if err != nil {
 		return nil, err
 	}
-	return result.(*UpdateRepositoryOK), nil
-
+	switch value := result.(type) {
+	case *UpdateRepositoryOK:
+		return value, nil
+	case *UpdateRepositoryBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateRepositoryUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateRepositoryForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateRepositoryNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateRepositoryInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for updateRepository: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }

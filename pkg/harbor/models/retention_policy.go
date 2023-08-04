@@ -71,6 +71,8 @@ func (m *RetentionPolicy) validateRules(formats strfmt.Registry) error {
 			if err := m.Rules[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("rules" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("rules" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -90,6 +92,8 @@ func (m *RetentionPolicy) validateScope(formats strfmt.Registry) error {
 		if err := m.Scope.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("scope")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("scope")
 			}
 			return err
 		}
@@ -107,6 +111,8 @@ func (m *RetentionPolicy) validateTrigger(formats strfmt.Registry) error {
 		if err := m.Trigger.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("trigger")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("trigger")
 			}
 			return err
 		}
@@ -142,9 +148,16 @@ func (m *RetentionPolicy) contextValidateRules(ctx context.Context, formats strf
 	for i := 0; i < len(m.Rules); i++ {
 
 		if m.Rules[i] != nil {
+
+			if swag.IsZero(m.Rules[i]) { // not required
+				return nil
+			}
+
 			if err := m.Rules[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("rules" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("rules" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -158,9 +171,16 @@ func (m *RetentionPolicy) contextValidateRules(ctx context.Context, formats strf
 func (m *RetentionPolicy) contextValidateScope(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Scope != nil {
+
+		if swag.IsZero(m.Scope) { // not required
+			return nil
+		}
+
 		if err := m.Scope.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("scope")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("scope")
 			}
 			return err
 		}
@@ -172,9 +192,16 @@ func (m *RetentionPolicy) contextValidateScope(ctx context.Context, formats strf
 func (m *RetentionPolicy) contextValidateTrigger(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Trigger != nil {
+
+		if swag.IsZero(m.Trigger) { // not required
+			return nil
+		}
+
 		if err := m.Trigger.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("trigger")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("trigger")
 			}
 			return err
 		}

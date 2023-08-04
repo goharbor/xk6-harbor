@@ -53,10 +53,12 @@ func NewGetRobotByIDParamsWithHTTPClient(client *http.Client) *GetRobotByIDParam
 	}
 }
 
-/* GetRobotByIDParams contains all the parameters to send to the API endpoint
-   for the get robot by ID operation.
+/*
+GetRobotByIDParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get robot by ID operation.
+
+	Typically these are written to a http.Request.
 */
 type GetRobotByIDParams struct {
 

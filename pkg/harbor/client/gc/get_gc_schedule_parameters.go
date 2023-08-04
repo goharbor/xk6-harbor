@@ -52,10 +52,12 @@ func NewGetGCScheduleParamsWithHTTPClient(client *http.Client) *GetGCSchedulePar
 	}
 }
 
-/* GetGCScheduleParams contains all the parameters to send to the API endpoint
-   for the get GC schedule operation.
+/*
+GetGCScheduleParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get GC schedule operation.
+
+	Typically these are written to a http.Request.
 */
 type GetGCScheduleParams struct {
 

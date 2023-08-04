@@ -53,10 +53,12 @@ func NewListWebhookPoliciesOfProjectParamsWithHTTPClient(client *http.Client) *L
 	}
 }
 
-/* ListWebhookPoliciesOfProjectParams contains all the parameters to send to the API endpoint
-   for the list webhook policies of project operation.
+/*
+ListWebhookPoliciesOfProjectParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the list webhook policies of project operation.
+
+	Typically these are written to a http.Request.
 */
 type ListWebhookPoliciesOfProjectParams struct {
 

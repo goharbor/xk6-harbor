@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // PutSystemCVEAllowlistReader is a Reader for the PutSystemCVEAllowlist structure.
@@ -48,7 +48,7 @@ func (o *PutSystemCVEAllowlistReader) ReadResponse(response runtime.ClientRespon
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /system/CVEAllowlist] putSystemCVEAllowlist", response, response.Code())
 	}
 }
 
@@ -57,14 +57,49 @@ func NewPutSystemCVEAllowlistOK() *PutSystemCVEAllowlistOK {
 	return &PutSystemCVEAllowlistOK{}
 }
 
-/* PutSystemCVEAllowlistOK describes a response with status code 200, with default header values.
+/*
+PutSystemCVEAllowlistOK describes a response with status code 200, with default header values.
 
 Successfully updated the CVE allowlist.
 */
 type PutSystemCVEAllowlistOK struct {
 }
 
+// IsSuccess returns true when this put system Cve allowlist o k response has a 2xx status code
+func (o *PutSystemCVEAllowlistOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this put system Cve allowlist o k response has a 3xx status code
+func (o *PutSystemCVEAllowlistOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this put system Cve allowlist o k response has a 4xx status code
+func (o *PutSystemCVEAllowlistOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this put system Cve allowlist o k response has a 5xx status code
+func (o *PutSystemCVEAllowlistOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this put system Cve allowlist o k response a status code equal to that given
+func (o *PutSystemCVEAllowlistOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the put system Cve allowlist o k response
+func (o *PutSystemCVEAllowlistOK) Code() int {
+	return 200
+}
+
 func (o *PutSystemCVEAllowlistOK) Error() string {
+	return fmt.Sprintf("[PUT /system/CVEAllowlist][%d] putSystemCveAllowlistOK ", 200)
+}
+
+func (o *PutSystemCVEAllowlistOK) String() string {
 	return fmt.Sprintf("[PUT /system/CVEAllowlist][%d] putSystemCveAllowlistOK ", 200)
 }
 
@@ -78,7 +113,8 @@ func NewPutSystemCVEAllowlistUnauthorized() *PutSystemCVEAllowlistUnauthorized {
 	return &PutSystemCVEAllowlistUnauthorized{}
 }
 
-/* PutSystemCVEAllowlistUnauthorized describes a response with status code 401, with default header values.
+/*
+PutSystemCVEAllowlistUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -91,9 +127,44 @@ type PutSystemCVEAllowlistUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this put system Cve allowlist unauthorized response has a 2xx status code
+func (o *PutSystemCVEAllowlistUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this put system Cve allowlist unauthorized response has a 3xx status code
+func (o *PutSystemCVEAllowlistUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this put system Cve allowlist unauthorized response has a 4xx status code
+func (o *PutSystemCVEAllowlistUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this put system Cve allowlist unauthorized response has a 5xx status code
+func (o *PutSystemCVEAllowlistUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this put system Cve allowlist unauthorized response a status code equal to that given
+func (o *PutSystemCVEAllowlistUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the put system Cve allowlist unauthorized response
+func (o *PutSystemCVEAllowlistUnauthorized) Code() int {
+	return 401
+}
+
 func (o *PutSystemCVEAllowlistUnauthorized) Error() string {
 	return fmt.Sprintf("[PUT /system/CVEAllowlist][%d] putSystemCveAllowlistUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *PutSystemCVEAllowlistUnauthorized) String() string {
+	return fmt.Sprintf("[PUT /system/CVEAllowlist][%d] putSystemCveAllowlistUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *PutSystemCVEAllowlistUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -122,7 +193,8 @@ func NewPutSystemCVEAllowlistForbidden() *PutSystemCVEAllowlistForbidden {
 	return &PutSystemCVEAllowlistForbidden{}
 }
 
-/* PutSystemCVEAllowlistForbidden describes a response with status code 403, with default header values.
+/*
+PutSystemCVEAllowlistForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -135,9 +207,44 @@ type PutSystemCVEAllowlistForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this put system Cve allowlist forbidden response has a 2xx status code
+func (o *PutSystemCVEAllowlistForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this put system Cve allowlist forbidden response has a 3xx status code
+func (o *PutSystemCVEAllowlistForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this put system Cve allowlist forbidden response has a 4xx status code
+func (o *PutSystemCVEAllowlistForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this put system Cve allowlist forbidden response has a 5xx status code
+func (o *PutSystemCVEAllowlistForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this put system Cve allowlist forbidden response a status code equal to that given
+func (o *PutSystemCVEAllowlistForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the put system Cve allowlist forbidden response
+func (o *PutSystemCVEAllowlistForbidden) Code() int {
+	return 403
+}
+
 func (o *PutSystemCVEAllowlistForbidden) Error() string {
 	return fmt.Sprintf("[PUT /system/CVEAllowlist][%d] putSystemCveAllowlistForbidden  %+v", 403, o.Payload)
 }
+
+func (o *PutSystemCVEAllowlistForbidden) String() string {
+	return fmt.Sprintf("[PUT /system/CVEAllowlist][%d] putSystemCveAllowlistForbidden  %+v", 403, o.Payload)
+}
+
 func (o *PutSystemCVEAllowlistForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -166,7 +273,8 @@ func NewPutSystemCVEAllowlistInternalServerError() *PutSystemCVEAllowlistInterna
 	return &PutSystemCVEAllowlistInternalServerError{}
 }
 
-/* PutSystemCVEAllowlistInternalServerError describes a response with status code 500, with default header values.
+/*
+PutSystemCVEAllowlistInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -179,9 +287,44 @@ type PutSystemCVEAllowlistInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this put system Cve allowlist internal server error response has a 2xx status code
+func (o *PutSystemCVEAllowlistInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this put system Cve allowlist internal server error response has a 3xx status code
+func (o *PutSystemCVEAllowlistInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this put system Cve allowlist internal server error response has a 4xx status code
+func (o *PutSystemCVEAllowlistInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this put system Cve allowlist internal server error response has a 5xx status code
+func (o *PutSystemCVEAllowlistInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this put system Cve allowlist internal server error response a status code equal to that given
+func (o *PutSystemCVEAllowlistInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the put system Cve allowlist internal server error response
+func (o *PutSystemCVEAllowlistInternalServerError) Code() int {
+	return 500
+}
+
 func (o *PutSystemCVEAllowlistInternalServerError) Error() string {
 	return fmt.Sprintf("[PUT /system/CVEAllowlist][%d] putSystemCveAllowlistInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *PutSystemCVEAllowlistInternalServerError) String() string {
+	return fmt.Sprintf("[PUT /system/CVEAllowlist][%d] putSystemCveAllowlistInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *PutSystemCVEAllowlistInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

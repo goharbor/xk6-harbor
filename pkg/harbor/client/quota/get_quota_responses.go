@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // GetQuotaReader is a Reader for the GetQuota structure.
@@ -54,7 +54,7 @@ func (o *GetQuotaReader) ReadResponse(response runtime.ClientResponse, consumer 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /quotas/{id}] getQuota", response, response.Code())
 	}
 }
 
@@ -63,7 +63,8 @@ func NewGetQuotaOK() *GetQuotaOK {
 	return &GetQuotaOK{}
 }
 
-/* GetQuotaOK describes a response with status code 200, with default header values.
+/*
+GetQuotaOK describes a response with status code 200, with default header values.
 
 Successfully retrieved the quota.
 */
@@ -71,9 +72,44 @@ type GetQuotaOK struct {
 	Payload *models.Quota
 }
 
+// IsSuccess returns true when this get quota o k response has a 2xx status code
+func (o *GetQuotaOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get quota o k response has a 3xx status code
+func (o *GetQuotaOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get quota o k response has a 4xx status code
+func (o *GetQuotaOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get quota o k response has a 5xx status code
+func (o *GetQuotaOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get quota o k response a status code equal to that given
+func (o *GetQuotaOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get quota o k response
+func (o *GetQuotaOK) Code() int {
+	return 200
+}
+
 func (o *GetQuotaOK) Error() string {
 	return fmt.Sprintf("[GET /quotas/{id}][%d] getQuotaOK  %+v", 200, o.Payload)
 }
+
+func (o *GetQuotaOK) String() string {
+	return fmt.Sprintf("[GET /quotas/{id}][%d] getQuotaOK  %+v", 200, o.Payload)
+}
+
 func (o *GetQuotaOK) GetPayload() *models.Quota {
 	return o.Payload
 }
@@ -95,7 +131,8 @@ func NewGetQuotaUnauthorized() *GetQuotaUnauthorized {
 	return &GetQuotaUnauthorized{}
 }
 
-/* GetQuotaUnauthorized describes a response with status code 401, with default header values.
+/*
+GetQuotaUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -108,9 +145,44 @@ type GetQuotaUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get quota unauthorized response has a 2xx status code
+func (o *GetQuotaUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get quota unauthorized response has a 3xx status code
+func (o *GetQuotaUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get quota unauthorized response has a 4xx status code
+func (o *GetQuotaUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get quota unauthorized response has a 5xx status code
+func (o *GetQuotaUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get quota unauthorized response a status code equal to that given
+func (o *GetQuotaUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the get quota unauthorized response
+func (o *GetQuotaUnauthorized) Code() int {
+	return 401
+}
+
 func (o *GetQuotaUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /quotas/{id}][%d] getQuotaUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *GetQuotaUnauthorized) String() string {
+	return fmt.Sprintf("[GET /quotas/{id}][%d] getQuotaUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *GetQuotaUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -139,7 +211,8 @@ func NewGetQuotaForbidden() *GetQuotaForbidden {
 	return &GetQuotaForbidden{}
 }
 
-/* GetQuotaForbidden describes a response with status code 403, with default header values.
+/*
+GetQuotaForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -152,9 +225,44 @@ type GetQuotaForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get quota forbidden response has a 2xx status code
+func (o *GetQuotaForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get quota forbidden response has a 3xx status code
+func (o *GetQuotaForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get quota forbidden response has a 4xx status code
+func (o *GetQuotaForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get quota forbidden response has a 5xx status code
+func (o *GetQuotaForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get quota forbidden response a status code equal to that given
+func (o *GetQuotaForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the get quota forbidden response
+func (o *GetQuotaForbidden) Code() int {
+	return 403
+}
+
 func (o *GetQuotaForbidden) Error() string {
 	return fmt.Sprintf("[GET /quotas/{id}][%d] getQuotaForbidden  %+v", 403, o.Payload)
 }
+
+func (o *GetQuotaForbidden) String() string {
+	return fmt.Sprintf("[GET /quotas/{id}][%d] getQuotaForbidden  %+v", 403, o.Payload)
+}
+
 func (o *GetQuotaForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -183,7 +291,8 @@ func NewGetQuotaNotFound() *GetQuotaNotFound {
 	return &GetQuotaNotFound{}
 }
 
-/* GetQuotaNotFound describes a response with status code 404, with default header values.
+/*
+GetQuotaNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
@@ -196,9 +305,44 @@ type GetQuotaNotFound struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get quota not found response has a 2xx status code
+func (o *GetQuotaNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get quota not found response has a 3xx status code
+func (o *GetQuotaNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get quota not found response has a 4xx status code
+func (o *GetQuotaNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get quota not found response has a 5xx status code
+func (o *GetQuotaNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get quota not found response a status code equal to that given
+func (o *GetQuotaNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get quota not found response
+func (o *GetQuotaNotFound) Code() int {
+	return 404
+}
+
 func (o *GetQuotaNotFound) Error() string {
 	return fmt.Sprintf("[GET /quotas/{id}][%d] getQuotaNotFound  %+v", 404, o.Payload)
 }
+
+func (o *GetQuotaNotFound) String() string {
+	return fmt.Sprintf("[GET /quotas/{id}][%d] getQuotaNotFound  %+v", 404, o.Payload)
+}
+
 func (o *GetQuotaNotFound) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -227,7 +371,8 @@ func NewGetQuotaInternalServerError() *GetQuotaInternalServerError {
 	return &GetQuotaInternalServerError{}
 }
 
-/* GetQuotaInternalServerError describes a response with status code 500, with default header values.
+/*
+GetQuotaInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -240,9 +385,44 @@ type GetQuotaInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get quota internal server error response has a 2xx status code
+func (o *GetQuotaInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get quota internal server error response has a 3xx status code
+func (o *GetQuotaInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get quota internal server error response has a 4xx status code
+func (o *GetQuotaInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get quota internal server error response has a 5xx status code
+func (o *GetQuotaInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get quota internal server error response a status code equal to that given
+func (o *GetQuotaInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the get quota internal server error response
+func (o *GetQuotaInternalServerError) Code() int {
+	return 500
+}
+
 func (o *GetQuotaInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /quotas/{id}][%d] getQuotaInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *GetQuotaInternalServerError) String() string {
+	return fmt.Sprintf("[GET /quotas/{id}][%d] getQuotaInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *GetQuotaInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

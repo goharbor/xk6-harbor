@@ -79,6 +79,8 @@ func (m *RetentionRule) validateScopeSelectors(formats strfmt.Registry) error {
 			if err := m.ScopeSelectors[k][i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("scope_selectors" + "." + k + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("scope_selectors" + "." + k + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -104,6 +106,8 @@ func (m *RetentionRule) validateTagSelectors(formats strfmt.Registry) error {
 			if err := m.TagSelectors[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("tag_selectors" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("tag_selectors" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -138,9 +142,15 @@ func (m *RetentionRule) contextValidateScopeSelectors(ctx context.Context, forma
 
 		for i := 0; i < len(m.ScopeSelectors[k]); i++ {
 
+			if swag.IsZero(m.ScopeSelectors[k][i]) { // not required
+				return nil
+			}
+
 			if err := m.ScopeSelectors[k][i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("scope_selectors" + "." + k + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("scope_selectors" + "." + k + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -157,9 +167,16 @@ func (m *RetentionRule) contextValidateTagSelectors(ctx context.Context, formats
 	for i := 0; i < len(m.TagSelectors); i++ {
 
 		if m.TagSelectors[i] != nil {
+
+			if swag.IsZero(m.TagSelectors[i]) { // not required
+				return nil
+			}
+
 			if err := m.TagSelectors[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("tag_selectors" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("tag_selectors" + "." + strconv.Itoa(i))
 				}
 				return err
 			}

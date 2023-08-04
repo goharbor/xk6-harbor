@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // ListProjectsReader is a Reader for the ListProjects structure.
@@ -44,7 +44,7 @@ func (o *ListProjectsReader) ReadResponse(response runtime.ClientResponse, consu
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /projects] listProjects", response, response.Code())
 	}
 }
 
@@ -53,7 +53,8 @@ func NewListProjectsOK() *ListProjectsOK {
 	return &ListProjectsOK{}
 }
 
-/* ListProjectsOK describes a response with status code 200, with default header values.
+/*
+ListProjectsOK describes a response with status code 200, with default header values.
 
 Return all matched projects.
 */
@@ -70,9 +71,44 @@ type ListProjectsOK struct {
 	Payload []*models.Project
 }
 
+// IsSuccess returns true when this list projects o k response has a 2xx status code
+func (o *ListProjectsOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list projects o k response has a 3xx status code
+func (o *ListProjectsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list projects o k response has a 4xx status code
+func (o *ListProjectsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list projects o k response has a 5xx status code
+func (o *ListProjectsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list projects o k response a status code equal to that given
+func (o *ListProjectsOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list projects o k response
+func (o *ListProjectsOK) Code() int {
+	return 200
+}
+
 func (o *ListProjectsOK) Error() string {
 	return fmt.Sprintf("[GET /projects][%d] listProjectsOK  %+v", 200, o.Payload)
 }
+
+func (o *ListProjectsOK) String() string {
+	return fmt.Sprintf("[GET /projects][%d] listProjectsOK  %+v", 200, o.Payload)
+}
+
 func (o *ListProjectsOK) GetPayload() []*models.Project {
 	return o.Payload
 }
@@ -110,7 +146,8 @@ func NewListProjectsUnauthorized() *ListProjectsUnauthorized {
 	return &ListProjectsUnauthorized{}
 }
 
-/* ListProjectsUnauthorized describes a response with status code 401, with default header values.
+/*
+ListProjectsUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -123,9 +160,44 @@ type ListProjectsUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list projects unauthorized response has a 2xx status code
+func (o *ListProjectsUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list projects unauthorized response has a 3xx status code
+func (o *ListProjectsUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list projects unauthorized response has a 4xx status code
+func (o *ListProjectsUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list projects unauthorized response has a 5xx status code
+func (o *ListProjectsUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list projects unauthorized response a status code equal to that given
+func (o *ListProjectsUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the list projects unauthorized response
+func (o *ListProjectsUnauthorized) Code() int {
+	return 401
+}
+
 func (o *ListProjectsUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /projects][%d] listProjectsUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *ListProjectsUnauthorized) String() string {
+	return fmt.Sprintf("[GET /projects][%d] listProjectsUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *ListProjectsUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -154,7 +226,8 @@ func NewListProjectsInternalServerError() *ListProjectsInternalServerError {
 	return &ListProjectsInternalServerError{}
 }
 
-/* ListProjectsInternalServerError describes a response with status code 500, with default header values.
+/*
+ListProjectsInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -167,9 +240,44 @@ type ListProjectsInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list projects internal server error response has a 2xx status code
+func (o *ListProjectsInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list projects internal server error response has a 3xx status code
+func (o *ListProjectsInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list projects internal server error response has a 4xx status code
+func (o *ListProjectsInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list projects internal server error response has a 5xx status code
+func (o *ListProjectsInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this list projects internal server error response a status code equal to that given
+func (o *ListProjectsInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the list projects internal server error response
+func (o *ListProjectsInternalServerError) Code() int {
+	return 500
+}
+
 func (o *ListProjectsInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /projects][%d] listProjectsInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *ListProjectsInternalServerError) String() string {
+	return fmt.Sprintf("[GET /projects][%d] listProjectsInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *ListProjectsInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

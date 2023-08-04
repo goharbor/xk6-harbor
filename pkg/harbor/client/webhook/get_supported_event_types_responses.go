@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // GetSupportedEventTypesReader is a Reader for the GetSupportedEventTypes structure.
@@ -48,7 +48,7 @@ func (o *GetSupportedEventTypesReader) ReadResponse(response runtime.ClientRespo
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /projects/{project_name_or_id}/webhook/events] GetSupportedEventTypes", response, response.Code())
 	}
 }
 
@@ -57,7 +57,8 @@ func NewGetSupportedEventTypesOK() *GetSupportedEventTypesOK {
 	return &GetSupportedEventTypesOK{}
 }
 
-/* GetSupportedEventTypesOK describes a response with status code 200, with default header values.
+/*
+GetSupportedEventTypesOK describes a response with status code 200, with default header values.
 
 Success
 */
@@ -65,9 +66,44 @@ type GetSupportedEventTypesOK struct {
 	Payload *models.SupportedWebhookEventTypes
 }
 
+// IsSuccess returns true when this get supported event types o k response has a 2xx status code
+func (o *GetSupportedEventTypesOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get supported event types o k response has a 3xx status code
+func (o *GetSupportedEventTypesOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get supported event types o k response has a 4xx status code
+func (o *GetSupportedEventTypesOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get supported event types o k response has a 5xx status code
+func (o *GetSupportedEventTypesOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get supported event types o k response a status code equal to that given
+func (o *GetSupportedEventTypesOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get supported event types o k response
+func (o *GetSupportedEventTypesOK) Code() int {
+	return 200
+}
+
 func (o *GetSupportedEventTypesOK) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name_or_id}/webhook/events][%d] getSupportedEventTypesOK  %+v", 200, o.Payload)
 }
+
+func (o *GetSupportedEventTypesOK) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name_or_id}/webhook/events][%d] getSupportedEventTypesOK  %+v", 200, o.Payload)
+}
+
 func (o *GetSupportedEventTypesOK) GetPayload() *models.SupportedWebhookEventTypes {
 	return o.Payload
 }
@@ -89,7 +125,8 @@ func NewGetSupportedEventTypesUnauthorized() *GetSupportedEventTypesUnauthorized
 	return &GetSupportedEventTypesUnauthorized{}
 }
 
-/* GetSupportedEventTypesUnauthorized describes a response with status code 401, with default header values.
+/*
+GetSupportedEventTypesUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -102,9 +139,44 @@ type GetSupportedEventTypesUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get supported event types unauthorized response has a 2xx status code
+func (o *GetSupportedEventTypesUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get supported event types unauthorized response has a 3xx status code
+func (o *GetSupportedEventTypesUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get supported event types unauthorized response has a 4xx status code
+func (o *GetSupportedEventTypesUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get supported event types unauthorized response has a 5xx status code
+func (o *GetSupportedEventTypesUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get supported event types unauthorized response a status code equal to that given
+func (o *GetSupportedEventTypesUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the get supported event types unauthorized response
+func (o *GetSupportedEventTypesUnauthorized) Code() int {
+	return 401
+}
+
 func (o *GetSupportedEventTypesUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name_or_id}/webhook/events][%d] getSupportedEventTypesUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *GetSupportedEventTypesUnauthorized) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name_or_id}/webhook/events][%d] getSupportedEventTypesUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *GetSupportedEventTypesUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -133,7 +205,8 @@ func NewGetSupportedEventTypesForbidden() *GetSupportedEventTypesForbidden {
 	return &GetSupportedEventTypesForbidden{}
 }
 
-/* GetSupportedEventTypesForbidden describes a response with status code 403, with default header values.
+/*
+GetSupportedEventTypesForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -146,9 +219,44 @@ type GetSupportedEventTypesForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get supported event types forbidden response has a 2xx status code
+func (o *GetSupportedEventTypesForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get supported event types forbidden response has a 3xx status code
+func (o *GetSupportedEventTypesForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get supported event types forbidden response has a 4xx status code
+func (o *GetSupportedEventTypesForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get supported event types forbidden response has a 5xx status code
+func (o *GetSupportedEventTypesForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get supported event types forbidden response a status code equal to that given
+func (o *GetSupportedEventTypesForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the get supported event types forbidden response
+func (o *GetSupportedEventTypesForbidden) Code() int {
+	return 403
+}
+
 func (o *GetSupportedEventTypesForbidden) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name_or_id}/webhook/events][%d] getSupportedEventTypesForbidden  %+v", 403, o.Payload)
 }
+
+func (o *GetSupportedEventTypesForbidden) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name_or_id}/webhook/events][%d] getSupportedEventTypesForbidden  %+v", 403, o.Payload)
+}
+
 func (o *GetSupportedEventTypesForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -177,7 +285,8 @@ func NewGetSupportedEventTypesInternalServerError() *GetSupportedEventTypesInter
 	return &GetSupportedEventTypesInternalServerError{}
 }
 
-/* GetSupportedEventTypesInternalServerError describes a response with status code 500, with default header values.
+/*
+GetSupportedEventTypesInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -190,9 +299,44 @@ type GetSupportedEventTypesInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get supported event types internal server error response has a 2xx status code
+func (o *GetSupportedEventTypesInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get supported event types internal server error response has a 3xx status code
+func (o *GetSupportedEventTypesInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get supported event types internal server error response has a 4xx status code
+func (o *GetSupportedEventTypesInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get supported event types internal server error response has a 5xx status code
+func (o *GetSupportedEventTypesInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get supported event types internal server error response a status code equal to that given
+func (o *GetSupportedEventTypesInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the get supported event types internal server error response
+func (o *GetSupportedEventTypesInternalServerError) Code() int {
+	return 500
+}
+
 func (o *GetSupportedEventTypesInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name_or_id}/webhook/events][%d] getSupportedEventTypesInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *GetSupportedEventTypesInternalServerError) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name_or_id}/webhook/events][%d] getSupportedEventTypesInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *GetSupportedEventTypesInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

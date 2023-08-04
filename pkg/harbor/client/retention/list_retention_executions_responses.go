@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // ListRetentionExecutionsReader is a Reader for the ListRetentionExecutions structure.
@@ -50,7 +50,7 @@ func (o *ListRetentionExecutionsReader) ReadResponse(response runtime.ClientResp
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /retentions/{id}/executions] listRetentionExecutions", response, response.Code())
 	}
 }
 
@@ -59,7 +59,8 @@ func NewListRetentionExecutionsOK() *ListRetentionExecutionsOK {
 	return &ListRetentionExecutionsOK{}
 }
 
-/* ListRetentionExecutionsOK describes a response with status code 200, with default header values.
+/*
+ListRetentionExecutionsOK describes a response with status code 200, with default header values.
 
 Get a Retention execution successfully.
 */
@@ -76,9 +77,44 @@ type ListRetentionExecutionsOK struct {
 	Payload []*models.RetentionExecution
 }
 
+// IsSuccess returns true when this list retention executions o k response has a 2xx status code
+func (o *ListRetentionExecutionsOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list retention executions o k response has a 3xx status code
+func (o *ListRetentionExecutionsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list retention executions o k response has a 4xx status code
+func (o *ListRetentionExecutionsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list retention executions o k response has a 5xx status code
+func (o *ListRetentionExecutionsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list retention executions o k response a status code equal to that given
+func (o *ListRetentionExecutionsOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list retention executions o k response
+func (o *ListRetentionExecutionsOK) Code() int {
+	return 200
+}
+
 func (o *ListRetentionExecutionsOK) Error() string {
 	return fmt.Sprintf("[GET /retentions/{id}/executions][%d] listRetentionExecutionsOK  %+v", 200, o.Payload)
 }
+
+func (o *ListRetentionExecutionsOK) String() string {
+	return fmt.Sprintf("[GET /retentions/{id}/executions][%d] listRetentionExecutionsOK  %+v", 200, o.Payload)
+}
+
 func (o *ListRetentionExecutionsOK) GetPayload() []*models.RetentionExecution {
 	return o.Payload
 }
@@ -116,7 +152,8 @@ func NewListRetentionExecutionsUnauthorized() *ListRetentionExecutionsUnauthoriz
 	return &ListRetentionExecutionsUnauthorized{}
 }
 
-/* ListRetentionExecutionsUnauthorized describes a response with status code 401, with default header values.
+/*
+ListRetentionExecutionsUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -129,9 +166,44 @@ type ListRetentionExecutionsUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list retention executions unauthorized response has a 2xx status code
+func (o *ListRetentionExecutionsUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list retention executions unauthorized response has a 3xx status code
+func (o *ListRetentionExecutionsUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list retention executions unauthorized response has a 4xx status code
+func (o *ListRetentionExecutionsUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list retention executions unauthorized response has a 5xx status code
+func (o *ListRetentionExecutionsUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list retention executions unauthorized response a status code equal to that given
+func (o *ListRetentionExecutionsUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the list retention executions unauthorized response
+func (o *ListRetentionExecutionsUnauthorized) Code() int {
+	return 401
+}
+
 func (o *ListRetentionExecutionsUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /retentions/{id}/executions][%d] listRetentionExecutionsUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *ListRetentionExecutionsUnauthorized) String() string {
+	return fmt.Sprintf("[GET /retentions/{id}/executions][%d] listRetentionExecutionsUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *ListRetentionExecutionsUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -160,7 +232,8 @@ func NewListRetentionExecutionsForbidden() *ListRetentionExecutionsForbidden {
 	return &ListRetentionExecutionsForbidden{}
 }
 
-/* ListRetentionExecutionsForbidden describes a response with status code 403, with default header values.
+/*
+ListRetentionExecutionsForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -173,9 +246,44 @@ type ListRetentionExecutionsForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list retention executions forbidden response has a 2xx status code
+func (o *ListRetentionExecutionsForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list retention executions forbidden response has a 3xx status code
+func (o *ListRetentionExecutionsForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list retention executions forbidden response has a 4xx status code
+func (o *ListRetentionExecutionsForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list retention executions forbidden response has a 5xx status code
+func (o *ListRetentionExecutionsForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list retention executions forbidden response a status code equal to that given
+func (o *ListRetentionExecutionsForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the list retention executions forbidden response
+func (o *ListRetentionExecutionsForbidden) Code() int {
+	return 403
+}
+
 func (o *ListRetentionExecutionsForbidden) Error() string {
 	return fmt.Sprintf("[GET /retentions/{id}/executions][%d] listRetentionExecutionsForbidden  %+v", 403, o.Payload)
 }
+
+func (o *ListRetentionExecutionsForbidden) String() string {
+	return fmt.Sprintf("[GET /retentions/{id}/executions][%d] listRetentionExecutionsForbidden  %+v", 403, o.Payload)
+}
+
 func (o *ListRetentionExecutionsForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -204,7 +312,8 @@ func NewListRetentionExecutionsInternalServerError() *ListRetentionExecutionsInt
 	return &ListRetentionExecutionsInternalServerError{}
 }
 
-/* ListRetentionExecutionsInternalServerError describes a response with status code 500, with default header values.
+/*
+ListRetentionExecutionsInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -217,9 +326,44 @@ type ListRetentionExecutionsInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list retention executions internal server error response has a 2xx status code
+func (o *ListRetentionExecutionsInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list retention executions internal server error response has a 3xx status code
+func (o *ListRetentionExecutionsInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list retention executions internal server error response has a 4xx status code
+func (o *ListRetentionExecutionsInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list retention executions internal server error response has a 5xx status code
+func (o *ListRetentionExecutionsInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this list retention executions internal server error response a status code equal to that given
+func (o *ListRetentionExecutionsInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the list retention executions internal server error response
+func (o *ListRetentionExecutionsInternalServerError) Code() int {
+	return 500
+}
+
 func (o *ListRetentionExecutionsInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /retentions/{id}/executions][%d] listRetentionExecutionsInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *ListRetentionExecutionsInternalServerError) String() string {
+	return fmt.Sprintf("[GET /retentions/{id}/executions][%d] listRetentionExecutionsInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *ListRetentionExecutionsInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

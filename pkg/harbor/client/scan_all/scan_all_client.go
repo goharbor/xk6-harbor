@@ -7,13 +7,14 @@ package scan_all
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/go-openapi/runtime"
 
 	strfmt "github.com/go-openapi/strfmt"
 )
 
-//go:generate mockery -name API -inpkg
+//go:generate mockery --name API --keeptree --with-expecter --case underscore
 
 // API is the interface of the scan all client
 type API interface {
@@ -85,8 +86,25 @@ func (a *Client) CreateScanAllSchedule(ctx context.Context, params *CreateScanAl
 	if err != nil {
 		return nil, err
 	}
-	return result.(*CreateScanAllScheduleCreated), nil
-
+	switch value := result.(type) {
+	case *CreateScanAllScheduleCreated:
+		return value, nil
+	case *CreateScanAllScheduleBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateScanAllScheduleUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateScanAllScheduleForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateScanAllScheduleConflict:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateScanAllSchedulePreconditionFailed:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateScanAllScheduleInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for createScanAllSchedule: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -112,8 +130,21 @@ func (a *Client) GetLatestScanAllMetrics(ctx context.Context, params *GetLatestS
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetLatestScanAllMetricsOK), nil
-
+	switch value := result.(type) {
+	case *GetLatestScanAllMetricsOK:
+		return value, nil
+	case *GetLatestScanAllMetricsUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetLatestScanAllMetricsForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetLatestScanAllMetricsPreconditionFailed:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetLatestScanAllMetricsInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getLatestScanAllMetrics: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -139,8 +170,21 @@ func (a *Client) GetLatestScheduledScanAllMetrics(ctx context.Context, params *G
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetLatestScheduledScanAllMetricsOK), nil
-
+	switch value := result.(type) {
+	case *GetLatestScheduledScanAllMetricsOK:
+		return value, nil
+	case *GetLatestScheduledScanAllMetricsUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetLatestScheduledScanAllMetricsForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetLatestScheduledScanAllMetricsPreconditionFailed:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetLatestScheduledScanAllMetricsInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getLatestScheduledScanAllMetrics: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -166,8 +210,21 @@ func (a *Client) GetScanAllSchedule(ctx context.Context, params *GetScanAllSched
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetScanAllScheduleOK), nil
-
+	switch value := result.(type) {
+	case *GetScanAllScheduleOK:
+		return value, nil
+	case *GetScanAllScheduleUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetScanAllScheduleForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetScanAllSchedulePreconditionFailed:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetScanAllScheduleInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getScanAllSchedule: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -193,6 +250,21 @@ func (a *Client) UpdateScanAllSchedule(ctx context.Context, params *UpdateScanAl
 	if err != nil {
 		return nil, err
 	}
-	return result.(*UpdateScanAllScheduleOK), nil
-
+	switch value := result.(type) {
+	case *UpdateScanAllScheduleOK:
+		return value, nil
+	case *UpdateScanAllScheduleBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateScanAllScheduleUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateScanAllScheduleForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateScanAllSchedulePreconditionFailed:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateScanAllScheduleInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for updateScanAllSchedule: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }

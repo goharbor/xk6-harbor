@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // CreateScanAllScheduleReader is a Reader for the CreateScanAllSchedule structure.
@@ -66,7 +66,7 @@ func (o *CreateScanAllScheduleReader) ReadResponse(response runtime.ClientRespon
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /system/scanAll/schedule] createScanAllSchedule", response, response.Code())
 	}
 }
 
@@ -75,7 +75,8 @@ func NewCreateScanAllScheduleCreated() *CreateScanAllScheduleCreated {
 	return &CreateScanAllScheduleCreated{}
 }
 
-/* CreateScanAllScheduleCreated describes a response with status code 201, with default header values.
+/*
+CreateScanAllScheduleCreated describes a response with status code 201, with default header values.
 
 Created
 */
@@ -90,7 +91,41 @@ type CreateScanAllScheduleCreated struct {
 	XRequestID string
 }
 
+// IsSuccess returns true when this create scan all schedule created response has a 2xx status code
+func (o *CreateScanAllScheduleCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create scan all schedule created response has a 3xx status code
+func (o *CreateScanAllScheduleCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create scan all schedule created response has a 4xx status code
+func (o *CreateScanAllScheduleCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create scan all schedule created response has a 5xx status code
+func (o *CreateScanAllScheduleCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create scan all schedule created response a status code equal to that given
+func (o *CreateScanAllScheduleCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create scan all schedule created response
+func (o *CreateScanAllScheduleCreated) Code() int {
+	return 201
+}
+
 func (o *CreateScanAllScheduleCreated) Error() string {
+	return fmt.Sprintf("[POST /system/scanAll/schedule][%d] createScanAllScheduleCreated ", 201)
+}
+
+func (o *CreateScanAllScheduleCreated) String() string {
 	return fmt.Sprintf("[POST /system/scanAll/schedule][%d] createScanAllScheduleCreated ", 201)
 }
 
@@ -118,7 +153,8 @@ func NewCreateScanAllScheduleBadRequest() *CreateScanAllScheduleBadRequest {
 	return &CreateScanAllScheduleBadRequest{}
 }
 
-/* CreateScanAllScheduleBadRequest describes a response with status code 400, with default header values.
+/*
+CreateScanAllScheduleBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
@@ -131,9 +167,44 @@ type CreateScanAllScheduleBadRequest struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create scan all schedule bad request response has a 2xx status code
+func (o *CreateScanAllScheduleBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create scan all schedule bad request response has a 3xx status code
+func (o *CreateScanAllScheduleBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create scan all schedule bad request response has a 4xx status code
+func (o *CreateScanAllScheduleBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create scan all schedule bad request response has a 5xx status code
+func (o *CreateScanAllScheduleBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create scan all schedule bad request response a status code equal to that given
+func (o *CreateScanAllScheduleBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create scan all schedule bad request response
+func (o *CreateScanAllScheduleBadRequest) Code() int {
+	return 400
+}
+
 func (o *CreateScanAllScheduleBadRequest) Error() string {
 	return fmt.Sprintf("[POST /system/scanAll/schedule][%d] createScanAllScheduleBadRequest  %+v", 400, o.Payload)
 }
+
+func (o *CreateScanAllScheduleBadRequest) String() string {
+	return fmt.Sprintf("[POST /system/scanAll/schedule][%d] createScanAllScheduleBadRequest  %+v", 400, o.Payload)
+}
+
 func (o *CreateScanAllScheduleBadRequest) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -162,7 +233,8 @@ func NewCreateScanAllScheduleUnauthorized() *CreateScanAllScheduleUnauthorized {
 	return &CreateScanAllScheduleUnauthorized{}
 }
 
-/* CreateScanAllScheduleUnauthorized describes a response with status code 401, with default header values.
+/*
+CreateScanAllScheduleUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -175,9 +247,44 @@ type CreateScanAllScheduleUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create scan all schedule unauthorized response has a 2xx status code
+func (o *CreateScanAllScheduleUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create scan all schedule unauthorized response has a 3xx status code
+func (o *CreateScanAllScheduleUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create scan all schedule unauthorized response has a 4xx status code
+func (o *CreateScanAllScheduleUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create scan all schedule unauthorized response has a 5xx status code
+func (o *CreateScanAllScheduleUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create scan all schedule unauthorized response a status code equal to that given
+func (o *CreateScanAllScheduleUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the create scan all schedule unauthorized response
+func (o *CreateScanAllScheduleUnauthorized) Code() int {
+	return 401
+}
+
 func (o *CreateScanAllScheduleUnauthorized) Error() string {
 	return fmt.Sprintf("[POST /system/scanAll/schedule][%d] createScanAllScheduleUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *CreateScanAllScheduleUnauthorized) String() string {
+	return fmt.Sprintf("[POST /system/scanAll/schedule][%d] createScanAllScheduleUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *CreateScanAllScheduleUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -206,7 +313,8 @@ func NewCreateScanAllScheduleForbidden() *CreateScanAllScheduleForbidden {
 	return &CreateScanAllScheduleForbidden{}
 }
 
-/* CreateScanAllScheduleForbidden describes a response with status code 403, with default header values.
+/*
+CreateScanAllScheduleForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -219,9 +327,44 @@ type CreateScanAllScheduleForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create scan all schedule forbidden response has a 2xx status code
+func (o *CreateScanAllScheduleForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create scan all schedule forbidden response has a 3xx status code
+func (o *CreateScanAllScheduleForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create scan all schedule forbidden response has a 4xx status code
+func (o *CreateScanAllScheduleForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create scan all schedule forbidden response has a 5xx status code
+func (o *CreateScanAllScheduleForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create scan all schedule forbidden response a status code equal to that given
+func (o *CreateScanAllScheduleForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the create scan all schedule forbidden response
+func (o *CreateScanAllScheduleForbidden) Code() int {
+	return 403
+}
+
 func (o *CreateScanAllScheduleForbidden) Error() string {
 	return fmt.Sprintf("[POST /system/scanAll/schedule][%d] createScanAllScheduleForbidden  %+v", 403, o.Payload)
 }
+
+func (o *CreateScanAllScheduleForbidden) String() string {
+	return fmt.Sprintf("[POST /system/scanAll/schedule][%d] createScanAllScheduleForbidden  %+v", 403, o.Payload)
+}
+
 func (o *CreateScanAllScheduleForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -250,7 +393,8 @@ func NewCreateScanAllScheduleConflict() *CreateScanAllScheduleConflict {
 	return &CreateScanAllScheduleConflict{}
 }
 
-/* CreateScanAllScheduleConflict describes a response with status code 409, with default header values.
+/*
+CreateScanAllScheduleConflict describes a response with status code 409, with default header values.
 
 Conflict
 */
@@ -263,9 +407,44 @@ type CreateScanAllScheduleConflict struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create scan all schedule conflict response has a 2xx status code
+func (o *CreateScanAllScheduleConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create scan all schedule conflict response has a 3xx status code
+func (o *CreateScanAllScheduleConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create scan all schedule conflict response has a 4xx status code
+func (o *CreateScanAllScheduleConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create scan all schedule conflict response has a 5xx status code
+func (o *CreateScanAllScheduleConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create scan all schedule conflict response a status code equal to that given
+func (o *CreateScanAllScheduleConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the create scan all schedule conflict response
+func (o *CreateScanAllScheduleConflict) Code() int {
+	return 409
+}
+
 func (o *CreateScanAllScheduleConflict) Error() string {
 	return fmt.Sprintf("[POST /system/scanAll/schedule][%d] createScanAllScheduleConflict  %+v", 409, o.Payload)
 }
+
+func (o *CreateScanAllScheduleConflict) String() string {
+	return fmt.Sprintf("[POST /system/scanAll/schedule][%d] createScanAllScheduleConflict  %+v", 409, o.Payload)
+}
+
 func (o *CreateScanAllScheduleConflict) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -294,7 +473,8 @@ func NewCreateScanAllSchedulePreconditionFailed() *CreateScanAllSchedulePrecondi
 	return &CreateScanAllSchedulePreconditionFailed{}
 }
 
-/* CreateScanAllSchedulePreconditionFailed describes a response with status code 412, with default header values.
+/*
+CreateScanAllSchedulePreconditionFailed describes a response with status code 412, with default header values.
 
 Precondition failed
 */
@@ -307,9 +487,44 @@ type CreateScanAllSchedulePreconditionFailed struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create scan all schedule precondition failed response has a 2xx status code
+func (o *CreateScanAllSchedulePreconditionFailed) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create scan all schedule precondition failed response has a 3xx status code
+func (o *CreateScanAllSchedulePreconditionFailed) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create scan all schedule precondition failed response has a 4xx status code
+func (o *CreateScanAllSchedulePreconditionFailed) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create scan all schedule precondition failed response has a 5xx status code
+func (o *CreateScanAllSchedulePreconditionFailed) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create scan all schedule precondition failed response a status code equal to that given
+func (o *CreateScanAllSchedulePreconditionFailed) IsCode(code int) bool {
+	return code == 412
+}
+
+// Code gets the status code for the create scan all schedule precondition failed response
+func (o *CreateScanAllSchedulePreconditionFailed) Code() int {
+	return 412
+}
+
 func (o *CreateScanAllSchedulePreconditionFailed) Error() string {
 	return fmt.Sprintf("[POST /system/scanAll/schedule][%d] createScanAllSchedulePreconditionFailed  %+v", 412, o.Payload)
 }
+
+func (o *CreateScanAllSchedulePreconditionFailed) String() string {
+	return fmt.Sprintf("[POST /system/scanAll/schedule][%d] createScanAllSchedulePreconditionFailed  %+v", 412, o.Payload)
+}
+
 func (o *CreateScanAllSchedulePreconditionFailed) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -338,7 +553,8 @@ func NewCreateScanAllScheduleInternalServerError() *CreateScanAllScheduleInterna
 	return &CreateScanAllScheduleInternalServerError{}
 }
 
-/* CreateScanAllScheduleInternalServerError describes a response with status code 500, with default header values.
+/*
+CreateScanAllScheduleInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -351,9 +567,44 @@ type CreateScanAllScheduleInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create scan all schedule internal server error response has a 2xx status code
+func (o *CreateScanAllScheduleInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create scan all schedule internal server error response has a 3xx status code
+func (o *CreateScanAllScheduleInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create scan all schedule internal server error response has a 4xx status code
+func (o *CreateScanAllScheduleInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create scan all schedule internal server error response has a 5xx status code
+func (o *CreateScanAllScheduleInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this create scan all schedule internal server error response a status code equal to that given
+func (o *CreateScanAllScheduleInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the create scan all schedule internal server error response
+func (o *CreateScanAllScheduleInternalServerError) Code() int {
+	return 500
+}
+
 func (o *CreateScanAllScheduleInternalServerError) Error() string {
 	return fmt.Sprintf("[POST /system/scanAll/schedule][%d] createScanAllScheduleInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *CreateScanAllScheduleInternalServerError) String() string {
+	return fmt.Sprintf("[POST /system/scanAll/schedule][%d] createScanAllScheduleInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *CreateScanAllScheduleInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

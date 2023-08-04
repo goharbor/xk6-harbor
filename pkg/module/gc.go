@@ -1,15 +1,14 @@
 package module
 
 import (
-	"context"
 	"time"
 
-	operation "github.com/heww/xk6-harbor/pkg/harbor/client/gc"
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	operation "github.com/goharbor/xk6-harbor/pkg/harbor/client/gc"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
-func (h *Harbor) StartGC(ctx context.Context) int64 {
-	h.mustInitialized(ctx)
+func (h *Harbor) StartGC() int64 {
+	h.mustInitialized()
 
 	params := operation.NewCreateGCScheduleParams().WithSchedule(&models.Schedule{
 		Schedule: &models.ScheduleObj{Type: "Manual"},
@@ -19,33 +18,33 @@ func (h *Harbor) StartGC(ctx context.Context) int64 {
 		},
 	})
 
-	res, err := h.api.GC.CreateGCSchedule(ctx, params)
-	Checkf(ctx, err, "failed to start gc")
+	res, err := h.api.GC.CreateGCSchedule(h.vu.Context(), params)
+	Checkf(h.vu.Runtime(), err, "failed to start gc")
 
-	return IDFromLocation(ctx, res.Location)
+	return IDFromLocation(h.vu.Runtime(), res.Location)
 }
 
-func (h *Harbor) GetGC(ctx context.Context, id int64) *models.GCHistory {
-	h.mustInitialized(ctx)
+func (h *Harbor) GetGC(id int64) *models.GCHistory {
+	h.mustInitialized()
 
 	params := operation.NewGetGCParams().WithGCID(id)
 
-	res, err := h.api.GC.GetGC(ctx, params)
-	Checkf(ctx, err, "failed to get gc %d", id)
+	res, err := h.api.GC.GetGC(h.vu.Context(), params)
+	Checkf(h.vu.Runtime(), err, "failed to get gc %d", id)
 
 	return res.Payload
 }
 
-func (h *Harbor) StartGCAndWait(ctx context.Context) {
-	jobID := h.StartGC(ctx)
+func (h *Harbor) StartGCAndWait() {
+	jobID := h.StartGC()
 
 	for {
-		gc := h.GetGC(ctx, jobID)
+		gc := h.GetGC(jobID)
 
 		if gc.JobStatus == "Success" {
 			break
 		} else if gc.JobStatus == "Error" || gc.JobStatus == "Stopped" {
-			Throwf(ctx, "expect Success but get %s for gc %d", gc.JobStatus, jobID)
+			Throwf(h.vu.Runtime(), "expect Success but get %s for gc %d", gc.JobStatus, jobID)
 		}
 
 		time.Sleep(time.Second)

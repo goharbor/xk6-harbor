@@ -92,6 +92,8 @@ func (m *GCHistory) validateSchedule(formats strfmt.Registry) error {
 		if err := m.Schedule.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("schedule")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("schedule")
 			}
 			return err
 		}
@@ -129,9 +131,16 @@ func (m *GCHistory) ContextValidate(ctx context.Context, formats strfmt.Registry
 func (m *GCHistory) contextValidateSchedule(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Schedule != nil {
+
+		if swag.IsZero(m.Schedule) { // not required
+			return nil
+		}
+
 		if err := m.Schedule.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("schedule")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("schedule")
 			}
 			return err
 		}

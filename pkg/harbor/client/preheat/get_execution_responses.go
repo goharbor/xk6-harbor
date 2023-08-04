@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // GetExecutionReader is a Reader for the GetExecution structure.
@@ -60,7 +60,7 @@ func (o *GetExecutionReader) ReadResponse(response runtime.ClientResponse, consu
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /projects/{project_name}/preheat/policies/{preheat_policy_name}/executions/{execution_id}] GetExecution", response, response.Code())
 	}
 }
 
@@ -69,7 +69,8 @@ func NewGetExecutionOK() *GetExecutionOK {
 	return &GetExecutionOK{}
 }
 
-/* GetExecutionOK describes a response with status code 200, with default header values.
+/*
+GetExecutionOK describes a response with status code 200, with default header values.
 
 Get execution success
 */
@@ -77,9 +78,44 @@ type GetExecutionOK struct {
 	Payload *models.Execution
 }
 
+// IsSuccess returns true when this get execution o k response has a 2xx status code
+func (o *GetExecutionOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get execution o k response has a 3xx status code
+func (o *GetExecutionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get execution o k response has a 4xx status code
+func (o *GetExecutionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get execution o k response has a 5xx status code
+func (o *GetExecutionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get execution o k response a status code equal to that given
+func (o *GetExecutionOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get execution o k response
+func (o *GetExecutionOK) Code() int {
+	return 200
+}
+
 func (o *GetExecutionOK) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/preheat/policies/{preheat_policy_name}/executions/{execution_id}][%d] getExecutionOK  %+v", 200, o.Payload)
 }
+
+func (o *GetExecutionOK) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/preheat/policies/{preheat_policy_name}/executions/{execution_id}][%d] getExecutionOK  %+v", 200, o.Payload)
+}
+
 func (o *GetExecutionOK) GetPayload() *models.Execution {
 	return o.Payload
 }
@@ -101,7 +137,8 @@ func NewGetExecutionBadRequest() *GetExecutionBadRequest {
 	return &GetExecutionBadRequest{}
 }
 
-/* GetExecutionBadRequest describes a response with status code 400, with default header values.
+/*
+GetExecutionBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
@@ -114,9 +151,44 @@ type GetExecutionBadRequest struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get execution bad request response has a 2xx status code
+func (o *GetExecutionBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get execution bad request response has a 3xx status code
+func (o *GetExecutionBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get execution bad request response has a 4xx status code
+func (o *GetExecutionBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get execution bad request response has a 5xx status code
+func (o *GetExecutionBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get execution bad request response a status code equal to that given
+func (o *GetExecutionBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the get execution bad request response
+func (o *GetExecutionBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetExecutionBadRequest) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/preheat/policies/{preheat_policy_name}/executions/{execution_id}][%d] getExecutionBadRequest  %+v", 400, o.Payload)
 }
+
+func (o *GetExecutionBadRequest) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/preheat/policies/{preheat_policy_name}/executions/{execution_id}][%d] getExecutionBadRequest  %+v", 400, o.Payload)
+}
+
 func (o *GetExecutionBadRequest) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -145,7 +217,8 @@ func NewGetExecutionUnauthorized() *GetExecutionUnauthorized {
 	return &GetExecutionUnauthorized{}
 }
 
-/* GetExecutionUnauthorized describes a response with status code 401, with default header values.
+/*
+GetExecutionUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -158,9 +231,44 @@ type GetExecutionUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get execution unauthorized response has a 2xx status code
+func (o *GetExecutionUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get execution unauthorized response has a 3xx status code
+func (o *GetExecutionUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get execution unauthorized response has a 4xx status code
+func (o *GetExecutionUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get execution unauthorized response has a 5xx status code
+func (o *GetExecutionUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get execution unauthorized response a status code equal to that given
+func (o *GetExecutionUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the get execution unauthorized response
+func (o *GetExecutionUnauthorized) Code() int {
+	return 401
+}
+
 func (o *GetExecutionUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/preheat/policies/{preheat_policy_name}/executions/{execution_id}][%d] getExecutionUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *GetExecutionUnauthorized) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/preheat/policies/{preheat_policy_name}/executions/{execution_id}][%d] getExecutionUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *GetExecutionUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -189,7 +297,8 @@ func NewGetExecutionForbidden() *GetExecutionForbidden {
 	return &GetExecutionForbidden{}
 }
 
-/* GetExecutionForbidden describes a response with status code 403, with default header values.
+/*
+GetExecutionForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -202,9 +311,44 @@ type GetExecutionForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get execution forbidden response has a 2xx status code
+func (o *GetExecutionForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get execution forbidden response has a 3xx status code
+func (o *GetExecutionForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get execution forbidden response has a 4xx status code
+func (o *GetExecutionForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get execution forbidden response has a 5xx status code
+func (o *GetExecutionForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get execution forbidden response a status code equal to that given
+func (o *GetExecutionForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the get execution forbidden response
+func (o *GetExecutionForbidden) Code() int {
+	return 403
+}
+
 func (o *GetExecutionForbidden) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/preheat/policies/{preheat_policy_name}/executions/{execution_id}][%d] getExecutionForbidden  %+v", 403, o.Payload)
 }
+
+func (o *GetExecutionForbidden) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/preheat/policies/{preheat_policy_name}/executions/{execution_id}][%d] getExecutionForbidden  %+v", 403, o.Payload)
+}
+
 func (o *GetExecutionForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -233,7 +377,8 @@ func NewGetExecutionNotFound() *GetExecutionNotFound {
 	return &GetExecutionNotFound{}
 }
 
-/* GetExecutionNotFound describes a response with status code 404, with default header values.
+/*
+GetExecutionNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
@@ -246,9 +391,44 @@ type GetExecutionNotFound struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get execution not found response has a 2xx status code
+func (o *GetExecutionNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get execution not found response has a 3xx status code
+func (o *GetExecutionNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get execution not found response has a 4xx status code
+func (o *GetExecutionNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get execution not found response has a 5xx status code
+func (o *GetExecutionNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get execution not found response a status code equal to that given
+func (o *GetExecutionNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get execution not found response
+func (o *GetExecutionNotFound) Code() int {
+	return 404
+}
+
 func (o *GetExecutionNotFound) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/preheat/policies/{preheat_policy_name}/executions/{execution_id}][%d] getExecutionNotFound  %+v", 404, o.Payload)
 }
+
+func (o *GetExecutionNotFound) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/preheat/policies/{preheat_policy_name}/executions/{execution_id}][%d] getExecutionNotFound  %+v", 404, o.Payload)
+}
+
 func (o *GetExecutionNotFound) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -277,7 +457,8 @@ func NewGetExecutionInternalServerError() *GetExecutionInternalServerError {
 	return &GetExecutionInternalServerError{}
 }
 
-/* GetExecutionInternalServerError describes a response with status code 500, with default header values.
+/*
+GetExecutionInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -290,9 +471,44 @@ type GetExecutionInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get execution internal server error response has a 2xx status code
+func (o *GetExecutionInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get execution internal server error response has a 3xx status code
+func (o *GetExecutionInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get execution internal server error response has a 4xx status code
+func (o *GetExecutionInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get execution internal server error response has a 5xx status code
+func (o *GetExecutionInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get execution internal server error response a status code equal to that given
+func (o *GetExecutionInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the get execution internal server error response
+func (o *GetExecutionInternalServerError) Code() int {
+	return 500
+}
+
 func (o *GetExecutionInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/preheat/policies/{preheat_policy_name}/executions/{execution_id}][%d] getExecutionInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *GetExecutionInternalServerError) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/preheat/policies/{preheat_policy_name}/executions/{execution_id}][%d] getExecutionInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *GetExecutionInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

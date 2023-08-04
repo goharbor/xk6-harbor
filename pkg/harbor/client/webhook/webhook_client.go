@@ -7,13 +7,14 @@ package webhook
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/go-openapi/runtime"
 
 	strfmt "github.com/go-openapi/strfmt"
 )
 
-//go:generate mockery -name API -inpkg
+//go:generate mockery --name API --keeptree --with-expecter --case underscore
 
 // API is the interface of the webhook client
 type API interface {
@@ -82,7 +83,6 @@ type Client struct {
 CreateWebhookPolicyOfProject creates project webhook policy
 
 This endpoint create a webhook policy if the project does not have one.
-
 */
 func (a *Client) CreateWebhookPolicyOfProject(ctx context.Context, params *CreateWebhookPolicyOfProjectParams) (*CreateWebhookPolicyOfProjectCreated, error) {
 
@@ -102,15 +102,27 @@ func (a *Client) CreateWebhookPolicyOfProject(ctx context.Context, params *Creat
 	if err != nil {
 		return nil, err
 	}
-	return result.(*CreateWebhookPolicyOfProjectCreated), nil
-
+	switch value := result.(type) {
+	case *CreateWebhookPolicyOfProjectCreated:
+		return value, nil
+	case *CreateWebhookPolicyOfProjectBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateWebhookPolicyOfProjectUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateWebhookPolicyOfProjectForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateWebhookPolicyOfProjectInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for CreateWebhookPolicyOfProject: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
 DeleteWebhookPolicyOfProject deletes webhook policy of a project
 
 This endpoint is aimed to delete webhookpolicy of a project.
-
 */
 func (a *Client) DeleteWebhookPolicyOfProject(ctx context.Context, params *DeleteWebhookPolicyOfProjectParams) (*DeleteWebhookPolicyOfProjectOK, error) {
 
@@ -130,8 +142,23 @@ func (a *Client) DeleteWebhookPolicyOfProject(ctx context.Context, params *Delet
 	if err != nil {
 		return nil, err
 	}
-	return result.(*DeleteWebhookPolicyOfProjectOK), nil
-
+	switch value := result.(type) {
+	case *DeleteWebhookPolicyOfProjectOK:
+		return value, nil
+	case *DeleteWebhookPolicyOfProjectBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteWebhookPolicyOfProjectUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteWebhookPolicyOfProjectForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteWebhookPolicyOfProjectNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteWebhookPolicyOfProjectInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for DeleteWebhookPolicyOfProject: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -157,15 +184,25 @@ func (a *Client) GetSupportedEventTypes(ctx context.Context, params *GetSupporte
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetSupportedEventTypesOK), nil
-
+	switch value := result.(type) {
+	case *GetSupportedEventTypesOK:
+		return value, nil
+	case *GetSupportedEventTypesUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetSupportedEventTypesForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetSupportedEventTypesInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetSupportedEventTypes: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
 GetWebhookPolicyOfProject gets project webhook policy
 
 This endpoint returns specified webhook policy of a project.
-
 */
 func (a *Client) GetWebhookPolicyOfProject(ctx context.Context, params *GetWebhookPolicyOfProjectParams) (*GetWebhookPolicyOfProjectOK, error) {
 
@@ -185,15 +222,29 @@ func (a *Client) GetWebhookPolicyOfProject(ctx context.Context, params *GetWebho
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetWebhookPolicyOfProjectOK), nil
-
+	switch value := result.(type) {
+	case *GetWebhookPolicyOfProjectOK:
+		return value, nil
+	case *GetWebhookPolicyOfProjectBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetWebhookPolicyOfProjectUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetWebhookPolicyOfProjectForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetWebhookPolicyOfProjectNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetWebhookPolicyOfProjectInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetWebhookPolicyOfProject: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
 LastTrigger gets project webhook policy last trigger info
 
 This endpoint returns last trigger information of project webhook policy.
-
 */
 func (a *Client) LastTrigger(ctx context.Context, params *LastTriggerParams) (*LastTriggerOK, error) {
 
@@ -213,15 +264,27 @@ func (a *Client) LastTrigger(ctx context.Context, params *LastTriggerParams) (*L
 	if err != nil {
 		return nil, err
 	}
-	return result.(*LastTriggerOK), nil
-
+	switch value := result.(type) {
+	case *LastTriggerOK:
+		return value, nil
+	case *LastTriggerBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *LastTriggerUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *LastTriggerForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *LastTriggerInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for LastTrigger: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
 ListWebhookPoliciesOfProject lists project webhook policies
 
 This endpoint returns webhook policies of a project.
-
 */
 func (a *Client) ListWebhookPoliciesOfProject(ctx context.Context, params *ListWebhookPoliciesOfProjectParams) (*ListWebhookPoliciesOfProjectOK, error) {
 
@@ -241,15 +304,27 @@ func (a *Client) ListWebhookPoliciesOfProject(ctx context.Context, params *ListW
 	if err != nil {
 		return nil, err
 	}
-	return result.(*ListWebhookPoliciesOfProjectOK), nil
-
+	switch value := result.(type) {
+	case *ListWebhookPoliciesOfProjectOK:
+		return value, nil
+	case *ListWebhookPoliciesOfProjectBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListWebhookPoliciesOfProjectUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListWebhookPoliciesOfProjectForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListWebhookPoliciesOfProjectInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ListWebhookPoliciesOfProject: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
 UpdateWebhookPolicyOfProject updates webhook policy of a project
 
 This endpoint is aimed to update the webhook policy of a project.
-
 */
 func (a *Client) UpdateWebhookPolicyOfProject(ctx context.Context, params *UpdateWebhookPolicyOfProjectParams) (*UpdateWebhookPolicyOfProjectOK, error) {
 
@@ -269,6 +344,21 @@ func (a *Client) UpdateWebhookPolicyOfProject(ctx context.Context, params *Updat
 	if err != nil {
 		return nil, err
 	}
-	return result.(*UpdateWebhookPolicyOfProjectOK), nil
-
+	switch value := result.(type) {
+	case *UpdateWebhookPolicyOfProjectOK:
+		return value, nil
+	case *UpdateWebhookPolicyOfProjectBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateWebhookPolicyOfProjectUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateWebhookPolicyOfProjectForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateWebhookPolicyOfProjectNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateWebhookPolicyOfProjectInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for UpdateWebhookPolicyOfProject: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }

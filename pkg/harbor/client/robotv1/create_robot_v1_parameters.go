@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // NewCreateRobotV1Params creates a new CreateRobotV1Params object,
@@ -55,10 +55,12 @@ func NewCreateRobotV1ParamsWithHTTPClient(client *http.Client) *CreateRobotV1Par
 	}
 }
 
-/* CreateRobotV1Params contains all the parameters to send to the API endpoint
-   for the create robot v1 operation.
+/*
+CreateRobotV1Params contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the create robot v1 operation.
+
+	Typically these are written to a http.Request.
 */
 type CreateRobotV1Params struct {
 

@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // PingScannerReader is a Reader for the PingScanner structure.
@@ -54,7 +54,7 @@ func (o *PingScannerReader) ReadResponse(response runtime.ClientResponse, consum
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /scanners/ping] pingScanner", response, response.Code())
 	}
 }
 
@@ -63,7 +63,8 @@ func NewPingScannerOK() *PingScannerOK {
 	return &PingScannerOK{}
 }
 
-/* PingScannerOK describes a response with status code 200, with default header values.
+/*
+PingScannerOK describes a response with status code 200, with default header values.
 
 Success
 */
@@ -74,7 +75,41 @@ type PingScannerOK struct {
 	XRequestID string
 }
 
+// IsSuccess returns true when this ping scanner o k response has a 2xx status code
+func (o *PingScannerOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this ping scanner o k response has a 3xx status code
+func (o *PingScannerOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this ping scanner o k response has a 4xx status code
+func (o *PingScannerOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this ping scanner o k response has a 5xx status code
+func (o *PingScannerOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this ping scanner o k response a status code equal to that given
+func (o *PingScannerOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the ping scanner o k response
+func (o *PingScannerOK) Code() int {
+	return 200
+}
+
 func (o *PingScannerOK) Error() string {
+	return fmt.Sprintf("[POST /scanners/ping][%d] pingScannerOK ", 200)
+}
+
+func (o *PingScannerOK) String() string {
 	return fmt.Sprintf("[POST /scanners/ping][%d] pingScannerOK ", 200)
 }
 
@@ -95,7 +130,8 @@ func NewPingScannerBadRequest() *PingScannerBadRequest {
 	return &PingScannerBadRequest{}
 }
 
-/* PingScannerBadRequest describes a response with status code 400, with default header values.
+/*
+PingScannerBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
@@ -108,9 +144,44 @@ type PingScannerBadRequest struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this ping scanner bad request response has a 2xx status code
+func (o *PingScannerBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this ping scanner bad request response has a 3xx status code
+func (o *PingScannerBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this ping scanner bad request response has a 4xx status code
+func (o *PingScannerBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this ping scanner bad request response has a 5xx status code
+func (o *PingScannerBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this ping scanner bad request response a status code equal to that given
+func (o *PingScannerBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the ping scanner bad request response
+func (o *PingScannerBadRequest) Code() int {
+	return 400
+}
+
 func (o *PingScannerBadRequest) Error() string {
 	return fmt.Sprintf("[POST /scanners/ping][%d] pingScannerBadRequest  %+v", 400, o.Payload)
 }
+
+func (o *PingScannerBadRequest) String() string {
+	return fmt.Sprintf("[POST /scanners/ping][%d] pingScannerBadRequest  %+v", 400, o.Payload)
+}
+
 func (o *PingScannerBadRequest) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -139,7 +210,8 @@ func NewPingScannerUnauthorized() *PingScannerUnauthorized {
 	return &PingScannerUnauthorized{}
 }
 
-/* PingScannerUnauthorized describes a response with status code 401, with default header values.
+/*
+PingScannerUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -152,9 +224,44 @@ type PingScannerUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this ping scanner unauthorized response has a 2xx status code
+func (o *PingScannerUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this ping scanner unauthorized response has a 3xx status code
+func (o *PingScannerUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this ping scanner unauthorized response has a 4xx status code
+func (o *PingScannerUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this ping scanner unauthorized response has a 5xx status code
+func (o *PingScannerUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this ping scanner unauthorized response a status code equal to that given
+func (o *PingScannerUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the ping scanner unauthorized response
+func (o *PingScannerUnauthorized) Code() int {
+	return 401
+}
+
 func (o *PingScannerUnauthorized) Error() string {
 	return fmt.Sprintf("[POST /scanners/ping][%d] pingScannerUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *PingScannerUnauthorized) String() string {
+	return fmt.Sprintf("[POST /scanners/ping][%d] pingScannerUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *PingScannerUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -183,7 +290,8 @@ func NewPingScannerForbidden() *PingScannerForbidden {
 	return &PingScannerForbidden{}
 }
 
-/* PingScannerForbidden describes a response with status code 403, with default header values.
+/*
+PingScannerForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -196,9 +304,44 @@ type PingScannerForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this ping scanner forbidden response has a 2xx status code
+func (o *PingScannerForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this ping scanner forbidden response has a 3xx status code
+func (o *PingScannerForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this ping scanner forbidden response has a 4xx status code
+func (o *PingScannerForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this ping scanner forbidden response has a 5xx status code
+func (o *PingScannerForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this ping scanner forbidden response a status code equal to that given
+func (o *PingScannerForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the ping scanner forbidden response
+func (o *PingScannerForbidden) Code() int {
+	return 403
+}
+
 func (o *PingScannerForbidden) Error() string {
 	return fmt.Sprintf("[POST /scanners/ping][%d] pingScannerForbidden  %+v", 403, o.Payload)
 }
+
+func (o *PingScannerForbidden) String() string {
+	return fmt.Sprintf("[POST /scanners/ping][%d] pingScannerForbidden  %+v", 403, o.Payload)
+}
+
 func (o *PingScannerForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -227,7 +370,8 @@ func NewPingScannerInternalServerError() *PingScannerInternalServerError {
 	return &PingScannerInternalServerError{}
 }
 
-/* PingScannerInternalServerError describes a response with status code 500, with default header values.
+/*
+PingScannerInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -240,9 +384,44 @@ type PingScannerInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this ping scanner internal server error response has a 2xx status code
+func (o *PingScannerInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this ping scanner internal server error response has a 3xx status code
+func (o *PingScannerInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this ping scanner internal server error response has a 4xx status code
+func (o *PingScannerInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this ping scanner internal server error response has a 5xx status code
+func (o *PingScannerInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this ping scanner internal server error response a status code equal to that given
+func (o *PingScannerInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the ping scanner internal server error response
+func (o *PingScannerInternalServerError) Code() int {
+	return 500
+}
+
 func (o *PingScannerInternalServerError) Error() string {
 	return fmt.Sprintf("[POST /scanners/ping][%d] pingScannerInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *PingScannerInternalServerError) String() string {
+	return fmt.Sprintf("[POST /scanners/ping][%d] pingScannerInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *PingScannerInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

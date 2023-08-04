@@ -52,10 +52,12 @@ func NewGetSystemCVEAllowlistParamsWithHTTPClient(client *http.Client) *GetSyste
 	}
 }
 
-/* GetSystemCVEAllowlistParams contains all the parameters to send to the API endpoint
-   for the get system CVE allowlist operation.
+/*
+GetSystemCVEAllowlistParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get system CVE allowlist operation.
+
+	Typically these are written to a http.Request.
 */
 type GetSystemCVEAllowlistParams struct {
 

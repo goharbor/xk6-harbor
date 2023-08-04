@@ -45,6 +45,8 @@ func (m *QuotaUpdateReq) validateHard(formats strfmt.Registry) error {
 		if err := m.Hard.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("hard")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("hard")
 			}
 			return err
 		}
@@ -69,9 +71,15 @@ func (m *QuotaUpdateReq) ContextValidate(ctx context.Context, formats strfmt.Reg
 
 func (m *QuotaUpdateReq) contextValidateHard(ctx context.Context, formats strfmt.Registry) error {
 
+	if swag.IsZero(m.Hard) { // not required
+		return nil
+	}
+
 	if err := m.Hard.ContextValidate(ctx, formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {
 			return ve.ValidateName("hard")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("hard")
 		}
 		return err
 	}

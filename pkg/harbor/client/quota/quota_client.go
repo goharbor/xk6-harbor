@@ -7,13 +7,14 @@ package quota
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/go-openapi/runtime"
 
 	strfmt "github.com/go-openapi/strfmt"
 )
 
-//go:generate mockery -name API -inpkg
+//go:generate mockery --name API --keeptree --with-expecter --case underscore
 
 // API is the interface of the quota client
 type API interface {
@@ -75,8 +76,21 @@ func (a *Client) GetQuota(ctx context.Context, params *GetQuotaParams) (*GetQuot
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetQuotaOK), nil
-
+	switch value := result.(type) {
+	case *GetQuotaOK:
+		return value, nil
+	case *GetQuotaUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetQuotaForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetQuotaNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetQuotaInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getQuota: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -102,8 +116,19 @@ func (a *Client) ListQuotas(ctx context.Context, params *ListQuotasParams) (*Lis
 	if err != nil {
 		return nil, err
 	}
-	return result.(*ListQuotasOK), nil
-
+	switch value := result.(type) {
+	case *ListQuotasOK:
+		return value, nil
+	case *ListQuotasUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListQuotasForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListQuotasInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for listQuotas: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -129,6 +154,21 @@ func (a *Client) UpdateQuota(ctx context.Context, params *UpdateQuotaParams) (*U
 	if err != nil {
 		return nil, err
 	}
-	return result.(*UpdateQuotaOK), nil
-
+	switch value := result.(type) {
+	case *UpdateQuotaOK:
+		return value, nil
+	case *UpdateQuotaBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateQuotaUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateQuotaForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateQuotaNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateQuotaInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for updateQuota: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }

@@ -114,6 +114,8 @@ func (m *Project) validateCVEAllowlist(formats strfmt.Registry) error {
 		if err := m.CVEAllowlist.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("cve_allowlist")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("cve_allowlist")
 			}
 			return err
 		}
@@ -131,6 +133,8 @@ func (m *Project) validateMetadata(formats strfmt.Registry) error {
 		if err := m.Metadata.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("metadata")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("metadata")
 			}
 			return err
 		}
@@ -172,9 +176,16 @@ func (m *Project) ContextValidate(ctx context.Context, formats strfmt.Registry) 
 func (m *Project) contextValidateCVEAllowlist(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.CVEAllowlist != nil {
+
+		if swag.IsZero(m.CVEAllowlist) { // not required
+			return nil
+		}
+
 		if err := m.CVEAllowlist.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("cve_allowlist")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("cve_allowlist")
 			}
 			return err
 		}
@@ -186,9 +197,16 @@ func (m *Project) contextValidateCVEAllowlist(ctx context.Context, formats strfm
 func (m *Project) contextValidateMetadata(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Metadata != nil {
+
+		if swag.IsZero(m.Metadata) { // not required
+			return nil
+		}
+
 		if err := m.Metadata.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("metadata")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("metadata")
 			}
 			return err
 		}

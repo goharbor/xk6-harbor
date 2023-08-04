@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // CreateInstanceReader is a Reader for the CreateInstance structure.
@@ -66,7 +66,7 @@ func (o *CreateInstanceReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /p2p/preheat/instances] CreateInstance", response, response.Code())
 	}
 }
 
@@ -75,7 +75,8 @@ func NewCreateInstanceCreated() *CreateInstanceCreated {
 	return &CreateInstanceCreated{}
 }
 
-/* CreateInstanceCreated describes a response with status code 201, with default header values.
+/*
+CreateInstanceCreated describes a response with status code 201, with default header values.
 
 Created
 */
@@ -90,7 +91,41 @@ type CreateInstanceCreated struct {
 	XRequestID string
 }
 
+// IsSuccess returns true when this create instance created response has a 2xx status code
+func (o *CreateInstanceCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create instance created response has a 3xx status code
+func (o *CreateInstanceCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create instance created response has a 4xx status code
+func (o *CreateInstanceCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create instance created response has a 5xx status code
+func (o *CreateInstanceCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create instance created response a status code equal to that given
+func (o *CreateInstanceCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create instance created response
+func (o *CreateInstanceCreated) Code() int {
+	return 201
+}
+
 func (o *CreateInstanceCreated) Error() string {
+	return fmt.Sprintf("[POST /p2p/preheat/instances][%d] createInstanceCreated ", 201)
+}
+
+func (o *CreateInstanceCreated) String() string {
 	return fmt.Sprintf("[POST /p2p/preheat/instances][%d] createInstanceCreated ", 201)
 }
 
@@ -118,7 +153,8 @@ func NewCreateInstanceBadRequest() *CreateInstanceBadRequest {
 	return &CreateInstanceBadRequest{}
 }
 
-/* CreateInstanceBadRequest describes a response with status code 400, with default header values.
+/*
+CreateInstanceBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
@@ -131,9 +167,44 @@ type CreateInstanceBadRequest struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create instance bad request response has a 2xx status code
+func (o *CreateInstanceBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create instance bad request response has a 3xx status code
+func (o *CreateInstanceBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create instance bad request response has a 4xx status code
+func (o *CreateInstanceBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create instance bad request response has a 5xx status code
+func (o *CreateInstanceBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create instance bad request response a status code equal to that given
+func (o *CreateInstanceBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create instance bad request response
+func (o *CreateInstanceBadRequest) Code() int {
+	return 400
+}
+
 func (o *CreateInstanceBadRequest) Error() string {
 	return fmt.Sprintf("[POST /p2p/preheat/instances][%d] createInstanceBadRequest  %+v", 400, o.Payload)
 }
+
+func (o *CreateInstanceBadRequest) String() string {
+	return fmt.Sprintf("[POST /p2p/preheat/instances][%d] createInstanceBadRequest  %+v", 400, o.Payload)
+}
+
 func (o *CreateInstanceBadRequest) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -162,7 +233,8 @@ func NewCreateInstanceUnauthorized() *CreateInstanceUnauthorized {
 	return &CreateInstanceUnauthorized{}
 }
 
-/* CreateInstanceUnauthorized describes a response with status code 401, with default header values.
+/*
+CreateInstanceUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -175,9 +247,44 @@ type CreateInstanceUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create instance unauthorized response has a 2xx status code
+func (o *CreateInstanceUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create instance unauthorized response has a 3xx status code
+func (o *CreateInstanceUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create instance unauthorized response has a 4xx status code
+func (o *CreateInstanceUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create instance unauthorized response has a 5xx status code
+func (o *CreateInstanceUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create instance unauthorized response a status code equal to that given
+func (o *CreateInstanceUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the create instance unauthorized response
+func (o *CreateInstanceUnauthorized) Code() int {
+	return 401
+}
+
 func (o *CreateInstanceUnauthorized) Error() string {
 	return fmt.Sprintf("[POST /p2p/preheat/instances][%d] createInstanceUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *CreateInstanceUnauthorized) String() string {
+	return fmt.Sprintf("[POST /p2p/preheat/instances][%d] createInstanceUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *CreateInstanceUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -206,7 +313,8 @@ func NewCreateInstanceForbidden() *CreateInstanceForbidden {
 	return &CreateInstanceForbidden{}
 }
 
-/* CreateInstanceForbidden describes a response with status code 403, with default header values.
+/*
+CreateInstanceForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -219,9 +327,44 @@ type CreateInstanceForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create instance forbidden response has a 2xx status code
+func (o *CreateInstanceForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create instance forbidden response has a 3xx status code
+func (o *CreateInstanceForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create instance forbidden response has a 4xx status code
+func (o *CreateInstanceForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create instance forbidden response has a 5xx status code
+func (o *CreateInstanceForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create instance forbidden response a status code equal to that given
+func (o *CreateInstanceForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the create instance forbidden response
+func (o *CreateInstanceForbidden) Code() int {
+	return 403
+}
+
 func (o *CreateInstanceForbidden) Error() string {
 	return fmt.Sprintf("[POST /p2p/preheat/instances][%d] createInstanceForbidden  %+v", 403, o.Payload)
 }
+
+func (o *CreateInstanceForbidden) String() string {
+	return fmt.Sprintf("[POST /p2p/preheat/instances][%d] createInstanceForbidden  %+v", 403, o.Payload)
+}
+
 func (o *CreateInstanceForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -250,7 +393,8 @@ func NewCreateInstanceNotFound() *CreateInstanceNotFound {
 	return &CreateInstanceNotFound{}
 }
 
-/* CreateInstanceNotFound describes a response with status code 404, with default header values.
+/*
+CreateInstanceNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
@@ -263,9 +407,44 @@ type CreateInstanceNotFound struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create instance not found response has a 2xx status code
+func (o *CreateInstanceNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create instance not found response has a 3xx status code
+func (o *CreateInstanceNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create instance not found response has a 4xx status code
+func (o *CreateInstanceNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create instance not found response has a 5xx status code
+func (o *CreateInstanceNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create instance not found response a status code equal to that given
+func (o *CreateInstanceNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the create instance not found response
+func (o *CreateInstanceNotFound) Code() int {
+	return 404
+}
+
 func (o *CreateInstanceNotFound) Error() string {
 	return fmt.Sprintf("[POST /p2p/preheat/instances][%d] createInstanceNotFound  %+v", 404, o.Payload)
 }
+
+func (o *CreateInstanceNotFound) String() string {
+	return fmt.Sprintf("[POST /p2p/preheat/instances][%d] createInstanceNotFound  %+v", 404, o.Payload)
+}
+
 func (o *CreateInstanceNotFound) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -294,7 +473,8 @@ func NewCreateInstanceConflict() *CreateInstanceConflict {
 	return &CreateInstanceConflict{}
 }
 
-/* CreateInstanceConflict describes a response with status code 409, with default header values.
+/*
+CreateInstanceConflict describes a response with status code 409, with default header values.
 
 Conflict
 */
@@ -307,9 +487,44 @@ type CreateInstanceConflict struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create instance conflict response has a 2xx status code
+func (o *CreateInstanceConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create instance conflict response has a 3xx status code
+func (o *CreateInstanceConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create instance conflict response has a 4xx status code
+func (o *CreateInstanceConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create instance conflict response has a 5xx status code
+func (o *CreateInstanceConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create instance conflict response a status code equal to that given
+func (o *CreateInstanceConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the create instance conflict response
+func (o *CreateInstanceConflict) Code() int {
+	return 409
+}
+
 func (o *CreateInstanceConflict) Error() string {
 	return fmt.Sprintf("[POST /p2p/preheat/instances][%d] createInstanceConflict  %+v", 409, o.Payload)
 }
+
+func (o *CreateInstanceConflict) String() string {
+	return fmt.Sprintf("[POST /p2p/preheat/instances][%d] createInstanceConflict  %+v", 409, o.Payload)
+}
+
 func (o *CreateInstanceConflict) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -338,7 +553,8 @@ func NewCreateInstanceInternalServerError() *CreateInstanceInternalServerError {
 	return &CreateInstanceInternalServerError{}
 }
 
-/* CreateInstanceInternalServerError describes a response with status code 500, with default header values.
+/*
+CreateInstanceInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -351,9 +567,44 @@ type CreateInstanceInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create instance internal server error response has a 2xx status code
+func (o *CreateInstanceInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create instance internal server error response has a 3xx status code
+func (o *CreateInstanceInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create instance internal server error response has a 4xx status code
+func (o *CreateInstanceInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create instance internal server error response has a 5xx status code
+func (o *CreateInstanceInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this create instance internal server error response a status code equal to that given
+func (o *CreateInstanceInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the create instance internal server error response
+func (o *CreateInstanceInternalServerError) Code() int {
+	return 500
+}
+
 func (o *CreateInstanceInternalServerError) Error() string {
 	return fmt.Sprintf("[POST /p2p/preheat/instances][%d] createInstanceInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *CreateInstanceInternalServerError) String() string {
+	return fmt.Sprintf("[POST /p2p/preheat/instances][%d] createInstanceInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *CreateInstanceInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

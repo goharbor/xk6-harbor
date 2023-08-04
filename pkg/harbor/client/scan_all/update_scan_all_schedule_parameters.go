@@ -15,7 +15,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // NewUpdateScanAllScheduleParams creates a new UpdateScanAllScheduleParams object,
@@ -54,10 +54,12 @@ func NewUpdateScanAllScheduleParamsWithHTTPClient(client *http.Client) *UpdateSc
 	}
 }
 
-/* UpdateScanAllScheduleParams contains all the parameters to send to the API endpoint
-   for the update scan all schedule operation.
+/*
+UpdateScanAllScheduleParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the update scan all schedule operation.
+
+	Typically these are written to a http.Request.
 */
 type UpdateScanAllScheduleParams struct {
 

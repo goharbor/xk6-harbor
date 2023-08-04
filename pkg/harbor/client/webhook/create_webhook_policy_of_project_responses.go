@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // CreateWebhookPolicyOfProjectReader is a Reader for the CreateWebhookPolicyOfProject structure.
@@ -54,7 +54,7 @@ func (o *CreateWebhookPolicyOfProjectReader) ReadResponse(response runtime.Clien
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /projects/{project_name_or_id}/webhook/policies] CreateWebhookPolicyOfProject", response, response.Code())
 	}
 }
 
@@ -63,7 +63,8 @@ func NewCreateWebhookPolicyOfProjectCreated() *CreateWebhookPolicyOfProjectCreat
 	return &CreateWebhookPolicyOfProjectCreated{}
 }
 
-/* CreateWebhookPolicyOfProjectCreated describes a response with status code 201, with default header values.
+/*
+CreateWebhookPolicyOfProjectCreated describes a response with status code 201, with default header values.
 
 Project webhook policy create successfully.
 */
@@ -78,7 +79,41 @@ type CreateWebhookPolicyOfProjectCreated struct {
 	XRequestID string
 }
 
+// IsSuccess returns true when this create webhook policy of project created response has a 2xx status code
+func (o *CreateWebhookPolicyOfProjectCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create webhook policy of project created response has a 3xx status code
+func (o *CreateWebhookPolicyOfProjectCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create webhook policy of project created response has a 4xx status code
+func (o *CreateWebhookPolicyOfProjectCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create webhook policy of project created response has a 5xx status code
+func (o *CreateWebhookPolicyOfProjectCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create webhook policy of project created response a status code equal to that given
+func (o *CreateWebhookPolicyOfProjectCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create webhook policy of project created response
+func (o *CreateWebhookPolicyOfProjectCreated) Code() int {
+	return 201
+}
+
 func (o *CreateWebhookPolicyOfProjectCreated) Error() string {
+	return fmt.Sprintf("[POST /projects/{project_name_or_id}/webhook/policies][%d] createWebhookPolicyOfProjectCreated ", 201)
+}
+
+func (o *CreateWebhookPolicyOfProjectCreated) String() string {
 	return fmt.Sprintf("[POST /projects/{project_name_or_id}/webhook/policies][%d] createWebhookPolicyOfProjectCreated ", 201)
 }
 
@@ -106,7 +141,8 @@ func NewCreateWebhookPolicyOfProjectBadRequest() *CreateWebhookPolicyOfProjectBa
 	return &CreateWebhookPolicyOfProjectBadRequest{}
 }
 
-/* CreateWebhookPolicyOfProjectBadRequest describes a response with status code 400, with default header values.
+/*
+CreateWebhookPolicyOfProjectBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
@@ -119,9 +155,44 @@ type CreateWebhookPolicyOfProjectBadRequest struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create webhook policy of project bad request response has a 2xx status code
+func (o *CreateWebhookPolicyOfProjectBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create webhook policy of project bad request response has a 3xx status code
+func (o *CreateWebhookPolicyOfProjectBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create webhook policy of project bad request response has a 4xx status code
+func (o *CreateWebhookPolicyOfProjectBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create webhook policy of project bad request response has a 5xx status code
+func (o *CreateWebhookPolicyOfProjectBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create webhook policy of project bad request response a status code equal to that given
+func (o *CreateWebhookPolicyOfProjectBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create webhook policy of project bad request response
+func (o *CreateWebhookPolicyOfProjectBadRequest) Code() int {
+	return 400
+}
+
 func (o *CreateWebhookPolicyOfProjectBadRequest) Error() string {
 	return fmt.Sprintf("[POST /projects/{project_name_or_id}/webhook/policies][%d] createWebhookPolicyOfProjectBadRequest  %+v", 400, o.Payload)
 }
+
+func (o *CreateWebhookPolicyOfProjectBadRequest) String() string {
+	return fmt.Sprintf("[POST /projects/{project_name_or_id}/webhook/policies][%d] createWebhookPolicyOfProjectBadRequest  %+v", 400, o.Payload)
+}
+
 func (o *CreateWebhookPolicyOfProjectBadRequest) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -150,7 +221,8 @@ func NewCreateWebhookPolicyOfProjectUnauthorized() *CreateWebhookPolicyOfProject
 	return &CreateWebhookPolicyOfProjectUnauthorized{}
 }
 
-/* CreateWebhookPolicyOfProjectUnauthorized describes a response with status code 401, with default header values.
+/*
+CreateWebhookPolicyOfProjectUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -163,9 +235,44 @@ type CreateWebhookPolicyOfProjectUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create webhook policy of project unauthorized response has a 2xx status code
+func (o *CreateWebhookPolicyOfProjectUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create webhook policy of project unauthorized response has a 3xx status code
+func (o *CreateWebhookPolicyOfProjectUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create webhook policy of project unauthorized response has a 4xx status code
+func (o *CreateWebhookPolicyOfProjectUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create webhook policy of project unauthorized response has a 5xx status code
+func (o *CreateWebhookPolicyOfProjectUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create webhook policy of project unauthorized response a status code equal to that given
+func (o *CreateWebhookPolicyOfProjectUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the create webhook policy of project unauthorized response
+func (o *CreateWebhookPolicyOfProjectUnauthorized) Code() int {
+	return 401
+}
+
 func (o *CreateWebhookPolicyOfProjectUnauthorized) Error() string {
 	return fmt.Sprintf("[POST /projects/{project_name_or_id}/webhook/policies][%d] createWebhookPolicyOfProjectUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *CreateWebhookPolicyOfProjectUnauthorized) String() string {
+	return fmt.Sprintf("[POST /projects/{project_name_or_id}/webhook/policies][%d] createWebhookPolicyOfProjectUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *CreateWebhookPolicyOfProjectUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -194,7 +301,8 @@ func NewCreateWebhookPolicyOfProjectForbidden() *CreateWebhookPolicyOfProjectFor
 	return &CreateWebhookPolicyOfProjectForbidden{}
 }
 
-/* CreateWebhookPolicyOfProjectForbidden describes a response with status code 403, with default header values.
+/*
+CreateWebhookPolicyOfProjectForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -207,9 +315,44 @@ type CreateWebhookPolicyOfProjectForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create webhook policy of project forbidden response has a 2xx status code
+func (o *CreateWebhookPolicyOfProjectForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create webhook policy of project forbidden response has a 3xx status code
+func (o *CreateWebhookPolicyOfProjectForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create webhook policy of project forbidden response has a 4xx status code
+func (o *CreateWebhookPolicyOfProjectForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create webhook policy of project forbidden response has a 5xx status code
+func (o *CreateWebhookPolicyOfProjectForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create webhook policy of project forbidden response a status code equal to that given
+func (o *CreateWebhookPolicyOfProjectForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the create webhook policy of project forbidden response
+func (o *CreateWebhookPolicyOfProjectForbidden) Code() int {
+	return 403
+}
+
 func (o *CreateWebhookPolicyOfProjectForbidden) Error() string {
 	return fmt.Sprintf("[POST /projects/{project_name_or_id}/webhook/policies][%d] createWebhookPolicyOfProjectForbidden  %+v", 403, o.Payload)
 }
+
+func (o *CreateWebhookPolicyOfProjectForbidden) String() string {
+	return fmt.Sprintf("[POST /projects/{project_name_or_id}/webhook/policies][%d] createWebhookPolicyOfProjectForbidden  %+v", 403, o.Payload)
+}
+
 func (o *CreateWebhookPolicyOfProjectForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -238,7 +381,8 @@ func NewCreateWebhookPolicyOfProjectInternalServerError() *CreateWebhookPolicyOf
 	return &CreateWebhookPolicyOfProjectInternalServerError{}
 }
 
-/* CreateWebhookPolicyOfProjectInternalServerError describes a response with status code 500, with default header values.
+/*
+CreateWebhookPolicyOfProjectInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -251,9 +395,44 @@ type CreateWebhookPolicyOfProjectInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create webhook policy of project internal server error response has a 2xx status code
+func (o *CreateWebhookPolicyOfProjectInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create webhook policy of project internal server error response has a 3xx status code
+func (o *CreateWebhookPolicyOfProjectInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create webhook policy of project internal server error response has a 4xx status code
+func (o *CreateWebhookPolicyOfProjectInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create webhook policy of project internal server error response has a 5xx status code
+func (o *CreateWebhookPolicyOfProjectInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this create webhook policy of project internal server error response a status code equal to that given
+func (o *CreateWebhookPolicyOfProjectInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the create webhook policy of project internal server error response
+func (o *CreateWebhookPolicyOfProjectInternalServerError) Code() int {
+	return 500
+}
+
 func (o *CreateWebhookPolicyOfProjectInternalServerError) Error() string {
 	return fmt.Sprintf("[POST /projects/{project_name_or_id}/webhook/policies][%d] createWebhookPolicyOfProjectInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *CreateWebhookPolicyOfProjectInternalServerError) String() string {
+	return fmt.Sprintf("[POST /projects/{project_name_or_id}/webhook/policies][%d] createWebhookPolicyOfProjectInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *CreateWebhookPolicyOfProjectInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

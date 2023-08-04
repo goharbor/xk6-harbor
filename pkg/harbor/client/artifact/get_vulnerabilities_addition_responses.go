@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // GetVulnerabilitiesAdditionReader is a Reader for the GetVulnerabilitiesAddition structure.
@@ -60,7 +60,7 @@ func (o *GetVulnerabilitiesAdditionReader) ReadResponse(response runtime.ClientR
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/additions/vulnerabilities] getVulnerabilitiesAddition", response, response.Code())
 	}
 }
 
@@ -69,7 +69,8 @@ func NewGetVulnerabilitiesAdditionOK() *GetVulnerabilitiesAdditionOK {
 	return &GetVulnerabilitiesAdditionOK{}
 }
 
-/* GetVulnerabilitiesAdditionOK describes a response with status code 200, with default header values.
+/*
+GetVulnerabilitiesAdditionOK describes a response with status code 200, with default header values.
 
 Success
 */
@@ -82,9 +83,44 @@ type GetVulnerabilitiesAdditionOK struct {
 	Payload string
 }
 
+// IsSuccess returns true when this get vulnerabilities addition o k response has a 2xx status code
+func (o *GetVulnerabilitiesAdditionOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get vulnerabilities addition o k response has a 3xx status code
+func (o *GetVulnerabilitiesAdditionOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get vulnerabilities addition o k response has a 4xx status code
+func (o *GetVulnerabilitiesAdditionOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get vulnerabilities addition o k response has a 5xx status code
+func (o *GetVulnerabilitiesAdditionOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get vulnerabilities addition o k response a status code equal to that given
+func (o *GetVulnerabilitiesAdditionOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the get vulnerabilities addition o k response
+func (o *GetVulnerabilitiesAdditionOK) Code() int {
+	return 200
+}
+
 func (o *GetVulnerabilitiesAdditionOK) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/additions/vulnerabilities][%d] getVulnerabilitiesAdditionOK  %+v", 200, o.Payload)
 }
+
+func (o *GetVulnerabilitiesAdditionOK) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/additions/vulnerabilities][%d] getVulnerabilitiesAdditionOK  %+v", 200, o.Payload)
+}
+
 func (o *GetVulnerabilitiesAdditionOK) GetPayload() string {
 	return o.Payload
 }
@@ -111,7 +147,8 @@ func NewGetVulnerabilitiesAdditionBadRequest() *GetVulnerabilitiesAdditionBadReq
 	return &GetVulnerabilitiesAdditionBadRequest{}
 }
 
-/* GetVulnerabilitiesAdditionBadRequest describes a response with status code 400, with default header values.
+/*
+GetVulnerabilitiesAdditionBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
@@ -124,9 +161,44 @@ type GetVulnerabilitiesAdditionBadRequest struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get vulnerabilities addition bad request response has a 2xx status code
+func (o *GetVulnerabilitiesAdditionBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get vulnerabilities addition bad request response has a 3xx status code
+func (o *GetVulnerabilitiesAdditionBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get vulnerabilities addition bad request response has a 4xx status code
+func (o *GetVulnerabilitiesAdditionBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get vulnerabilities addition bad request response has a 5xx status code
+func (o *GetVulnerabilitiesAdditionBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get vulnerabilities addition bad request response a status code equal to that given
+func (o *GetVulnerabilitiesAdditionBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the get vulnerabilities addition bad request response
+func (o *GetVulnerabilitiesAdditionBadRequest) Code() int {
+	return 400
+}
+
 func (o *GetVulnerabilitiesAdditionBadRequest) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/additions/vulnerabilities][%d] getVulnerabilitiesAdditionBadRequest  %+v", 400, o.Payload)
 }
+
+func (o *GetVulnerabilitiesAdditionBadRequest) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/additions/vulnerabilities][%d] getVulnerabilitiesAdditionBadRequest  %+v", 400, o.Payload)
+}
+
 func (o *GetVulnerabilitiesAdditionBadRequest) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -155,7 +227,8 @@ func NewGetVulnerabilitiesAdditionUnauthorized() *GetVulnerabilitiesAdditionUnau
 	return &GetVulnerabilitiesAdditionUnauthorized{}
 }
 
-/* GetVulnerabilitiesAdditionUnauthorized describes a response with status code 401, with default header values.
+/*
+GetVulnerabilitiesAdditionUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -168,9 +241,44 @@ type GetVulnerabilitiesAdditionUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get vulnerabilities addition unauthorized response has a 2xx status code
+func (o *GetVulnerabilitiesAdditionUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get vulnerabilities addition unauthorized response has a 3xx status code
+func (o *GetVulnerabilitiesAdditionUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get vulnerabilities addition unauthorized response has a 4xx status code
+func (o *GetVulnerabilitiesAdditionUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get vulnerabilities addition unauthorized response has a 5xx status code
+func (o *GetVulnerabilitiesAdditionUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get vulnerabilities addition unauthorized response a status code equal to that given
+func (o *GetVulnerabilitiesAdditionUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the get vulnerabilities addition unauthorized response
+func (o *GetVulnerabilitiesAdditionUnauthorized) Code() int {
+	return 401
+}
+
 func (o *GetVulnerabilitiesAdditionUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/additions/vulnerabilities][%d] getVulnerabilitiesAdditionUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *GetVulnerabilitiesAdditionUnauthorized) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/additions/vulnerabilities][%d] getVulnerabilitiesAdditionUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *GetVulnerabilitiesAdditionUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -199,7 +307,8 @@ func NewGetVulnerabilitiesAdditionForbidden() *GetVulnerabilitiesAdditionForbidd
 	return &GetVulnerabilitiesAdditionForbidden{}
 }
 
-/* GetVulnerabilitiesAdditionForbidden describes a response with status code 403, with default header values.
+/*
+GetVulnerabilitiesAdditionForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -212,9 +321,44 @@ type GetVulnerabilitiesAdditionForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get vulnerabilities addition forbidden response has a 2xx status code
+func (o *GetVulnerabilitiesAdditionForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get vulnerabilities addition forbidden response has a 3xx status code
+func (o *GetVulnerabilitiesAdditionForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get vulnerabilities addition forbidden response has a 4xx status code
+func (o *GetVulnerabilitiesAdditionForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get vulnerabilities addition forbidden response has a 5xx status code
+func (o *GetVulnerabilitiesAdditionForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get vulnerabilities addition forbidden response a status code equal to that given
+func (o *GetVulnerabilitiesAdditionForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the get vulnerabilities addition forbidden response
+func (o *GetVulnerabilitiesAdditionForbidden) Code() int {
+	return 403
+}
+
 func (o *GetVulnerabilitiesAdditionForbidden) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/additions/vulnerabilities][%d] getVulnerabilitiesAdditionForbidden  %+v", 403, o.Payload)
 }
+
+func (o *GetVulnerabilitiesAdditionForbidden) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/additions/vulnerabilities][%d] getVulnerabilitiesAdditionForbidden  %+v", 403, o.Payload)
+}
+
 func (o *GetVulnerabilitiesAdditionForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -243,7 +387,8 @@ func NewGetVulnerabilitiesAdditionNotFound() *GetVulnerabilitiesAdditionNotFound
 	return &GetVulnerabilitiesAdditionNotFound{}
 }
 
-/* GetVulnerabilitiesAdditionNotFound describes a response with status code 404, with default header values.
+/*
+GetVulnerabilitiesAdditionNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
@@ -256,9 +401,44 @@ type GetVulnerabilitiesAdditionNotFound struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get vulnerabilities addition not found response has a 2xx status code
+func (o *GetVulnerabilitiesAdditionNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get vulnerabilities addition not found response has a 3xx status code
+func (o *GetVulnerabilitiesAdditionNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get vulnerabilities addition not found response has a 4xx status code
+func (o *GetVulnerabilitiesAdditionNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get vulnerabilities addition not found response has a 5xx status code
+func (o *GetVulnerabilitiesAdditionNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get vulnerabilities addition not found response a status code equal to that given
+func (o *GetVulnerabilitiesAdditionNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the get vulnerabilities addition not found response
+func (o *GetVulnerabilitiesAdditionNotFound) Code() int {
+	return 404
+}
+
 func (o *GetVulnerabilitiesAdditionNotFound) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/additions/vulnerabilities][%d] getVulnerabilitiesAdditionNotFound  %+v", 404, o.Payload)
 }
+
+func (o *GetVulnerabilitiesAdditionNotFound) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/additions/vulnerabilities][%d] getVulnerabilitiesAdditionNotFound  %+v", 404, o.Payload)
+}
+
 func (o *GetVulnerabilitiesAdditionNotFound) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -287,7 +467,8 @@ func NewGetVulnerabilitiesAdditionInternalServerError() *GetVulnerabilitiesAddit
 	return &GetVulnerabilitiesAdditionInternalServerError{}
 }
 
-/* GetVulnerabilitiesAdditionInternalServerError describes a response with status code 500, with default header values.
+/*
+GetVulnerabilitiesAdditionInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -300,9 +481,44 @@ type GetVulnerabilitiesAdditionInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this get vulnerabilities addition internal server error response has a 2xx status code
+func (o *GetVulnerabilitiesAdditionInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get vulnerabilities addition internal server error response has a 3xx status code
+func (o *GetVulnerabilitiesAdditionInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get vulnerabilities addition internal server error response has a 4xx status code
+func (o *GetVulnerabilitiesAdditionInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get vulnerabilities addition internal server error response has a 5xx status code
+func (o *GetVulnerabilitiesAdditionInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this get vulnerabilities addition internal server error response a status code equal to that given
+func (o *GetVulnerabilitiesAdditionInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the get vulnerabilities addition internal server error response
+func (o *GetVulnerabilitiesAdditionInternalServerError) Code() int {
+	return 500
+}
+
 func (o *GetVulnerabilitiesAdditionInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/additions/vulnerabilities][%d] getVulnerabilitiesAdditionInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *GetVulnerabilitiesAdditionInternalServerError) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/additions/vulnerabilities][%d] getVulnerabilitiesAdditionInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *GetVulnerabilitiesAdditionInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

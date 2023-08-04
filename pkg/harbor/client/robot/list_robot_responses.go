@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // ListRobotReader is a Reader for the ListRobot structure.
@@ -50,7 +50,7 @@ func (o *ListRobotReader) ReadResponse(response runtime.ClientResponse, consumer
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /robots] ListRobot", response, response.Code())
 	}
 }
 
@@ -59,7 +59,8 @@ func NewListRobotOK() *ListRobotOK {
 	return &ListRobotOK{}
 }
 
-/* ListRobotOK describes a response with status code 200, with default header values.
+/*
+ListRobotOK describes a response with status code 200, with default header values.
 
 Success
 */
@@ -76,9 +77,44 @@ type ListRobotOK struct {
 	Payload []*models.Robot
 }
 
+// IsSuccess returns true when this list robot o k response has a 2xx status code
+func (o *ListRobotOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list robot o k response has a 3xx status code
+func (o *ListRobotOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list robot o k response has a 4xx status code
+func (o *ListRobotOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list robot o k response has a 5xx status code
+func (o *ListRobotOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list robot o k response a status code equal to that given
+func (o *ListRobotOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list robot o k response
+func (o *ListRobotOK) Code() int {
+	return 200
+}
+
 func (o *ListRobotOK) Error() string {
 	return fmt.Sprintf("[GET /robots][%d] listRobotOK  %+v", 200, o.Payload)
 }
+
+func (o *ListRobotOK) String() string {
+	return fmt.Sprintf("[GET /robots][%d] listRobotOK  %+v", 200, o.Payload)
+}
+
 func (o *ListRobotOK) GetPayload() []*models.Robot {
 	return o.Payload
 }
@@ -116,7 +152,8 @@ func NewListRobotBadRequest() *ListRobotBadRequest {
 	return &ListRobotBadRequest{}
 }
 
-/* ListRobotBadRequest describes a response with status code 400, with default header values.
+/*
+ListRobotBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
@@ -129,9 +166,44 @@ type ListRobotBadRequest struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list robot bad request response has a 2xx status code
+func (o *ListRobotBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list robot bad request response has a 3xx status code
+func (o *ListRobotBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list robot bad request response has a 4xx status code
+func (o *ListRobotBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list robot bad request response has a 5xx status code
+func (o *ListRobotBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list robot bad request response a status code equal to that given
+func (o *ListRobotBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the list robot bad request response
+func (o *ListRobotBadRequest) Code() int {
+	return 400
+}
+
 func (o *ListRobotBadRequest) Error() string {
 	return fmt.Sprintf("[GET /robots][%d] listRobotBadRequest  %+v", 400, o.Payload)
 }
+
+func (o *ListRobotBadRequest) String() string {
+	return fmt.Sprintf("[GET /robots][%d] listRobotBadRequest  %+v", 400, o.Payload)
+}
+
 func (o *ListRobotBadRequest) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -160,7 +232,8 @@ func NewListRobotNotFound() *ListRobotNotFound {
 	return &ListRobotNotFound{}
 }
 
-/* ListRobotNotFound describes a response with status code 404, with default header values.
+/*
+ListRobotNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
@@ -173,9 +246,44 @@ type ListRobotNotFound struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list robot not found response has a 2xx status code
+func (o *ListRobotNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list robot not found response has a 3xx status code
+func (o *ListRobotNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list robot not found response has a 4xx status code
+func (o *ListRobotNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list robot not found response has a 5xx status code
+func (o *ListRobotNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list robot not found response a status code equal to that given
+func (o *ListRobotNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the list robot not found response
+func (o *ListRobotNotFound) Code() int {
+	return 404
+}
+
 func (o *ListRobotNotFound) Error() string {
 	return fmt.Sprintf("[GET /robots][%d] listRobotNotFound  %+v", 404, o.Payload)
 }
+
+func (o *ListRobotNotFound) String() string {
+	return fmt.Sprintf("[GET /robots][%d] listRobotNotFound  %+v", 404, o.Payload)
+}
+
 func (o *ListRobotNotFound) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -204,7 +312,8 @@ func NewListRobotInternalServerError() *ListRobotInternalServerError {
 	return &ListRobotInternalServerError{}
 }
 
-/* ListRobotInternalServerError describes a response with status code 500, with default header values.
+/*
+ListRobotInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -217,9 +326,44 @@ type ListRobotInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list robot internal server error response has a 2xx status code
+func (o *ListRobotInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list robot internal server error response has a 3xx status code
+func (o *ListRobotInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list robot internal server error response has a 4xx status code
+func (o *ListRobotInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list robot internal server error response has a 5xx status code
+func (o *ListRobotInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this list robot internal server error response a status code equal to that given
+func (o *ListRobotInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the list robot internal server error response
+func (o *ListRobotInternalServerError) Code() int {
+	return 500
+}
+
 func (o *ListRobotInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /robots][%d] listRobotInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *ListRobotInternalServerError) String() string {
+	return fmt.Sprintf("[GET /robots][%d] listRobotInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *ListRobotInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

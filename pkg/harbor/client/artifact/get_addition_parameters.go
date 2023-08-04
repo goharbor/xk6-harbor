@@ -52,10 +52,12 @@ func NewGetAdditionParamsWithHTTPClient(client *http.Client) *GetAdditionParams 
 	}
 }
 
-/* GetAdditionParams contains all the parameters to send to the API endpoint
-   for the get addition operation.
+/*
+GetAdditionParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get addition operation.
+
+	Typically these are written to a http.Request.
 */
 type GetAdditionParams struct {
 

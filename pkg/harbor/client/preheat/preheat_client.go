@@ -7,13 +7,14 @@ package preheat
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/go-openapi/runtime"
 
 	strfmt "github.com/go-openapi/strfmt"
 )
 
-//go:generate mockery -name API -inpkg
+//go:generate mockery --name API --keeptree --with-expecter --case underscore
 
 // API is the interface of the preheat client
 type API interface {
@@ -156,8 +157,25 @@ func (a *Client) CreateInstance(ctx context.Context, params *CreateInstanceParam
 	if err != nil {
 		return nil, err
 	}
-	return result.(*CreateInstanceCreated), nil
-
+	switch value := result.(type) {
+	case *CreateInstanceCreated:
+		return value, nil
+	case *CreateInstanceBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateInstanceUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateInstanceForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateInstanceNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateInstanceConflict:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateInstanceInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for CreateInstance: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -183,8 +201,23 @@ func (a *Client) CreatePolicy(ctx context.Context, params *CreatePolicyParams) (
 	if err != nil {
 		return nil, err
 	}
-	return result.(*CreatePolicyCreated), nil
-
+	switch value := result.(type) {
+	case *CreatePolicyCreated:
+		return value, nil
+	case *CreatePolicyBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreatePolicyUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreatePolicyForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreatePolicyConflict:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreatePolicyInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for CreatePolicy: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -210,8 +243,21 @@ func (a *Client) DeleteInstance(ctx context.Context, params *DeleteInstanceParam
 	if err != nil {
 		return nil, err
 	}
-	return result.(*DeleteInstanceOK), nil
-
+	switch value := result.(type) {
+	case *DeleteInstanceOK:
+		return value, nil
+	case *DeleteInstanceUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteInstanceForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteInstanceNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteInstanceInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for DeleteInstance: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -237,8 +283,23 @@ func (a *Client) DeletePolicy(ctx context.Context, params *DeletePolicyParams) (
 	if err != nil {
 		return nil, err
 	}
-	return result.(*DeletePolicyOK), nil
-
+	switch value := result.(type) {
+	case *DeletePolicyOK:
+		return value, nil
+	case *DeletePolicyBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeletePolicyUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeletePolicyForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeletePolicyNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeletePolicyInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for DeletePolicy: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -264,8 +325,23 @@ func (a *Client) GetExecution(ctx context.Context, params *GetExecutionParams) (
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetExecutionOK), nil
-
+	switch value := result.(type) {
+	case *GetExecutionOK:
+		return value, nil
+	case *GetExecutionBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetExecutionUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetExecutionForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetExecutionNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetExecutionInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetExecution: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -291,8 +367,23 @@ func (a *Client) GetInstance(ctx context.Context, params *GetInstanceParams) (*G
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetInstanceOK), nil
-
+	switch value := result.(type) {
+	case *GetInstanceOK:
+		return value, nil
+	case *GetInstanceBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetInstanceUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetInstanceForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetInstanceNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetInstanceInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetInstance: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -318,8 +409,23 @@ func (a *Client) GetPolicy(ctx context.Context, params *GetPolicyParams) (*GetPo
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetPolicyOK), nil
-
+	switch value := result.(type) {
+	case *GetPolicyOK:
+		return value, nil
+	case *GetPolicyBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetPolicyUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetPolicyForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetPolicyNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetPolicyInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetPolicy: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -345,8 +451,23 @@ func (a *Client) GetPreheatLog(ctx context.Context, params *GetPreheatLogParams)
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetPreheatLogOK), nil
-
+	switch value := result.(type) {
+	case *GetPreheatLogOK:
+		return value, nil
+	case *GetPreheatLogBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetPreheatLogUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetPreheatLogForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetPreheatLogNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetPreheatLogInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetPreheatLog: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -372,8 +493,23 @@ func (a *Client) ListExecutions(ctx context.Context, params *ListExecutionsParam
 	if err != nil {
 		return nil, err
 	}
-	return result.(*ListExecutionsOK), nil
-
+	switch value := result.(type) {
+	case *ListExecutionsOK:
+		return value, nil
+	case *ListExecutionsBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListExecutionsUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListExecutionsForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListExecutionsNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListExecutionsInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ListExecutions: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -399,8 +535,23 @@ func (a *Client) ListInstances(ctx context.Context, params *ListInstancesParams)
 	if err != nil {
 		return nil, err
 	}
-	return result.(*ListInstancesOK), nil
-
+	switch value := result.(type) {
+	case *ListInstancesOK:
+		return value, nil
+	case *ListInstancesBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListInstancesUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListInstancesForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListInstancesNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListInstancesInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ListInstances: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -426,8 +577,21 @@ func (a *Client) ListPolicies(ctx context.Context, params *ListPoliciesParams) (
 	if err != nil {
 		return nil, err
 	}
-	return result.(*ListPoliciesOK), nil
-
+	switch value := result.(type) {
+	case *ListPoliciesOK:
+		return value, nil
+	case *ListPoliciesBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListPoliciesUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListPoliciesForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListPoliciesInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ListPolicies: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -453,8 +617,23 @@ func (a *Client) ListProviders(ctx context.Context, params *ListProvidersParams)
 	if err != nil {
 		return nil, err
 	}
-	return result.(*ListProvidersOK), nil
-
+	switch value := result.(type) {
+	case *ListProvidersOK:
+		return value, nil
+	case *ListProvidersBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListProvidersUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListProvidersForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListProvidersNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListProvidersInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ListProviders: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -480,8 +659,23 @@ func (a *Client) ListProvidersUnderProject(ctx context.Context, params *ListProv
 	if err != nil {
 		return nil, err
 	}
-	return result.(*ListProvidersUnderProjectOK), nil
-
+	switch value := result.(type) {
+	case *ListProvidersUnderProjectOK:
+		return value, nil
+	case *ListProvidersUnderProjectBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListProvidersUnderProjectUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListProvidersUnderProjectForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListProvidersUnderProjectNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListProvidersUnderProjectInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ListProvidersUnderProject: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -507,8 +701,23 @@ func (a *Client) ListTasks(ctx context.Context, params *ListTasksParams) (*ListT
 	if err != nil {
 		return nil, err
 	}
-	return result.(*ListTasksOK), nil
-
+	switch value := result.(type) {
+	case *ListTasksOK:
+		return value, nil
+	case *ListTasksBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListTasksUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListTasksForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListTasksNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListTasksInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ListTasks: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -534,15 +743,29 @@ func (a *Client) ManualPreheat(ctx context.Context, params *ManualPreheatParams)
 	if err != nil {
 		return nil, err
 	}
-	return result.(*ManualPreheatCreated), nil
-
+	switch value := result.(type) {
+	case *ManualPreheatCreated:
+		return value, nil
+	case *ManualPreheatBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ManualPreheatUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ManualPreheatForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ManualPreheatNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ManualPreheatInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ManualPreheat: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
 PingInstances pings status of a instance
 
 This endpoint checks status of a instance, the instance can be given by ID or Endpoint URL (together with credential)
-
 */
 func (a *Client) PingInstances(ctx context.Context, params *PingInstancesParams) (*PingInstancesOK, error) {
 
@@ -562,8 +785,21 @@ func (a *Client) PingInstances(ctx context.Context, params *PingInstancesParams)
 	if err != nil {
 		return nil, err
 	}
-	return result.(*PingInstancesOK), nil
-
+	switch value := result.(type) {
+	case *PingInstancesOK:
+		return value, nil
+	case *PingInstancesBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *PingInstancesUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *PingInstancesNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *PingInstancesInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for PingInstances: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -589,8 +825,23 @@ func (a *Client) StopExecution(ctx context.Context, params *StopExecutionParams)
 	if err != nil {
 		return nil, err
 	}
-	return result.(*StopExecutionOK), nil
-
+	switch value := result.(type) {
+	case *StopExecutionOK:
+		return value, nil
+	case *StopExecutionBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *StopExecutionUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *StopExecutionForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *StopExecutionNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *StopExecutionInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for StopExecution: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -616,8 +867,23 @@ func (a *Client) UpdateInstance(ctx context.Context, params *UpdateInstanceParam
 	if err != nil {
 		return nil, err
 	}
-	return result.(*UpdateInstanceOK), nil
-
+	switch value := result.(type) {
+	case *UpdateInstanceOK:
+		return value, nil
+	case *UpdateInstanceBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateInstanceUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateInstanceForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateInstanceNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateInstanceInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for UpdateInstance: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -643,6 +909,23 @@ func (a *Client) UpdatePolicy(ctx context.Context, params *UpdatePolicyParams) (
 	if err != nil {
 		return nil, err
 	}
-	return result.(*UpdatePolicyOK), nil
-
+	switch value := result.(type) {
+	case *UpdatePolicyOK:
+		return value, nil
+	case *UpdatePolicyBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdatePolicyUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdatePolicyForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdatePolicyNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdatePolicyConflict:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdatePolicyInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for UpdatePolicy: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }

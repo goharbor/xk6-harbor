@@ -87,6 +87,8 @@ func (m *Quota) validateHard(formats strfmt.Registry) error {
 		if err := m.Hard.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("hard")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("hard")
 			}
 			return err
 		}
@@ -116,6 +118,8 @@ func (m *Quota) validateUsed(formats strfmt.Registry) error {
 		if err := m.Used.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("used")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("used")
 			}
 			return err
 		}
@@ -144,9 +148,15 @@ func (m *Quota) ContextValidate(ctx context.Context, formats strfmt.Registry) er
 
 func (m *Quota) contextValidateHard(ctx context.Context, formats strfmt.Registry) error {
 
+	if swag.IsZero(m.Hard) { // not required
+		return nil
+	}
+
 	if err := m.Hard.ContextValidate(ctx, formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {
 			return ve.ValidateName("hard")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("hard")
 		}
 		return err
 	}
@@ -156,9 +166,15 @@ func (m *Quota) contextValidateHard(ctx context.Context, formats strfmt.Registry
 
 func (m *Quota) contextValidateUsed(ctx context.Context, formats strfmt.Registry) error {
 
+	if swag.IsZero(m.Used) { // not required
+		return nil
+	}
+
 	if err := m.Used.ContextValidate(ctx, formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {
 			return ve.ValidateName("used")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("used")
 		}
 		return err
 	}

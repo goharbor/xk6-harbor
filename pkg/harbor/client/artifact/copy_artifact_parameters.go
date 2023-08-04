@@ -52,10 +52,12 @@ func NewCopyArtifactParamsWithHTTPClient(client *http.Client) *CopyArtifactParam
 	}
 }
 
-/* CopyArtifactParams contains all the parameters to send to the API endpoint
-   for the copy artifact operation.
+/*
+CopyArtifactParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the copy artifact operation.
+
+	Typically these are written to a http.Request.
 */
 type CopyArtifactParams struct {
 

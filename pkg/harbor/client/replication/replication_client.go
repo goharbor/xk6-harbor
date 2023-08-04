@@ -7,13 +7,14 @@ package replication
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/go-openapi/runtime"
 
 	strfmt "github.com/go-openapi/strfmt"
 )
 
-//go:generate mockery -name API -inpkg
+//go:generate mockery --name API --keeptree --with-expecter --case underscore
 
 // API is the interface of the replication client
 type API interface {
@@ -115,8 +116,23 @@ func (a *Client) CreateReplicationPolicy(ctx context.Context, params *CreateRepl
 	if err != nil {
 		return nil, err
 	}
-	return result.(*CreateReplicationPolicyCreated), nil
-
+	switch value := result.(type) {
+	case *CreateReplicationPolicyCreated:
+		return value, nil
+	case *CreateReplicationPolicyBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateReplicationPolicyUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateReplicationPolicyForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateReplicationPolicyConflict:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateReplicationPolicyInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for createReplicationPolicy: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -142,8 +158,23 @@ func (a *Client) DeleteReplicationPolicy(ctx context.Context, params *DeleteRepl
 	if err != nil {
 		return nil, err
 	}
-	return result.(*DeleteReplicationPolicyOK), nil
-
+	switch value := result.(type) {
+	case *DeleteReplicationPolicyOK:
+		return value, nil
+	case *DeleteReplicationPolicyUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteReplicationPolicyForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteReplicationPolicyNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteReplicationPolicyPreconditionFailed:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteReplicationPolicyInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for deleteReplicationPolicy: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -169,8 +200,21 @@ func (a *Client) GetReplicationExecution(ctx context.Context, params *GetReplica
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetReplicationExecutionOK), nil
-
+	switch value := result.(type) {
+	case *GetReplicationExecutionOK:
+		return value, nil
+	case *GetReplicationExecutionUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetReplicationExecutionForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetReplicationExecutionNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetReplicationExecutionInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getReplicationExecution: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -196,8 +240,21 @@ func (a *Client) GetReplicationLog(ctx context.Context, params *GetReplicationLo
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetReplicationLogOK), nil
-
+	switch value := result.(type) {
+	case *GetReplicationLogOK:
+		return value, nil
+	case *GetReplicationLogUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetReplicationLogForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetReplicationLogNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetReplicationLogInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getReplicationLog: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -223,8 +280,19 @@ func (a *Client) GetReplicationPolicy(ctx context.Context, params *GetReplicatio
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetReplicationPolicyOK), nil
-
+	switch value := result.(type) {
+	case *GetReplicationPolicyOK:
+		return value, nil
+	case *GetReplicationPolicyUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetReplicationPolicyForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetReplicationPolicyInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getReplicationPolicy: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -250,8 +318,19 @@ func (a *Client) ListReplicationExecutions(ctx context.Context, params *ListRepl
 	if err != nil {
 		return nil, err
 	}
-	return result.(*ListReplicationExecutionsOK), nil
-
+	switch value := result.(type) {
+	case *ListReplicationExecutionsOK:
+		return value, nil
+	case *ListReplicationExecutionsUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListReplicationExecutionsForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListReplicationExecutionsInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for listReplicationExecutions: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -277,8 +356,19 @@ func (a *Client) ListReplicationPolicies(ctx context.Context, params *ListReplic
 	if err != nil {
 		return nil, err
 	}
-	return result.(*ListReplicationPoliciesOK), nil
-
+	switch value := result.(type) {
+	case *ListReplicationPoliciesOK:
+		return value, nil
+	case *ListReplicationPoliciesUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListReplicationPoliciesForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListReplicationPoliciesInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for listReplicationPolicies: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -304,8 +394,19 @@ func (a *Client) ListReplicationTasks(ctx context.Context, params *ListReplicati
 	if err != nil {
 		return nil, err
 	}
-	return result.(*ListReplicationTasksOK), nil
-
+	switch value := result.(type) {
+	case *ListReplicationTasksOK:
+		return value, nil
+	case *ListReplicationTasksUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListReplicationTasksForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListReplicationTasksInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for listReplicationTasks: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -331,8 +432,21 @@ func (a *Client) StartReplication(ctx context.Context, params *StartReplicationP
 	if err != nil {
 		return nil, err
 	}
-	return result.(*StartReplicationCreated), nil
-
+	switch value := result.(type) {
+	case *StartReplicationCreated:
+		return value, nil
+	case *StartReplicationBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *StartReplicationUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *StartReplicationForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *StartReplicationInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for startReplication: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -358,8 +472,21 @@ func (a *Client) StopReplication(ctx context.Context, params *StopReplicationPar
 	if err != nil {
 		return nil, err
 	}
-	return result.(*StopReplicationOK), nil
-
+	switch value := result.(type) {
+	case *StopReplicationOK:
+		return value, nil
+	case *StopReplicationUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *StopReplicationForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *StopReplicationNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *StopReplicationInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for stopReplication: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -385,6 +512,21 @@ func (a *Client) UpdateReplicationPolicy(ctx context.Context, params *UpdateRepl
 	if err != nil {
 		return nil, err
 	}
-	return result.(*UpdateReplicationPolicyOK), nil
-
+	switch value := result.(type) {
+	case *UpdateReplicationPolicyOK:
+		return value, nil
+	case *UpdateReplicationPolicyUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateReplicationPolicyForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateReplicationPolicyNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateReplicationPolicyConflict:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateReplicationPolicyInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for updateReplicationPolicy: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }

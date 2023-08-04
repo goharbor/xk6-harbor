@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // HeadProjectReader is a Reader for the HeadProject structure.
@@ -42,7 +42,7 @@ func (o *HeadProjectReader) ReadResponse(response runtime.ClientResponse, consum
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[HEAD /projects] headProject", response, response.Code())
 	}
 }
 
@@ -51,7 +51,8 @@ func NewHeadProjectOK() *HeadProjectOK {
 	return &HeadProjectOK{}
 }
 
-/* HeadProjectOK describes a response with status code 200, with default header values.
+/*
+HeadProjectOK describes a response with status code 200, with default header values.
 
 Success
 */
@@ -62,7 +63,41 @@ type HeadProjectOK struct {
 	XRequestID string
 }
 
+// IsSuccess returns true when this head project o k response has a 2xx status code
+func (o *HeadProjectOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this head project o k response has a 3xx status code
+func (o *HeadProjectOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this head project o k response has a 4xx status code
+func (o *HeadProjectOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this head project o k response has a 5xx status code
+func (o *HeadProjectOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this head project o k response a status code equal to that given
+func (o *HeadProjectOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the head project o k response
+func (o *HeadProjectOK) Code() int {
+	return 200
+}
+
 func (o *HeadProjectOK) Error() string {
+	return fmt.Sprintf("[HEAD /projects][%d] headProjectOK ", 200)
+}
+
+func (o *HeadProjectOK) String() string {
 	return fmt.Sprintf("[HEAD /projects][%d] headProjectOK ", 200)
 }
 
@@ -83,7 +118,8 @@ func NewHeadProjectNotFound() *HeadProjectNotFound {
 	return &HeadProjectNotFound{}
 }
 
-/* HeadProjectNotFound describes a response with status code 404, with default header values.
+/*
+HeadProjectNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
@@ -96,9 +132,44 @@ type HeadProjectNotFound struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this head project not found response has a 2xx status code
+func (o *HeadProjectNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this head project not found response has a 3xx status code
+func (o *HeadProjectNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this head project not found response has a 4xx status code
+func (o *HeadProjectNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this head project not found response has a 5xx status code
+func (o *HeadProjectNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this head project not found response a status code equal to that given
+func (o *HeadProjectNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the head project not found response
+func (o *HeadProjectNotFound) Code() int {
+	return 404
+}
+
 func (o *HeadProjectNotFound) Error() string {
 	return fmt.Sprintf("[HEAD /projects][%d] headProjectNotFound  %+v", 404, o.Payload)
 }
+
+func (o *HeadProjectNotFound) String() string {
+	return fmt.Sprintf("[HEAD /projects][%d] headProjectNotFound  %+v", 404, o.Payload)
+}
+
 func (o *HeadProjectNotFound) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -127,7 +198,8 @@ func NewHeadProjectInternalServerError() *HeadProjectInternalServerError {
 	return &HeadProjectInternalServerError{}
 }
 
-/* HeadProjectInternalServerError describes a response with status code 500, with default header values.
+/*
+HeadProjectInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -140,9 +212,44 @@ type HeadProjectInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this head project internal server error response has a 2xx status code
+func (o *HeadProjectInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this head project internal server error response has a 3xx status code
+func (o *HeadProjectInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this head project internal server error response has a 4xx status code
+func (o *HeadProjectInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this head project internal server error response has a 5xx status code
+func (o *HeadProjectInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this head project internal server error response a status code equal to that given
+func (o *HeadProjectInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the head project internal server error response
+func (o *HeadProjectInternalServerError) Code() int {
+	return 500
+}
+
 func (o *HeadProjectInternalServerError) Error() string {
 	return fmt.Sprintf("[HEAD /projects][%d] headProjectInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *HeadProjectInternalServerError) String() string {
+	return fmt.Sprintf("[HEAD /projects][%d] headProjectInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *HeadProjectInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

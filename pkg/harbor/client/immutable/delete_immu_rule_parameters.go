@@ -53,10 +53,12 @@ func NewDeleteImmuRuleParamsWithHTTPClient(client *http.Client) *DeleteImmuRuleP
 	}
 }
 
-/* DeleteImmuRuleParams contains all the parameters to send to the API endpoint
-   for the delete immu rule operation.
+/*
+DeleteImmuRuleParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the delete immu rule operation.
+
+	Typically these are written to a http.Request.
 */
 type DeleteImmuRuleParams struct {
 

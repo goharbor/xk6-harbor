@@ -54,6 +54,8 @@ func (m *OverallHealthStatus) validateComponents(formats strfmt.Registry) error 
 			if err := m.Components[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("components" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("components" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -83,9 +85,16 @@ func (m *OverallHealthStatus) contextValidateComponents(ctx context.Context, for
 	for i := 0; i < len(m.Components); i++ {
 
 		if m.Components[i] != nil {
+
+			if swag.IsZero(m.Components[i]) { // not required
+				return nil
+			}
+
 			if err := m.Components[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("components" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("components" + "." + strconv.Itoa(i))
 				}
 				return err
 			}

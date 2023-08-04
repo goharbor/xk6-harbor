@@ -51,6 +51,8 @@ func (m *SearchResult) validateChart(formats strfmt.Registry) error {
 		if err := m.Chart.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("Chart")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("Chart")
 			}
 			return err
 		}
@@ -76,9 +78,16 @@ func (m *SearchResult) ContextValidate(ctx context.Context, formats strfmt.Regis
 func (m *SearchResult) contextValidateChart(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Chart != nil {
+
+		if swag.IsZero(m.Chart) { // not required
+			return nil
+		}
+
 		if err := m.Chart.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("Chart")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("Chart")
 			}
 			return err
 		}

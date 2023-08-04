@@ -81,6 +81,8 @@ func (m *GeneralInfo) validateAuthproxySettings(formats strfmt.Registry) error {
 		if err := m.AuthproxySettings.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("authproxy_settings")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authproxy_settings")
 			}
 			return err
 		}
@@ -106,9 +108,16 @@ func (m *GeneralInfo) ContextValidate(ctx context.Context, formats strfmt.Regist
 func (m *GeneralInfo) contextValidateAuthproxySettings(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AuthproxySettings != nil {
+
+		if swag.IsZero(m.AuthproxySettings) { // not required
+			return nil
+		}
+
 		if err := m.AuthproxySettings.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("authproxy_settings")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("authproxy_settings")
 			}
 			return err
 		}

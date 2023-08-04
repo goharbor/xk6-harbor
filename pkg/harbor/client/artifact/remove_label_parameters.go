@@ -53,10 +53,12 @@ func NewRemoveLabelParamsWithHTTPClient(client *http.Client) *RemoveLabelParams 
 	}
 }
 
-/* RemoveLabelParams contains all the parameters to send to the API endpoint
-   for the remove label operation.
+/*
+RemoveLabelParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the remove label operation.
+
+	Typically these are written to a http.Request.
 */
 type RemoveLabelParams struct {
 

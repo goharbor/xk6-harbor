@@ -15,7 +15,7 @@ import (
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // NewCreatePolicyParams creates a new CreatePolicyParams object,
@@ -54,10 +54,12 @@ func NewCreatePolicyParamsWithHTTPClient(client *http.Client) *CreatePolicyParam
 	}
 }
 
-/* CreatePolicyParams contains all the parameters to send to the API endpoint
-   for the create policy operation.
+/*
+CreatePolicyParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the create policy operation.
+
+	Typically these are written to a http.Request.
 */
 type CreatePolicyParams struct {
 

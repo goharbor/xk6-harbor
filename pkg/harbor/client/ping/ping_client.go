@@ -7,13 +7,14 @@ package ping
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/go-openapi/runtime"
 
 	strfmt "github.com/go-openapi/strfmt"
 )
 
-//go:generate mockery -name API -inpkg
+//go:generate mockery --name API --keeptree --with-expecter --case underscore
 
 // API is the interface of the ping client
 type API interface {
@@ -65,6 +66,11 @@ func (a *Client) GetPing(ctx context.Context, params *GetPingParams) (*GetPingOK
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetPingOK), nil
-
+	switch value := result.(type) {
+	case *GetPingOK:
+		return value, nil
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getPing: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }

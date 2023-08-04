@@ -7,13 +7,14 @@ package member
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/go-openapi/runtime"
 
 	strfmt "github.com/go-openapi/strfmt"
 )
 
-//go:generate mockery -name API -inpkg
+//go:generate mockery --name API --keeptree --with-expecter --case underscore
 
 // API is the interface of the member client
 type API interface {
@@ -83,8 +84,23 @@ func (a *Client) CreateProjectMember(ctx context.Context, params *CreateProjectM
 	if err != nil {
 		return nil, err
 	}
-	return result.(*CreateProjectMemberCreated), nil
-
+	switch value := result.(type) {
+	case *CreateProjectMemberCreated:
+		return value, nil
+	case *CreateProjectMemberBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateProjectMemberUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateProjectMemberForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateProjectMemberConflict:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateProjectMemberInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for createProjectMember: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -108,8 +124,21 @@ func (a *Client) DeleteProjectMember(ctx context.Context, params *DeleteProjectM
 	if err != nil {
 		return nil, err
 	}
-	return result.(*DeleteProjectMemberOK), nil
-
+	switch value := result.(type) {
+	case *DeleteProjectMemberOK:
+		return value, nil
+	case *DeleteProjectMemberBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteProjectMemberUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteProjectMemberForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteProjectMemberInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for deleteProjectMember: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -135,8 +164,23 @@ func (a *Client) GetProjectMember(ctx context.Context, params *GetProjectMemberP
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetProjectMemberOK), nil
-
+	switch value := result.(type) {
+	case *GetProjectMemberOK:
+		return value, nil
+	case *GetProjectMemberBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetProjectMemberUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetProjectMemberForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetProjectMemberNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetProjectMemberInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getProjectMember: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -162,8 +206,23 @@ func (a *Client) ListProjectMembers(ctx context.Context, params *ListProjectMemb
 	if err != nil {
 		return nil, err
 	}
-	return result.(*ListProjectMembersOK), nil
-
+	switch value := result.(type) {
+	case *ListProjectMembersOK:
+		return value, nil
+	case *ListProjectMembersBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListProjectMembersUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListProjectMembersForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListProjectMembersNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListProjectMembersInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for listProjectMembers: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -189,6 +248,21 @@ func (a *Client) UpdateProjectMember(ctx context.Context, params *UpdateProjectM
 	if err != nil {
 		return nil, err
 	}
-	return result.(*UpdateProjectMemberOK), nil
-
+	switch value := result.(type) {
+	case *UpdateProjectMemberOK:
+		return value, nil
+	case *UpdateProjectMemberBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateProjectMemberUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateProjectMemberForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateProjectMemberNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateProjectMemberInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for updateProjectMember: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }

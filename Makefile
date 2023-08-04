@@ -1,6 +1,6 @@
-IMG ?= heww/k6
+IMG ?= goharbor/k6
 
-GOLANG=golang:1.15.6
+GOLANG=golang:1.20.6
 
 SHELL := /bin/bash
 
@@ -16,7 +16,7 @@ $(BIN):
 DOCKERCMD=$(shell which docker)
 
 SWAGGER_IMAGENAME := quay.io/goswagger/swagger
-SWAGGER_VERSION := 0.27.0
+SWAGGER_VERSION := 0.30.5
 SWAGGER=$(DOCKERCMD) run --rm -u $(shell id -u):$(shell id -g) -v $(BUILDPATH):$(BUILDPATH) -w $(BUILDPATH) ${SWAGGER_IMAGENAME}:v${SWAGGER_VERSION}
 
 generate-client:
@@ -65,7 +65,7 @@ vet:
 # find or download golangci-lint
 # download golangci-lint if necessary
 GOLANGCI_LINT := $(BIN)/golangci-lint
-GOLANGCI_LINT_VERSION := 1.36.0
+GOLANGCI_LINT_VERSION := 1.53.3
 
 .PHONY: golangci-lint
 golangci-lint:

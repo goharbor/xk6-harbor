@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // StopReplicationReader is a Reader for the StopReplication structure.
@@ -54,7 +54,7 @@ func (o *StopReplicationReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /replication/executions/{id}] stopReplication", response, response.Code())
 	}
 }
 
@@ -63,7 +63,8 @@ func NewStopReplicationOK() *StopReplicationOK {
 	return &StopReplicationOK{}
 }
 
-/* StopReplicationOK describes a response with status code 200, with default header values.
+/*
+StopReplicationOK describes a response with status code 200, with default header values.
 
 Success
 */
@@ -74,7 +75,41 @@ type StopReplicationOK struct {
 	XRequestID string
 }
 
+// IsSuccess returns true when this stop replication o k response has a 2xx status code
+func (o *StopReplicationOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this stop replication o k response has a 3xx status code
+func (o *StopReplicationOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stop replication o k response has a 4xx status code
+func (o *StopReplicationOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this stop replication o k response has a 5xx status code
+func (o *StopReplicationOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stop replication o k response a status code equal to that given
+func (o *StopReplicationOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the stop replication o k response
+func (o *StopReplicationOK) Code() int {
+	return 200
+}
+
 func (o *StopReplicationOK) Error() string {
+	return fmt.Sprintf("[PUT /replication/executions/{id}][%d] stopReplicationOK ", 200)
+}
+
+func (o *StopReplicationOK) String() string {
 	return fmt.Sprintf("[PUT /replication/executions/{id}][%d] stopReplicationOK ", 200)
 }
 
@@ -95,7 +130,8 @@ func NewStopReplicationUnauthorized() *StopReplicationUnauthorized {
 	return &StopReplicationUnauthorized{}
 }
 
-/* StopReplicationUnauthorized describes a response with status code 401, with default header values.
+/*
+StopReplicationUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -108,9 +144,44 @@ type StopReplicationUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this stop replication unauthorized response has a 2xx status code
+func (o *StopReplicationUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this stop replication unauthorized response has a 3xx status code
+func (o *StopReplicationUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stop replication unauthorized response has a 4xx status code
+func (o *StopReplicationUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this stop replication unauthorized response has a 5xx status code
+func (o *StopReplicationUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stop replication unauthorized response a status code equal to that given
+func (o *StopReplicationUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the stop replication unauthorized response
+func (o *StopReplicationUnauthorized) Code() int {
+	return 401
+}
+
 func (o *StopReplicationUnauthorized) Error() string {
 	return fmt.Sprintf("[PUT /replication/executions/{id}][%d] stopReplicationUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *StopReplicationUnauthorized) String() string {
+	return fmt.Sprintf("[PUT /replication/executions/{id}][%d] stopReplicationUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *StopReplicationUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -139,7 +210,8 @@ func NewStopReplicationForbidden() *StopReplicationForbidden {
 	return &StopReplicationForbidden{}
 }
 
-/* StopReplicationForbidden describes a response with status code 403, with default header values.
+/*
+StopReplicationForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -152,9 +224,44 @@ type StopReplicationForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this stop replication forbidden response has a 2xx status code
+func (o *StopReplicationForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this stop replication forbidden response has a 3xx status code
+func (o *StopReplicationForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stop replication forbidden response has a 4xx status code
+func (o *StopReplicationForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this stop replication forbidden response has a 5xx status code
+func (o *StopReplicationForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stop replication forbidden response a status code equal to that given
+func (o *StopReplicationForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the stop replication forbidden response
+func (o *StopReplicationForbidden) Code() int {
+	return 403
+}
+
 func (o *StopReplicationForbidden) Error() string {
 	return fmt.Sprintf("[PUT /replication/executions/{id}][%d] stopReplicationForbidden  %+v", 403, o.Payload)
 }
+
+func (o *StopReplicationForbidden) String() string {
+	return fmt.Sprintf("[PUT /replication/executions/{id}][%d] stopReplicationForbidden  %+v", 403, o.Payload)
+}
+
 func (o *StopReplicationForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -183,7 +290,8 @@ func NewStopReplicationNotFound() *StopReplicationNotFound {
 	return &StopReplicationNotFound{}
 }
 
-/* StopReplicationNotFound describes a response with status code 404, with default header values.
+/*
+StopReplicationNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
@@ -196,9 +304,44 @@ type StopReplicationNotFound struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this stop replication not found response has a 2xx status code
+func (o *StopReplicationNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this stop replication not found response has a 3xx status code
+func (o *StopReplicationNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stop replication not found response has a 4xx status code
+func (o *StopReplicationNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this stop replication not found response has a 5xx status code
+func (o *StopReplicationNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this stop replication not found response a status code equal to that given
+func (o *StopReplicationNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the stop replication not found response
+func (o *StopReplicationNotFound) Code() int {
+	return 404
+}
+
 func (o *StopReplicationNotFound) Error() string {
 	return fmt.Sprintf("[PUT /replication/executions/{id}][%d] stopReplicationNotFound  %+v", 404, o.Payload)
 }
+
+func (o *StopReplicationNotFound) String() string {
+	return fmt.Sprintf("[PUT /replication/executions/{id}][%d] stopReplicationNotFound  %+v", 404, o.Payload)
+}
+
 func (o *StopReplicationNotFound) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -227,7 +370,8 @@ func NewStopReplicationInternalServerError() *StopReplicationInternalServerError
 	return &StopReplicationInternalServerError{}
 }
 
-/* StopReplicationInternalServerError describes a response with status code 500, with default header values.
+/*
+StopReplicationInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -240,9 +384,44 @@ type StopReplicationInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this stop replication internal server error response has a 2xx status code
+func (o *StopReplicationInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this stop replication internal server error response has a 3xx status code
+func (o *StopReplicationInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this stop replication internal server error response has a 4xx status code
+func (o *StopReplicationInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this stop replication internal server error response has a 5xx status code
+func (o *StopReplicationInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this stop replication internal server error response a status code equal to that given
+func (o *StopReplicationInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the stop replication internal server error response
+func (o *StopReplicationInternalServerError) Code() int {
+	return 500
+}
+
 func (o *StopReplicationInternalServerError) Error() string {
 	return fmt.Sprintf("[PUT /replication/executions/{id}][%d] stopReplicationInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *StopReplicationInternalServerError) String() string {
+	return fmt.Sprintf("[PUT /replication/executions/{id}][%d] stopReplicationInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *StopReplicationInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

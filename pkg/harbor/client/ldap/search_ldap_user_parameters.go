@@ -52,10 +52,12 @@ func NewSearchLdapUserParamsWithHTTPClient(client *http.Client) *SearchLdapUserP
 	}
 }
 
-/* SearchLdapUserParams contains all the parameters to send to the API endpoint
-   for the search ldap user operation.
+/*
+SearchLdapUserParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the search ldap user operation.
+
+	Typically these are written to a http.Request.
 */
 type SearchLdapUserParams struct {
 

@@ -52,10 +52,12 @@ func NewGetReportLogParamsWithHTTPClient(client *http.Client) *GetReportLogParam
 	}
 }
 
-/* GetReportLogParams contains all the parameters to send to the API endpoint
-   for the get report log operation.
+/*
+GetReportLogParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get report log operation.
+
+	Typically these are written to a http.Request.
 */
 type GetReportLogParams struct {
 

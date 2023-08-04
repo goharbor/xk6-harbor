@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // DeleteRobotReader is a Reader for the DeleteRobot structure.
@@ -60,7 +60,7 @@ func (o *DeleteRobotReader) ReadResponse(response runtime.ClientResponse, consum
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /robots/{robot_id}] DeleteRobot", response, response.Code())
 	}
 }
 
@@ -69,7 +69,8 @@ func NewDeleteRobotOK() *DeleteRobotOK {
 	return &DeleteRobotOK{}
 }
 
-/* DeleteRobotOK describes a response with status code 200, with default header values.
+/*
+DeleteRobotOK describes a response with status code 200, with default header values.
 
 Success
 */
@@ -80,7 +81,41 @@ type DeleteRobotOK struct {
 	XRequestID string
 }
 
+// IsSuccess returns true when this delete robot o k response has a 2xx status code
+func (o *DeleteRobotOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this delete robot o k response has a 3xx status code
+func (o *DeleteRobotOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete robot o k response has a 4xx status code
+func (o *DeleteRobotOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete robot o k response has a 5xx status code
+func (o *DeleteRobotOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete robot o k response a status code equal to that given
+func (o *DeleteRobotOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the delete robot o k response
+func (o *DeleteRobotOK) Code() int {
+	return 200
+}
+
 func (o *DeleteRobotOK) Error() string {
+	return fmt.Sprintf("[DELETE /robots/{robot_id}][%d] deleteRobotOK ", 200)
+}
+
+func (o *DeleteRobotOK) String() string {
 	return fmt.Sprintf("[DELETE /robots/{robot_id}][%d] deleteRobotOK ", 200)
 }
 
@@ -101,7 +136,8 @@ func NewDeleteRobotBadRequest() *DeleteRobotBadRequest {
 	return &DeleteRobotBadRequest{}
 }
 
-/* DeleteRobotBadRequest describes a response with status code 400, with default header values.
+/*
+DeleteRobotBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
@@ -114,9 +150,44 @@ type DeleteRobotBadRequest struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this delete robot bad request response has a 2xx status code
+func (o *DeleteRobotBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete robot bad request response has a 3xx status code
+func (o *DeleteRobotBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete robot bad request response has a 4xx status code
+func (o *DeleteRobotBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete robot bad request response has a 5xx status code
+func (o *DeleteRobotBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete robot bad request response a status code equal to that given
+func (o *DeleteRobotBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the delete robot bad request response
+func (o *DeleteRobotBadRequest) Code() int {
+	return 400
+}
+
 func (o *DeleteRobotBadRequest) Error() string {
 	return fmt.Sprintf("[DELETE /robots/{robot_id}][%d] deleteRobotBadRequest  %+v", 400, o.Payload)
 }
+
+func (o *DeleteRobotBadRequest) String() string {
+	return fmt.Sprintf("[DELETE /robots/{robot_id}][%d] deleteRobotBadRequest  %+v", 400, o.Payload)
+}
+
 func (o *DeleteRobotBadRequest) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -145,7 +216,8 @@ func NewDeleteRobotUnauthorized() *DeleteRobotUnauthorized {
 	return &DeleteRobotUnauthorized{}
 }
 
-/* DeleteRobotUnauthorized describes a response with status code 401, with default header values.
+/*
+DeleteRobotUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -158,9 +230,44 @@ type DeleteRobotUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this delete robot unauthorized response has a 2xx status code
+func (o *DeleteRobotUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete robot unauthorized response has a 3xx status code
+func (o *DeleteRobotUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete robot unauthorized response has a 4xx status code
+func (o *DeleteRobotUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete robot unauthorized response has a 5xx status code
+func (o *DeleteRobotUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete robot unauthorized response a status code equal to that given
+func (o *DeleteRobotUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the delete robot unauthorized response
+func (o *DeleteRobotUnauthorized) Code() int {
+	return 401
+}
+
 func (o *DeleteRobotUnauthorized) Error() string {
 	return fmt.Sprintf("[DELETE /robots/{robot_id}][%d] deleteRobotUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *DeleteRobotUnauthorized) String() string {
+	return fmt.Sprintf("[DELETE /robots/{robot_id}][%d] deleteRobotUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *DeleteRobotUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -189,7 +296,8 @@ func NewDeleteRobotForbidden() *DeleteRobotForbidden {
 	return &DeleteRobotForbidden{}
 }
 
-/* DeleteRobotForbidden describes a response with status code 403, with default header values.
+/*
+DeleteRobotForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -202,9 +310,44 @@ type DeleteRobotForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this delete robot forbidden response has a 2xx status code
+func (o *DeleteRobotForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete robot forbidden response has a 3xx status code
+func (o *DeleteRobotForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete robot forbidden response has a 4xx status code
+func (o *DeleteRobotForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete robot forbidden response has a 5xx status code
+func (o *DeleteRobotForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete robot forbidden response a status code equal to that given
+func (o *DeleteRobotForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the delete robot forbidden response
+func (o *DeleteRobotForbidden) Code() int {
+	return 403
+}
+
 func (o *DeleteRobotForbidden) Error() string {
 	return fmt.Sprintf("[DELETE /robots/{robot_id}][%d] deleteRobotForbidden  %+v", 403, o.Payload)
 }
+
+func (o *DeleteRobotForbidden) String() string {
+	return fmt.Sprintf("[DELETE /robots/{robot_id}][%d] deleteRobotForbidden  %+v", 403, o.Payload)
+}
+
 func (o *DeleteRobotForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -233,7 +376,8 @@ func NewDeleteRobotNotFound() *DeleteRobotNotFound {
 	return &DeleteRobotNotFound{}
 }
 
-/* DeleteRobotNotFound describes a response with status code 404, with default header values.
+/*
+DeleteRobotNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
@@ -246,9 +390,44 @@ type DeleteRobotNotFound struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this delete robot not found response has a 2xx status code
+func (o *DeleteRobotNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete robot not found response has a 3xx status code
+func (o *DeleteRobotNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete robot not found response has a 4xx status code
+func (o *DeleteRobotNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete robot not found response has a 5xx status code
+func (o *DeleteRobotNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete robot not found response a status code equal to that given
+func (o *DeleteRobotNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the delete robot not found response
+func (o *DeleteRobotNotFound) Code() int {
+	return 404
+}
+
 func (o *DeleteRobotNotFound) Error() string {
 	return fmt.Sprintf("[DELETE /robots/{robot_id}][%d] deleteRobotNotFound  %+v", 404, o.Payload)
 }
+
+func (o *DeleteRobotNotFound) String() string {
+	return fmt.Sprintf("[DELETE /robots/{robot_id}][%d] deleteRobotNotFound  %+v", 404, o.Payload)
+}
+
 func (o *DeleteRobotNotFound) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -277,7 +456,8 @@ func NewDeleteRobotInternalServerError() *DeleteRobotInternalServerError {
 	return &DeleteRobotInternalServerError{}
 }
 
-/* DeleteRobotInternalServerError describes a response with status code 500, with default header values.
+/*
+DeleteRobotInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -290,9 +470,44 @@ type DeleteRobotInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this delete robot internal server error response has a 2xx status code
+func (o *DeleteRobotInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete robot internal server error response has a 3xx status code
+func (o *DeleteRobotInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete robot internal server error response has a 4xx status code
+func (o *DeleteRobotInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete robot internal server error response has a 5xx status code
+func (o *DeleteRobotInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this delete robot internal server error response a status code equal to that given
+func (o *DeleteRobotInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the delete robot internal server error response
+func (o *DeleteRobotInternalServerError) Code() int {
+	return 500
+}
+
 func (o *DeleteRobotInternalServerError) Error() string {
 	return fmt.Sprintf("[DELETE /robots/{robot_id}][%d] deleteRobotInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *DeleteRobotInternalServerError) String() string {
+	return fmt.Sprintf("[DELETE /robots/{robot_id}][%d] deleteRobotInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *DeleteRobotInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

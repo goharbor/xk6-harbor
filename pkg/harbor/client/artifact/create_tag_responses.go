@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // CreateTagReader is a Reader for the CreateTag structure.
@@ -72,7 +72,7 @@ func (o *CreateTagReader) ReadResponse(response runtime.ClientResponse, consumer
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/tags] createTag", response, response.Code())
 	}
 }
 
@@ -81,7 +81,8 @@ func NewCreateTagCreated() *CreateTagCreated {
 	return &CreateTagCreated{}
 }
 
-/* CreateTagCreated describes a response with status code 201, with default header values.
+/*
+CreateTagCreated describes a response with status code 201, with default header values.
 
 Created
 */
@@ -96,7 +97,41 @@ type CreateTagCreated struct {
 	XRequestID string
 }
 
+// IsSuccess returns true when this create tag created response has a 2xx status code
+func (o *CreateTagCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create tag created response has a 3xx status code
+func (o *CreateTagCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create tag created response has a 4xx status code
+func (o *CreateTagCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create tag created response has a 5xx status code
+func (o *CreateTagCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create tag created response a status code equal to that given
+func (o *CreateTagCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the create tag created response
+func (o *CreateTagCreated) Code() int {
+	return 201
+}
+
 func (o *CreateTagCreated) Error() string {
+	return fmt.Sprintf("[POST /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/tags][%d] createTagCreated ", 201)
+}
+
+func (o *CreateTagCreated) String() string {
 	return fmt.Sprintf("[POST /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/tags][%d] createTagCreated ", 201)
 }
 
@@ -124,7 +159,8 @@ func NewCreateTagBadRequest() *CreateTagBadRequest {
 	return &CreateTagBadRequest{}
 }
 
-/* CreateTagBadRequest describes a response with status code 400, with default header values.
+/*
+CreateTagBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
@@ -137,9 +173,44 @@ type CreateTagBadRequest struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create tag bad request response has a 2xx status code
+func (o *CreateTagBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create tag bad request response has a 3xx status code
+func (o *CreateTagBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create tag bad request response has a 4xx status code
+func (o *CreateTagBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create tag bad request response has a 5xx status code
+func (o *CreateTagBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create tag bad request response a status code equal to that given
+func (o *CreateTagBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the create tag bad request response
+func (o *CreateTagBadRequest) Code() int {
+	return 400
+}
+
 func (o *CreateTagBadRequest) Error() string {
 	return fmt.Sprintf("[POST /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/tags][%d] createTagBadRequest  %+v", 400, o.Payload)
 }
+
+func (o *CreateTagBadRequest) String() string {
+	return fmt.Sprintf("[POST /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/tags][%d] createTagBadRequest  %+v", 400, o.Payload)
+}
+
 func (o *CreateTagBadRequest) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -168,7 +239,8 @@ func NewCreateTagUnauthorized() *CreateTagUnauthorized {
 	return &CreateTagUnauthorized{}
 }
 
-/* CreateTagUnauthorized describes a response with status code 401, with default header values.
+/*
+CreateTagUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -181,9 +253,44 @@ type CreateTagUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create tag unauthorized response has a 2xx status code
+func (o *CreateTagUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create tag unauthorized response has a 3xx status code
+func (o *CreateTagUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create tag unauthorized response has a 4xx status code
+func (o *CreateTagUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create tag unauthorized response has a 5xx status code
+func (o *CreateTagUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create tag unauthorized response a status code equal to that given
+func (o *CreateTagUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the create tag unauthorized response
+func (o *CreateTagUnauthorized) Code() int {
+	return 401
+}
+
 func (o *CreateTagUnauthorized) Error() string {
 	return fmt.Sprintf("[POST /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/tags][%d] createTagUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *CreateTagUnauthorized) String() string {
+	return fmt.Sprintf("[POST /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/tags][%d] createTagUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *CreateTagUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -212,7 +319,8 @@ func NewCreateTagForbidden() *CreateTagForbidden {
 	return &CreateTagForbidden{}
 }
 
-/* CreateTagForbidden describes a response with status code 403, with default header values.
+/*
+CreateTagForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -225,9 +333,44 @@ type CreateTagForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create tag forbidden response has a 2xx status code
+func (o *CreateTagForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create tag forbidden response has a 3xx status code
+func (o *CreateTagForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create tag forbidden response has a 4xx status code
+func (o *CreateTagForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create tag forbidden response has a 5xx status code
+func (o *CreateTagForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create tag forbidden response a status code equal to that given
+func (o *CreateTagForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the create tag forbidden response
+func (o *CreateTagForbidden) Code() int {
+	return 403
+}
+
 func (o *CreateTagForbidden) Error() string {
 	return fmt.Sprintf("[POST /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/tags][%d] createTagForbidden  %+v", 403, o.Payload)
 }
+
+func (o *CreateTagForbidden) String() string {
+	return fmt.Sprintf("[POST /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/tags][%d] createTagForbidden  %+v", 403, o.Payload)
+}
+
 func (o *CreateTagForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -256,7 +399,8 @@ func NewCreateTagNotFound() *CreateTagNotFound {
 	return &CreateTagNotFound{}
 }
 
-/* CreateTagNotFound describes a response with status code 404, with default header values.
+/*
+CreateTagNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
@@ -269,9 +413,44 @@ type CreateTagNotFound struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create tag not found response has a 2xx status code
+func (o *CreateTagNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create tag not found response has a 3xx status code
+func (o *CreateTagNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create tag not found response has a 4xx status code
+func (o *CreateTagNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create tag not found response has a 5xx status code
+func (o *CreateTagNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create tag not found response a status code equal to that given
+func (o *CreateTagNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the create tag not found response
+func (o *CreateTagNotFound) Code() int {
+	return 404
+}
+
 func (o *CreateTagNotFound) Error() string {
 	return fmt.Sprintf("[POST /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/tags][%d] createTagNotFound  %+v", 404, o.Payload)
 }
+
+func (o *CreateTagNotFound) String() string {
+	return fmt.Sprintf("[POST /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/tags][%d] createTagNotFound  %+v", 404, o.Payload)
+}
+
 func (o *CreateTagNotFound) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -300,7 +479,8 @@ func NewCreateTagMethodNotAllowed() *CreateTagMethodNotAllowed {
 	return &CreateTagMethodNotAllowed{}
 }
 
-/* CreateTagMethodNotAllowed describes a response with status code 405, with default header values.
+/*
+CreateTagMethodNotAllowed describes a response with status code 405, with default header values.
 
 Method not allowed
 */
@@ -313,9 +493,44 @@ type CreateTagMethodNotAllowed struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create tag method not allowed response has a 2xx status code
+func (o *CreateTagMethodNotAllowed) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create tag method not allowed response has a 3xx status code
+func (o *CreateTagMethodNotAllowed) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create tag method not allowed response has a 4xx status code
+func (o *CreateTagMethodNotAllowed) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create tag method not allowed response has a 5xx status code
+func (o *CreateTagMethodNotAllowed) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create tag method not allowed response a status code equal to that given
+func (o *CreateTagMethodNotAllowed) IsCode(code int) bool {
+	return code == 405
+}
+
+// Code gets the status code for the create tag method not allowed response
+func (o *CreateTagMethodNotAllowed) Code() int {
+	return 405
+}
+
 func (o *CreateTagMethodNotAllowed) Error() string {
 	return fmt.Sprintf("[POST /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/tags][%d] createTagMethodNotAllowed  %+v", 405, o.Payload)
 }
+
+func (o *CreateTagMethodNotAllowed) String() string {
+	return fmt.Sprintf("[POST /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/tags][%d] createTagMethodNotAllowed  %+v", 405, o.Payload)
+}
+
 func (o *CreateTagMethodNotAllowed) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -344,7 +559,8 @@ func NewCreateTagConflict() *CreateTagConflict {
 	return &CreateTagConflict{}
 }
 
-/* CreateTagConflict describes a response with status code 409, with default header values.
+/*
+CreateTagConflict describes a response with status code 409, with default header values.
 
 Conflict
 */
@@ -357,9 +573,44 @@ type CreateTagConflict struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create tag conflict response has a 2xx status code
+func (o *CreateTagConflict) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create tag conflict response has a 3xx status code
+func (o *CreateTagConflict) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create tag conflict response has a 4xx status code
+func (o *CreateTagConflict) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create tag conflict response has a 5xx status code
+func (o *CreateTagConflict) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create tag conflict response a status code equal to that given
+func (o *CreateTagConflict) IsCode(code int) bool {
+	return code == 409
+}
+
+// Code gets the status code for the create tag conflict response
+func (o *CreateTagConflict) Code() int {
+	return 409
+}
+
 func (o *CreateTagConflict) Error() string {
 	return fmt.Sprintf("[POST /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/tags][%d] createTagConflict  %+v", 409, o.Payload)
 }
+
+func (o *CreateTagConflict) String() string {
+	return fmt.Sprintf("[POST /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/tags][%d] createTagConflict  %+v", 409, o.Payload)
+}
+
 func (o *CreateTagConflict) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -388,7 +639,8 @@ func NewCreateTagInternalServerError() *CreateTagInternalServerError {
 	return &CreateTagInternalServerError{}
 }
 
-/* CreateTagInternalServerError describes a response with status code 500, with default header values.
+/*
+CreateTagInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -401,9 +653,44 @@ type CreateTagInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this create tag internal server error response has a 2xx status code
+func (o *CreateTagInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create tag internal server error response has a 3xx status code
+func (o *CreateTagInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create tag internal server error response has a 4xx status code
+func (o *CreateTagInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create tag internal server error response has a 5xx status code
+func (o *CreateTagInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this create tag internal server error response a status code equal to that given
+func (o *CreateTagInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the create tag internal server error response
+func (o *CreateTagInternalServerError) Code() int {
+	return 500
+}
+
 func (o *CreateTagInternalServerError) Error() string {
 	return fmt.Sprintf("[POST /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/tags][%d] createTagInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *CreateTagInternalServerError) String() string {
+	return fmt.Sprintf("[POST /projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/tags][%d] createTagInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *CreateTagInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

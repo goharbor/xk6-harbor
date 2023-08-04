@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // RefreshSecReader is a Reader for the RefreshSec structure.
@@ -60,7 +60,7 @@ func (o *RefreshSecReader) ReadResponse(response runtime.ClientResponse, consume
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PATCH /robots/{robot_id}] RefreshSec", response, response.Code())
 	}
 }
 
@@ -69,7 +69,8 @@ func NewRefreshSecOK() *RefreshSecOK {
 	return &RefreshSecOK{}
 }
 
-/* RefreshSecOK describes a response with status code 200, with default header values.
+/*
+RefreshSecOK describes a response with status code 200, with default header values.
 
 Return refreshed robot sec.
 */
@@ -77,9 +78,44 @@ type RefreshSecOK struct {
 	Payload *models.RobotSec
 }
 
+// IsSuccess returns true when this refresh sec o k response has a 2xx status code
+func (o *RefreshSecOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this refresh sec o k response has a 3xx status code
+func (o *RefreshSecOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this refresh sec o k response has a 4xx status code
+func (o *RefreshSecOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this refresh sec o k response has a 5xx status code
+func (o *RefreshSecOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this refresh sec o k response a status code equal to that given
+func (o *RefreshSecOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the refresh sec o k response
+func (o *RefreshSecOK) Code() int {
+	return 200
+}
+
 func (o *RefreshSecOK) Error() string {
 	return fmt.Sprintf("[PATCH /robots/{robot_id}][%d] refreshSecOK  %+v", 200, o.Payload)
 }
+
+func (o *RefreshSecOK) String() string {
+	return fmt.Sprintf("[PATCH /robots/{robot_id}][%d] refreshSecOK  %+v", 200, o.Payload)
+}
+
 func (o *RefreshSecOK) GetPayload() *models.RobotSec {
 	return o.Payload
 }
@@ -101,7 +137,8 @@ func NewRefreshSecBadRequest() *RefreshSecBadRequest {
 	return &RefreshSecBadRequest{}
 }
 
-/* RefreshSecBadRequest describes a response with status code 400, with default header values.
+/*
+RefreshSecBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
@@ -114,9 +151,44 @@ type RefreshSecBadRequest struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this refresh sec bad request response has a 2xx status code
+func (o *RefreshSecBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this refresh sec bad request response has a 3xx status code
+func (o *RefreshSecBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this refresh sec bad request response has a 4xx status code
+func (o *RefreshSecBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this refresh sec bad request response has a 5xx status code
+func (o *RefreshSecBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this refresh sec bad request response a status code equal to that given
+func (o *RefreshSecBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the refresh sec bad request response
+func (o *RefreshSecBadRequest) Code() int {
+	return 400
+}
+
 func (o *RefreshSecBadRequest) Error() string {
 	return fmt.Sprintf("[PATCH /robots/{robot_id}][%d] refreshSecBadRequest  %+v", 400, o.Payload)
 }
+
+func (o *RefreshSecBadRequest) String() string {
+	return fmt.Sprintf("[PATCH /robots/{robot_id}][%d] refreshSecBadRequest  %+v", 400, o.Payload)
+}
+
 func (o *RefreshSecBadRequest) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -145,7 +217,8 @@ func NewRefreshSecUnauthorized() *RefreshSecUnauthorized {
 	return &RefreshSecUnauthorized{}
 }
 
-/* RefreshSecUnauthorized describes a response with status code 401, with default header values.
+/*
+RefreshSecUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -158,9 +231,44 @@ type RefreshSecUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this refresh sec unauthorized response has a 2xx status code
+func (o *RefreshSecUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this refresh sec unauthorized response has a 3xx status code
+func (o *RefreshSecUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this refresh sec unauthorized response has a 4xx status code
+func (o *RefreshSecUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this refresh sec unauthorized response has a 5xx status code
+func (o *RefreshSecUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this refresh sec unauthorized response a status code equal to that given
+func (o *RefreshSecUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the refresh sec unauthorized response
+func (o *RefreshSecUnauthorized) Code() int {
+	return 401
+}
+
 func (o *RefreshSecUnauthorized) Error() string {
 	return fmt.Sprintf("[PATCH /robots/{robot_id}][%d] refreshSecUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *RefreshSecUnauthorized) String() string {
+	return fmt.Sprintf("[PATCH /robots/{robot_id}][%d] refreshSecUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *RefreshSecUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -189,7 +297,8 @@ func NewRefreshSecForbidden() *RefreshSecForbidden {
 	return &RefreshSecForbidden{}
 }
 
-/* RefreshSecForbidden describes a response with status code 403, with default header values.
+/*
+RefreshSecForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -202,9 +311,44 @@ type RefreshSecForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this refresh sec forbidden response has a 2xx status code
+func (o *RefreshSecForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this refresh sec forbidden response has a 3xx status code
+func (o *RefreshSecForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this refresh sec forbidden response has a 4xx status code
+func (o *RefreshSecForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this refresh sec forbidden response has a 5xx status code
+func (o *RefreshSecForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this refresh sec forbidden response a status code equal to that given
+func (o *RefreshSecForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the refresh sec forbidden response
+func (o *RefreshSecForbidden) Code() int {
+	return 403
+}
+
 func (o *RefreshSecForbidden) Error() string {
 	return fmt.Sprintf("[PATCH /robots/{robot_id}][%d] refreshSecForbidden  %+v", 403, o.Payload)
 }
+
+func (o *RefreshSecForbidden) String() string {
+	return fmt.Sprintf("[PATCH /robots/{robot_id}][%d] refreshSecForbidden  %+v", 403, o.Payload)
+}
+
 func (o *RefreshSecForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -233,7 +377,8 @@ func NewRefreshSecNotFound() *RefreshSecNotFound {
 	return &RefreshSecNotFound{}
 }
 
-/* RefreshSecNotFound describes a response with status code 404, with default header values.
+/*
+RefreshSecNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
@@ -246,9 +391,44 @@ type RefreshSecNotFound struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this refresh sec not found response has a 2xx status code
+func (o *RefreshSecNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this refresh sec not found response has a 3xx status code
+func (o *RefreshSecNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this refresh sec not found response has a 4xx status code
+func (o *RefreshSecNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this refresh sec not found response has a 5xx status code
+func (o *RefreshSecNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this refresh sec not found response a status code equal to that given
+func (o *RefreshSecNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the refresh sec not found response
+func (o *RefreshSecNotFound) Code() int {
+	return 404
+}
+
 func (o *RefreshSecNotFound) Error() string {
 	return fmt.Sprintf("[PATCH /robots/{robot_id}][%d] refreshSecNotFound  %+v", 404, o.Payload)
 }
+
+func (o *RefreshSecNotFound) String() string {
+	return fmt.Sprintf("[PATCH /robots/{robot_id}][%d] refreshSecNotFound  %+v", 404, o.Payload)
+}
+
 func (o *RefreshSecNotFound) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -277,7 +457,8 @@ func NewRefreshSecInternalServerError() *RefreshSecInternalServerError {
 	return &RefreshSecInternalServerError{}
 }
 
-/* RefreshSecInternalServerError describes a response with status code 500, with default header values.
+/*
+RefreshSecInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -290,9 +471,44 @@ type RefreshSecInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this refresh sec internal server error response has a 2xx status code
+func (o *RefreshSecInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this refresh sec internal server error response has a 3xx status code
+func (o *RefreshSecInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this refresh sec internal server error response has a 4xx status code
+func (o *RefreshSecInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this refresh sec internal server error response has a 5xx status code
+func (o *RefreshSecInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this refresh sec internal server error response a status code equal to that given
+func (o *RefreshSecInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the refresh sec internal server error response
+func (o *RefreshSecInternalServerError) Code() int {
+	return 500
+}
+
 func (o *RefreshSecInternalServerError) Error() string {
 	return fmt.Sprintf("[PATCH /robots/{robot_id}][%d] refreshSecInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *RefreshSecInternalServerError) String() string {
+	return fmt.Sprintf("[PATCH /robots/{robot_id}][%d] refreshSecInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *RefreshSecInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

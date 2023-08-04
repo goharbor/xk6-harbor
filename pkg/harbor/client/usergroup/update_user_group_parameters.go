@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // NewUpdateUserGroupParams creates a new UpdateUserGroupParams object,
@@ -55,10 +55,12 @@ func NewUpdateUserGroupParamsWithHTTPClient(client *http.Client) *UpdateUserGrou
 	}
 }
 
-/* UpdateUserGroupParams contains all the parameters to send to the API endpoint
-   for the update user group operation.
+/*
+UpdateUserGroupParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the update user group operation.
+
+	Typically these are written to a http.Request.
 */
 type UpdateUserGroupParams struct {
 

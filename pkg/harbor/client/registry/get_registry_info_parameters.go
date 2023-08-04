@@ -53,10 +53,12 @@ func NewGetRegistryInfoParamsWithHTTPClient(client *http.Client) *GetRegistryInf
 	}
 }
 
-/* GetRegistryInfoParams contains all the parameters to send to the API endpoint
-   for the get registry info operation.
+/*
+GetRegistryInfoParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the get registry info operation.
+
+	Typically these are written to a http.Request.
 */
 type GetRegistryInfoParams struct {
 

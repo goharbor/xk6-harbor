@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // NewSetUserSysAdminParams creates a new SetUserSysAdminParams object,
@@ -55,10 +55,12 @@ func NewSetUserSysAdminParamsWithHTTPClient(client *http.Client) *SetUserSysAdmi
 	}
 }
 
-/* SetUserSysAdminParams contains all the parameters to send to the API endpoint
-   for the set user sys admin operation.
+/*
+SetUserSysAdminParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the set user sys admin operation.
+
+	Typically these are written to a http.Request.
 */
 type SetUserSysAdminParams struct {
 

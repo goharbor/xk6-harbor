@@ -52,10 +52,12 @@ func NewListRegistryProviderTypesParamsWithHTTPClient(client *http.Client) *List
 	}
 }
 
-/* ListRegistryProviderTypesParams contains all the parameters to send to the API endpoint
-   for the list registry provider types operation.
+/*
+ListRegistryProviderTypesParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the list registry provider types operation.
+
+	Typically these are written to a http.Request.
 */
 type ListRegistryProviderTypesParams struct {
 

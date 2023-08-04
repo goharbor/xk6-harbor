@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // DeleteReplicationPolicyReader is a Reader for the DeleteReplicationPolicy structure.
@@ -60,7 +60,7 @@ func (o *DeleteReplicationPolicyReader) ReadResponse(response runtime.ClientResp
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /replication/policies/{id}] deleteReplicationPolicy", response, response.Code())
 	}
 }
 
@@ -69,7 +69,8 @@ func NewDeleteReplicationPolicyOK() *DeleteReplicationPolicyOK {
 	return &DeleteReplicationPolicyOK{}
 }
 
-/* DeleteReplicationPolicyOK describes a response with status code 200, with default header values.
+/*
+DeleteReplicationPolicyOK describes a response with status code 200, with default header values.
 
 Success
 */
@@ -80,7 +81,41 @@ type DeleteReplicationPolicyOK struct {
 	XRequestID string
 }
 
+// IsSuccess returns true when this delete replication policy o k response has a 2xx status code
+func (o *DeleteReplicationPolicyOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this delete replication policy o k response has a 3xx status code
+func (o *DeleteReplicationPolicyOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete replication policy o k response has a 4xx status code
+func (o *DeleteReplicationPolicyOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete replication policy o k response has a 5xx status code
+func (o *DeleteReplicationPolicyOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete replication policy o k response a status code equal to that given
+func (o *DeleteReplicationPolicyOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the delete replication policy o k response
+func (o *DeleteReplicationPolicyOK) Code() int {
+	return 200
+}
+
 func (o *DeleteReplicationPolicyOK) Error() string {
+	return fmt.Sprintf("[DELETE /replication/policies/{id}][%d] deleteReplicationPolicyOK ", 200)
+}
+
+func (o *DeleteReplicationPolicyOK) String() string {
 	return fmt.Sprintf("[DELETE /replication/policies/{id}][%d] deleteReplicationPolicyOK ", 200)
 }
 
@@ -101,7 +136,8 @@ func NewDeleteReplicationPolicyUnauthorized() *DeleteReplicationPolicyUnauthoriz
 	return &DeleteReplicationPolicyUnauthorized{}
 }
 
-/* DeleteReplicationPolicyUnauthorized describes a response with status code 401, with default header values.
+/*
+DeleteReplicationPolicyUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -114,9 +150,44 @@ type DeleteReplicationPolicyUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this delete replication policy unauthorized response has a 2xx status code
+func (o *DeleteReplicationPolicyUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete replication policy unauthorized response has a 3xx status code
+func (o *DeleteReplicationPolicyUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete replication policy unauthorized response has a 4xx status code
+func (o *DeleteReplicationPolicyUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete replication policy unauthorized response has a 5xx status code
+func (o *DeleteReplicationPolicyUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete replication policy unauthorized response a status code equal to that given
+func (o *DeleteReplicationPolicyUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the delete replication policy unauthorized response
+func (o *DeleteReplicationPolicyUnauthorized) Code() int {
+	return 401
+}
+
 func (o *DeleteReplicationPolicyUnauthorized) Error() string {
 	return fmt.Sprintf("[DELETE /replication/policies/{id}][%d] deleteReplicationPolicyUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *DeleteReplicationPolicyUnauthorized) String() string {
+	return fmt.Sprintf("[DELETE /replication/policies/{id}][%d] deleteReplicationPolicyUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *DeleteReplicationPolicyUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -145,7 +216,8 @@ func NewDeleteReplicationPolicyForbidden() *DeleteReplicationPolicyForbidden {
 	return &DeleteReplicationPolicyForbidden{}
 }
 
-/* DeleteReplicationPolicyForbidden describes a response with status code 403, with default header values.
+/*
+DeleteReplicationPolicyForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -158,9 +230,44 @@ type DeleteReplicationPolicyForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this delete replication policy forbidden response has a 2xx status code
+func (o *DeleteReplicationPolicyForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete replication policy forbidden response has a 3xx status code
+func (o *DeleteReplicationPolicyForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete replication policy forbidden response has a 4xx status code
+func (o *DeleteReplicationPolicyForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete replication policy forbidden response has a 5xx status code
+func (o *DeleteReplicationPolicyForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete replication policy forbidden response a status code equal to that given
+func (o *DeleteReplicationPolicyForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the delete replication policy forbidden response
+func (o *DeleteReplicationPolicyForbidden) Code() int {
+	return 403
+}
+
 func (o *DeleteReplicationPolicyForbidden) Error() string {
 	return fmt.Sprintf("[DELETE /replication/policies/{id}][%d] deleteReplicationPolicyForbidden  %+v", 403, o.Payload)
 }
+
+func (o *DeleteReplicationPolicyForbidden) String() string {
+	return fmt.Sprintf("[DELETE /replication/policies/{id}][%d] deleteReplicationPolicyForbidden  %+v", 403, o.Payload)
+}
+
 func (o *DeleteReplicationPolicyForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -189,7 +296,8 @@ func NewDeleteReplicationPolicyNotFound() *DeleteReplicationPolicyNotFound {
 	return &DeleteReplicationPolicyNotFound{}
 }
 
-/* DeleteReplicationPolicyNotFound describes a response with status code 404, with default header values.
+/*
+DeleteReplicationPolicyNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
@@ -202,9 +310,44 @@ type DeleteReplicationPolicyNotFound struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this delete replication policy not found response has a 2xx status code
+func (o *DeleteReplicationPolicyNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete replication policy not found response has a 3xx status code
+func (o *DeleteReplicationPolicyNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete replication policy not found response has a 4xx status code
+func (o *DeleteReplicationPolicyNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete replication policy not found response has a 5xx status code
+func (o *DeleteReplicationPolicyNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete replication policy not found response a status code equal to that given
+func (o *DeleteReplicationPolicyNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the delete replication policy not found response
+func (o *DeleteReplicationPolicyNotFound) Code() int {
+	return 404
+}
+
 func (o *DeleteReplicationPolicyNotFound) Error() string {
 	return fmt.Sprintf("[DELETE /replication/policies/{id}][%d] deleteReplicationPolicyNotFound  %+v", 404, o.Payload)
 }
+
+func (o *DeleteReplicationPolicyNotFound) String() string {
+	return fmt.Sprintf("[DELETE /replication/policies/{id}][%d] deleteReplicationPolicyNotFound  %+v", 404, o.Payload)
+}
+
 func (o *DeleteReplicationPolicyNotFound) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -233,7 +376,8 @@ func NewDeleteReplicationPolicyPreconditionFailed() *DeleteReplicationPolicyPrec
 	return &DeleteReplicationPolicyPreconditionFailed{}
 }
 
-/* DeleteReplicationPolicyPreconditionFailed describes a response with status code 412, with default header values.
+/*
+DeleteReplicationPolicyPreconditionFailed describes a response with status code 412, with default header values.
 
 Precondition failed
 */
@@ -246,9 +390,44 @@ type DeleteReplicationPolicyPreconditionFailed struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this delete replication policy precondition failed response has a 2xx status code
+func (o *DeleteReplicationPolicyPreconditionFailed) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete replication policy precondition failed response has a 3xx status code
+func (o *DeleteReplicationPolicyPreconditionFailed) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete replication policy precondition failed response has a 4xx status code
+func (o *DeleteReplicationPolicyPreconditionFailed) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this delete replication policy precondition failed response has a 5xx status code
+func (o *DeleteReplicationPolicyPreconditionFailed) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this delete replication policy precondition failed response a status code equal to that given
+func (o *DeleteReplicationPolicyPreconditionFailed) IsCode(code int) bool {
+	return code == 412
+}
+
+// Code gets the status code for the delete replication policy precondition failed response
+func (o *DeleteReplicationPolicyPreconditionFailed) Code() int {
+	return 412
+}
+
 func (o *DeleteReplicationPolicyPreconditionFailed) Error() string {
 	return fmt.Sprintf("[DELETE /replication/policies/{id}][%d] deleteReplicationPolicyPreconditionFailed  %+v", 412, o.Payload)
 }
+
+func (o *DeleteReplicationPolicyPreconditionFailed) String() string {
+	return fmt.Sprintf("[DELETE /replication/policies/{id}][%d] deleteReplicationPolicyPreconditionFailed  %+v", 412, o.Payload)
+}
+
 func (o *DeleteReplicationPolicyPreconditionFailed) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -277,7 +456,8 @@ func NewDeleteReplicationPolicyInternalServerError() *DeleteReplicationPolicyInt
 	return &DeleteReplicationPolicyInternalServerError{}
 }
 
-/* DeleteReplicationPolicyInternalServerError describes a response with status code 500, with default header values.
+/*
+DeleteReplicationPolicyInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -290,9 +470,44 @@ type DeleteReplicationPolicyInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this delete replication policy internal server error response has a 2xx status code
+func (o *DeleteReplicationPolicyInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this delete replication policy internal server error response has a 3xx status code
+func (o *DeleteReplicationPolicyInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this delete replication policy internal server error response has a 4xx status code
+func (o *DeleteReplicationPolicyInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this delete replication policy internal server error response has a 5xx status code
+func (o *DeleteReplicationPolicyInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this delete replication policy internal server error response a status code equal to that given
+func (o *DeleteReplicationPolicyInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the delete replication policy internal server error response
+func (o *DeleteReplicationPolicyInternalServerError) Code() int {
+	return 500
+}
+
 func (o *DeleteReplicationPolicyInternalServerError) Error() string {
 	return fmt.Sprintf("[DELETE /replication/policies/{id}][%d] deleteReplicationPolicyInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *DeleteReplicationPolicyInternalServerError) String() string {
+	return fmt.Sprintf("[DELETE /replication/policies/{id}][%d] deleteReplicationPolicyInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *DeleteReplicationPolicyInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

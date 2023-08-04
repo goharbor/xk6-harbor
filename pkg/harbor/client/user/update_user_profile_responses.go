@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // UpdateUserProfileReader is a Reader for the UpdateUserProfile structure.
@@ -54,7 +54,7 @@ func (o *UpdateUserProfileReader) ReadResponse(response runtime.ClientResponse, 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /users/{user_id}] updateUserProfile", response, response.Code())
 	}
 }
 
@@ -63,7 +63,8 @@ func NewUpdateUserProfileOK() *UpdateUserProfileOK {
 	return &UpdateUserProfileOK{}
 }
 
-/* UpdateUserProfileOK describes a response with status code 200, with default header values.
+/*
+UpdateUserProfileOK describes a response with status code 200, with default header values.
 
 Success
 */
@@ -74,7 +75,41 @@ type UpdateUserProfileOK struct {
 	XRequestID string
 }
 
+// IsSuccess returns true when this update user profile o k response has a 2xx status code
+func (o *UpdateUserProfileOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this update user profile o k response has a 3xx status code
+func (o *UpdateUserProfileOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update user profile o k response has a 4xx status code
+func (o *UpdateUserProfileOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this update user profile o k response has a 5xx status code
+func (o *UpdateUserProfileOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update user profile o k response a status code equal to that given
+func (o *UpdateUserProfileOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the update user profile o k response
+func (o *UpdateUserProfileOK) Code() int {
+	return 200
+}
+
 func (o *UpdateUserProfileOK) Error() string {
+	return fmt.Sprintf("[PUT /users/{user_id}][%d] updateUserProfileOK ", 200)
+}
+
+func (o *UpdateUserProfileOK) String() string {
 	return fmt.Sprintf("[PUT /users/{user_id}][%d] updateUserProfileOK ", 200)
 }
 
@@ -95,7 +130,8 @@ func NewUpdateUserProfileUnauthorized() *UpdateUserProfileUnauthorized {
 	return &UpdateUserProfileUnauthorized{}
 }
 
-/* UpdateUserProfileUnauthorized describes a response with status code 401, with default header values.
+/*
+UpdateUserProfileUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -108,9 +144,44 @@ type UpdateUserProfileUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this update user profile unauthorized response has a 2xx status code
+func (o *UpdateUserProfileUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update user profile unauthorized response has a 3xx status code
+func (o *UpdateUserProfileUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update user profile unauthorized response has a 4xx status code
+func (o *UpdateUserProfileUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update user profile unauthorized response has a 5xx status code
+func (o *UpdateUserProfileUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update user profile unauthorized response a status code equal to that given
+func (o *UpdateUserProfileUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the update user profile unauthorized response
+func (o *UpdateUserProfileUnauthorized) Code() int {
+	return 401
+}
+
 func (o *UpdateUserProfileUnauthorized) Error() string {
 	return fmt.Sprintf("[PUT /users/{user_id}][%d] updateUserProfileUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *UpdateUserProfileUnauthorized) String() string {
+	return fmt.Sprintf("[PUT /users/{user_id}][%d] updateUserProfileUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *UpdateUserProfileUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -139,7 +210,8 @@ func NewUpdateUserProfileForbidden() *UpdateUserProfileForbidden {
 	return &UpdateUserProfileForbidden{}
 }
 
-/* UpdateUserProfileForbidden describes a response with status code 403, with default header values.
+/*
+UpdateUserProfileForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -152,9 +224,44 @@ type UpdateUserProfileForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this update user profile forbidden response has a 2xx status code
+func (o *UpdateUserProfileForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update user profile forbidden response has a 3xx status code
+func (o *UpdateUserProfileForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update user profile forbidden response has a 4xx status code
+func (o *UpdateUserProfileForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update user profile forbidden response has a 5xx status code
+func (o *UpdateUserProfileForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update user profile forbidden response a status code equal to that given
+func (o *UpdateUserProfileForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the update user profile forbidden response
+func (o *UpdateUserProfileForbidden) Code() int {
+	return 403
+}
+
 func (o *UpdateUserProfileForbidden) Error() string {
 	return fmt.Sprintf("[PUT /users/{user_id}][%d] updateUserProfileForbidden  %+v", 403, o.Payload)
 }
+
+func (o *UpdateUserProfileForbidden) String() string {
+	return fmt.Sprintf("[PUT /users/{user_id}][%d] updateUserProfileForbidden  %+v", 403, o.Payload)
+}
+
 func (o *UpdateUserProfileForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -183,7 +290,8 @@ func NewUpdateUserProfileNotFound() *UpdateUserProfileNotFound {
 	return &UpdateUserProfileNotFound{}
 }
 
-/* UpdateUserProfileNotFound describes a response with status code 404, with default header values.
+/*
+UpdateUserProfileNotFound describes a response with status code 404, with default header values.
 
 Not found
 */
@@ -196,9 +304,44 @@ type UpdateUserProfileNotFound struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this update user profile not found response has a 2xx status code
+func (o *UpdateUserProfileNotFound) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update user profile not found response has a 3xx status code
+func (o *UpdateUserProfileNotFound) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update user profile not found response has a 4xx status code
+func (o *UpdateUserProfileNotFound) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this update user profile not found response has a 5xx status code
+func (o *UpdateUserProfileNotFound) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this update user profile not found response a status code equal to that given
+func (o *UpdateUserProfileNotFound) IsCode(code int) bool {
+	return code == 404
+}
+
+// Code gets the status code for the update user profile not found response
+func (o *UpdateUserProfileNotFound) Code() int {
+	return 404
+}
+
 func (o *UpdateUserProfileNotFound) Error() string {
 	return fmt.Sprintf("[PUT /users/{user_id}][%d] updateUserProfileNotFound  %+v", 404, o.Payload)
 }
+
+func (o *UpdateUserProfileNotFound) String() string {
+	return fmt.Sprintf("[PUT /users/{user_id}][%d] updateUserProfileNotFound  %+v", 404, o.Payload)
+}
+
 func (o *UpdateUserProfileNotFound) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -227,7 +370,8 @@ func NewUpdateUserProfileInternalServerError() *UpdateUserProfileInternalServerE
 	return &UpdateUserProfileInternalServerError{}
 }
 
-/* UpdateUserProfileInternalServerError describes a response with status code 500, with default header values.
+/*
+UpdateUserProfileInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -240,9 +384,44 @@ type UpdateUserProfileInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this update user profile internal server error response has a 2xx status code
+func (o *UpdateUserProfileInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this update user profile internal server error response has a 3xx status code
+func (o *UpdateUserProfileInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this update user profile internal server error response has a 4xx status code
+func (o *UpdateUserProfileInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this update user profile internal server error response has a 5xx status code
+func (o *UpdateUserProfileInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this update user profile internal server error response a status code equal to that given
+func (o *UpdateUserProfileInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the update user profile internal server error response
+func (o *UpdateUserProfileInternalServerError) Code() int {
+	return 500
+}
+
 func (o *UpdateUserProfileInternalServerError) Error() string {
 	return fmt.Sprintf("[PUT /users/{user_id}][%d] updateUserProfileInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *UpdateUserProfileInternalServerError) String() string {
+	return fmt.Sprintf("[PUT /users/{user_id}][%d] updateUserProfileInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *UpdateUserProfileInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

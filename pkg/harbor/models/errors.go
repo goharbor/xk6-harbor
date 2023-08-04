@@ -51,6 +51,8 @@ func (m *Errors) validateErrors(formats strfmt.Registry) error {
 			if err := m.Errors[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("errors" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("errors" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -80,9 +82,16 @@ func (m *Errors) contextValidateErrors(ctx context.Context, formats strfmt.Regis
 	for i := 0; i < len(m.Errors); i++ {
 
 		if m.Errors[i] != nil {
+
+			if swag.IsZero(m.Errors[i]) { // not required
+				return nil
+			}
+
 			if err := m.Errors[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("errors" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("errors" + "." + strconv.Itoa(i))
 				}
 				return err
 			}

@@ -7,13 +7,14 @@ package robotv1
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/go-openapi/runtime"
 
 	strfmt "github.com/go-openapi/strfmt"
 )
 
-//go:generate mockery -name API -inpkg
+//go:generate mockery --name API --keeptree --with-expecter --case underscore
 
 // API is the interface of the robotv1 client
 type API interface {
@@ -85,8 +86,23 @@ func (a *Client) CreateRobotV1(ctx context.Context, params *CreateRobotV1Params)
 	if err != nil {
 		return nil, err
 	}
-	return result.(*CreateRobotV1Created), nil
-
+	switch value := result.(type) {
+	case *CreateRobotV1Created:
+		return value, nil
+	case *CreateRobotV1BadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateRobotV1Unauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateRobotV1Forbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateRobotV1NotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *CreateRobotV1InternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for CreateRobotV1: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -112,8 +128,23 @@ func (a *Client) DeleteRobotV1(ctx context.Context, params *DeleteRobotV1Params)
 	if err != nil {
 		return nil, err
 	}
-	return result.(*DeleteRobotV1OK), nil
-
+	switch value := result.(type) {
+	case *DeleteRobotV1OK:
+		return value, nil
+	case *DeleteRobotV1BadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteRobotV1Unauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteRobotV1Forbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteRobotV1NotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *DeleteRobotV1InternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for DeleteRobotV1: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -139,8 +170,21 @@ func (a *Client) GetRobotByIDV1(ctx context.Context, params *GetRobotByIDV1Param
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetRobotByIDV1OK), nil
-
+	switch value := result.(type) {
+	case *GetRobotByIDV1OK:
+		return value, nil
+	case *GetRobotByIDV1Unauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetRobotByIDV1Forbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetRobotByIDV1NotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetRobotByIDV1InternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetRobotByIDV1: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -166,8 +210,19 @@ func (a *Client) ListRobotV1(ctx context.Context, params *ListRobotV1Params) (*L
 	if err != nil {
 		return nil, err
 	}
-	return result.(*ListRobotV1OK), nil
-
+	switch value := result.(type) {
+	case *ListRobotV1OK:
+		return value, nil
+	case *ListRobotV1BadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListRobotV1NotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListRobotV1InternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ListRobotV1: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }
 
 /*
@@ -193,6 +248,23 @@ func (a *Client) UpdateRobotV1(ctx context.Context, params *UpdateRobotV1Params)
 	if err != nil {
 		return nil, err
 	}
-	return result.(*UpdateRobotV1OK), nil
-
+	switch value := result.(type) {
+	case *UpdateRobotV1OK:
+		return value, nil
+	case *UpdateRobotV1BadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateRobotV1Unauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateRobotV1Forbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateRobotV1NotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateRobotV1Conflict:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *UpdateRobotV1InternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for UpdateRobotV1: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
 }

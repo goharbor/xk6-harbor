@@ -57,6 +57,8 @@ func (m *RobotPermission) validateAccess(formats strfmt.Registry) error {
 			if err := m.Access[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("access" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("access" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -86,9 +88,16 @@ func (m *RobotPermission) contextValidateAccess(ctx context.Context, formats str
 	for i := 0; i < len(m.Access); i++ {
 
 		if m.Access[i] != nil {
+
+			if swag.IsZero(m.Access[i]) { // not required
+				return nil
+			}
+
 			if err := m.Access[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("access" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("access" + "." + strconv.Itoa(i))
 				}
 				return err
 			}

@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // PingOIDCReader is a Reader for the PingOIDC structure.
@@ -50,7 +50,7 @@ func (o *PingOIDCReader) ReadResponse(response runtime.ClientResponse, consumer 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /system/oidc/ping] pingOIDC", response, response.Code())
 	}
 }
 
@@ -59,7 +59,8 @@ func NewPingOIDCOK() *PingOIDCOK {
 	return &PingOIDCOK{}
 }
 
-/* PingOIDCOK describes a response with status code 200, with default header values.
+/*
+PingOIDCOK describes a response with status code 200, with default header values.
 
 Success
 */
@@ -70,7 +71,41 @@ type PingOIDCOK struct {
 	XRequestID string
 }
 
+// IsSuccess returns true when this ping Oidc o k response has a 2xx status code
+func (o *PingOIDCOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this ping Oidc o k response has a 3xx status code
+func (o *PingOIDCOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this ping Oidc o k response has a 4xx status code
+func (o *PingOIDCOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this ping Oidc o k response has a 5xx status code
+func (o *PingOIDCOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this ping Oidc o k response a status code equal to that given
+func (o *PingOIDCOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the ping Oidc o k response
+func (o *PingOIDCOK) Code() int {
+	return 200
+}
+
 func (o *PingOIDCOK) Error() string {
+	return fmt.Sprintf("[POST /system/oidc/ping][%d] pingOidcOK ", 200)
+}
+
+func (o *PingOIDCOK) String() string {
 	return fmt.Sprintf("[POST /system/oidc/ping][%d] pingOidcOK ", 200)
 }
 
@@ -91,7 +126,8 @@ func NewPingOIDCBadRequest() *PingOIDCBadRequest {
 	return &PingOIDCBadRequest{}
 }
 
-/* PingOIDCBadRequest describes a response with status code 400, with default header values.
+/*
+PingOIDCBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
@@ -104,9 +140,44 @@ type PingOIDCBadRequest struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this ping Oidc bad request response has a 2xx status code
+func (o *PingOIDCBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this ping Oidc bad request response has a 3xx status code
+func (o *PingOIDCBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this ping Oidc bad request response has a 4xx status code
+func (o *PingOIDCBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this ping Oidc bad request response has a 5xx status code
+func (o *PingOIDCBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this ping Oidc bad request response a status code equal to that given
+func (o *PingOIDCBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the ping Oidc bad request response
+func (o *PingOIDCBadRequest) Code() int {
+	return 400
+}
+
 func (o *PingOIDCBadRequest) Error() string {
 	return fmt.Sprintf("[POST /system/oidc/ping][%d] pingOidcBadRequest  %+v", 400, o.Payload)
 }
+
+func (o *PingOIDCBadRequest) String() string {
+	return fmt.Sprintf("[POST /system/oidc/ping][%d] pingOidcBadRequest  %+v", 400, o.Payload)
+}
+
 func (o *PingOIDCBadRequest) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -135,7 +206,8 @@ func NewPingOIDCUnauthorized() *PingOIDCUnauthorized {
 	return &PingOIDCUnauthorized{}
 }
 
-/* PingOIDCUnauthorized describes a response with status code 401, with default header values.
+/*
+PingOIDCUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -148,9 +220,44 @@ type PingOIDCUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this ping Oidc unauthorized response has a 2xx status code
+func (o *PingOIDCUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this ping Oidc unauthorized response has a 3xx status code
+func (o *PingOIDCUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this ping Oidc unauthorized response has a 4xx status code
+func (o *PingOIDCUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this ping Oidc unauthorized response has a 5xx status code
+func (o *PingOIDCUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this ping Oidc unauthorized response a status code equal to that given
+func (o *PingOIDCUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the ping Oidc unauthorized response
+func (o *PingOIDCUnauthorized) Code() int {
+	return 401
+}
+
 func (o *PingOIDCUnauthorized) Error() string {
 	return fmt.Sprintf("[POST /system/oidc/ping][%d] pingOidcUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *PingOIDCUnauthorized) String() string {
+	return fmt.Sprintf("[POST /system/oidc/ping][%d] pingOidcUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *PingOIDCUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -179,7 +286,8 @@ func NewPingOIDCForbidden() *PingOIDCForbidden {
 	return &PingOIDCForbidden{}
 }
 
-/* PingOIDCForbidden describes a response with status code 403, with default header values.
+/*
+PingOIDCForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -192,9 +300,44 @@ type PingOIDCForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this ping Oidc forbidden response has a 2xx status code
+func (o *PingOIDCForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this ping Oidc forbidden response has a 3xx status code
+func (o *PingOIDCForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this ping Oidc forbidden response has a 4xx status code
+func (o *PingOIDCForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this ping Oidc forbidden response has a 5xx status code
+func (o *PingOIDCForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this ping Oidc forbidden response a status code equal to that given
+func (o *PingOIDCForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the ping Oidc forbidden response
+func (o *PingOIDCForbidden) Code() int {
+	return 403
+}
+
 func (o *PingOIDCForbidden) Error() string {
 	return fmt.Sprintf("[POST /system/oidc/ping][%d] pingOidcForbidden  %+v", 403, o.Payload)
 }
+
+func (o *PingOIDCForbidden) String() string {
+	return fmt.Sprintf("[POST /system/oidc/ping][%d] pingOidcForbidden  %+v", 403, o.Payload)
+}
+
 func (o *PingOIDCForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -218,7 +361,8 @@ func (o *PingOIDCForbidden) readResponse(response runtime.ClientResponse, consum
 	return nil
 }
 
-/*PingOIDCBody ping OIDC body
+/*
+PingOIDCBody ping OIDC body
 swagger:model PingOIDCBody
 */
 type PingOIDCBody struct {

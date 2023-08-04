@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // ListScannerCandidatesOfProjectReader is a Reader for the ListScannerCandidatesOfProject structure.
@@ -56,7 +56,7 @@ func (o *ListScannerCandidatesOfProjectReader) ReadResponse(response runtime.Cli
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /projects/{project_name_or_id}/scanner/candidates] listScannerCandidatesOfProject", response, response.Code())
 	}
 }
 
@@ -65,7 +65,8 @@ func NewListScannerCandidatesOfProjectOK() *ListScannerCandidatesOfProjectOK {
 	return &ListScannerCandidatesOfProjectOK{}
 }
 
-/* ListScannerCandidatesOfProjectOK describes a response with status code 200, with default header values.
+/*
+ListScannerCandidatesOfProjectOK describes a response with status code 200, with default header values.
 
 A list of scanner registrations.
 */
@@ -82,9 +83,44 @@ type ListScannerCandidatesOfProjectOK struct {
 	Payload []*models.ScannerRegistration
 }
 
+// IsSuccess returns true when this list scanner candidates of project o k response has a 2xx status code
+func (o *ListScannerCandidatesOfProjectOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list scanner candidates of project o k response has a 3xx status code
+func (o *ListScannerCandidatesOfProjectOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list scanner candidates of project o k response has a 4xx status code
+func (o *ListScannerCandidatesOfProjectOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list scanner candidates of project o k response has a 5xx status code
+func (o *ListScannerCandidatesOfProjectOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list scanner candidates of project o k response a status code equal to that given
+func (o *ListScannerCandidatesOfProjectOK) IsCode(code int) bool {
+	return code == 200
+}
+
+// Code gets the status code for the list scanner candidates of project o k response
+func (o *ListScannerCandidatesOfProjectOK) Code() int {
+	return 200
+}
+
 func (o *ListScannerCandidatesOfProjectOK) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name_or_id}/scanner/candidates][%d] listScannerCandidatesOfProjectOK  %+v", 200, o.Payload)
 }
+
+func (o *ListScannerCandidatesOfProjectOK) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name_or_id}/scanner/candidates][%d] listScannerCandidatesOfProjectOK  %+v", 200, o.Payload)
+}
+
 func (o *ListScannerCandidatesOfProjectOK) GetPayload() []*models.ScannerRegistration {
 	return o.Payload
 }
@@ -122,7 +158,8 @@ func NewListScannerCandidatesOfProjectBadRequest() *ListScannerCandidatesOfProje
 	return &ListScannerCandidatesOfProjectBadRequest{}
 }
 
-/* ListScannerCandidatesOfProjectBadRequest describes a response with status code 400, with default header values.
+/*
+ListScannerCandidatesOfProjectBadRequest describes a response with status code 400, with default header values.
 
 Bad request
 */
@@ -135,9 +172,44 @@ type ListScannerCandidatesOfProjectBadRequest struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list scanner candidates of project bad request response has a 2xx status code
+func (o *ListScannerCandidatesOfProjectBadRequest) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list scanner candidates of project bad request response has a 3xx status code
+func (o *ListScannerCandidatesOfProjectBadRequest) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list scanner candidates of project bad request response has a 4xx status code
+func (o *ListScannerCandidatesOfProjectBadRequest) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list scanner candidates of project bad request response has a 5xx status code
+func (o *ListScannerCandidatesOfProjectBadRequest) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list scanner candidates of project bad request response a status code equal to that given
+func (o *ListScannerCandidatesOfProjectBadRequest) IsCode(code int) bool {
+	return code == 400
+}
+
+// Code gets the status code for the list scanner candidates of project bad request response
+func (o *ListScannerCandidatesOfProjectBadRequest) Code() int {
+	return 400
+}
+
 func (o *ListScannerCandidatesOfProjectBadRequest) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name_or_id}/scanner/candidates][%d] listScannerCandidatesOfProjectBadRequest  %+v", 400, o.Payload)
 }
+
+func (o *ListScannerCandidatesOfProjectBadRequest) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name_or_id}/scanner/candidates][%d] listScannerCandidatesOfProjectBadRequest  %+v", 400, o.Payload)
+}
+
 func (o *ListScannerCandidatesOfProjectBadRequest) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -166,7 +238,8 @@ func NewListScannerCandidatesOfProjectUnauthorized() *ListScannerCandidatesOfPro
 	return &ListScannerCandidatesOfProjectUnauthorized{}
 }
 
-/* ListScannerCandidatesOfProjectUnauthorized describes a response with status code 401, with default header values.
+/*
+ListScannerCandidatesOfProjectUnauthorized describes a response with status code 401, with default header values.
 
 Unauthorized
 */
@@ -179,9 +252,44 @@ type ListScannerCandidatesOfProjectUnauthorized struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list scanner candidates of project unauthorized response has a 2xx status code
+func (o *ListScannerCandidatesOfProjectUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list scanner candidates of project unauthorized response has a 3xx status code
+func (o *ListScannerCandidatesOfProjectUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list scanner candidates of project unauthorized response has a 4xx status code
+func (o *ListScannerCandidatesOfProjectUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list scanner candidates of project unauthorized response has a 5xx status code
+func (o *ListScannerCandidatesOfProjectUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list scanner candidates of project unauthorized response a status code equal to that given
+func (o *ListScannerCandidatesOfProjectUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
+// Code gets the status code for the list scanner candidates of project unauthorized response
+func (o *ListScannerCandidatesOfProjectUnauthorized) Code() int {
+	return 401
+}
+
 func (o *ListScannerCandidatesOfProjectUnauthorized) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name_or_id}/scanner/candidates][%d] listScannerCandidatesOfProjectUnauthorized  %+v", 401, o.Payload)
 }
+
+func (o *ListScannerCandidatesOfProjectUnauthorized) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name_or_id}/scanner/candidates][%d] listScannerCandidatesOfProjectUnauthorized  %+v", 401, o.Payload)
+}
+
 func (o *ListScannerCandidatesOfProjectUnauthorized) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -210,7 +318,8 @@ func NewListScannerCandidatesOfProjectForbidden() *ListScannerCandidatesOfProjec
 	return &ListScannerCandidatesOfProjectForbidden{}
 }
 
-/* ListScannerCandidatesOfProjectForbidden describes a response with status code 403, with default header values.
+/*
+ListScannerCandidatesOfProjectForbidden describes a response with status code 403, with default header values.
 
 Forbidden
 */
@@ -223,9 +332,44 @@ type ListScannerCandidatesOfProjectForbidden struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list scanner candidates of project forbidden response has a 2xx status code
+func (o *ListScannerCandidatesOfProjectForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list scanner candidates of project forbidden response has a 3xx status code
+func (o *ListScannerCandidatesOfProjectForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list scanner candidates of project forbidden response has a 4xx status code
+func (o *ListScannerCandidatesOfProjectForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this list scanner candidates of project forbidden response has a 5xx status code
+func (o *ListScannerCandidatesOfProjectForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list scanner candidates of project forbidden response a status code equal to that given
+func (o *ListScannerCandidatesOfProjectForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
+// Code gets the status code for the list scanner candidates of project forbidden response
+func (o *ListScannerCandidatesOfProjectForbidden) Code() int {
+	return 403
+}
+
 func (o *ListScannerCandidatesOfProjectForbidden) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name_or_id}/scanner/candidates][%d] listScannerCandidatesOfProjectForbidden  %+v", 403, o.Payload)
 }
+
+func (o *ListScannerCandidatesOfProjectForbidden) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name_or_id}/scanner/candidates][%d] listScannerCandidatesOfProjectForbidden  %+v", 403, o.Payload)
+}
+
 func (o *ListScannerCandidatesOfProjectForbidden) GetPayload() *models.Errors {
 	return o.Payload
 }
@@ -254,7 +398,8 @@ func NewListScannerCandidatesOfProjectInternalServerError() *ListScannerCandidat
 	return &ListScannerCandidatesOfProjectInternalServerError{}
 }
 
-/* ListScannerCandidatesOfProjectInternalServerError describes a response with status code 500, with default header values.
+/*
+ListScannerCandidatesOfProjectInternalServerError describes a response with status code 500, with default header values.
 
 Internal server error
 */
@@ -267,9 +412,44 @@ type ListScannerCandidatesOfProjectInternalServerError struct {
 	Payload *models.Errors
 }
 
+// IsSuccess returns true when this list scanner candidates of project internal server error response has a 2xx status code
+func (o *ListScannerCandidatesOfProjectInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this list scanner candidates of project internal server error response has a 3xx status code
+func (o *ListScannerCandidatesOfProjectInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list scanner candidates of project internal server error response has a 4xx status code
+func (o *ListScannerCandidatesOfProjectInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list scanner candidates of project internal server error response has a 5xx status code
+func (o *ListScannerCandidatesOfProjectInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this list scanner candidates of project internal server error response a status code equal to that given
+func (o *ListScannerCandidatesOfProjectInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the list scanner candidates of project internal server error response
+func (o *ListScannerCandidatesOfProjectInternalServerError) Code() int {
+	return 500
+}
+
 func (o *ListScannerCandidatesOfProjectInternalServerError) Error() string {
 	return fmt.Sprintf("[GET /projects/{project_name_or_id}/scanner/candidates][%d] listScannerCandidatesOfProjectInternalServerError  %+v", 500, o.Payload)
 }
+
+func (o *ListScannerCandidatesOfProjectInternalServerError) String() string {
+	return fmt.Sprintf("[GET /projects/{project_name_or_id}/scanner/candidates][%d] listScannerCandidatesOfProjectInternalServerError  %+v", 500, o.Payload)
+}
+
 func (o *ListScannerCandidatesOfProjectInternalServerError) GetPayload() *models.Errors {
 	return o.Payload
 }

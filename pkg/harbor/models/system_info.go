@@ -51,6 +51,8 @@ func (m *SystemInfo) validateStorage(formats strfmt.Registry) error {
 			if err := m.Storage[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("storage" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("storage" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -80,9 +82,16 @@ func (m *SystemInfo) contextValidateStorage(ctx context.Context, formats strfmt.
 	for i := 0; i < len(m.Storage); i++ {
 
 		if m.Storage[i] != nil {
+
+			if swag.IsZero(m.Storage[i]) { // not required
+				return nil
+			}
+
 			if err := m.Storage[i].ContextValidate(ctx, formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("storage" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("storage" + "." + strconv.Itoa(i))
 				}
 				return err
 			}

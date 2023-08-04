@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // NewUpdateLabelParams creates a new UpdateLabelParams object,
@@ -55,10 +55,12 @@ func NewUpdateLabelParamsWithHTTPClient(client *http.Client) *UpdateLabelParams 
 	}
 }
 
-/* UpdateLabelParams contains all the parameters to send to the API endpoint
-   for the update label operation.
+/*
+UpdateLabelParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the update label operation.
+
+	Typically these are written to a http.Request.
 */
 type UpdateLabelParams struct {
 

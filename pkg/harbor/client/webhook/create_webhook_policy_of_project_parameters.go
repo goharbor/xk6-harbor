@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"github.com/heww/xk6-harbor/pkg/harbor/models"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 )
 
 // NewCreateWebhookPolicyOfProjectParams creates a new CreateWebhookPolicyOfProjectParams object,
@@ -55,10 +55,12 @@ func NewCreateWebhookPolicyOfProjectParamsWithHTTPClient(client *http.Client) *C
 	}
 }
 
-/* CreateWebhookPolicyOfProjectParams contains all the parameters to send to the API endpoint
-   for the create webhook policy of project operation.
+/*
+CreateWebhookPolicyOfProjectParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the create webhook policy of project operation.
+
+	Typically these are written to a http.Request.
 */
 type CreateWebhookPolicyOfProjectParams struct {
 

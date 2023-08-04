@@ -1,4 +1,4 @@
-import harbor from 'k6/x/harbor'
+import { Harbor } from 'k6/x/harbor'
 import { Rate } from 'k6/metrics'
 
 const missing = Object()
@@ -29,14 +29,15 @@ export let options = {
     }
 };
 
+const harbor = new Harbor({
+    scheme: getEnv('HARBOR_SCHEME', 'https'),
+    host: getEnv('HARBOR_HOST'),
+    username: getEnv('HARBOR_USERNAME', 'admin'),
+    password: getEnv('HARBOR_PASSWORD', 'Harbor12345'),
+    insecure: true,
+})
+
 export function setup() {
-    harbor.initialize({
-        scheme: getEnv('HARBOR_SCHEME', 'https'),
-        host: getEnv('HARBOR_HOST'),
-        username: getEnv('HARBOR_USERNAME', 'admin'),
-        password: getEnv('HARBOR_PASSWORD', 'Harbor12345'),
-        insecure: true,
-    })
 }
 
 export default function () {

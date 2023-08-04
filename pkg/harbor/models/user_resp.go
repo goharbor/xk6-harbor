@@ -95,6 +95,8 @@ func (m *UserResp) validateOIDCUserMeta(formats strfmt.Registry) error {
 		if err := m.OIDCUserMeta.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("oidc_user_meta")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("oidc_user_meta")
 			}
 			return err
 		}
@@ -132,9 +134,16 @@ func (m *UserResp) ContextValidate(ctx context.Context, formats strfmt.Registry)
 func (m *UserResp) contextValidateOIDCUserMeta(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.OIDCUserMeta != nil {
+
+		if swag.IsZero(m.OIDCUserMeta) { // not required
+			return nil
+		}
+
 		if err := m.OIDCUserMeta.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("oidc_user_meta")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("oidc_user_meta")
 			}
 			return err
 		}

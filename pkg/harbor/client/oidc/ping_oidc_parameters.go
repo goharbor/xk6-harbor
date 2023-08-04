@@ -52,10 +52,12 @@ func NewPingOIDCParamsWithHTTPClient(client *http.Client) *PingOIDCParams {
 	}
 }
 
-/* PingOIDCParams contains all the parameters to send to the API endpoint
-   for the ping OIDC operation.
+/*
+PingOIDCParams contains all the parameters to send to the API endpoint
 
-   Typically these are written to a http.Request.
+	for the ping OIDC operation.
+
+	Typically these are written to a http.Request.
 */
 type PingOIDCParams struct {
 
