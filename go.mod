@@ -13,6 +13,7 @@ require (
 	github.com/go-openapi/swag v0.22.4
 	github.com/go-openapi/validate v0.22.1
 	github.com/google/uuid v1.3.0
+	github.com/grafana/xk6-output-prometheus-remote v0.2.2-0.20230804114542-d969b142f46f
 	github.com/mstoykov/xk6-counter v0.0.1
 	github.com/opencontainers/go-digest v1.0.0
 	github.com/opencontainers/image-spec v1.0.1
@@ -70,7 +71,6 @@ require (
 	github.com/gorilla/websocket v1.5.0 // indirect
 	github.com/grafana/xk6-browser v0.10.0 // indirect
 	github.com/grafana/xk6-grpc v0.1.2 // indirect
-	github.com/grafana/xk6-output-prometheus-remote v0.2.2-0.20230804114542-d969b142f46f // indirect
 	github.com/grafana/xk6-redis v0.1.1 // indirect
 	github.com/grafana/xk6-timers v0.1.2 // indirect
 	github.com/grafana/xk6-webcrypto v0.1.0 // indirect
