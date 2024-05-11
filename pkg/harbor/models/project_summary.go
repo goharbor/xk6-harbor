@@ -18,9 +18,6 @@ import (
 // swagger:model ProjectSummary
 type ProjectSummary struct {
 
-	// The total number of charts under this project.
-	ChartCount int64 `json:"chart_count,omitempty" js:"chartCount"`
-
 	// The total number of developer members.
 	DeveloperCount int64 `json:"developer_count,omitempty" js:"developerCount"`
 
@@ -43,7 +40,7 @@ type ProjectSummary struct {
 	Registry *Registry `json:"registry,omitempty" js:"registry"`
 
 	// The number of the repositories under this project.
-	RepoCount int64 `json:"repo_count,omitempty" js:"repoCount"`
+	RepoCount int64 `json:"repo_count" js:"repoCount"`
 }
 
 // Validate validates this project summary

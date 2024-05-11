@@ -14,6 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // NewListUserGroupsParams creates a new ListUserGroupsParams object,
@@ -67,6 +68,36 @@ type ListUserGroupsParams struct {
 	*/
 	XRequestID *string `js:"xRequestID"`
 
+	/* GroupName.
+
+	   group name need to search, fuzzy matches
+	*/
+	GroupName *string `js:"groupName"`
+
+	/* LdapGroupDn.
+
+	   search with ldap group DN
+	*/
+	LdapGroupDn *string `js:"ldapGroupDn"`
+
+	/* Page.
+
+	   The page number
+
+	   Format: int64
+	   Default: 1
+	*/
+	Page *int64 `js:"page"`
+
+	/* PageSize.
+
+	   The size of per page
+
+	   Format: int64
+	   Default: 10
+	*/
+	PageSize *int64 `js:"pageSize"`
+
 	timeout    time.Duration
 	Context    context.Context `js:"context"`
 	HTTPClient *http.Client    `js:"httpClient"`
@@ -84,7 +115,21 @@ func (o *ListUserGroupsParams) WithDefaults() *ListUserGroupsParams {
 //
 // All values with no default are reset to their zero value.
 func (o *ListUserGroupsParams) SetDefaults() {
-	// no default values defined for this parameter
+	var (
+		pageDefault = int64(1)
+
+		pageSizeDefault = int64(10)
+	)
+
+	val := ListUserGroupsParams{
+		Page:     &pageDefault,
+		PageSize: &pageSizeDefault,
+	}
+
+	val.timeout = o.timeout
+	val.Context = o.Context
+	val.HTTPClient = o.HTTPClient
+	*o = val
 }
 
 // WithTimeout adds the timeout to the list user groups params
@@ -131,6 +176,50 @@ func (o *ListUserGroupsParams) SetXRequestID(xRequestID *string) {
 	o.XRequestID = xRequestID
 }
 
+// WithGroupName adds the groupName to the list user groups params
+func (o *ListUserGroupsParams) WithGroupName(groupName *string) *ListUserGroupsParams {
+	o.SetGroupName(groupName)
+	return o
+}
+
+// SetGroupName adds the groupName to the list user groups params
+func (o *ListUserGroupsParams) SetGroupName(groupName *string) {
+	o.GroupName = groupName
+}
+
+// WithLdapGroupDn adds the ldapGroupDn to the list user groups params
+func (o *ListUserGroupsParams) WithLdapGroupDn(ldapGroupDn *string) *ListUserGroupsParams {
+	o.SetLdapGroupDn(ldapGroupDn)
+	return o
+}
+
+// SetLdapGroupDn adds the ldapGroupDn to the list user groups params
+func (o *ListUserGroupsParams) SetLdapGroupDn(ldapGroupDn *string) {
+	o.LdapGroupDn = ldapGroupDn
+}
+
+// WithPage adds the page to the list user groups params
+func (o *ListUserGroupsParams) WithPage(page *int64) *ListUserGroupsParams {
+	o.SetPage(page)
+	return o
+}
+
+// SetPage adds the page to the list user groups params
+func (o *ListUserGroupsParams) SetPage(page *int64) {
+	o.Page = page
+}
+
+// WithPageSize adds the pageSize to the list user groups params
+func (o *ListUserGroupsParams) WithPageSize(pageSize *int64) *ListUserGroupsParams {
+	o.SetPageSize(pageSize)
+	return o
+}
+
+// SetPageSize adds the pageSize to the list user groups params
+func (o *ListUserGroupsParams) SetPageSize(pageSize *int64) {
+	o.PageSize = pageSize
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *ListUserGroupsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -144,6 +233,74 @@ func (o *ListUserGroupsParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 		// header param X-Request-Id
 		if err := r.SetHeaderParam("X-Request-Id", *o.XRequestID); err != nil {
 			return err
+		}
+	}
+
+	if o.GroupName != nil {
+
+		// query param group_name
+		var qrGroupName string
+
+		if o.GroupName != nil {
+			qrGroupName = *o.GroupName
+		}
+		qGroupName := qrGroupName
+		if qGroupName != "" {
+
+			if err := r.SetQueryParam("group_name", qGroupName); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.LdapGroupDn != nil {
+
+		// query param ldap_group_dn
+		var qrLdapGroupDn string
+
+		if o.LdapGroupDn != nil {
+			qrLdapGroupDn = *o.LdapGroupDn
+		}
+		qLdapGroupDn := qrLdapGroupDn
+		if qLdapGroupDn != "" {
+
+			if err := r.SetQueryParam("ldap_group_dn", qLdapGroupDn); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.Page != nil {
+
+		// query param page
+		var qrPage int64
+
+		if o.Page != nil {
+			qrPage = *o.Page
+		}
+		qPage := swag.FormatInt64(qrPage)
+		if qPage != "" {
+
+			if err := r.SetQueryParam("page", qPage); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.PageSize != nil {
+
+		// query param page_size
+		var qrPageSize int64
+
+		if o.PageSize != nil {
+			qrPageSize = *o.PageSize
+		}
+		qPageSize := swag.FormatInt64(qrPageSize)
+		if qPageSize != "" {
+
+			if err := r.SetQueryParam("page_size", qPageSize); err != nil {
+				return err
+			}
 		}
 	}
 

@@ -20,6 +20,9 @@ import (
 // swagger:model Artifact
 type Artifact struct {
 
+	// accessories
+	Accessories []*Accessory `json:"accessories" js:"accessories"`
+
 	// addition links
 	AdditionLinks AdditionLinks `json:"addition_links,omitempty" js:"additionLinks"`
 
@@ -64,6 +67,9 @@ type Artifact struct {
 	// The ID of the repository that the artifact belongs to
 	RepositoryID int64 `json:"repository_id,omitempty" js:"repositoryID"`
 
+	// The overview of the generating SBOM progress
+	SbomOverview *SBOMOverview `json:"sbom_overview,omitempty" js:"sbomOverview"`
+
 	// The overview of the scan result.
 	ScanOverview ScanOverview `json:"scan_overview,omitempty" js:"scanOverview"`
 
@@ -80,6 +86,10 @@ type Artifact struct {
 // Validate validates this artifact
 func (m *Artifact) Validate(formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.validateAccessories(formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.validateAdditionLinks(formats); err != nil {
 		res = append(res, err)
@@ -109,6 +119,10 @@ func (m *Artifact) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateSbomOverview(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateScanOverview(formats); err != nil {
 		res = append(res, err)
 	}
@@ -120,6 +134,32 @@ func (m *Artifact) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *Artifact) validateAccessories(formats strfmt.Registry) error {
+	if swag.IsZero(m.Accessories) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Accessories); i++ {
+		if swag.IsZero(m.Accessories[i]) { // not required
+			continue
+		}
+
+		if m.Accessories[i] != nil {
+			if err := m.Accessories[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("accessories" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("accessories" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -256,6 +296,25 @@ func (m *Artifact) validateReferences(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *Artifact) validateSbomOverview(formats strfmt.Registry) error {
+	if swag.IsZero(m.SbomOverview) { // not required
+		return nil
+	}
+
+	if m.SbomOverview != nil {
+		if err := m.SbomOverview.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("sbom_overview")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("sbom_overview")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *Artifact) validateScanOverview(formats strfmt.Registry) error {
 	if swag.IsZero(m.ScanOverview) { // not required
 		return nil
@@ -305,6 +364,10 @@ func (m *Artifact) validateTags(formats strfmt.Registry) error {
 func (m *Artifact) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateAccessories(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateAdditionLinks(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -325,6 +388,10 @@ func (m *Artifact) ContextValidate(ctx context.Context, formats strfmt.Registry)
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateSbomOverview(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateScanOverview(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -336,6 +403,31 @@ func (m *Artifact) ContextValidate(ctx context.Context, formats strfmt.Registry)
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *Artifact) contextValidateAccessories(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Accessories); i++ {
+
+		if m.Accessories[i] != nil {
+
+			if swag.IsZero(m.Accessories[i]) { // not required
+				return nil
+			}
+
+			if err := m.Accessories[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("accessories" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("accessories" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 
@@ -438,6 +530,27 @@ func (m *Artifact) contextValidateReferences(ctx context.Context, formats strfmt
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *Artifact) contextValidateSbomOverview(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.SbomOverview != nil {
+
+		if swag.IsZero(m.SbomOverview) { // not required
+			return nil
+		}
+
+		if err := m.SbomOverview.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("sbom_overview")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("sbom_overview")
+			}
+			return err
+		}
 	}
 
 	return nil

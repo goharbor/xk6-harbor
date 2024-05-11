@@ -85,3 +85,6 @@ Temporary Items
 
 bin/
 k6
+
+### Goland ###
+.idea/

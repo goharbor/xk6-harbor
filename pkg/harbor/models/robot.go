@@ -30,13 +30,13 @@ type Robot struct {
 	// The disable status of the robot
 	Disable bool `json:"disable" js:"disable"`
 
-	// The duration of the robot in days
-	Duration int64 `json:"duration,omitempty" js:"duration"`
+	// The duration of the robot in days, duration must be either -1(Never) or a positive integer
+	Duration *int64 `json:"duration,omitempty" js:"duration"`
 
 	// The editable status of the robot
 	Editable bool `json:"editable" js:"editable"`
 
-	// The expiration data of the robot
+	// The expiration date of the robot
 	ExpiresAt int64 `json:"expires_at,omitempty" js:"expiresAt"`
 
 	// The ID of the robot
@@ -45,7 +45,7 @@ type Robot struct {
 	// The level of the robot, project or system
 	Level string `json:"level,omitempty" js:"level"`
 
-	// The name of the tag
+	// The name of the robot
 	Name string `json:"name,omitempty" js:"name"`
 
 	// permissions

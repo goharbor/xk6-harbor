@@ -62,6 +62,12 @@ GetCurrentUserPermissionsParams contains all the parameters to send to the API e
 */
 type GetCurrentUserPermissionsParams struct {
 
+	/* XRequestID.
+
+	   An unique ID for the request
+	*/
+	XRequestID *string `js:"xRequestID"`
+
 	/* Relative.
 
 	     If true, the resources in the response are relative to the scope,
@@ -129,6 +135,17 @@ func (o *GetCurrentUserPermissionsParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithXRequestID adds the xRequestID to the get current user permissions params
+func (o *GetCurrentUserPermissionsParams) WithXRequestID(xRequestID *string) *GetCurrentUserPermissionsParams {
+	o.SetXRequestID(xRequestID)
+	return o
+}
+
+// SetXRequestID adds the xRequestId to the get current user permissions params
+func (o *GetCurrentUserPermissionsParams) SetXRequestID(xRequestID *string) {
+	o.XRequestID = xRequestID
+}
+
 // WithRelative adds the relative to the get current user permissions params
 func (o *GetCurrentUserPermissionsParams) WithRelative(relative *bool) *GetCurrentUserPermissionsParams {
 	o.SetRelative(relative)
@@ -158,6 +175,14 @@ func (o *GetCurrentUserPermissionsParams) WriteToRequest(r runtime.ClientRequest
 		return err
 	}
 	var res []error
+
+	if o.XRequestID != nil {
+
+		// header param X-Request-Id
+		if err := r.SetHeaderParam("X-Request-Id", *o.XRequestID); err != nil {
+			return err
+		}
+	}
 
 	if o.Relative != nil {
 

@@ -62,6 +62,12 @@ DeleteUserParams contains all the parameters to send to the API endpoint
 */
 type DeleteUserParams struct {
 
+	/* XRequestID.
+
+	   An unique ID for the request
+	*/
+	XRequestID *string `js:"xRequestID"`
+
 	/* UserID.
 
 	   User ID for marking as to be removed.
@@ -123,6 +129,17 @@ func (o *DeleteUserParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithXRequestID adds the xRequestID to the delete user params
+func (o *DeleteUserParams) WithXRequestID(xRequestID *string) *DeleteUserParams {
+	o.SetXRequestID(xRequestID)
+	return o
+}
+
+// SetXRequestID adds the xRequestId to the delete user params
+func (o *DeleteUserParams) SetXRequestID(xRequestID *string) {
+	o.XRequestID = xRequestID
+}
+
 // WithUserID adds the userID to the delete user params
 func (o *DeleteUserParams) WithUserID(userID int64) *DeleteUserParams {
 	o.SetUserID(userID)
@@ -141,6 +158,14 @@ func (o *DeleteUserParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Re
 		return err
 	}
 	var res []error
+
+	if o.XRequestID != nil {
+
+		// header param X-Request-Id
+		if err := r.SetHeaderParam("X-Request-Id", *o.XRequestID); err != nil {
+			return err
+		}
+	}
 
 	// path param user_id
 	if err := r.SetPathParam("user_id", swag.FormatInt64(o.UserID)); err != nil {

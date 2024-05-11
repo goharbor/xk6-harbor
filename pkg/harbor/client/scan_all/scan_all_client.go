@@ -39,6 +39,11 @@ type API interface {
 	   This endpoint is for getting a schedule for the scan all job, which scans all of images in Harbor.*/
 	GetScanAllSchedule(ctx context.Context, params *GetScanAllScheduleParams) (*GetScanAllScheduleOK, error)
 	/*
+	   StopScanAll stops scan all job execution
+
+	   Stop scanAll job execution*/
+	StopScanAll(ctx context.Context, params *StopScanAllParams) (*StopScanAllAccepted, error)
+	/*
 	   UpdateScanAllSchedule updates scan all s schedule
 
 	   This endpoint is for updating the schedule of scan all job, which scans all of images in Harbor.*/
@@ -224,6 +229,46 @@ func (a *Client) GetScanAllSchedule(ctx context.Context, params *GetScanAllSched
 	}
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for getScanAllSchedule: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+StopScanAll stops scan all job execution
+
+Stop scanAll job execution
+*/
+func (a *Client) StopScanAll(ctx context.Context, params *StopScanAllParams) (*StopScanAllAccepted, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "stopScanAll",
+		Method:             "POST",
+		PathPattern:        "/system/scanAll/stop",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &StopScanAllReader{formats: a.formats},
+		AuthInfo:           a.authInfo,
+		Context:            ctx,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	switch value := result.(type) {
+	case *StopScanAllAccepted:
+		return value, nil
+	case *StopScanAllBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *StopScanAllUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *StopScanAllForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *StopScanAllInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for stopScanAll: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

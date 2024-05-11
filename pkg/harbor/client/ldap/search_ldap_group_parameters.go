@@ -61,6 +61,12 @@ SearchLdapGroupParams contains all the parameters to send to the API endpoint
 */
 type SearchLdapGroupParams struct {
 
+	/* XRequestID.
+
+	   An unique ID for the request
+	*/
+	XRequestID *string `js:"xRequestID"`
+
 	/* Groupdn.
 
 	   The LDAP group DN
@@ -126,6 +132,17 @@ func (o *SearchLdapGroupParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithXRequestID adds the xRequestID to the search ldap group params
+func (o *SearchLdapGroupParams) WithXRequestID(xRequestID *string) *SearchLdapGroupParams {
+	o.SetXRequestID(xRequestID)
+	return o
+}
+
+// SetXRequestID adds the xRequestId to the search ldap group params
+func (o *SearchLdapGroupParams) SetXRequestID(xRequestID *string) {
+	o.XRequestID = xRequestID
+}
+
 // WithGroupdn adds the groupdn to the search ldap group params
 func (o *SearchLdapGroupParams) WithGroupdn(groupdn *string) *SearchLdapGroupParams {
 	o.SetGroupdn(groupdn)
@@ -155,6 +172,14 @@ func (o *SearchLdapGroupParams) WriteToRequest(r runtime.ClientRequest, reg strf
 		return err
 	}
 	var res []error
+
+	if o.XRequestID != nil {
+
+		// header param X-Request-Id
+		if err := r.SetHeaderParam("X-Request-Id", *o.XRequestID); err != nil {
+			return err
+		}
+	}
 
 	if o.Groupdn != nil {
 

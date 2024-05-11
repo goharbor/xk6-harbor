@@ -63,6 +63,12 @@ UpdateGCScheduleParams contains all the parameters to send to the API endpoint
 */
 type UpdateGCScheduleParams struct {
 
+	/* XRequestID.
+
+	   An unique ID for the request
+	*/
+	XRequestID *string `js:"xRequestID"`
+
 	/* Schedule.
 
 	   Updates of gc's schedule.
@@ -122,6 +128,17 @@ func (o *UpdateGCScheduleParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithXRequestID adds the xRequestID to the update GC schedule params
+func (o *UpdateGCScheduleParams) WithXRequestID(xRequestID *string) *UpdateGCScheduleParams {
+	o.SetXRequestID(xRequestID)
+	return o
+}
+
+// SetXRequestID adds the xRequestId to the update GC schedule params
+func (o *UpdateGCScheduleParams) SetXRequestID(xRequestID *string) {
+	o.XRequestID = xRequestID
+}
+
 // WithSchedule adds the schedule to the update GC schedule params
 func (o *UpdateGCScheduleParams) WithSchedule(schedule *models.Schedule) *UpdateGCScheduleParams {
 	o.SetSchedule(schedule)
@@ -140,6 +157,14 @@ func (o *UpdateGCScheduleParams) WriteToRequest(r runtime.ClientRequest, reg str
 		return err
 	}
 	var res []error
+
+	if o.XRequestID != nil {
+
+		// header param X-Request-Id
+		if err := r.SetHeaderParam("X-Request-Id", *o.XRequestID); err != nil {
+			return err
+		}
+	}
 	if o.Schedule != nil {
 		if err := r.SetBodyParam(o.Schedule); err != nil {
 			return err

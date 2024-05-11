@@ -63,6 +63,12 @@ ImportLdapUserParams contains all the parameters to send to the API endpoint
 */
 type ImportLdapUserParams struct {
 
+	/* XRequestID.
+
+	   An unique ID for the request
+	*/
+	XRequestID *string `js:"xRequestID"`
+
 	/* UIDList.
 
 	   The uid listed for importing. This list will check users validity of ldap service based on configuration from the system.
@@ -122,6 +128,17 @@ func (o *ImportLdapUserParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithXRequestID adds the xRequestID to the import ldap user params
+func (o *ImportLdapUserParams) WithXRequestID(xRequestID *string) *ImportLdapUserParams {
+	o.SetXRequestID(xRequestID)
+	return o
+}
+
+// SetXRequestID adds the xRequestId to the import ldap user params
+func (o *ImportLdapUserParams) SetXRequestID(xRequestID *string) {
+	o.XRequestID = xRequestID
+}
+
 // WithUIDList adds the uIDList to the import ldap user params
 func (o *ImportLdapUserParams) WithUIDList(uIDList *models.LdapImportUsers) *ImportLdapUserParams {
 	o.SetUIDList(uIDList)
@@ -140,6 +157,14 @@ func (o *ImportLdapUserParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 		return err
 	}
 	var res []error
+
+	if o.XRequestID != nil {
+
+		// header param X-Request-Id
+		if err := r.SetHeaderParam("X-Request-Id", *o.XRequestID); err != nil {
+			return err
+		}
+	}
 	if o.UIDList != nil {
 		if err := r.SetBodyParam(o.UIDList); err != nil {
 			return err

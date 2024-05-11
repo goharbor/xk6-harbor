@@ -59,6 +59,11 @@ type API interface {
 	   Get the vulnerabilities addition of the artifact specified by the reference under the project and repository.*/
 	GetVulnerabilitiesAddition(ctx context.Context, params *GetVulnerabilitiesAdditionParams) (*GetVulnerabilitiesAdditionOK, error)
 	/*
+	   ListAccessories lists accessories
+
+	   List accessories of the specific artifact*/
+	ListAccessories(ctx context.Context, params *ListAccessoriesParams) (*ListAccessoriesOK, error)
+	/*
 	   ListArtifacts lists artifacts
 
 	   List artifacts under the specific project and repository. Except the basic properties, the other supported queries in "q" includes "tags=*" to list only tagged artifacts, "tags=nil" to list only untagged artifacts, "tags=~v" to list artifacts whose tag fuzzy matches "v", "tags=v" to list artifact whose tag exactly matches "v", "labels=(id1, id2)" to list artifacts that both labels with id1 and id2 are added to*/
@@ -341,6 +346,8 @@ func (a *Client) GetAddition(ctx context.Context, params *GetAdditionParams) (*G
 		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
 	case *GetAdditionNotFound:
 		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetAdditionUnprocessableEntity:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
 	case *GetAdditionInternalServerError:
 		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
 	}
@@ -430,6 +437,48 @@ func (a *Client) GetVulnerabilitiesAddition(ctx context.Context, params *GetVuln
 	}
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for getVulnerabilitiesAddition: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+ListAccessories lists accessories
+
+List accessories of the specific artifact
+*/
+func (a *Client) ListAccessories(ctx context.Context, params *ListAccessoriesParams) (*ListAccessoriesOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "listAccessories",
+		Method:             "GET",
+		PathPattern:        "/projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/accessories",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &ListAccessoriesReader{formats: a.formats},
+		AuthInfo:           a.authInfo,
+		Context:            ctx,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	switch value := result.(type) {
+	case *ListAccessoriesOK:
+		return value, nil
+	case *ListAccessoriesBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListAccessoriesUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListAccessoriesForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListAccessoriesNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListAccessoriesInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for listAccessories: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

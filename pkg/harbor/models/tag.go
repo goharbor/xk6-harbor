@@ -41,9 +41,6 @@ type Tag struct {
 
 	// The ID of the repository that the tag belongs to
 	RepositoryID int64 `json:"repository_id,omitempty" js:"repositoryID"`
-
-	// The attribute indicates whether the tag is signed or not
-	Signed bool `json:"signed" js:"signed"`
 }
 
 // Validate validates this tag

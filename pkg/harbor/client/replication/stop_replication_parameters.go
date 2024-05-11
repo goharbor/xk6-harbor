@@ -62,6 +62,12 @@ StopReplicationParams contains all the parameters to send to the API endpoint
 */
 type StopReplicationParams struct {
 
+	/* XRequestID.
+
+	   An unique ID for the request
+	*/
+	XRequestID *string `js:"xRequestID"`
+
 	/* ID.
 
 	   The ID of the execution.
@@ -123,6 +129,17 @@ func (o *StopReplicationParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithXRequestID adds the xRequestID to the stop replication params
+func (o *StopReplicationParams) WithXRequestID(xRequestID *string) *StopReplicationParams {
+	o.SetXRequestID(xRequestID)
+	return o
+}
+
+// SetXRequestID adds the xRequestId to the stop replication params
+func (o *StopReplicationParams) SetXRequestID(xRequestID *string) {
+	o.XRequestID = xRequestID
+}
+
 // WithID adds the id to the stop replication params
 func (o *StopReplicationParams) WithID(id int64) *StopReplicationParams {
 	o.SetID(id)
@@ -141,6 +158,14 @@ func (o *StopReplicationParams) WriteToRequest(r runtime.ClientRequest, reg strf
 		return err
 	}
 	var res []error
+
+	if o.XRequestID != nil {
+
+		// header param X-Request-Id
+		if err := r.SetHeaderParam("X-Request-Id", *o.XRequestID); err != nil {
+			return err
+		}
+	}
 
 	// path param id
 	if err := r.SetPathParam("id", swag.FormatInt64(o.ID)); err != nil {

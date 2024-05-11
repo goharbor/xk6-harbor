@@ -64,6 +64,12 @@ SetUserSysAdminParams contains all the parameters to send to the API endpoint
 */
 type SetUserSysAdminParams struct {
 
+	/* XRequestID.
+
+	   An unique ID for the request
+	*/
+	XRequestID *string `js:"xRequestID"`
+
 	/* SysadminFlag.
 
 	   Toggle a user to admin or not.
@@ -128,6 +134,17 @@ func (o *SetUserSysAdminParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithXRequestID adds the xRequestID to the set user sys admin params
+func (o *SetUserSysAdminParams) WithXRequestID(xRequestID *string) *SetUserSysAdminParams {
+	o.SetXRequestID(xRequestID)
+	return o
+}
+
+// SetXRequestID adds the xRequestId to the set user sys admin params
+func (o *SetUserSysAdminParams) SetXRequestID(xRequestID *string) {
+	o.XRequestID = xRequestID
+}
+
 // WithSysadminFlag adds the sysadminFlag to the set user sys admin params
 func (o *SetUserSysAdminParams) WithSysadminFlag(sysadminFlag *models.UserSysAdminFlag) *SetUserSysAdminParams {
 	o.SetSysadminFlag(sysadminFlag)
@@ -157,6 +174,14 @@ func (o *SetUserSysAdminParams) WriteToRequest(r runtime.ClientRequest, reg strf
 		return err
 	}
 	var res []error
+
+	if o.XRequestID != nil {
+
+		// header param X-Request-Id
+		if err := r.SetHeaderParam("X-Request-Id", *o.XRequestID); err != nil {
+			return err
+		}
+	}
 	if o.SysadminFlag != nil {
 		if err := r.SetBodyParam(o.SysadminFlag); err != nil {
 			return err

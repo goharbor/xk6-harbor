@@ -31,9 +31,15 @@ type API interface {
 	*/
 	DeleteWebhookPolicyOfProject(ctx context.Context, params *DeleteWebhookPolicyOfProjectParams) (*DeleteWebhookPolicyOfProjectOK, error)
 	/*
+	   GetLogsOfWebhookTask gets logs for a specific webhook task
+
+	   This endpoint returns the logs of a specific webhook task.
+	*/
+	GetLogsOfWebhookTask(ctx context.Context, params *GetLogsOfWebhookTaskParams) (*GetLogsOfWebhookTaskOK, error)
+	/*
 	   GetSupportedEventTypes gets supported event types and notify types
 
-	   Get supportted event types and notify types.*/
+	   Get supported event types and notify types.*/
 	GetSupportedEventTypes(ctx context.Context, params *GetSupportedEventTypesParams) (*GetSupportedEventTypesOK, error)
 	/*
 	   GetWebhookPolicyOfProject gets project webhook policy
@@ -47,6 +53,18 @@ type API interface {
 	   This endpoint returns last trigger information of project webhook policy.
 	*/
 	LastTrigger(ctx context.Context, params *LastTriggerParams) (*LastTriggerOK, error)
+	/*
+	   ListExecutionsOfWebhookPolicy lists executions for a specific webhook policy
+
+	   This endpoint returns the executions of a specific webhook policy.
+	*/
+	ListExecutionsOfWebhookPolicy(ctx context.Context, params *ListExecutionsOfWebhookPolicyParams) (*ListExecutionsOfWebhookPolicyOK, error)
+	/*
+	   ListTasksOfWebhookExecution lists tasks for a specific webhook execution
+
+	   This endpoint returns the tasks of a specific webhook execution.
+	*/
+	ListTasksOfWebhookExecution(ctx context.Context, params *ListTasksOfWebhookExecutionParams) (*ListTasksOfWebhookExecutionOK, error)
 	/*
 	   ListWebhookPoliciesOfProject lists project webhook policies
 
@@ -162,9 +180,51 @@ func (a *Client) DeleteWebhookPolicyOfProject(ctx context.Context, params *Delet
 }
 
 /*
+GetLogsOfWebhookTask gets logs for a specific webhook task
+
+This endpoint returns the logs of a specific webhook task.
+*/
+func (a *Client) GetLogsOfWebhookTask(ctx context.Context, params *GetLogsOfWebhookTaskParams) (*GetLogsOfWebhookTaskOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetLogsOfWebhookTask",
+		Method:             "GET",
+		PathPattern:        "/projects/{project_name_or_id}/webhook/policies/{webhook_policy_id}/executions/{execution_id}/tasks/{task_id}/log",
+		ProducesMediaTypes: []string{"text/plain"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &GetLogsOfWebhookTaskReader{formats: a.formats},
+		AuthInfo:           a.authInfo,
+		Context:            ctx,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	switch value := result.(type) {
+	case *GetLogsOfWebhookTaskOK:
+		return value, nil
+	case *GetLogsOfWebhookTaskBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetLogsOfWebhookTaskUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetLogsOfWebhookTaskForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetLogsOfWebhookTaskNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *GetLogsOfWebhookTaskInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for GetLogsOfWebhookTask: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
 GetSupportedEventTypes gets supported event types and notify types
 
-Get supportted event types and notify types.
+Get supported event types and notify types.
 */
 func (a *Client) GetSupportedEventTypes(ctx context.Context, params *GetSupportedEventTypesParams) (*GetSupportedEventTypesOK, error) {
 
@@ -278,6 +338,90 @@ func (a *Client) LastTrigger(ctx context.Context, params *LastTriggerParams) (*L
 	}
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for LastTrigger: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+ListExecutionsOfWebhookPolicy lists executions for a specific webhook policy
+
+This endpoint returns the executions of a specific webhook policy.
+*/
+func (a *Client) ListExecutionsOfWebhookPolicy(ctx context.Context, params *ListExecutionsOfWebhookPolicyParams) (*ListExecutionsOfWebhookPolicyOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "ListExecutionsOfWebhookPolicy",
+		Method:             "GET",
+		PathPattern:        "/projects/{project_name_or_id}/webhook/policies/{webhook_policy_id}/executions",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &ListExecutionsOfWebhookPolicyReader{formats: a.formats},
+		AuthInfo:           a.authInfo,
+		Context:            ctx,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	switch value := result.(type) {
+	case *ListExecutionsOfWebhookPolicyOK:
+		return value, nil
+	case *ListExecutionsOfWebhookPolicyBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListExecutionsOfWebhookPolicyUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListExecutionsOfWebhookPolicyForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListExecutionsOfWebhookPolicyNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListExecutionsOfWebhookPolicyInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ListExecutionsOfWebhookPolicy: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+ListTasksOfWebhookExecution lists tasks for a specific webhook execution
+
+This endpoint returns the tasks of a specific webhook execution.
+*/
+func (a *Client) ListTasksOfWebhookExecution(ctx context.Context, params *ListTasksOfWebhookExecutionParams) (*ListTasksOfWebhookExecutionOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "ListTasksOfWebhookExecution",
+		Method:             "GET",
+		PathPattern:        "/projects/{project_name_or_id}/webhook/policies/{webhook_policy_id}/executions/{execution_id}/tasks",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &ListTasksOfWebhookExecutionReader{formats: a.formats},
+		AuthInfo:           a.authInfo,
+		Context:            ctx,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	switch value := result.(type) {
+	case *ListTasksOfWebhookExecutionOK:
+		return value, nil
+	case *ListTasksOfWebhookExecutionBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListTasksOfWebhookExecutionUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListTasksOfWebhookExecutionForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListTasksOfWebhookExecutionNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ListTasksOfWebhookExecutionInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for ListTasksOfWebhookExecution: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

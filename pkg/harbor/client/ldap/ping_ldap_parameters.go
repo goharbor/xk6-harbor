@@ -63,6 +63,12 @@ PingLdapParams contains all the parameters to send to the API endpoint
 */
 type PingLdapParams struct {
 
+	/* XRequestID.
+
+	   An unique ID for the request
+	*/
+	XRequestID *string `js:"xRequestID"`
+
 	/* Ldapconf.
 
 	   ldap configuration. support input ldap service configuration. If it is a empty request, will load current configuration from the system.
@@ -122,6 +128,17 @@ func (o *PingLdapParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithXRequestID adds the xRequestID to the ping ldap params
+func (o *PingLdapParams) WithXRequestID(xRequestID *string) *PingLdapParams {
+	o.SetXRequestID(xRequestID)
+	return o
+}
+
+// SetXRequestID adds the xRequestId to the ping ldap params
+func (o *PingLdapParams) SetXRequestID(xRequestID *string) {
+	o.XRequestID = xRequestID
+}
+
 // WithLdapconf adds the ldapconf to the ping ldap params
 func (o *PingLdapParams) WithLdapconf(ldapconf *models.LdapConf) *PingLdapParams {
 	o.SetLdapconf(ldapconf)
@@ -140,6 +157,14 @@ func (o *PingLdapParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Regi
 		return err
 	}
 	var res []error
+
+	if o.XRequestID != nil {
+
+		// header param X-Request-Id
+		if err := r.SetHeaderParam("X-Request-Id", *o.XRequestID); err != nil {
+			return err
+		}
+	}
 	if o.Ldapconf != nil {
 		if err := r.SetBodyParam(o.Ldapconf); err != nil {
 			return err

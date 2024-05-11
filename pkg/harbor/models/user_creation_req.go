@@ -8,8 +8,10 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // UserCreationReq user creation req
@@ -21,6 +23,7 @@ type UserCreationReq struct {
 	Comment string `json:"comment,omitempty" js:"comment"`
 
 	// email
+	// Max Length: 255
 	Email string `json:"email,omitempty" js:"email"`
 
 	// password
@@ -30,11 +33,49 @@ type UserCreationReq struct {
 	Realname string `json:"realname,omitempty" js:"realname"`
 
 	// username
+	// Max Length: 255
 	Username string `json:"username,omitempty" js:"username"`
 }
 
 // Validate validates this user creation req
 func (m *UserCreationReq) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateEmail(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateUsername(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *UserCreationReq) validateEmail(formats strfmt.Registry) error {
+	if swag.IsZero(m.Email) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("email", "body", m.Email, 255); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *UserCreationReq) validateUsername(formats strfmt.Registry) error {
+	if swag.IsZero(m.Username) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("username", "body", m.Username, 255); err != nil {
+		return err
+	}
+
 	return nil
 }
 

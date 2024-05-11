@@ -36,8 +36,14 @@ type API interface {
 	/*
 	   ListUserGroups gets all user groups information
 
-	   Get all user groups information*/
+	   Get all user groups information, it is open for system admin*/
 	ListUserGroups(ctx context.Context, params *ListUserGroupsParams) (*ListUserGroupsOK, error)
+	/*
+	   SearchUserGroups searches groups by groupname
+
+	   This endpoint is to search groups by group name.  It's open for all authenticated requests.
+	*/
+	SearchUserGroups(ctx context.Context, params *SearchUserGroupsParams) (*SearchUserGroupsOK, error)
 	/*
 	   UpdateUserGroup updates group information
 
@@ -190,7 +196,7 @@ func (a *Client) GetUserGroup(ctx context.Context, params *GetUserGroupParams) (
 /*
 ListUserGroups gets all user groups information
 
-Get all user groups information
+Get all user groups information, it is open for system admin
 */
 func (a *Client) ListUserGroups(ctx context.Context, params *ListUserGroupsParams) (*ListUserGroupsOK, error) {
 
@@ -222,6 +228,42 @@ func (a *Client) ListUserGroups(ctx context.Context, params *ListUserGroupsParam
 	}
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for listUserGroups: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+SearchUserGroups searches groups by groupname
+
+This endpoint is to search groups by group name.  It's open for all authenticated requests.
+*/
+func (a *Client) SearchUserGroups(ctx context.Context, params *SearchUserGroupsParams) (*SearchUserGroupsOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "searchUserGroups",
+		Method:             "GET",
+		PathPattern:        "/usergroups/search",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &SearchUserGroupsReader{formats: a.formats},
+		AuthInfo:           a.authInfo,
+		Context:            ctx,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	switch value := result.(type) {
+	case *SearchUserGroupsOK:
+		return value, nil
+	case *SearchUserGroupsUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *SearchUserGroupsInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for searchUserGroups: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

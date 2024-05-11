@@ -20,6 +20,9 @@ import (
 // swagger:model ReplicationPolicy
 type ReplicationPolicy struct {
 
+	// Whether to enable copy by chunk.
+	CopyByChunk *bool `json:"copy_by_chunk,omitempty" js:"copyByChunk"`
+
 	// The create time of the policy.
 	// Format: date-time
 	CreationTime strfmt.DateTime `json:"creation_time,omitempty" js:"creationTime"`
@@ -57,6 +60,9 @@ type ReplicationPolicy struct {
 
 	// Whether to replicate the deletion operation.
 	ReplicateDeletion bool `json:"replicate_deletion,omitempty" js:"replicateDeletion"`
+
+	// speed limit for each task
+	Speed *int32 `json:"speed,omitempty" js:"speed"`
 
 	// The source registry.
 	SrcRegistry *Registry `json:"src_registry,omitempty" js:"srcRegistry"`

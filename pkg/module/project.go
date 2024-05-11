@@ -110,7 +110,7 @@ func (h *Harbor) DeleteAllProjects(excludeProjects []string) {
 					}
 				}()
 
-				h.DeleteProject(project.Name, rt.ToValue(project.RepoCount+project.ChartCount > 0))
+				h.DeleteProject(project.Name, rt.ToValue(project.RepoCount > 0))
 				deleted++
 			}()
 		}

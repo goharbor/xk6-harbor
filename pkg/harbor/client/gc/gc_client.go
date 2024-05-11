@@ -45,6 +45,11 @@ type API interface {
 	   This endpoint is for get schedule of gc job.*/
 	GetGCSchedule(ctx context.Context, params *GetGCScheduleParams) (*GetGCScheduleOK, error)
 	/*
+	   StopGC stops the specific GC execution
+
+	   Stop the GC execution specified by ID*/
+	StopGC(ctx context.Context, params *StopGCParams) (*StopGCOK, error)
+	/*
 	   UpdateGCSchedule updates gc s schedule
 
 	   This endpoint is for update gc schedule.
@@ -267,6 +272,46 @@ func (a *Client) GetGCSchedule(ctx context.Context, params *GetGCScheduleParams)
 	}
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for getGCSchedule: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+StopGC stops the specific GC execution
+
+Stop the GC execution specified by ID
+*/
+func (a *Client) StopGC(ctx context.Context, params *StopGCParams) (*StopGCOK, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "stopGC",
+		Method:             "PUT",
+		PathPattern:        "/system/gc/{gc_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &StopGCReader{formats: a.formats},
+		AuthInfo:           a.authInfo,
+		Context:            ctx,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	switch value := result.(type) {
+	case *StopGCOK:
+		return value, nil
+	case *StopGCUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *StopGCForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *StopGCNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *StopGCInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for stopGC: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

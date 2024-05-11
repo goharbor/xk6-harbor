@@ -19,9 +19,6 @@ import (
 // swagger:model Project
 type Project struct {
 
-	// The total number of charts under this project.
-	ChartCount int64 `json:"chart_count,omitempty" js:"chartCount"`
-
 	// The creation time of the project.
 	// Format: date-time
 	CreationTime strfmt.DateTime `json:"creation_time,omitempty" js:"creationTime"`
@@ -57,7 +54,7 @@ type Project struct {
 	RegistryID int64 `json:"registry_id,omitempty" js:"registryID"`
 
 	// The number of the repositories under this project.
-	RepoCount int64 `json:"repo_count,omitempty" js:"repoCount"`
+	RepoCount int64 `json:"repo_count" js:"repoCount"`
 
 	// Correspond to the UI about whether the project's publicity is  updatable (for UI)
 	Togglable bool `json:"togglable,omitempty" js:"togglable"`
