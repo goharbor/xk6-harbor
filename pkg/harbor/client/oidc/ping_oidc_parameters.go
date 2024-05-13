@@ -61,6 +61,12 @@ PingOIDCParams contains all the parameters to send to the API endpoint
 */
 type PingOIDCParams struct {
 
+	/* XRequestID.
+
+	   An unique ID for the request
+	*/
+	XRequestID *string `js:"xRequestID"`
+
 	/* Endpoint.
 
 	   Request body for OIDC endpoint to be tested.
@@ -120,6 +126,17 @@ func (o *PingOIDCParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithXRequestID adds the xRequestID to the ping OIDC params
+func (o *PingOIDCParams) WithXRequestID(xRequestID *string) *PingOIDCParams {
+	o.SetXRequestID(xRequestID)
+	return o
+}
+
+// SetXRequestID adds the xRequestId to the ping OIDC params
+func (o *PingOIDCParams) SetXRequestID(xRequestID *string) {
+	o.XRequestID = xRequestID
+}
+
 // WithEndpoint adds the endpoint to the ping OIDC params
 func (o *PingOIDCParams) WithEndpoint(endpoint PingOIDCBody) *PingOIDCParams {
 	o.SetEndpoint(endpoint)
@@ -138,6 +155,14 @@ func (o *PingOIDCParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Regi
 		return err
 	}
 	var res []error
+
+	if o.XRequestID != nil {
+
+		// header param X-Request-Id
+		if err := r.SetHeaderParam("X-Request-Id", *o.XRequestID); err != nil {
+			return err
+		}
+	}
 	if err := r.SetBodyParam(o.Endpoint); err != nil {
 		return err
 	}

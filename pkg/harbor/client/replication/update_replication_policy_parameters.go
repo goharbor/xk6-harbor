@@ -64,6 +64,12 @@ UpdateReplicationPolicyParams contains all the parameters to send to the API end
 */
 type UpdateReplicationPolicyParams struct {
 
+	/* XRequestID.
+
+	   An unique ID for the request
+	*/
+	XRequestID *string `js:"xRequestID"`
+
 	/* ID.
 
 	   The policy ID
@@ -131,6 +137,17 @@ func (o *UpdateReplicationPolicyParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithXRequestID adds the xRequestID to the update replication policy params
+func (o *UpdateReplicationPolicyParams) WithXRequestID(xRequestID *string) *UpdateReplicationPolicyParams {
+	o.SetXRequestID(xRequestID)
+	return o
+}
+
+// SetXRequestID adds the xRequestId to the update replication policy params
+func (o *UpdateReplicationPolicyParams) SetXRequestID(xRequestID *string) {
+	o.XRequestID = xRequestID
+}
+
 // WithID adds the id to the update replication policy params
 func (o *UpdateReplicationPolicyParams) WithID(id int64) *UpdateReplicationPolicyParams {
 	o.SetID(id)
@@ -160,6 +177,14 @@ func (o *UpdateReplicationPolicyParams) WriteToRequest(r runtime.ClientRequest, 
 		return err
 	}
 	var res []error
+
+	if o.XRequestID != nil {
+
+		// header param X-Request-Id
+		if err := r.SetHeaderParam("X-Request-Id", *o.XRequestID); err != nil {
+			return err
+		}
+	}
 
 	// path param id
 	if err := r.SetPathParam("id", swag.FormatInt64(o.ID)); err != nil {

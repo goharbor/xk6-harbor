@@ -18,10 +18,10 @@ import (
 type IntegerConfigItem struct {
 
 	// The configure item can be updated or not
-	Editable bool `json:"editable,omitempty" js:"editable"`
+	Editable bool `json:"editable" js:"editable"`
 
 	// The integer value of current config item
-	Value int64 `json:"value,omitempty" js:"value"`
+	Value int64 `json:"value" js:"value"`
 }
 
 // Validate validates this integer config item

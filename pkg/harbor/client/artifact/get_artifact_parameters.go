@@ -67,7 +67,7 @@ type GetArtifactParams struct {
 	     A comma-separated lists of MIME types for the scan report or scan summary. The first mime type will be used when the report found for it.
 	Currently the mime type supports 'application/vnd.scanner.adapter.vuln.report.harbor+json; version=1.0' and 'application/vnd.security.vulnerability.report; version=1.1'
 
-	     Default: "application/vnd.scanner.adapter.vuln.report.harbor+json; version=1.0"
+	     Default: "application/vnd.security.vulnerability.report; version=1.1, application/vnd.scanner.adapter.vuln.report.harbor+json; version=1.0"
 	*/
 	XAcceptVulnerabilities *string `js:"xAcceptVulnerabilities"`
 
@@ -109,13 +109,19 @@ type GetArtifactParams struct {
 
 	/* RepositoryName.
 
-	   The name of the repository. If it contains slash, encode it with URL encoding. e.g. a/b -> a%252Fb
+	   The name of the repository. If it contains slash, encode it twice over with URL encoding. e.g. a/b -> a%2Fb -> a%252Fb
 	*/
 	RepositoryName string `js:"repositoryName"`
 
+	/* WithAccessory.
+
+	   Specify whether the accessories are included of the returning artifacts.
+	*/
+	WithAccessory *bool `js:"withAccessory"`
+
 	/* WithImmutableStatus.
 
-	   Specify whether the immutable status is inclued inside the tags of the returning artifacts. Only works when setting "with_tag=true"
+	   Specify whether the immutable status is inclued inside the tags of the returning artifacts.
 	*/
 	WithImmutableStatus *bool `js:"withImmutableStatus"`
 
@@ -124,6 +130,12 @@ type GetArtifactParams struct {
 	   Specify whether the labels are inclued inside the returning artifacts
 	*/
 	WithLabel *bool `js:"withLabel"`
+
+	/* WithSbomOverview.
+
+	   Specify whether the SBOM overview is included in returning artifact, when this option is true, the SBOM overview will be included in the response
+	*/
+	WithSbomOverview *bool `js:"withSbomOverview"`
 
 	/* WithScanOverview.
 
@@ -163,15 +175,19 @@ func (o *GetArtifactParams) WithDefaults() *GetArtifactParams {
 // All values with no default are reset to their zero value.
 func (o *GetArtifactParams) SetDefaults() {
 	var (
-		xAcceptVulnerabilitiesDefault = string("application/vnd.scanner.adapter.vuln.report.harbor+json; version=1.0")
+		xAcceptVulnerabilitiesDefault = string("application/vnd.security.vulnerability.report; version=1.1, application/vnd.scanner.adapter.vuln.report.harbor+json; version=1.0")
 
 		pageDefault = int64(1)
 
 		pageSizeDefault = int64(10)
 
+		withAccessoryDefault = bool(false)
+
 		withImmutableStatusDefault = bool(false)
 
 		withLabelDefault = bool(false)
+
+		withSbomOverviewDefault = bool(false)
 
 		withScanOverviewDefault = bool(false)
 
@@ -184,8 +200,10 @@ func (o *GetArtifactParams) SetDefaults() {
 		XAcceptVulnerabilities: &xAcceptVulnerabilitiesDefault,
 		Page:                   &pageDefault,
 		PageSize:               &pageSizeDefault,
+		WithAccessory:          &withAccessoryDefault,
 		WithImmutableStatus:    &withImmutableStatusDefault,
 		WithLabel:              &withLabelDefault,
+		WithSbomOverview:       &withSbomOverviewDefault,
 		WithScanOverview:       &withScanOverviewDefault,
 		WithSignature:          &withSignatureDefault,
 		WithTag:                &withTagDefault,
@@ -307,6 +325,17 @@ func (o *GetArtifactParams) SetRepositoryName(repositoryName string) {
 	o.RepositoryName = repositoryName
 }
 
+// WithWithAccessory adds the withAccessory to the get artifact params
+func (o *GetArtifactParams) WithWithAccessory(withAccessory *bool) *GetArtifactParams {
+	o.SetWithAccessory(withAccessory)
+	return o
+}
+
+// SetWithAccessory adds the withAccessory to the get artifact params
+func (o *GetArtifactParams) SetWithAccessory(withAccessory *bool) {
+	o.WithAccessory = withAccessory
+}
+
 // WithWithImmutableStatus adds the withImmutableStatus to the get artifact params
 func (o *GetArtifactParams) WithWithImmutableStatus(withImmutableStatus *bool) *GetArtifactParams {
 	o.SetWithImmutableStatus(withImmutableStatus)
@@ -327,6 +356,17 @@ func (o *GetArtifactParams) WithWithLabel(withLabel *bool) *GetArtifactParams {
 // SetWithLabel adds the withLabel to the get artifact params
 func (o *GetArtifactParams) SetWithLabel(withLabel *bool) {
 	o.WithLabel = withLabel
+}
+
+// WithWithSbomOverview adds the withSbomOverview to the get artifact params
+func (o *GetArtifactParams) WithWithSbomOverview(withSbomOverview *bool) *GetArtifactParams {
+	o.SetWithSbomOverview(withSbomOverview)
+	return o
+}
+
+// SetWithSbomOverview adds the withSbomOverview to the get artifact params
+func (o *GetArtifactParams) SetWithSbomOverview(withSbomOverview *bool) {
+	o.WithSbomOverview = withSbomOverview
 }
 
 // WithWithScanOverview adds the withScanOverview to the get artifact params
@@ -435,6 +475,23 @@ func (o *GetArtifactParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.R
 		return err
 	}
 
+	if o.WithAccessory != nil {
+
+		// query param with_accessory
+		var qrWithAccessory bool
+
+		if o.WithAccessory != nil {
+			qrWithAccessory = *o.WithAccessory
+		}
+		qWithAccessory := swag.FormatBool(qrWithAccessory)
+		if qWithAccessory != "" {
+
+			if err := r.SetQueryParam("with_accessory", qWithAccessory); err != nil {
+				return err
+			}
+		}
+	}
+
 	if o.WithImmutableStatus != nil {
 
 		// query param with_immutable_status
@@ -464,6 +521,23 @@ func (o *GetArtifactParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.R
 		if qWithLabel != "" {
 
 			if err := r.SetQueryParam("with_label", qWithLabel); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.WithSbomOverview != nil {
+
+		// query param with_sbom_overview
+		var qrWithSbomOverview bool
+
+		if o.WithSbomOverview != nil {
+			qrWithSbomOverview = *o.WithSbomOverview
+		}
+		qWithSbomOverview := swag.FormatBool(qrWithSbomOverview)
+		if qWithSbomOverview != "" {
+
+			if err := r.SetQueryParam("with_sbom_overview", qWithSbomOverview); err != nil {
 				return err
 			}
 		}

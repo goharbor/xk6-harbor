@@ -28,6 +28,11 @@ type API interface {
 
 	   Scan the specified artifact*/
 	ScanArtifact(ctx context.Context, params *ScanArtifactParams) (*ScanArtifactAccepted, error)
+	/*
+	   StopScanArtifact cancellings a scan job for a particular artifact
+
+	   Cancelling a scan job for a particular artifact*/
+	StopScanArtifact(ctx context.Context, params *StopScanArtifactParams) (*StopScanArtifactAccepted, error)
 }
 
 // New creates a new scan API client.
@@ -74,6 +79,8 @@ func (a *Client) GetReportLog(ctx context.Context, params *GetReportLogParams) (
 	switch value := result.(type) {
 	case *GetReportLogOK:
 		return value, nil
+	case *GetReportLogBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
 	case *GetReportLogUnauthorized:
 		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
 	case *GetReportLogForbidden:
@@ -122,10 +129,56 @@ func (a *Client) ScanArtifact(ctx context.Context, params *ScanArtifactParams) (
 		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
 	case *ScanArtifactNotFound:
 		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *ScanArtifactUnprocessableEntity:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
 	case *ScanArtifactInternalServerError:
 		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
 	}
 	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for scanArtifact: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+StopScanArtifact cancellings a scan job for a particular artifact
+
+Cancelling a scan job for a particular artifact
+*/
+func (a *Client) StopScanArtifact(ctx context.Context, params *StopScanArtifactParams) (*StopScanArtifactAccepted, error) {
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "stopScanArtifact",
+		Method:             "POST",
+		PathPattern:        "/projects/{project_name}/repositories/{repository_name}/artifacts/{reference}/scan/stop",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"http", "https"},
+		Params:             params,
+		Reader:             &StopScanArtifactReader{formats: a.formats},
+		AuthInfo:           a.authInfo,
+		Context:            ctx,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	switch value := result.(type) {
+	case *StopScanArtifactAccepted:
+		return value, nil
+	case *StopScanArtifactBadRequest:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *StopScanArtifactUnauthorized:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *StopScanArtifactForbidden:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *StopScanArtifactNotFound:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *StopScanArtifactUnprocessableEntity:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	case *StopScanArtifactInternalServerError:
+		return nil, runtime.NewAPIError("unsuccessful response", value, value.Code())
+	}
+	// safeguard: normally, absent a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for stopScanArtifact: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }

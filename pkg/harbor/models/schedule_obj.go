@@ -23,16 +23,25 @@ type ScheduleObj struct {
 	// A cron expression, a time-based job scheduler.
 	Cron string `json:"cron,omitempty" js:"cron"`
 
-	// The schedule type. The valid values are 'Hourly', 'Daily', 'Weekly', 'Custom', 'Manual' and 'None'.
-	// 'Manual' means to trigger it right away and 'None' means to cancel the schedule.
+	// The next time to schedule to run the job.
+	// Format: date-time
+	NextScheduledTime strfmt.DateTime `json:"next_scheduled_time,omitempty" js:"nextScheduledTime"`
+
+	// The schedule type. The valid values are 'Hourly', 'Daily', 'Weekly', 'Custom', 'Manual', 'None' and 'Schedule'.
+	// 'Manual' means to trigger it right away, 'Schedule' means to trigger it by a specified cron schedule and
+	// 'None' means to cancel the schedule.
 	//
-	// Enum: [Hourly Daily Weekly Custom Manual None]
+	// Enum: [Hourly Daily Weekly Custom Manual None Schedule]
 	Type string `json:"type,omitempty" js:"type"`
 }
 
 // Validate validates this schedule obj
 func (m *ScheduleObj) Validate(formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.validateNextScheduledTime(formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.validateType(formats); err != nil {
 		res = append(res, err)
@@ -44,11 +53,23 @@ func (m *ScheduleObj) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *ScheduleObj) validateNextScheduledTime(formats strfmt.Registry) error {
+	if swag.IsZero(m.NextScheduledTime) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("next_scheduled_time", "body", "date-time", m.NextScheduledTime.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 var scheduleObjTypeTypePropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["Hourly","Daily","Weekly","Custom","Manual","None"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["Hourly","Daily","Weekly","Custom","Manual","None","Schedule"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -75,6 +96,9 @@ const (
 
 	// ScheduleObjTypeNone captures enum value "None"
 	ScheduleObjTypeNone string = "None"
+
+	// ScheduleObjTypeSchedule captures enum value "Schedule"
+	ScheduleObjTypeSchedule string = "Schedule"
 )
 
 // prop value enum

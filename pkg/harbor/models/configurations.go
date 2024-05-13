@@ -9,19 +9,201 @@ import (
 	"context"
 
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
 // Configurations configurations
 //
 // swagger:model Configurations
-type Configurations map[string]interface{}
+type Configurations struct {
+
+	// The audit log forward endpoint
+	AuditLogForwardEndpoint *string `json:"audit_log_forward_endpoint,omitempty" js:"auditLogForwardEndpoint"`
+
+	// The auth mode of current system, such as "db_auth", "ldap_auth", "oidc_auth"
+	AuthMode *string `json:"auth_mode,omitempty" js:"authMode"`
+
+	// The banner message for the UI.It is the stringified result of the banner message object
+	BannerMessage *string `json:"banner_message,omitempty" js:"bannerMessage"`
+
+	// The group which has the harbor admin privileges
+	HTTPAuthproxyAdminGroups *string `json:"http_authproxy_admin_groups,omitempty" js:"httpAuthproxyAdminGroups"`
+
+	// The username which has the harbor admin privileges
+	HTTPAuthproxyAdminUsernames *string `json:"http_authproxy_admin_usernames,omitempty" js:"httpAuthproxyAdminUsernames"`
+
+	// The endpoint of the HTTP auth
+	HTTPAuthproxyEndpoint *string `json:"http_authproxy_endpoint,omitempty" js:"httpAuthproxyEndpoint"`
+
+	// The certificate of the HTTP auth provider
+	HTTPAuthproxyServerCertificate *string `json:"http_authproxy_server_certificate,omitempty" js:"httpAuthproxyServerCertificate"`
+
+	// Search user before onboard
+	HTTPAuthproxySkipSearch *bool `json:"http_authproxy_skip_search,omitempty" js:"httpAuthproxySkipSearch"`
+
+	// The token review endpoint
+	HTTPAuthproxyTokenreviewEndpoint *string `json:"http_authproxy_tokenreview_endpoint,omitempty" js:"httpAuthproxyTokenreviewEndpoint"`
+
+	// Verify the HTTP auth provider's certificate
+	HTTPAuthproxyVerifyCert *bool `json:"http_authproxy_verify_cert,omitempty" js:"httpAuthproxyVerifyCert"`
+
+	// The Base DN for LDAP binding.
+	LdapBaseDn *string `json:"ldap_base_dn,omitempty" js:"ldapBaseDn"`
+
+	// The filter for LDAP search
+	LdapFilter *string `json:"ldap_filter,omitempty" js:"ldapFilter"`
+
+	// Specify the ldap group which have the same privilege with Harbor admin
+	LdapGroupAdminDn *string `json:"ldap_group_admin_dn,omitempty" js:"ldapGroupAdminDn"`
+
+	// The attribute which is used as identity of the LDAP group, default is cn.'
+	LdapGroupAttributeName *string `json:"ldap_group_attribute_name,omitempty" js:"ldapGroupAttributeName"`
+
+	// The base DN to search LDAP group.
+	LdapGroupBaseDn *string `json:"ldap_group_base_dn,omitempty" js:"ldapGroupBaseDn"`
+
+	// The user attribute to identify the group membership
+	LdapGroupMembershipAttribute *string `json:"ldap_group_membership_attribute,omitempty" js:"ldapGroupMembershipAttribute"`
+
+	// The filter to search the ldap group
+	LdapGroupSearchFilter *string `json:"ldap_group_search_filter,omitempty" js:"ldapGroupSearchFilter"`
+
+	// The scope to search ldap group. ''0-LDAP_SCOPE_BASE, 1-LDAP_SCOPE_ONELEVEL, 2-LDAP_SCOPE_SUBTREE''
+	LdapGroupSearchScope *int64 `json:"ldap_group_search_scope,omitempty" js:"ldapGroupSearchScope"`
+
+	// The scope to search ldap users,'0-LDAP_SCOPE_BASE, 1-LDAP_SCOPE_ONELEVEL, 2-LDAP_SCOPE_SUBTREE'
+	LdapScope *int64 `json:"ldap_scope,omitempty" js:"ldapScope"`
+
+	// The DN of the user to do the search.
+	LdapSearchDn *string `json:"ldap_search_dn,omitempty" js:"ldapSearchDn"`
+
+	// The password of the ldap search dn
+	LdapSearchPassword *string `json:"ldap_search_password,omitempty" js:"ldapSearchPassword"`
+
+	// Timeout in seconds for connection to LDAP server
+	LdapTimeout *int64 `json:"ldap_timeout,omitempty" js:"ldapTimeout"`
+
+	// The attribute which is used as identity for the LDAP binding, such as "CN" or "SAMAccountname"
+	LdapUID *string `json:"ldap_uid,omitempty" js:"ldapUID"`
+
+	// The URL of LDAP server
+	LdapURL *string `json:"ldap_url,omitempty" js:"ldapURL"`
+
+	// Whether verify your OIDC server certificate, disable it if your OIDC server is hosted via self-hosted certificate.
+	LdapVerifyCert *bool `json:"ldap_verify_cert,omitempty" js:"ldapVerifyCert"`
+
+	// Enable notification
+	NotificationEnable *bool `json:"notification_enable,omitempty" js:"notificationEnable"`
+
+	// The OIDC group which has the harbor admin privileges
+	OIDCAdminGroup *string `json:"oidc_admin_group,omitempty" js:"oidcAdminGroup"`
+
+	// Auto onboard the OIDC user
+	OIDCAutoOnboard *bool `json:"oidc_auto_onboard,omitempty" js:"oidcAutoOnboard"`
+
+	// The client ID of the OIDC provider
+	OIDCClientID *string `json:"oidc_client_id,omitempty" js:"oidcClientID"`
+
+	// The OIDC provider secret
+	OIDCClientSecret *string `json:"oidc_client_secret,omitempty" js:"oidcClientSecret"`
+
+	// The endpoint of the OIDC provider
+	OIDCEndpoint *string `json:"oidc_endpoint,omitempty" js:"oidcEndpoint"`
+
+	// Extra parameters to add when redirect request to OIDC provider
+	OIDCExtraRedirectParms *string `json:"oidc_extra_redirect_parms,omitempty" js:"oidcExtraRedirectParms"`
+
+	// The OIDC group filter which filters out the group name doesn't match the regular expression
+	OIDCGroupFilter *string `json:"oidc_group_filter,omitempty" js:"oidcGroupFilter"`
+
+	// The attribute claims the group name
+	OIDCGroupsClaim *string `json:"oidc_groups_claim,omitempty" js:"oidcGroupsClaim"`
+
+	// The OIDC provider name
+	OIDCName *string `json:"oidc_name,omitempty" js:"oidcName"`
+
+	// The scope of the OIDC provider
+	OIDCScope *string `json:"oidc_scope,omitempty" js:"oidcScope"`
+
+	// The attribute claims the username
+	OIDCUserClaim *string `json:"oidc_user_claim,omitempty" js:"oidcUserClaim"`
+
+	// Verify the OIDC provider's certificate'
+	OIDCVerifyCert *bool `json:"oidc_verify_cert,omitempty" js:"oidcVerifyCert"`
+
+	// The flag to indicate whether the current auth mode should consider as a primary one.
+	PrimaryAuthMode *bool `json:"primary_auth_mode,omitempty" js:"primaryAuthMode"`
+
+	// Indicate who can create projects, it could be ''adminonly'' or ''everyone''.
+	ProjectCreationRestriction *string `json:"project_creation_restriction,omitempty" js:"projectCreationRestriction"`
+
+	// Enable quota per project
+	QuotaPerProjectEnable *bool `json:"quota_per_project_enable,omitempty" js:"quotaPerProjectEnable"`
+
+	// The flag to indicate whether Harbor is in readonly mode.
+	ReadOnly *bool `json:"read_only,omitempty" js:"readOnly"`
+
+	// The rebot account name prefix
+	RobotNamePrefix *string `json:"robot_name_prefix,omitempty" js:"robotNamePrefix"`
+
+	// The robot account token duration in days
+	RobotTokenDuration *int64 `json:"robot_token_duration,omitempty" js:"robotTokenDuration"`
+
+	// Whether or not to skip update pull time for scanner
+	ScannerSkipUpdatePulltime *bool `json:"scanner_skip_update_pulltime,omitempty" js:"scannerSkipUpdatePulltime"`
+
+	// Whether the Harbor instance supports self-registration.  If it''s set to false, admin need to add user to the instance.
+	SelfRegistration *bool `json:"self_registration,omitempty" js:"selfRegistration"`
+
+	// The session timeout for harbor, in minutes.
+	SessionTimeout *int64 `json:"session_timeout,omitempty" js:"sessionTimeout"`
+
+	// Skip audit log database
+	SkipAuditLogDatabase *bool `json:"skip_audit_log_database,omitempty" js:"skipAuditLogDatabase"`
+
+	// The storage quota per project
+	StoragePerProject *int64 `json:"storage_per_project,omitempty" js:"storagePerProject"`
+
+	// The expiration time of the token for internal Registry, in minutes.
+	TokenExpiration *int64 `json:"token_expiration,omitempty" js:"tokenExpiration"`
+
+	// The client id of UAA
+	UaaClientID *string `json:"uaa_client_id,omitempty" js:"uaaClientID"`
+
+	// The client secret of the UAA
+	UaaClientSecret *string `json:"uaa_client_secret,omitempty" js:"uaaClientSecret"`
+
+	// The endpoint of the UAA
+	UaaEndpoint *string `json:"uaa_endpoint,omitempty" js:"uaaEndpoint"`
+
+	// Verify the certificate in UAA server
+	UaaVerifyCert *bool `json:"uaa_verify_cert,omitempty" js:"uaaVerifyCert"`
+}
 
 // Validate validates this configurations
-func (m Configurations) Validate(formats strfmt.Registry) error {
+func (m *Configurations) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
 // ContextValidate validates this configurations based on context it is used
-func (m Configurations) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+func (m *Configurations) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *Configurations) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *Configurations) UnmarshalBinary(b []byte) error {
+	var res Configurations
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
 	return nil
 }

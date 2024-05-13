@@ -63,6 +63,12 @@ CreateLabelParams contains all the parameters to send to the API endpoint
 */
 type CreateLabelParams struct {
 
+	/* XRequestID.
+
+	   An unique ID for the request
+	*/
+	XRequestID *string `js:"xRequestID"`
+
 	/* Label.
 
 	   The json object of label.
@@ -122,6 +128,17 @@ func (o *CreateLabelParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithXRequestID adds the xRequestID to the create label params
+func (o *CreateLabelParams) WithXRequestID(xRequestID *string) *CreateLabelParams {
+	o.SetXRequestID(xRequestID)
+	return o
+}
+
+// SetXRequestID adds the xRequestId to the create label params
+func (o *CreateLabelParams) SetXRequestID(xRequestID *string) {
+	o.XRequestID = xRequestID
+}
+
 // WithLabel adds the label to the create label params
 func (o *CreateLabelParams) WithLabel(label *models.Label) *CreateLabelParams {
 	o.SetLabel(label)
@@ -140,6 +157,14 @@ func (o *CreateLabelParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.R
 		return err
 	}
 	var res []error
+
+	if o.XRequestID != nil {
+
+		// header param X-Request-Id
+		if err := r.SetHeaderParam("X-Request-Id", *o.XRequestID); err != nil {
+			return err
+		}
+	}
 	if o.Label != nil {
 		if err := r.SetBodyParam(o.Label); err != nil {
 			return err

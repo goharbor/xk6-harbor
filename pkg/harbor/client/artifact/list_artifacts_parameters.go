@@ -67,7 +67,7 @@ type ListArtifactsParams struct {
 	     A comma-separated lists of MIME types for the scan report or scan summary. The first mime type will be used when the report found for it.
 	Currently the mime type supports 'application/vnd.scanner.adapter.vuln.report.harbor+json; version=1.0' and 'application/vnd.security.vulnerability.report; version=1.1'
 
-	     Default: "application/vnd.scanner.adapter.vuln.report.harbor+json; version=1.0"
+	     Default: "application/vnd.security.vulnerability.report; version=1.1, application/vnd.scanner.adapter.vuln.report.harbor+json; version=1.0"
 	*/
 	XAcceptVulnerabilities *string `js:"xAcceptVulnerabilities"`
 
@@ -109,19 +109,25 @@ type ListArtifactsParams struct {
 
 	/* RepositoryName.
 
-	   The name of the repository. If it contains slash, encode it with URL encoding. e.g. a/b -> a%252Fb
+	   The name of the repository. If it contains slash, encode it twice over with URL encoding. e.g. a/b -> a%2Fb -> a%252Fb
 	*/
 	RepositoryName string `js:"repositoryName"`
 
 	/* Sort.
 
-	   Sort the resource list in ascending or descending order. e.g. sort by field1 in ascending orderr and field2 in descending order with "sort=field1,-field2"
+	   Sort the resource list in ascending or descending order. e.g. sort by field1 in ascending order and field2 in descending order with "sort=field1,-field2"
 	*/
 	Sort *string `js:"sort"`
 
+	/* WithAccessory.
+
+	   Specify whether the accessories are included of the returning artifacts. Only works when setting "with_accessory=true"
+	*/
+	WithAccessory *bool `js:"withAccessory"`
+
 	/* WithImmutableStatus.
 
-	   Specify whether the immutable status is included inside the tags of the returning artifacts. Only works when setting "with_tag=true"
+	   Specify whether the immutable status is included inside the tags of the returning artifacts. Only works when setting "with_immutable_status=true"
 	*/
 	WithImmutableStatus *bool `js:"withImmutableStatus"`
 
@@ -130,6 +136,12 @@ type ListArtifactsParams struct {
 	   Specify whether the labels are included inside the returning artifacts
 	*/
 	WithLabel *bool `js:"withLabel"`
+
+	/* WithSbomOverview.
+
+	   Specify whether the SBOM overview is included in returning artifacts, when this option is true, the SBOM overview will be included in the response
+	*/
+	WithSbomOverview *bool `js:"withSbomOverview"`
 
 	/* WithScanOverview.
 
@@ -169,15 +181,19 @@ func (o *ListArtifactsParams) WithDefaults() *ListArtifactsParams {
 // All values with no default are reset to their zero value.
 func (o *ListArtifactsParams) SetDefaults() {
 	var (
-		xAcceptVulnerabilitiesDefault = string("application/vnd.scanner.adapter.vuln.report.harbor+json; version=1.0")
+		xAcceptVulnerabilitiesDefault = string("application/vnd.security.vulnerability.report; version=1.1, application/vnd.scanner.adapter.vuln.report.harbor+json; version=1.0")
 
 		pageDefault = int64(1)
 
 		pageSizeDefault = int64(10)
 
+		withAccessoryDefault = bool(false)
+
 		withImmutableStatusDefault = bool(false)
 
 		withLabelDefault = bool(false)
+
+		withSbomOverviewDefault = bool(false)
 
 		withScanOverviewDefault = bool(false)
 
@@ -190,8 +206,10 @@ func (o *ListArtifactsParams) SetDefaults() {
 		XAcceptVulnerabilities: &xAcceptVulnerabilitiesDefault,
 		Page:                   &pageDefault,
 		PageSize:               &pageSizeDefault,
+		WithAccessory:          &withAccessoryDefault,
 		WithImmutableStatus:    &withImmutableStatusDefault,
 		WithLabel:              &withLabelDefault,
+		WithSbomOverview:       &withSbomOverviewDefault,
 		WithScanOverview:       &withScanOverviewDefault,
 		WithSignature:          &withSignatureDefault,
 		WithTag:                &withTagDefault,
@@ -324,6 +342,17 @@ func (o *ListArtifactsParams) SetSort(sort *string) {
 	o.Sort = sort
 }
 
+// WithWithAccessory adds the withAccessory to the list artifacts params
+func (o *ListArtifactsParams) WithWithAccessory(withAccessory *bool) *ListArtifactsParams {
+	o.SetWithAccessory(withAccessory)
+	return o
+}
+
+// SetWithAccessory adds the withAccessory to the list artifacts params
+func (o *ListArtifactsParams) SetWithAccessory(withAccessory *bool) {
+	o.WithAccessory = withAccessory
+}
+
 // WithWithImmutableStatus adds the withImmutableStatus to the list artifacts params
 func (o *ListArtifactsParams) WithWithImmutableStatus(withImmutableStatus *bool) *ListArtifactsParams {
 	o.SetWithImmutableStatus(withImmutableStatus)
@@ -344,6 +373,17 @@ func (o *ListArtifactsParams) WithWithLabel(withLabel *bool) *ListArtifactsParam
 // SetWithLabel adds the withLabel to the list artifacts params
 func (o *ListArtifactsParams) SetWithLabel(withLabel *bool) {
 	o.WithLabel = withLabel
+}
+
+// WithWithSbomOverview adds the withSbomOverview to the list artifacts params
+func (o *ListArtifactsParams) WithWithSbomOverview(withSbomOverview *bool) *ListArtifactsParams {
+	o.SetWithSbomOverview(withSbomOverview)
+	return o
+}
+
+// SetWithSbomOverview adds the withSbomOverview to the list artifacts params
+func (o *ListArtifactsParams) SetWithSbomOverview(withSbomOverview *bool) {
+	o.WithSbomOverview = withSbomOverview
 }
 
 // WithWithScanOverview adds the withScanOverview to the list artifacts params
@@ -481,6 +521,23 @@ func (o *ListArtifactsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		}
 	}
 
+	if o.WithAccessory != nil {
+
+		// query param with_accessory
+		var qrWithAccessory bool
+
+		if o.WithAccessory != nil {
+			qrWithAccessory = *o.WithAccessory
+		}
+		qWithAccessory := swag.FormatBool(qrWithAccessory)
+		if qWithAccessory != "" {
+
+			if err := r.SetQueryParam("with_accessory", qWithAccessory); err != nil {
+				return err
+			}
+		}
+	}
+
 	if o.WithImmutableStatus != nil {
 
 		// query param with_immutable_status
@@ -510,6 +567,23 @@ func (o *ListArtifactsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt
 		if qWithLabel != "" {
 
 			if err := r.SetQueryParam("with_label", qWithLabel); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.WithSbomOverview != nil {
+
+		// query param with_sbom_overview
+		var qrWithSbomOverview bool
+
+		if o.WithSbomOverview != nil {
+			qrWithSbomOverview = *o.WithSbomOverview
+		}
+		qWithSbomOverview := swag.FormatBool(qrWithSbomOverview)
+		if qWithSbomOverview != "" {
+
+			if err := r.SetQueryParam("with_sbom_overview", qWithSbomOverview); err != nil {
 				return err
 			}
 		}

@@ -17,13 +17,13 @@ import (
 // swagger:model Access
 type Access struct {
 
-	// The action of the access
+	// The action of the access. Possible actions are *, pull, push, create, read, update, delete, list, operate, scanner-pull and stop.
 	Action string `json:"action,omitempty" js:"action"`
 
 	// The effect of the access
 	Effect string `json:"effect,omitempty" js:"effect"`
 
-	// The resource of the access
+	// The resource of the access. Possible resources are listed here for system and project level https://github.com/goharbor/harbor/blob/main/src/common/rbac/const.go
 	Resource string `json:"resource,omitempty" js:"resource"`
 }
 

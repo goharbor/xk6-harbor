@@ -61,6 +61,12 @@ SearchLdapUserParams contains all the parameters to send to the API endpoint
 */
 type SearchLdapUserParams struct {
 
+	/* XRequestID.
+
+	   An unique ID for the request
+	*/
+	XRequestID *string `js:"xRequestID"`
+
 	/* Username.
 
 	   Registered user ID
@@ -120,6 +126,17 @@ func (o *SearchLdapUserParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithXRequestID adds the xRequestID to the search ldap user params
+func (o *SearchLdapUserParams) WithXRequestID(xRequestID *string) *SearchLdapUserParams {
+	o.SetXRequestID(xRequestID)
+	return o
+}
+
+// SetXRequestID adds the xRequestId to the search ldap user params
+func (o *SearchLdapUserParams) SetXRequestID(xRequestID *string) {
+	o.XRequestID = xRequestID
+}
+
 // WithUsername adds the username to the search ldap user params
 func (o *SearchLdapUserParams) WithUsername(username *string) *SearchLdapUserParams {
 	o.SetUsername(username)
@@ -138,6 +155,14 @@ func (o *SearchLdapUserParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 		return err
 	}
 	var res []error
+
+	if o.XRequestID != nil {
+
+		// header param X-Request-Id
+		if err := r.SetHeaderParam("X-Request-Id", *o.XRequestID); err != nil {
+			return err
+		}
+	}
 
 	if o.Username != nil {
 

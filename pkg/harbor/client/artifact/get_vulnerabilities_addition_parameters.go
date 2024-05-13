@@ -66,7 +66,7 @@ type GetVulnerabilitiesAdditionParams struct {
 	     A comma-separated lists of MIME types for the scan report or scan summary. The first mime type will be used when the report found for it.
 	Currently the mime type supports 'application/vnd.scanner.adapter.vuln.report.harbor+json; version=1.0' and 'application/vnd.security.vulnerability.report; version=1.1'
 
-	     Default: "application/vnd.scanner.adapter.vuln.report.harbor+json; version=1.0"
+	     Default: "application/vnd.security.vulnerability.report; version=1.1, application/vnd.scanner.adapter.vuln.report.harbor+json; version=1.0"
 	*/
 	XAcceptVulnerabilities *string `js:"xAcceptVulnerabilities"`
 
@@ -90,7 +90,7 @@ type GetVulnerabilitiesAdditionParams struct {
 
 	/* RepositoryName.
 
-	   The name of the repository. If it contains slash, encode it with URL encoding. e.g. a/b -> a%252Fb
+	   The name of the repository. If it contains slash, encode it twice over with URL encoding. e.g. a/b -> a%2Fb -> a%252Fb
 	*/
 	RepositoryName string `js:"repositoryName"`
 
@@ -112,7 +112,7 @@ func (o *GetVulnerabilitiesAdditionParams) WithDefaults() *GetVulnerabilitiesAdd
 // All values with no default are reset to their zero value.
 func (o *GetVulnerabilitiesAdditionParams) SetDefaults() {
 	var (
-		xAcceptVulnerabilitiesDefault = string("application/vnd.scanner.adapter.vuln.report.harbor+json; version=1.0")
+		xAcceptVulnerabilitiesDefault = string("application/vnd.security.vulnerability.report; version=1.1, application/vnd.scanner.adapter.vuln.report.harbor+json; version=1.0")
 	)
 
 	val := GetVulnerabilitiesAdditionParams{

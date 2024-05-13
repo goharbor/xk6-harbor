@@ -64,6 +64,12 @@ UpdateUserPasswordParams contains all the parameters to send to the API endpoint
 */
 type UpdateUserPasswordParams struct {
 
+	/* XRequestID.
+
+	   An unique ID for the request
+	*/
+	XRequestID *string `js:"xRequestID"`
+
 	/* Password.
 
 	   Password to be updated, the attribute 'old_password' is optional when the API is called by the system administrator.
@@ -128,6 +134,17 @@ func (o *UpdateUserPasswordParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithXRequestID adds the xRequestID to the update user password params
+func (o *UpdateUserPasswordParams) WithXRequestID(xRequestID *string) *UpdateUserPasswordParams {
+	o.SetXRequestID(xRequestID)
+	return o
+}
+
+// SetXRequestID adds the xRequestId to the update user password params
+func (o *UpdateUserPasswordParams) SetXRequestID(xRequestID *string) {
+	o.XRequestID = xRequestID
+}
+
 // WithPassword adds the password to the update user password params
 func (o *UpdateUserPasswordParams) WithPassword(password *models.PasswordReq) *UpdateUserPasswordParams {
 	o.SetPassword(password)
@@ -157,6 +174,14 @@ func (o *UpdateUserPasswordParams) WriteToRequest(r runtime.ClientRequest, reg s
 		return err
 	}
 	var res []error
+
+	if o.XRequestID != nil {
+
+		// header param X-Request-Id
+		if err := r.SetHeaderParam("X-Request-Id", *o.XRequestID); err != nil {
+			return err
+		}
+	}
 	if o.Password != nil {
 		if err := r.SetBodyParam(o.Password); err != nil {
 			return err

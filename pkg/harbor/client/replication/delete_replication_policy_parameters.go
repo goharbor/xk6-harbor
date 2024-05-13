@@ -62,6 +62,12 @@ DeleteReplicationPolicyParams contains all the parameters to send to the API end
 */
 type DeleteReplicationPolicyParams struct {
 
+	/* XRequestID.
+
+	   An unique ID for the request
+	*/
+	XRequestID *string `js:"xRequestID"`
+
 	/* ID.
 
 	   Replication policy ID
@@ -123,6 +129,17 @@ func (o *DeleteReplicationPolicyParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithXRequestID adds the xRequestID to the delete replication policy params
+func (o *DeleteReplicationPolicyParams) WithXRequestID(xRequestID *string) *DeleteReplicationPolicyParams {
+	o.SetXRequestID(xRequestID)
+	return o
+}
+
+// SetXRequestID adds the xRequestId to the delete replication policy params
+func (o *DeleteReplicationPolicyParams) SetXRequestID(xRequestID *string) {
+	o.XRequestID = xRequestID
+}
+
 // WithID adds the id to the delete replication policy params
 func (o *DeleteReplicationPolicyParams) WithID(id int64) *DeleteReplicationPolicyParams {
 	o.SetID(id)
@@ -141,6 +158,14 @@ func (o *DeleteReplicationPolicyParams) WriteToRequest(r runtime.ClientRequest, 
 		return err
 	}
 	var res []error
+
+	if o.XRequestID != nil {
+
+		// header param X-Request-Id
+		if err := r.SetHeaderParam("X-Request-Id", *o.XRequestID); err != nil {
+			return err
+		}
+	}
 
 	// path param id
 	if err := r.SetPathParam("id", swag.FormatInt64(o.ID)); err != nil {

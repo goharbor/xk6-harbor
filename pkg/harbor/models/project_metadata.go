@@ -17,11 +17,17 @@ import (
 // swagger:model ProjectMetadata
 type ProjectMetadata struct {
 
+	// Whether generating SBOM automatically when pushing a subject artifact. The valid values are "true", "false".
+	AutoSbomGeneration *string `json:"auto_sbom_generation,omitempty" js:"autoSbomGeneration"`
+
 	// Whether scan images automatically when pushing. The valid values are "true", "false".
 	AutoScan *string `json:"auto_scan,omitempty" js:"autoScan"`
 
 	// Whether content trust is enabled or not. If it is enabled, user can't pull unsigned images from this project. The valid values are "true", "false".
 	EnableContentTrust *string `json:"enable_content_trust,omitempty" js:"enableContentTrust"`
+
+	// Whether cosign content trust is enabled or not. If it is enabled, user can't pull images without cosign signature from this project. The valid values are "true", "false".
+	EnableContentTrustCosign *string `json:"enable_content_trust_cosign,omitempty" js:"enableContentTrustCosign"`
 
 	// Whether prevent the vulnerable images from running. The valid values are "true", "false".
 	PreventVul *string `json:"prevent_vul,omitempty" js:"preventVul"`

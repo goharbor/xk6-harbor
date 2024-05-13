@@ -20,14 +20,17 @@ import (
 	"github.com/goharbor/xk6-harbor/pkg/harbor/client/health"
 	"github.com/goharbor/xk6-harbor/pkg/harbor/client/icon"
 	"github.com/goharbor/xk6-harbor/pkg/harbor/client/immutable"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/client/jobservice"
 	"github.com/goharbor/xk6-harbor/pkg/harbor/client/label"
 	"github.com/goharbor/xk6-harbor/pkg/harbor/client/ldap"
 	"github.com/goharbor/xk6-harbor/pkg/harbor/client/member"
 	"github.com/goharbor/xk6-harbor/pkg/harbor/client/oidc"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/client/permissions"
 	"github.com/goharbor/xk6-harbor/pkg/harbor/client/ping"
 	"github.com/goharbor/xk6-harbor/pkg/harbor/client/preheat"
 	"github.com/goharbor/xk6-harbor/pkg/harbor/client/project"
 	"github.com/goharbor/xk6-harbor/pkg/harbor/client/project_metadata"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/client/purge"
 	"github.com/goharbor/xk6-harbor/pkg/harbor/client/quota"
 	"github.com/goharbor/xk6-harbor/pkg/harbor/client/registry"
 	"github.com/goharbor/xk6-harbor/pkg/harbor/client/replication"
@@ -37,8 +40,11 @@ import (
 	"github.com/goharbor/xk6-harbor/pkg/harbor/client/robotv1"
 	"github.com/goharbor/xk6-harbor/pkg/harbor/client/scan"
 	"github.com/goharbor/xk6-harbor/pkg/harbor/client/scan_all"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/client/scan_data_export"
 	"github.com/goharbor/xk6-harbor/pkg/harbor/client/scanner"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/client/schedule"
 	"github.com/goharbor/xk6-harbor/pkg/harbor/client/search"
+	"github.com/goharbor/xk6-harbor/pkg/harbor/client/securityhub"
 	"github.com/goharbor/xk6-harbor/pkg/harbor/client/statistic"
 	"github.com/goharbor/xk6-harbor/pkg/harbor/client/system_cve_allowlist"
 	"github.com/goharbor/xk6-harbor/pkg/harbor/client/systeminfo"
@@ -97,14 +103,17 @@ func New(c Config) *HarborAPI {
 	cli.Health = health.New(transport, strfmt.Default, c.AuthInfo)
 	cli.Icon = icon.New(transport, strfmt.Default, c.AuthInfo)
 	cli.Immutable = immutable.New(transport, strfmt.Default, c.AuthInfo)
+	cli.Jobservice = jobservice.New(transport, strfmt.Default, c.AuthInfo)
 	cli.Label = label.New(transport, strfmt.Default, c.AuthInfo)
 	cli.Ldap = ldap.New(transport, strfmt.Default, c.AuthInfo)
 	cli.Member = member.New(transport, strfmt.Default, c.AuthInfo)
 	cli.OIDC = oidc.New(transport, strfmt.Default, c.AuthInfo)
+	cli.Permissions = permissions.New(transport, strfmt.Default, c.AuthInfo)
 	cli.Ping = ping.New(transport, strfmt.Default, c.AuthInfo)
 	cli.Preheat = preheat.New(transport, strfmt.Default, c.AuthInfo)
 	cli.Project = project.New(transport, strfmt.Default, c.AuthInfo)
 	cli.ProjectMetadata = project_metadata.New(transport, strfmt.Default, c.AuthInfo)
+	cli.Purge = purge.New(transport, strfmt.Default, c.AuthInfo)
 	cli.Quota = quota.New(transport, strfmt.Default, c.AuthInfo)
 	cli.Registry = registry.New(transport, strfmt.Default, c.AuthInfo)
 	cli.Replication = replication.New(transport, strfmt.Default, c.AuthInfo)
@@ -114,8 +123,11 @@ func New(c Config) *HarborAPI {
 	cli.Robotv1 = robotv1.New(transport, strfmt.Default, c.AuthInfo)
 	cli.Scan = scan.New(transport, strfmt.Default, c.AuthInfo)
 	cli.ScanAll = scan_all.New(transport, strfmt.Default, c.AuthInfo)
+	cli.ScanDataExport = scan_data_export.New(transport, strfmt.Default, c.AuthInfo)
 	cli.Scanner = scanner.New(transport, strfmt.Default, c.AuthInfo)
+	cli.Schedule = schedule.New(transport, strfmt.Default, c.AuthInfo)
 	cli.Search = search.New(transport, strfmt.Default, c.AuthInfo)
+	cli.Securityhub = securityhub.New(transport, strfmt.Default, c.AuthInfo)
 	cli.Statistic = statistic.New(transport, strfmt.Default, c.AuthInfo)
 	cli.SystemCVEAllowlist = system_cve_allowlist.New(transport, strfmt.Default, c.AuthInfo)
 	cli.Systeminfo = systeminfo.New(transport, strfmt.Default, c.AuthInfo)
@@ -135,14 +147,17 @@ type HarborAPI struct {
 	Health             health.API
 	Icon               icon.API
 	Immutable          immutable.API
+	Jobservice         jobservice.API
 	Label              label.API
 	Ldap               ldap.API
 	Member             member.API
 	OIDC               oidc.API
+	Permissions        permissions.API
 	Ping               ping.API
 	Preheat            preheat.API
 	Project            project.API
 	ProjectMetadata    project_metadata.API
+	Purge              purge.API
 	Quota              quota.API
 	Registry           registry.API
 	Replication        replication.API
@@ -152,8 +167,11 @@ type HarborAPI struct {
 	Robotv1            robotv1.API
 	Scan               scan.API
 	ScanAll            scan_all.API
+	ScanDataExport     scan_data_export.API
 	Scanner            scanner.API
+	Schedule           schedule.API
 	Search             search.API
+	Securityhub        securityhub.API
 	Statistic          statistic.API
 	SystemCVEAllowlist system_cve_allowlist.API
 	Systeminfo         systeminfo.API

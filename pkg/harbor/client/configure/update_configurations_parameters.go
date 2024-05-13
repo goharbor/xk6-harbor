@@ -73,7 +73,7 @@ type UpdateConfigurationsParams struct {
 
 	   The configuration map can contain a subset of the attributes of the schema, which are to be updated.
 	*/
-	Configurations models.Configurations `js:"configurations"`
+	Configurations *models.Configurations `js:"configurations"`
 
 	timeout    time.Duration
 	Context    context.Context `js:"context"`
@@ -140,13 +140,13 @@ func (o *UpdateConfigurationsParams) SetXRequestID(xRequestID *string) {
 }
 
 // WithConfigurations adds the configurations to the update configurations params
-func (o *UpdateConfigurationsParams) WithConfigurations(configurations models.Configurations) *UpdateConfigurationsParams {
+func (o *UpdateConfigurationsParams) WithConfigurations(configurations *models.Configurations) *UpdateConfigurationsParams {
 	o.SetConfigurations(configurations)
 	return o
 }
 
 // SetConfigurations adds the configurations to the update configurations params
-func (o *UpdateConfigurationsParams) SetConfigurations(configurations models.Configurations) {
+func (o *UpdateConfigurationsParams) SetConfigurations(configurations *models.Configurations) {
 	o.Configurations = configurations
 }
 

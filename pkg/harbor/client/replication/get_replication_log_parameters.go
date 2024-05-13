@@ -62,6 +62,12 @@ GetReplicationLogParams contains all the parameters to send to the API endpoint
 */
 type GetReplicationLogParams struct {
 
+	/* XRequestID.
+
+	   An unique ID for the request
+	*/
+	XRequestID *string `js:"xRequestID"`
+
 	/* ID.
 
 	   The ID of the execution that the tasks belongs to.
@@ -131,6 +137,17 @@ func (o *GetReplicationLogParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithXRequestID adds the xRequestID to the get replication log params
+func (o *GetReplicationLogParams) WithXRequestID(xRequestID *string) *GetReplicationLogParams {
+	o.SetXRequestID(xRequestID)
+	return o
+}
+
+// SetXRequestID adds the xRequestId to the get replication log params
+func (o *GetReplicationLogParams) SetXRequestID(xRequestID *string) {
+	o.XRequestID = xRequestID
+}
+
 // WithID adds the id to the get replication log params
 func (o *GetReplicationLogParams) WithID(id int64) *GetReplicationLogParams {
 	o.SetID(id)
@@ -160,6 +177,14 @@ func (o *GetReplicationLogParams) WriteToRequest(r runtime.ClientRequest, reg st
 		return err
 	}
 	var res []error
+
+	if o.XRequestID != nil {
+
+		// header param X-Request-Id
+		if err := r.SetHeaderParam("X-Request-Id", *o.XRequestID); err != nil {
+			return err
+		}
+	}
 
 	// path param id
 	if err := r.SetPathParam("id", swag.FormatInt64(o.ID)); err != nil {

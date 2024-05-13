@@ -63,6 +63,12 @@ SetScannerAsDefaultParams contains all the parameters to send to the API endpoin
 */
 type SetScannerAsDefaultParams struct {
 
+	/* XRequestID.
+
+	   An unique ID for the request
+	*/
+	XRequestID *string `js:"xRequestID"`
+
 	// Payload.
 	Payload *models.IsDefault `js:"payload"`
 
@@ -125,6 +131,17 @@ func (o *SetScannerAsDefaultParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithXRequestID adds the xRequestID to the set scanner as default params
+func (o *SetScannerAsDefaultParams) WithXRequestID(xRequestID *string) *SetScannerAsDefaultParams {
+	o.SetXRequestID(xRequestID)
+	return o
+}
+
+// SetXRequestID adds the xRequestId to the set scanner as default params
+func (o *SetScannerAsDefaultParams) SetXRequestID(xRequestID *string) {
+	o.XRequestID = xRequestID
+}
+
 // WithPayload adds the payload to the set scanner as default params
 func (o *SetScannerAsDefaultParams) WithPayload(payload *models.IsDefault) *SetScannerAsDefaultParams {
 	o.SetPayload(payload)
@@ -154,6 +171,14 @@ func (o *SetScannerAsDefaultParams) WriteToRequest(r runtime.ClientRequest, reg 
 		return err
 	}
 	var res []error
+
+	if o.XRequestID != nil {
+
+		// header param X-Request-Id
+		if err := r.SetHeaderParam("X-Request-Id", *o.XRequestID); err != nil {
+			return err
+		}
+	}
 	if o.Payload != nil {
 		if err := r.SetBodyParam(o.Payload); err != nil {
 			return err

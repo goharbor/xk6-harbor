@@ -63,6 +63,12 @@ CreateReplicationPolicyParams contains all the parameters to send to the API end
 */
 type CreateReplicationPolicyParams struct {
 
+	/* XRequestID.
+
+	   An unique ID for the request
+	*/
+	XRequestID *string `js:"xRequestID"`
+
 	/* Policy.
 
 	   The replication policy
@@ -122,6 +128,17 @@ func (o *CreateReplicationPolicyParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithXRequestID adds the xRequestID to the create replication policy params
+func (o *CreateReplicationPolicyParams) WithXRequestID(xRequestID *string) *CreateReplicationPolicyParams {
+	o.SetXRequestID(xRequestID)
+	return o
+}
+
+// SetXRequestID adds the xRequestId to the create replication policy params
+func (o *CreateReplicationPolicyParams) SetXRequestID(xRequestID *string) {
+	o.XRequestID = xRequestID
+}
+
 // WithPolicy adds the policy to the create replication policy params
 func (o *CreateReplicationPolicyParams) WithPolicy(policy *models.ReplicationPolicy) *CreateReplicationPolicyParams {
 	o.SetPolicy(policy)
@@ -140,6 +157,14 @@ func (o *CreateReplicationPolicyParams) WriteToRequest(r runtime.ClientRequest, 
 		return err
 	}
 	var res []error
+
+	if o.XRequestID != nil {
+
+		// header param X-Request-Id
+		if err := r.SetHeaderParam("X-Request-Id", *o.XRequestID); err != nil {
+			return err
+		}
+	}
 	if o.Policy != nil {
 		if err := r.SetBodyParam(o.Policy); err != nil {
 			return err
