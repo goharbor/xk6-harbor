@@ -1,9 +1,9 @@
 package module
 
 import (
-	"github.com/dop251/goja"
 	operation "github.com/goharbor/xk6-harbor/pkg/harbor/client/replication"
 	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
+	"github.com/grafana/sobek"
 	"go.k6.io/k6/js/common"
 )
 
@@ -33,7 +33,7 @@ type ListReplicationPoliciesResult struct {
 	Total    int64                       `js:"total"`
 }
 
-func (h *Harbor) ListReplicationPolicies(args ...goja.Value) ListReplicationPoliciesResult {
+func (h *Harbor) ListReplicationPolicies(args ...sobek.Value) ListReplicationPoliciesResult {
 	h.mustInitialized()
 
 	params := operation.NewListReplicationPoliciesParams()

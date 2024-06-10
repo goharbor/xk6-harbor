@@ -3,9 +3,9 @@ package module
 import (
 	"fmt"
 
-	"github.com/dop251/goja"
 	operation "github.com/goharbor/xk6-harbor/pkg/harbor/client/user"
 	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
+	"github.com/grafana/sobek"
 	"go.k6.io/k6/js/common"
 )
 
@@ -46,7 +46,7 @@ type ListUsersResult struct {
 	Total int64              `js:"total"`
 }
 
-func (h *Harbor) ListUsers(args ...goja.Value) ListUsersResult {
+func (h *Harbor) ListUsers(args ...sobek.Value) ListUsersResult {
 	h.mustInitialized()
 
 	params := operation.NewListUsersParams()
@@ -72,7 +72,7 @@ type SearchUsersResult struct {
 	Total int64                        `js:"total"`
 }
 
-func (h *Harbor) SearchUsers(args ...goja.Value) SearchUsersResult {
+func (h *Harbor) SearchUsers(args ...sobek.Value) SearchUsersResult {
 	h.mustInitialized()
 
 	params := operation.NewSearchUsersParams()

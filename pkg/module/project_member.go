@@ -1,9 +1,9 @@
 package module
 
 import (
-	"github.com/dop251/goja"
 	operation "github.com/goharbor/xk6-harbor/pkg/harbor/client/member"
 	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
+	"github.com/grafana/sobek"
 	"go.k6.io/k6/js/common"
 )
 
@@ -32,7 +32,7 @@ type ListProjectMembersResult struct {
 	Total          int64                         `js:"total"`
 }
 
-func (h *Harbor) ListProjectMembers(projectName string, args ...goja.Value) ListProjectMembersResult {
+func (h *Harbor) ListProjectMembers(projectName string, args ...sobek.Value) ListProjectMembersResult {
 	h.mustInitialized()
 
 	params := operation.NewListProjectMembersParams()

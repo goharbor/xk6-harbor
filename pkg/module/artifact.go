@@ -5,10 +5,10 @@ import (
 	"net/url"
 	"sync"
 
-	"github.com/dop251/goja"
 	operation "github.com/goharbor/xk6-harbor/pkg/harbor/client/artifact"
 	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 	"github.com/goharbor/xk6-harbor/pkg/util"
+	"github.com/grafana/sobek"
 	ocispec "github.com/opencontainers/image-spec/specs-go/v1"
 	ants "github.com/panjf2000/ants/v2"
 	log "github.com/sirupsen/logrus"
@@ -17,10 +17,10 @@ import (
 const DefaultPoolSise = 300
 
 type PrepareArtifactsOption struct {
-	ProjectName    string     `js:"projectName"`
-	RepositoryName string     `js:"repositoryName"`
-	ArtifactSize   goja.Value `js:"artifactSize"`
-	ArtifactsCount int        `js:"artifactsCount"`
+	ProjectName    string      `js:"projectName"`
+	RepositoryName string      `js:"repositoryName"`
+	ArtifactSize   sobek.Value `js:"artifactSize"`
+	ArtifactsCount int         `js:"artifactsCount"`
 }
 
 func (h *Harbor) PrepareArtifacts(option PrepareArtifactsOption) {
@@ -75,7 +75,7 @@ type ListArtifactsResult struct {
 	Total     int64              `js:"total"`
 }
 
-func (h *Harbor) ListArtifacts(projectName, repositoryName string, args ...goja.Value) ListArtifactsResult {
+func (h *Harbor) ListArtifacts(projectName, repositoryName string, args ...sobek.Value) ListArtifactsResult {
 	h.mustInitialized()
 
 	params := operation.NewListArtifactsParams()
@@ -97,10 +97,10 @@ func (h *Harbor) ListArtifacts(projectName, repositoryName string, args ...goja.
 }
 
 type PrepareArtifactTagsOption struct {
-	ProjectName    string     `js:"projectName"`
-	RepositoryName string     `js:"repositoryName"`
-	ArtifactSize   goja.Value `js:"artifactSize"`
-	TagsCount      int        `js:"tagsCount"`
+	ProjectName    string      `js:"projectName"`
+	RepositoryName string      `js:"repositoryName"`
+	ArtifactSize   sobek.Value `js:"artifactSize"`
+	TagsCount      int         `js:"tagsCount"`
 }
 
 func (h *Harbor) PrepareArtifactTags(option PrepareArtifactTagsOption) string {
@@ -201,7 +201,7 @@ func (h *Harbor) DeleteArtifact(projectName, repositoryName, reference string) {
 	Checkf(h.vu.Runtime(), err, "failed to delete artifact %s", getDistrubtionRef(projectName, repositoryName, reference))
 }
 
-func (h *Harbor) ListArtifactTags(projectName, repositoryName, digestOrTag string, args ...goja.Value) []*models.Tag {
+func (h *Harbor) ListArtifactTags(projectName, repositoryName, digestOrTag string, args ...sobek.Value) []*models.Tag {
 	h.mustInitialized()
 
 	params := operation.NewListTagsParams()

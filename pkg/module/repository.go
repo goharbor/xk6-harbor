@@ -3,9 +3,9 @@ package module
 import (
 	"net/url"
 
-	"github.com/dop251/goja"
 	operation "github.com/goharbor/xk6-harbor/pkg/harbor/client/repository"
 	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
+	"github.com/grafana/sobek"
 	"go.k6.io/k6/js/common"
 )
 
@@ -37,7 +37,7 @@ type ListRepositoriesResult struct {
 	Total        int64                `js:"total"`
 }
 
-func (h *Harbor) ListRepositories(projectName string, args ...goja.Value) ListRepositoriesResult {
+func (h *Harbor) ListRepositories(projectName string, args ...sobek.Value) ListRepositoriesResult {
 	h.mustInitialized()
 
 	params := operation.NewListRepositoriesParams()

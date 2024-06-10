@@ -10,12 +10,12 @@ import (
 
 	"github.com/containerd/containerd/content"
 	"github.com/containerd/containerd/content/local"
-	"github.com/dop251/goja"
+	"github.com/grafana/sobek"
 	"github.com/opencontainers/go-digest"
 	"go.k6.io/k6/js/common"
 )
 
-func newLocalStore(rt *goja.Runtime, name string) (string, content.Store) {
+func newLocalStore(rt *sobek.Runtime, name string) (string, content.Store) {
 	rootPath := filepath.Join(DefaultRootPath, name)
 
 	store, err := local.NewStore(rootPath)
@@ -42,12 +42,12 @@ func writeBlob(rootPath string, data []byte) (digest.Digest, error) {
 
 	dir := path.Join(rootPath, "blobs", dgt.Algorithm().String())
 
-	if err := os.MkdirAll(dir, 0755); err != nil {
+	if err := os.MkdirAll(dir, 0o755); err != nil {
 		return "", err
 	}
 
 	filename := path.Join(dir, dgt.Hex())
-	if err := os.WriteFile(filename, data, 0664); err != nil {
+	if err := os.WriteFile(filename, data, 0o664); err != nil {
 		return "", err
 	}
 
@@ -72,7 +72,7 @@ func writeBlob(rootPath string, data []byte) (digest.Digest, error) {
 // 	return err.Error()
 // }
 
-func Check(rt *goja.Runtime, err error) {
+func Check(rt *sobek.Runtime, err error) {
 	if err == nil {
 		return
 	}
@@ -80,7 +80,7 @@ func Check(rt *goja.Runtime, err error) {
 	common.Throw(rt, err)
 }
 
-func Checkf(rt *goja.Runtime, err error, format string, a ...interface{}) {
+func Checkf(rt *sobek.Runtime, err error, format string, a ...interface{}) {
 	if err == nil {
 		return
 	}
@@ -91,11 +91,11 @@ func Checkf(rt *goja.Runtime, err error, format string, a ...interface{}) {
 	)
 }
 
-func Throwf(rt *goja.Runtime, format string, a ...interface{}) {
+func Throwf(rt *sobek.Runtime, format string, a ...interface{}) {
 	common.Throw(rt, fmt.Errorf(format, a...))
 }
 
-func ExportTo(rt *goja.Runtime, target interface{}, args ...goja.Value) {
+func ExportTo(rt *sobek.Runtime, target interface{}, args ...sobek.Value) {
 	if len(args) > 0 {
 		if err := rt.ExportTo(args[0], target); err != nil {
 			common.Throw(rt, err)
@@ -103,7 +103,7 @@ func ExportTo(rt *goja.Runtime, target interface{}, args ...goja.Value) {
 	}
 }
 
-func IDFromLocation(rt *goja.Runtime, loc string) int64 {
+func IDFromLocation(rt *sobek.Runtime, loc string) int64 {
 	parts := strings.Split(loc, "/")
 
 	id, err := strconv.ParseInt(parts[len(parts)-1], 10, 64)

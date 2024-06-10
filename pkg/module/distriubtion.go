@@ -11,9 +11,9 @@ import (
 	"github.com/containerd/containerd/remotes/docker"
 	orascontent "github.com/deislabs/oras/pkg/content"
 	"github.com/deislabs/oras/pkg/oras"
-	"github.com/dop251/goja"
 	"github.com/goharbor/xk6-harbor/pkg/util"
 	"github.com/google/uuid"
+	"github.com/grafana/sobek"
 	"github.com/opencontainers/go-digest"
 	ocispec "github.com/opencontainers/image-spec/specs-go/v1"
 	log "github.com/sirupsen/logrus"
@@ -25,7 +25,7 @@ type GetCatalogQuery struct {
 	Last string `js:"last"`
 }
 
-func (h *Harbor) GetCatalog(args ...goja.Value) map[string]interface{} {
+func (h *Harbor) GetCatalog(args ...sobek.Value) map[string]interface{} {
 	h.mustInitialized()
 
 	var param GetCatalogQuery
@@ -91,7 +91,7 @@ type PullOption struct {
 	Discard bool
 }
 
-func (h *Harbor) Pull(ref string, args ...goja.Value) {
+func (h *Harbor) Pull(ref string, args ...sobek.Value) {
 	h.mustInitialized()
 
 	params := PullOption{}
@@ -121,7 +121,7 @@ type PushOption struct {
 	Blobs []ocispec.Descriptor
 }
 
-func (h *Harbor) Push(option PushOption, args ...goja.Value) string {
+func (h *Harbor) Push(option PushOption, args ...sobek.Value) string {
 	h.mustInitialized()
 
 	resolver := h.makeResolver(args...)
@@ -152,7 +152,7 @@ func (h *Harbor) getRef(ref string) string {
 	return ref
 }
 
-func (h *Harbor) makeResolver(args ...goja.Value) remotes.Resolver {
+func (h *Harbor) makeResolver(args ...sobek.Value) remotes.Resolver {
 	h.mustInitialized()
 
 	log.StandardLogger().SetLevel(log.ErrorLevel)
