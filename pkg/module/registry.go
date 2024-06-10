@@ -1,9 +1,9 @@
 package module
 
 import (
-	"github.com/dop251/goja"
 	operation "github.com/goharbor/xk6-harbor/pkg/harbor/client/registry"
 	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
+	"github.com/grafana/sobek"
 	"go.k6.io/k6/js/common"
 )
 
@@ -31,7 +31,7 @@ type ListRegistriesResult struct {
 	Registries []*models.Registry `js:"registries"`
 }
 
-func (h *Harbor) ListRegistries(args ...goja.Value) ListRegistriesResult {
+func (h *Harbor) ListRegistries(args ...sobek.Value) ListRegistriesResult {
 	h.mustInitialized()
 
 	params := operation.NewListRegistriesParams()

@@ -1,9 +1,9 @@
 package module
 
 import (
-	"github.com/dop251/goja"
 	operation "github.com/goharbor/xk6-harbor/pkg/harbor/client/quota"
 	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
+	"github.com/grafana/sobek"
 	"go.k6.io/k6/js/common"
 )
 
@@ -12,7 +12,7 @@ type ListQuotasResult struct {
 	Total  int64           `js:"total"`
 }
 
-func (h *Harbor) ListQuotas(args ...goja.Value) ListQuotasResult {
+func (h *Harbor) ListQuotas(args ...sobek.Value) ListQuotasResult {
 	h.mustInitialized()
 
 	params := operation.NewListQuotasParams()

@@ -1,9 +1,9 @@
 package module
 
 import (
-	"github.com/dop251/goja"
 	operation "github.com/goharbor/xk6-harbor/pkg/harbor/client/auditlog"
 	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
+	"github.com/grafana/sobek"
 	"go.k6.io/k6/js/common"
 )
 
@@ -12,7 +12,7 @@ type ListAuditLogsResult struct {
 	Total     int64              `js:"total"`
 }
 
-func (h *Harbor) ListAuditLogs(args ...goja.Value) ListAuditLogsResult {
+func (h *Harbor) ListAuditLogs(args ...sobek.Value) ListAuditLogsResult {
 	h.mustInitialized()
 
 	params := operation.NewListAuditLogsParams()

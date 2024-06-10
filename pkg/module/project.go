@@ -3,16 +3,16 @@ package module
 import (
 	"strings"
 
-	"github.com/dop251/goja"
 	operation "github.com/goharbor/xk6-harbor/pkg/harbor/client/project"
 	"github.com/goharbor/xk6-harbor/pkg/harbor/client/repository"
 	"github.com/goharbor/xk6-harbor/pkg/harbor/models"
 	"github.com/goharbor/xk6-harbor/pkg/util"
+	"github.com/grafana/sobek"
 	log "github.com/sirupsen/logrus"
 	"go.k6.io/k6/js/common"
 )
 
-func (h *Harbor) CreateProject(body goja.Value) string {
+func (h *Harbor) CreateProject(body sobek.Value) string {
 	h.mustInitialized()
 
 	rt := h.vu.Runtime()
@@ -41,7 +41,7 @@ func (h *Harbor) GetProject(projectName string) *models.Project {
 	return res.Payload
 }
 
-func (h *Harbor) DeleteProject(projectName string, args ...goja.Value) {
+func (h *Harbor) DeleteProject(projectName string, args ...sobek.Value) {
 	h.mustInitialized()
 
 	var force bool
@@ -130,7 +130,7 @@ type ListProjectsResult struct {
 	Total    int64             `js:"total"`
 }
 
-func (h *Harbor) ListProjects(args ...goja.Value) ListProjectsResult {
+func (h *Harbor) ListProjects(args ...sobek.Value) ListProjectsResult {
 	h.mustInitialized()
 
 	params := operation.NewListProjectsParams()
@@ -156,7 +156,7 @@ type ListAuditLogsOfProjectResult struct {
 	Total int64              `js:"total"`
 }
 
-func (h *Harbor) ListAuditLogsOfProject(projectName string, args ...goja.Value) ListAuditLogsOfProjectResult {
+func (h *Harbor) ListAuditLogsOfProject(projectName string, args ...sobek.Value) ListAuditLogsOfProjectResult {
 	h.mustInitialized()
 
 	params := operation.NewGetLogsParams().WithProjectName(projectName)
